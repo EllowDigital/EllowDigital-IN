@@ -15,6 +15,7 @@ import TermsOfService from "./pages/TermsOfService";
 import TeamPage from "./pages/TeamPage";
 import RefundPolicy from "./pages/RefundPolicy";
 import CookiesPolicy from "./pages/CookiesPolicy";
+import PortfolioPage from "./pages/PortfolioPage";
 
 import { initPerformanceOptimizations } from "@/utils/performanceUtils";
 import { initPerformanceMonitoring } from "@/utils/performanceMonitoring";
@@ -82,6 +83,7 @@ const App = () => {
           {/* App Routes */}
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/portfolio" element={<PortfolioPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/refund-policy" element={<RefundPolicy />} />

@@ -88,7 +88,6 @@ const Portfolio = () => {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: [0.25, 1, 0.5, 1],
       },
     },
     exit: {
@@ -96,7 +95,6 @@ const Portfolio = () => {
       y: 20,
       transition: {
         duration: 0.3,
-        ease: "easeIn",
       },
     },
   };
@@ -240,7 +238,7 @@ const Portfolio = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <Button className="bg-brand-yellow text-black hover:bg-brand-gold">
-            <a href="#portfolio" className="flex items-center">
+            <a href="/portfolio" className="flex items-center">
               View All Projects <ExternalLink className="ml-2 w-4 h-4" />
             </a>
           </Button>
