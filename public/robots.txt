@@ -1,3 +1,6 @@
+# EllowDigital Robots.txt
+# Website: https://ellowdigitals.me
+
 User-agent: Googlebot
 Allow: /
 
@@ -12,3 +15,9 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Block certain paths
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://ellowdigitals.me/sitemap.xml

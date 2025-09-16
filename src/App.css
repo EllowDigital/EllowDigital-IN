@@ -1,23 +1,56 @@
+/* Root Container with variables for yellow, black and white theme */
+:root {
+  --primary-color: #ffd700; /* Yellow */
+  --secondary-color: #121212; /* Black */
+  --accent-color: #f5f5f5; /* White */
+  --text-muted: #999;
+  --transition-duration: 300ms;
+  --animation-duration: 20s;
+  --yellow-glow: rgba(255, 215, 0, 0.15);
+  --white-glow: rgba(255, 255, 255, 0.15);
+
+  /* Performance optimizations */
+  text-size-adjust: 100%; /* Prevent text size adjustment on orientation change */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Apply will-change sparingly to elements that will actually change */
+.will-animate {
+  will-change: transform, opacity;
+}
+
+/* Use GPU-accelerated properties for animations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 #root {
-  max-width: 1280px;
+  max-width: 100%;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: clamp(0.5rem, 3vw, 1.5rem);
   text-align: center;
 }
 
+/* Enhanced Logo Styling */
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  height: clamp(4em, 8vw, 6em);
+  padding: clamp(0.8em, 2vw, 1.2em);
+  transition: filter var(--transition-duration);
 }
 
+/* Enhanced Logo Hover Effects */
+.logo:hover {
+  filter: drop-shadow(0 0 2em var(--primary-color));
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em var(--secondary-color));
+}
+
+/* Logo Spin Animation */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -27,16 +60,294 @@
   }
 }
 
+/* Conditional Animation for Reduced Motion Preference */
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+    animation: logo-spin infinite var(--animation-duration) linear;
   }
 }
 
+/* Enhanced Card Styling for professional look */
 .card {
-  padding: 2em;
+  padding: clamp(1.5em, 5vw, 2.5em);
+  border-radius: 0.75em;
+  background-color: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  width: 100%;
+  max-width: 100%;
 }
 
+/* Enhanced Card Hover Effect */
+.card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+}
+
+/* Professional Text Styling */
 .read-the-docs {
-  color: #888;
+  color: var(--text-muted);
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+  transition: color 200ms ease;
+  letter-spacing: 0.02em;
+}
+
+/* Enhanced hover effect on links */
+.read-the-docs:hover {
+  color: var(--primary-color);
+  text-shadow: 0 0 8px var(--yellow-glow);
+}
+
+/* Custom animations for professional effects */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Professional decorative elements */
+.yellow-gradient {
+  background: linear-gradient(135deg, #ffd700 0%, #ffdf00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.monochrome-gradient {
+  background: linear-gradient(90deg, #f8f8f8, #ebebeb, #bbbbbb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card-yellow-border {
+  position: relative;
+}
+
+.card-yellow-border::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75em;
+  padding: 1px;
+  background: linear-gradient(135deg, #ffd700 0%, #ffdf00 100%);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Glassmorphism effect for professional UI */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Professional subtle dividers */
+.divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  margin: 2rem 0;
+}
+
+.divider.vertical {
+  width: 1px;
+  height: auto;
+  background: linear-gradient(
+    0deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+
+/* Yellow & black divider */
+.theme-divider {
+  display: flex;
+  width: 100%;
+  height: 3px;
+  margin: 1rem 0;
+}
+
+.theme-divider .yellow {
+  background-color: #ffd700;
+  height: 100%;
+  width: 100%;
+}
+
+/* Image optimization */
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Improved focus states for accessibility with brand styling */
+:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
+/* Professional button styles with new theme */
+.btn-theme {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffd700 0%, #ffdf00 100%);
+  color: #121212;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-theme::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: all 0.6s ease;
+}
+
+.btn-theme:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(255, 215, 0, 0.4);
+}
+
+.btn-theme:hover::before {
+  left: 100%;
+}
+
+/* Badge styling */
+.theme-badge {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(135deg, #ffd700 0%, #ffdf00 100%);
+  color: #121212;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading states */
+.loading-skeleton {
+  background: linear-gradient(90deg, #333 0%, #444 50%, #333 100%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+  height: 1rem;
+  margin: 0.5rem 0;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 480px) {
+  #root {
+    padding: 0.5rem;
+  }
+
+  .logo {
+    height: 3em;
+    padding: 0.6em;
+  }
+
+  .card {
+    padding: 1.5em;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  #root {
+    padding: 0.75rem;
+  }
+
+  .logo {
+    height: 3.5em;
+    padding: 0.75em;
+  }
+
+  .card {
+    padding: 1.75em;
+  }
+}
+
+/* For print media - optimize for printing */
+@media print {
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  img {
+    page-break-inside: avoid;
+    max-width: 100% !important;
+  }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
 }
