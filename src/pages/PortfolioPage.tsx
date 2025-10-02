@@ -11,7 +11,7 @@ import SEOHead from "@/components/SEOHead";
 const categories = [
   "All",
   "UI/UX",
-  "Website", 
+  "Website",
   "Web App",
   "Mobile App",
   "Desktop App",
@@ -54,7 +54,7 @@ const projects = [
     tech: [
       "Node.js",
       "HTML",
-      "CSS", 
+      "CSS",
       "JavaScript",
       "PostgreSQL",
       "Cloudinary",
@@ -64,7 +64,7 @@ const projects = [
   },
   {
     title: "UpdateAlchemist",
-    category: "Web App", 
+    category: "Web App",
     image: "/images/projects_img/project3_updatealchemist.webp",
     description:
       "Modern changelog and product update management platform with real-time notifications, user feedback collection, and analytics dashboard for tracking feature adoption and user engagement.",
@@ -74,7 +74,7 @@ const projects = [
   {
     title: "Certificate Generator Pro",
     category: "Web App",
-    image: "/images/projects_img/project42_certificate.webp", 
+    image: "/images/projects_img/project42_certificate.webp",
     description:
       "Automated certificate generation system with customizable templates, bulk processing, digital signatures, and secure verification system for educational institutions and training programs.",
     tech: ["React", "Python", "Flask", "PostgreSQL", "Canvas API"],
@@ -88,7 +88,8 @@ const portfolioPageSchema = {
   "@id": "https://ellowdigitals.me/portfolio",
   url: "https://ellowdigitals.me/portfolio",
   name: "Portfolio - EllowDigital Projects",
-  description: "Explore our complete portfolio of web development, mobile apps, and digital transformation projects.",
+  description:
+    "Explore our complete portfolio of web development, mobile apps, and digital transformation projects.",
   isPartOf: {
     "@type": "WebSite",
     url: "https://ellowdigitals.me/",
@@ -158,7 +159,7 @@ const PortfolioPage = () => {
 
       <div className="min-h-screen flex flex-col bg-background text-foreground">
         <Navbar />
-        
+
         <main className="flex-grow overflow-x-hidden" id="main-content">
           <section className="section-container py-16 sm:py-20 md:py-24 relative overflow-hidden">
             {/* Background elements */}
@@ -183,13 +184,14 @@ const PortfolioPage = () => {
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to Home
                 </Link>
-                
+
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                   Our Complete Portfolio
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Explore our diverse range of projects spanning web development, mobile applications, 
-                  desktop software, and digital transformation solutions.
+                  Explore our diverse range of projects spanning web
+                  development, mobile applications, desktop software, and
+                  digital transformation solutions.
                 </p>
                 <div className="h-1 w-24 mx-auto bg-gradient-to-r from-brand-gold to-brand-yellow rounded-full mt-6"></div>
               </motion.div>
@@ -258,7 +260,9 @@ const PortfolioPage = () => {
                           {/* Hover overlay */}
                           <div
                             className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent flex items-end justify-center p-4 sm:p-6 transition-opacity duration-300 ${
-                              hoveredIndex === index ? "opacity-100" : "opacity-0"
+                              hoveredIndex === index
+                                ? "opacity-100"
+                                : "opacity-0"
                             }`}
                           >
                             {project.link !== "#" ? (
@@ -269,11 +273,15 @@ const PortfolioPage = () => {
                                   rel="noopener noreferrer"
                                   className="flex items-center"
                                 >
-                                  View Project <ExternalLink className="ml-2 w-4 h-4" />
+                                  View Project{" "}
+                                  <ExternalLink className="ml-2 w-4 h-4" />
                                 </a>
                               </Button>
                             ) : (
-                              <Button disabled className="bg-gray-500 text-white cursor-not-allowed">
+                              <Button
+                                disabled
+                                className="bg-gray-500 text-white cursor-not-allowed"
+                              >
                                 Coming Soon
                               </Button>
                             )}
@@ -320,7 +328,7 @@ const PortfolioPage = () => {
             </div>
           </section>
         </main>
-        
+
         <Footer />
       </div>
     </>
