@@ -29,7 +29,14 @@ const projects = [
     image: "/images/projects_img/project2_gsai.webp",
     description:
       "Responsive web app for GSAI featuring programs, schedules, events, updates, and streamlined admissions info, with an integrated gallery, coach bios, and a mobile-first, performance-optimized UI.",
-    tech: ["HTML", "CSS", "JavaScript", "React (Vite)", "TypeScript"],
+    tech: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React (Vite)",
+      "TypeScript",
+      "Netlify",
+    ],
     link: "https://ghatakgsai.netlify.app/",
   },
   {
@@ -38,7 +45,7 @@ const projects = [
     image: "/images/projects_img/project3_sarwan.webp",
     description:
       "Modern personal portfolio highlighting work, achievements, projects, and an easy, streamlined contact flow, enhanced with smooth animations, responsive layouts, and SEO-friendly metadata.",
-    tech: ["HTML", "CSS", "JavaScript", "JQuery"],
+    tech: ["HTML", "CSS", "JavaScript", "JQuery", "Netlify"],
     link: "https://sarwan.netlify.app/",
   },
   {
@@ -57,6 +64,23 @@ const projects = [
       "Netlify",
     ],
     link: "https://td-expoup25.netlify.app/",
+  },
+  {
+    title: "RGSK Technologies Pvt. Ltd.",
+    category: "Website",
+    image: "/images/projects_img/project5_rgsktech.webp",
+    description:
+      "Business website for RGSK Technologies with a modern, responsive UI focused on clarity, trust, and performance.",
+    tech: [
+      "Node.js",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React (Vite)",
+      "TypeScript",
+      "Netlify",
+    ],
+    link: "https://rgsktechnologies.netlify.app/",
   },
 ];
 
@@ -88,6 +112,7 @@ const Portfolio = () => {
       y: 0,
       transition: {
         duration: 0.5,
+        ease: [0.25, 1, 0.5, 1],
       },
     },
     exit: {
@@ -95,6 +120,7 @@ const Portfolio = () => {
       y: 20,
       transition: {
         duration: 0.3,
+        ease: "easeIn",
       },
     },
   };
@@ -238,7 +264,7 @@ const Portfolio = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <Button className="bg-brand-yellow text-black hover:bg-brand-gold">
-            <a href="/portfolio" className="flex items-center">
+            <a href="#portfolio" className="flex items-center">
               View All Projects <ExternalLink className="ml-2 w-4 h-4" />
             </a>
           </Button>
