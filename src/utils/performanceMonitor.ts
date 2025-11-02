@@ -103,11 +103,7 @@ export const useDeferredEffect = (
 
     // Cleanup function in case of any side effects
     return () => {
-      if (typeof cancelIdleCallback !== "undefined") {
-        cancelIdleCallback(callbackFn);
-      } else {
-        clearTimeout(callbackFn);
-      }
+      // No cleanup needed for requestIdleCallback
     };
   }, deps);
 };

@@ -9,21 +9,24 @@ import { toast } from "sonner";
 // Define search results categories and items
 const searchData = {
   services: [
-    { title: "Web Development", href: "#services" },
-    { title: "Mobile Apps", href: "#services" },
-    { title: "UI/UX Design", href: "#services" },
-    { title: "E-commerce Solutions", href: "#services" },
-    { title: "Digital Marketing", href: "#services" },
+    { title: "Web Development", href: "#services", description: "Custom web applications and websites" },
+    { title: "Mobile Apps", href: "#services", description: "iOS and Android mobile applications" },
+    { title: "UI/UX Design", href: "#services", description: "Beautiful, user-friendly interfaces" },
+    { title: "E-commerce Solutions", href: "#services", description: "Online stores and payment systems" },
+    { title: "Digital Marketing", href: "#services", description: "SEO, social media, and more" },
+    { title: "API Development", href: "#services", description: "Backend and API integration" },
   ],
   pages: [
-    { title: "About Us", href: "#about" },
-    { title: "Portfolio", href: "#portfolio" },
-    { title: "Contact", href: "#contact" },
-    { title: "Team", href: "/team" },
+    { title: "About Us", href: "#about", description: "Learn about EllowDigital" },
+    { title: "Portfolio", href: "/portfolio", description: "View our completed projects" },
+    { title: "Contact", href: "#contact", description: "Get in touch with us" },
+    { title: "Team", href: "/team", description: "Meet our expert team" },
+    { title: "Privacy Policy", href: "/privacy-policy", description: "Our privacy policy" },
+    { title: "Terms of Service", href: "/terms-of-service", description: "Terms and conditions" },
   ],
   offers: [
-    { title: "Static Website Package", href: "#offers" },
-    { title: "School CS Projects", href: "#offers" },
+    { title: "Static Website Package", href: "#offers", description: "Affordable static websites" },
+    { title: "School CS Projects", href: "#offers", description: "Computer science project help" },
   ],
 };
 
@@ -31,6 +34,7 @@ type SearchResult = {
   title: string;
   href: string;
   category: string;
+  description?: string;
 };
 
 interface SearchModalProps {
@@ -70,7 +74,8 @@ const SearchModal = ({ open, onOpenChange }: SearchModalProps) => {
     // Search through all categories
     Object.entries(searchData).forEach(([category, items]) => {
       items.forEach((item) => {
-        if (item.title.toLowerCase().includes(query.toLowerCase())) {
+        const searchText = `${item.title} ${item.description || ""}`.toLowerCase();
+        if (searchText.includes(query.toLowerCase())) {
           allResults.push({
             ...item,
             category,
@@ -193,17 +198,38 @@ const SearchModal = ({ open, onOpenChange }: SearchModalProps) => {
                       return (
                         <div
                           key={`${result.category}-${index}`}
-                          className={`px-2 py-1.5 rounded-md cursor-pointer flex items-center ${
+                          className={`px-3 py-2.5 rounded-lg cursor-pointer flex items-start gap-3 transition-all ${
                             resultIndex === selectedIndex
-                              ? "bg-orange-500/10 text-orange-500"
-                              : "hover:bg-muted"
+                              ? "bg-brand-yellow/10 border border-brand-yellow/30"
+                              : "hover:bg-muted border border-transparent"
                           }`}
                           onClick={() => handleNavigate(result)}
                         >
-                          <div className="mr-3 p-1.5 rounded-md bg-muted">
-                            <Search className="h-3.5 w-3.5 text-muted-foreground" />
+                          <div className={`p-2 rounded-md ${
+                            resultIndex === selectedIndex 
+                              ? "bg-brand-yellow/20" 
+                              : "bg-muted"
+                          }`}>
+                            <Search className={`h-4 w-4 ${
+                              resultIndex === selectedIndex
+                                ? "text-brand-yellow"
+                                : "text-muted-foreground"
+                            }`} />
                           </div>
-                          <span>{result.title}</span>
+                          <div className="flex-1 min-w-0">
+                            <div className={`font-medium ${
+                              resultIndex === selectedIndex
+                                ? "text-brand-yellow"
+                                : ""
+                            }`}>
+                              {result.title}
+                            </div>
+                            {result.description && (
+                              <p className="text-xs text-muted-foreground mt-0.5 truncate">
+                                {result.description}
+                              </p>
+                            )}
+                          </div>
                         </div>
                       );
                     })}

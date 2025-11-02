@@ -11,6 +11,9 @@ const TeamPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Scroll to top on mount
+    window.scrollTo(0, 0);
+
     // Simulate loading state
     const timer = setTimeout(() => {
       setLoading(false);
@@ -89,79 +92,84 @@ const TeamPage = () => {
 
       <main className="min-h-screen bg-background pt-24 pb-16">
         {/* Hero Section */}
-        <section className="relative overflow-hidden">
-          <div className="section-container">
-            <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 gradient-text">
-                Meet Our Team
+        <section className="relative overflow-hidden py-12">
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-yellow/5 to-transparent pointer-events-none" />
+          <div className="section-container relative">
+            <div className="max-w-4xl mx-auto text-center mb-12 md:mb-16">
+              <Badge
+                variant="outline"
+                className="px-4 py-1.5 text-brand-yellow border-brand-yellow/50 gap-2 mb-6 animate-fade-in"
+              >
+                <Users className="w-4 h-4" />
+                <span>Our Expert Team</span>
+              </Badge>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 gradient-text animate-fade-in">
+                Meet the Minds Behind{" "}
+                <span className="text-brand-yellow">EllowDigital</span>
               </h1>
-              <p className="text-lg text-muted-foreground mb-6">
-                The talented people behind EllowDigital's success
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in">
+                A passionate team of developers, designers, and innovators dedicated to bringing your digital vision to life.
               </p>
-              <div className="flex items-center justify-center">
-                <Badge
-                  variant="outline"
-                  className="px-3 py-1 text-brand-yellow border-brand-yellow/50 gap-1"
-                >
-                  <Users className="w-4 h-4" />
-                  <span>Our Experts</span>
-                </Badge>
-              </div>
             </div>
           </div>
         </section>
 
         {/* Team Members Grid */}
         <section className="section-container py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teamMembers.map((member) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {teamMembers.map((member, index) => (
               <Card
                 key={member.id}
-                className="card-hover overflow-hidden bg-card/50 border-border/50"
+                className="card-hover overflow-hidden bg-gradient-to-br from-card to-card/50 border-border/50 group"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <Avatar className="w-16 h-16 border-2 border-brand-yellow">
-                      <AvatarImage src={member.image} alt={member.name} />
-                      <AvatarFallback className="bg-brand-yellow/20 text-brand-yellow">
-                        {member.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <h3 className="font-bold text-xl">{member.name}</h3>
-                      <p className="text-brand-yellow text-sm">{member.role}</p>
+                <div className="p-6 space-y-4">
+                  <div className="flex flex-col items-center text-center">
+                    <div className="relative mb-4">
+                      <div className="absolute inset-0 bg-gradient-to-r from-brand-gold to-brand-yellow rounded-full blur-lg opacity-20 group-hover:opacity-40 transition-opacity" />
+                      <Avatar className="w-24 h-24 border-3 border-brand-yellow relative">
+                        <AvatarImage src={member.image} alt={member.name} />
+                        <AvatarFallback className="bg-brand-yellow/20 text-brand-yellow text-xl">
+                          {member.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")}
+                        </AvatarFallback>
+                      </Avatar>
                     </div>
+                    <h3 className="font-bold text-2xl mb-1">{member.name}</h3>
+                    <p className="text-brand-yellow font-medium">{member.role}</p>
                   </div>
-                  <CardContent className="px-0 pb-0">
-                    <p className="text-muted-foreground mb-4">{member.bio}</p>
-                    <div className="mb-4">
-                      <h4 className="text-sm font-medium mb-2">Specialties:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {member.specialties.map((specialty, index) => (
+                  
+                  <CardContent className="px-0 pb-0 space-y-4">
+                    <p className="text-muted-foreground text-center leading-relaxed">{member.bio}</p>
+                    
+                    <div>
+                      <h4 className="text-sm font-semibold mb-3 text-center">Core Expertise</h4>
+                      <div className="flex flex-wrap gap-2 justify-center">
+                        {member.specialties.map((specialty, idx) => (
                           <Badge
-                            key={index}
+                            key={idx}
                             variant="secondary"
-                            className="bg-brand-yellow/10 hover:bg-brand-yellow/20 text-xs"
+                            className="bg-gradient-to-r from-brand-yellow/10 to-brand-gold/10 hover:from-brand-yellow/20 hover:to-brand-gold/20 border border-brand-yellow/20 text-xs font-medium transition-all"
                           >
                             {specialty}
                           </Badge>
                         ))}
                       </div>
                     </div>
-                    <div className="flex gap-3 mt-4 border-t border-border/50 pt-4">
+                    
+                    <div className="flex justify-center gap-4 pt-4 border-t border-border/50">
                       {Object.entries(member.social).map(([platform, url]) => (
                         <a
                           key={platform}
                           href={url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-muted-foreground hover:text-brand-yellow transition-colors"
+                          className="text-muted-foreground hover:text-brand-yellow transition-all transform hover:scale-110"
                           aria-label={`${member.name}'s ${platform}`}
                         >
-                          <span className="capitalize text-xs">{platform}</span>
+                          <span className="capitalize text-sm font-medium">{platform}</span>
                         </a>
                       ))}
                     </div>
@@ -174,26 +182,30 @@ const TeamPage = () => {
 
         {/* Join Our Team Section */}
         <section className="section-container py-12 mt-8">
-          <div className="max-w-3xl mx-auto bg-card p-8 rounded-xl border border-border/50 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">
-              Want to Join Our Team?
-            </h2>
-            <p className="text-muted-foreground mb-6">
-              We're always looking for talented individuals to join our growing
-              team. If you're passionate about creating amazing digital
-              experiences, we'd love to hear from you.
-            </p>
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                // Navigate to home page and scroll to contact section
-                window.location.href = "/#contact";
-              }}
-              className="px-6 py-2.5 bg-gradient-to-r from-brand-gold to-brand-yellow text-black font-bold rounded-full shadow hover:scale-105 transition-transform inline-block"
-            >
-              Get in Touch
-            </a>
+          <div className="max-w-4xl mx-auto relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-gold/10 via-brand-yellow/10 to-brand-gold/10 rounded-2xl blur-xl" />
+            <div className="relative bg-gradient-to-br from-card to-card/80 p-8 md:p-12 rounded-2xl border border-brand-yellow/20 text-center">
+              <div className="inline-block p-3 bg-gradient-to-r from-brand-gold/20 to-brand-yellow/20 rounded-full mb-4">
+                <Users className="w-8 h-8 text-brand-yellow" />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
+                Join Our Growing Team
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+                We're always looking for talented, passionate individuals who want to make an impact. 
+                Whether you're a developer, designer, or marketing expert, we'd love to hear from you.
+              </p>
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = "/#contact";
+                }}
+                className="inline-block px-8 py-3.5 bg-gradient-to-r from-brand-gold to-brand-yellow text-black font-bold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+              >
+                Get in Touch
+              </a>
+            </div>
           </div>
         </section>
       </main>

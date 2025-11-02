@@ -39,7 +39,7 @@ export const initScrollRevealAnimations = () => {
     parallaxElements.forEach((element) => {
       const speed = element.getAttribute("data-speed") || "0.5";
       const yPos = -(scrollTop * parseFloat(speed));
-      element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+      (element as HTMLElement).style.transform = `translate3d(0, ${yPos}px, 0)`;
     });
   };
 
@@ -79,30 +79,30 @@ export const init3DTiltEffect = () => {
     const glarePosition = `${x * 100}% ${y * 100}%`;
 
     // Use transform3d for hardware acceleration and add subtle scale
-    element.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.01, 1.01, 1.01) translateZ(0)`;
-    element.style.transition =
+    (element as HTMLElement).style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.01, 1.01, 1.01) translateZ(0)`;
+    (element as HTMLElement).style.transition =
       "transform 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67)";
-    element.style.willChange = "transform";
+    (element as HTMLElement).style.willChange = "transform";
 
     // Enhanced glare effect
     const glareElement = element.querySelector(".glare");
     if (glareElement) {
-      glareElement.style.backgroundPosition = glarePosition;
-      glareElement.style.transform = `rotate(${tiltY * 0.5}deg)`;
+      (glareElement as HTMLElement).style.backgroundPosition = glarePosition;
+      (glareElement as HTMLElement).style.transform = `rotate(${tiltY * 0.5}deg)`;
     }
   };
 
   const handleMouseLeave = (element: Element) => {
-    element.style.transform =
+    (element as HTMLElement).style.transform =
       "perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1) translateZ(0)";
-    element.style.transition =
+    (element as HTMLElement).style.transition =
       "transform 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67)";
 
     // Reset glare effect
     const glareElement = element.querySelector(".glare");
     if (glareElement) {
-      glareElement.style.opacity = "0";
-      glareElement.style.transition = "opacity 0.5s ease-out";
+      (glareElement as HTMLElement).style.opacity = "0";
+      (glareElement as HTMLElement).style.transition = "opacity 0.5s ease-out";
     }
   };
 
@@ -154,10 +154,10 @@ export const init3DCodeAnimation = () => {
     const rotateY = Math.sin(time * 0.3) * 2;
     const rotateX = Math.cos(time * 0.4) * 1.5;
 
-    codeElement.style.transform = `translateY(${translateY}px) rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateZ(0)`;
-    codeElement.style.transition =
+    (codeElement as HTMLElement).style.transform = `translateY(${translateY}px) rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateZ(0)`;
+    (codeElement as HTMLElement).style.transition =
       "transform 0.1s cubic-bezier(0.25, 0.1, 0.25, 1)";
-    codeElement.style.willChange = "transform";
+    (codeElement as HTMLElement).style.willChange = "transform";
 
     requestAnimationFrame(animate);
   };
@@ -257,7 +257,9 @@ export const initScrollProgress = () => {
       document.documentElement.scrollHeight - window.innerHeight;
     const scrollPercentage = (scrollPosition / docHeight) * 100;
 
-    progressBar.style.width = `${scrollPercentage}%`;
+    if (progressBar) {
+      (progressBar as HTMLElement).style.width = `${scrollPercentage}%`;
+    }
   };
 
   window.addEventListener("scroll", updateProgressBar, { passive: true });

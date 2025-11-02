@@ -20,7 +20,7 @@ const trackWebVitals = async () => {
     const webVitals = await import("web-vitals");
 
     webVitals.onCLS(sendToAnalytics);
-    webVitals.onFID(sendToAnalytics);
+    webVitals.onINP(sendToAnalytics);
     webVitals.onLCP(sendToAnalytics);
     webVitals.onFCP(sendToAnalytics);
     webVitals.onTTFB(sendToAnalytics);

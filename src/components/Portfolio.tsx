@@ -112,7 +112,6 @@ const Portfolio = () => {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: [0.25, 1, 0.5, 1],
       },
     },
     exit: {
@@ -120,10 +119,9 @@ const Portfolio = () => {
       y: 20,
       transition: {
         duration: 0.3,
-        ease: "easeIn",
       },
     },
-  };
+  } as const;
 
   return (
     <section
