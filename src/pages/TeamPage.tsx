@@ -108,7 +108,8 @@ const TeamPage = () => {
                 <span className="text-brand-yellow">EllowDigital</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in">
-                A passionate team of developers, designers, and innovators dedicated to bringing your digital vision to life.
+                A passionate team of developers, designers, and innovators
+                dedicated to bringing your digital vision to life.
               </p>
             </div>
           </div>
@@ -138,14 +139,20 @@ const TeamPage = () => {
                       </Avatar>
                     </div>
                     <h3 className="font-bold text-2xl mb-1">{member.name}</h3>
-                    <p className="text-brand-yellow font-medium">{member.role}</p>
+                    <p className="text-brand-yellow font-medium">
+                      {member.role}
+                    </p>
                   </div>
-                  
+
                   <CardContent className="px-0 pb-0 space-y-4">
-                    <p className="text-muted-foreground text-center leading-relaxed">{member.bio}</p>
-                    
+                    <p className="text-muted-foreground text-center leading-relaxed">
+                      {member.bio}
+                    </p>
+
                     <div>
-                      <h4 className="text-sm font-semibold mb-3 text-center">Core Expertise</h4>
+                      <h4 className="text-sm font-semibold mb-3 text-center">
+                        Core Expertise
+                      </h4>
                       <div className="flex flex-wrap gap-2 justify-center">
                         {member.specialties.map((specialty, idx) => (
                           <Badge
@@ -158,7 +165,7 @@ const TeamPage = () => {
                         ))}
                       </div>
                     </div>
-                    
+
                     <div className="flex justify-center gap-4 pt-4 border-t border-border/50">
                       {Object.entries(member.social).map(([platform, url]) => (
                         <a
@@ -169,7 +176,9 @@ const TeamPage = () => {
                           className="text-muted-foreground hover:text-brand-yellow transition-all transform hover:scale-110"
                           aria-label={`${member.name}'s ${platform}`}
                         >
-                          <span className="capitalize text-sm font-medium">{platform}</span>
+                          <span className="capitalize text-sm font-medium">
+                            {platform}
+                          </span>
                         </a>
                       ))}
                     </div>
@@ -192,8 +201,9 @@ const TeamPage = () => {
                 Join Our Growing Team
               </h2>
               <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                We're always looking for talented, passionate individuals who want to make an impact. 
-                Whether you're a developer, designer, or marketing expert, we'd love to hear from you.
+                We're always looking for talented, passionate individuals who
+                want to make an impact. Whether you're a developer, designer, or
+                marketing expert, we'd love to hear from you.
               </p>
               <a
                 href="#contact"

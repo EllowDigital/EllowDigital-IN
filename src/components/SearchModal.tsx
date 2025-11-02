@@ -9,24 +9,72 @@ import { toast } from "sonner";
 // Define search results categories and items
 const searchData = {
   services: [
-    { title: "Web Development", href: "#services", description: "Custom web applications and websites" },
-    { title: "Mobile Apps", href: "#services", description: "iOS and Android mobile applications" },
-    { title: "UI/UX Design", href: "#services", description: "Beautiful, user-friendly interfaces" },
-    { title: "E-commerce Solutions", href: "#services", description: "Online stores and payment systems" },
-    { title: "Digital Marketing", href: "#services", description: "SEO, social media, and more" },
-    { title: "API Development", href: "#services", description: "Backend and API integration" },
+    {
+      title: "Web Development",
+      href: "#services",
+      description: "Custom web applications and websites",
+    },
+    {
+      title: "Mobile Apps",
+      href: "#services",
+      description: "iOS and Android mobile applications",
+    },
+    {
+      title: "UI/UX Design",
+      href: "#services",
+      description: "Beautiful, user-friendly interfaces",
+    },
+    {
+      title: "E-commerce Solutions",
+      href: "#services",
+      description: "Online stores and payment systems",
+    },
+    {
+      title: "Digital Marketing",
+      href: "#services",
+      description: "SEO, social media, and more",
+    },
+    {
+      title: "API Development",
+      href: "#services",
+      description: "Backend and API integration",
+    },
   ],
   pages: [
-    { title: "About Us", href: "#about", description: "Learn about EllowDigital" },
-    { title: "Portfolio", href: "/portfolio", description: "View our completed projects" },
+    {
+      title: "About Us",
+      href: "#about",
+      description: "Learn about EllowDigital",
+    },
+    {
+      title: "Portfolio",
+      href: "/portfolio",
+      description: "View our completed projects",
+    },
     { title: "Contact", href: "#contact", description: "Get in touch with us" },
     { title: "Team", href: "/team", description: "Meet our expert team" },
-    { title: "Privacy Policy", href: "/privacy-policy", description: "Our privacy policy" },
-    { title: "Terms of Service", href: "/terms-of-service", description: "Terms and conditions" },
+    {
+      title: "Privacy Policy",
+      href: "/privacy-policy",
+      description: "Our privacy policy",
+    },
+    {
+      title: "Terms of Service",
+      href: "/terms-of-service",
+      description: "Terms and conditions",
+    },
   ],
   offers: [
-    { title: "Static Website Package", href: "#offers", description: "Affordable static websites" },
-    { title: "School CS Projects", href: "#offers", description: "Computer science project help" },
+    {
+      title: "Static Website Package",
+      href: "#offers",
+      description: "Affordable static websites",
+    },
+    {
+      title: "School CS Projects",
+      href: "#offers",
+      description: "Computer science project help",
+    },
   ],
 };
 
@@ -74,7 +122,9 @@ const SearchModal = ({ open, onOpenChange }: SearchModalProps) => {
     // Search through all categories
     Object.entries(searchData).forEach(([category, items]) => {
       items.forEach((item) => {
-        const searchText = `${item.title} ${item.description || ""}`.toLowerCase();
+        const searchText = `${item.title} ${
+          item.description || ""
+        }`.toLowerCase();
         if (searchText.includes(query.toLowerCase())) {
           allResults.push({
             ...item,
@@ -205,23 +255,29 @@ const SearchModal = ({ open, onOpenChange }: SearchModalProps) => {
                           }`}
                           onClick={() => handleNavigate(result)}
                         >
-                          <div className={`p-2 rounded-md ${
-                            resultIndex === selectedIndex 
-                              ? "bg-brand-yellow/20" 
-                              : "bg-muted"
-                          }`}>
-                            <Search className={`h-4 w-4 ${
+                          <div
+                            className={`p-2 rounded-md ${
                               resultIndex === selectedIndex
-                                ? "text-brand-yellow"
-                                : "text-muted-foreground"
-                            }`} />
+                                ? "bg-brand-yellow/20"
+                                : "bg-muted"
+                            }`}
+                          >
+                            <Search
+                              className={`h-4 w-4 ${
+                                resultIndex === selectedIndex
+                                  ? "text-brand-yellow"
+                                  : "text-muted-foreground"
+                              }`}
+                            />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <div className={`font-medium ${
-                              resultIndex === selectedIndex
-                                ? "text-brand-yellow"
-                                : ""
-                            }`}>
+                            <div
+                              className={`font-medium ${
+                                resultIndex === selectedIndex
+                                  ? "text-brand-yellow"
+                                  : ""
+                              }`}
+                            >
                               {result.title}
                             </div>
                             {result.description && (
