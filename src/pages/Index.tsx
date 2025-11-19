@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
@@ -8,20 +8,18 @@ import Footer from "@/components/Footer";
 import Portfolio from "@/components/Portfolio";
 import SmartContactForm from "@/components/SmartContactForm";
 import SEOHead from "@/components/SEOHead";
+import FounderSection from "@/components/FounderSection";
+import EngagementModel from "@/components/EngagementModel";
+import WorkProcess from "@/components/WorkProcess";
+import Testimonials from "@/components/Testimonials";
+import ImpactMetrics from "@/components/ImpactMetrics";
+import TechStack from "@/components/TechStack";
+import FeaturedOffers from "@/components/FeaturedOffers";
 import {
   initScrollRevealAnimations,
   init3DTiltEffect,
 } from "@/utils/animationUtils";
 import Preloader from "@/components/Preloader";
-import LazySection from "@/components/LazySection";
-
-const FounderSection = lazy(() => import("@/components/FounderSection"));
-const EngagementModel = lazy(() => import("@/components/EngagementModel"));
-const WorkProcess = lazy(() => import("@/components/WorkProcess"));
-const Testimonials = lazy(() => import("@/components/Testimonials"));
-const ImpactMetrics = lazy(() => import("@/components/ImpactMetrics"));
-const TechStack = lazy(() => import("@/components/TechStack"));
-const FeaturedOffers = lazy(() => import("@/components/FeaturedOffers"));
 
 // Homepage JSON-LD structured data
 const homePageSchema = {
@@ -122,44 +120,16 @@ const Index = () => {
         <main className="flex-grow overflow-x-hidden" id="main-content">
           <HeroSection />
           <AboutSection />
-          <LazySection fallback={<SectionSkeleton />}>
-            <Suspense fallback={<SectionSkeleton />}>
-              <FounderSection />
-            </Suspense>
-          </LazySection>
+          <FounderSection />
           <ServicesSection />
-          <LazySection fallback={<SectionSkeleton minHeight={480} />}>
-            <Suspense fallback={<SectionSkeleton minHeight={480} />}>
-              <WorkProcess />
-            </Suspense>
-          </LazySection>
-          <LazySection fallback={<SectionSkeleton minHeight={520} />}>
-            <Suspense fallback={<SectionSkeleton minHeight={520} />}>
-              <EngagementModel />
-            </Suspense>
-          </LazySection>
+          <WorkProcess />
+          <EngagementModel />
           <Portfolio />
-          <LazySection fallback={<SectionSkeleton minHeight={420} />}>
-            <Suspense fallback={<SectionSkeleton minHeight={420} />}>
-              <ImpactMetrics />
-            </Suspense>
-          </LazySection>
-          <LazySection fallback={<SectionSkeleton minHeight={460} />}>
-            <Suspense fallback={<SectionSkeleton minHeight={460} />}>
-              <Testimonials />
-            </Suspense>
-          </LazySection>
-          <LazySection fallback={<SectionSkeleton />}>
-            <Suspense fallback={<SectionSkeleton />}>
-              <TechStack />
-            </Suspense>
-          </LazySection>
+          <ImpactMetrics />
+          <Testimonials />
+          <TechStack />
           <WhyChooseUs />
-          <LazySection fallback={<SectionSkeleton />}>
-            <Suspense fallback={<SectionSkeleton />}>
-              <FeaturedOffers />
-            </Suspense>
-          </LazySection>
+          <FeaturedOffers />
           <SmartContactForm />
         </main>
         <Footer />
@@ -167,14 +137,5 @@ const Index = () => {
     </>
   );
 };
-
-const SectionSkeleton = ({ minHeight = 360 }: { minHeight?: number }) => (
-  <div className="section-container" aria-hidden="true">
-    <div
-      className="w-full rounded-3xl bg-muted/30 animate-pulse"
-      style={{ minHeight }}
-    ></div>
-  </div>
-);
 
 export default Index;
