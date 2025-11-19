@@ -125,7 +125,8 @@ const applyResponsiveOptimizations = () => {
     const isTouchDevice =
       "ontouchstart" in window ||
       navigator.maxTouchPoints > 0 ||
-      (navigator as any).msMaxTouchPoints > 0;
+      (navigator as unknown as { msMaxTouchPoints: number }).msMaxTouchPoints >
+        0;
     document.body.classList.add(isTouchDevice ? "touch-device" : "no-touch");
 
     // Check for reduced motion preference
@@ -138,7 +139,9 @@ const applyResponsiveOptimizations = () => {
 
     // Check for data saver mode based on network connection
     if ("connection" in navigator) {
-      const connection = (navigator as any).connection;
+      const connection = (
+        navigator as unknown as { connection: { saveData: boolean } }
+      ).connection;
       if (connection && connection.saveData) {
         document.body.classList.add("data-saver");
       }

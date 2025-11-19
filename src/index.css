@@ -152,6 +152,20 @@
     padding-block: clamp(2rem, 10vh, 6rem);
   }
 
+  @supports (content-visibility: auto) {
+    .deferred-section {
+      content-visibility: auto;
+      contain-intrinsic-size: 600px;
+      contain: paint layout style;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .deferred-section {
+      content-visibility: visible;
+    }
+  }
+
   /* Enhanced section title with subtle effects */
   .section-title {
     @apply font-bold mb-6 md:mb-8 text-center text-foreground;

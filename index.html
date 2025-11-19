@@ -31,6 +31,14 @@
     <meta name="author" content="EllowDigital" />
     <link rel="canonical" href="https://ellowdigitals.me/" />
 
+    <!-- Resource Hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.gpteng.co" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://cdn.gpteng.co" />
+
     <!-- Additional SEO and Social Meta Tags -->
     <meta name="referrer" content="no-referrer-when-downgrade" />
     <meta name="copyright" content="© 2025 EllowDigital" />
@@ -138,14 +146,41 @@
       href="/favicon/favicon-16x16.png"
     />
     <link rel="manifest" href="/favicon/site.webmanifest" />
-    <link rel="stylesheet" href="/preloader.css" />
+    <link rel="preload" href="/preloader.css" as="style" />
+    <link
+      rel="stylesheet"
+      href="/preloader.css"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="/preloader.css" />
+    </noscript>
   </head>
 
   <body>
     <div id="root"></div>
 
     <!-- Important Script Tags -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      (() => {
+        const loadThirdParty = () => {
+          const script = document.createElement("script");
+          script.type = "module";
+          script.defer = true;
+          script.src = "https://cdn.gpteng.co/gptengineer.js";
+          document.body.appendChild(script);
+        };
+
+        if ("requestIdleCallback" in window) {
+          window.requestIdleCallback(loadThirdParty, { timeout: 2000 });
+        } else {
+          window.addEventListener("load", () => loadThirdParty(), {
+            once: true,
+          });
+        }
+      })();
+    </script>
   </body>
 </html>

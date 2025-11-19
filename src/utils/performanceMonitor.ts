@@ -65,22 +65,25 @@ export const useRenderPerformance = (componentName: string) => {
   const renderStart = useRef<number | undefined>(undefined);
 
   // Monitor render time only in development mode
-  if (process.env.NODE_ENV === "development") {
-    renderStart.current = performance.now();
+  // Always call hooks at the top level
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development") {
+      renderStart.current = performance.now();
+    }
+  });
 
-    useEffect(() => {
-      if (renderStart.current) {
-        const renderTime = performance.now() - renderStart.current;
-        if (renderTime > RENDER_THRESHOLD_MS) {
-          console.warn(
-            `Slow render detected in ${componentName}: ${Math.round(
-              renderTime
-            )}ms`
-          );
-        }
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development" && renderStart.current) {
+      const renderTime = performance.now() - renderStart.current;
+      if (renderTime > RENDER_THRESHOLD_MS) {
+        console.warn(
+          `Slow render detected in ${componentName}: ${Math.round(
+            renderTime
+          )}ms`
+        );
       }
-    });
-  }
+    }
+  });
 };
 
 /**
@@ -105,7 +108,7 @@ export const useDeferredEffect = (
     return () => {
       // No cleanup needed for requestIdleCallback
     };
-  }, deps);
+  }, [callback]);
 };
 
 /**
@@ -176,7 +179,9 @@ export const optimizeImage = (
 
 // Simplified performance debugging tool for development
 if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
-  (window as any).__PERFORMANCE_MONITOR__ = {
+  (
+    window as unknown as { __PERFORMANCE_MONITOR__: unknown }
+  ).__PERFORMANCE_MONITOR__ = {
     getMetrics: () => {
       if ("performance" in window) {
         return {

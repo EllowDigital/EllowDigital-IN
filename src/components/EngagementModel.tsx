@@ -99,23 +99,29 @@ const EngagementModel = () => {
       { threshold: 0.1 }
     );
 
-    if (titleRef.current) observer.observe(titleRef.current);
-    if (dividerRef.current) observer.observe(dividerRef.current);
-    if (timelineRef.current) observer.observe(timelineRef.current);
-    if (modelsRef.current) observer.observe(modelsRef.current);
+    // Copy ref values to variables for cleanup
+    const titleElement = titleRef.current;
+    const dividerElement = dividerRef.current;
+    const timelineElement = timelineRef.current;
+    const modelsElement = modelsRef.current;
+
+    if (titleElement) observer.observe(titleElement);
+    if (dividerElement) observer.observe(dividerElement);
+    if (timelineElement) observer.observe(timelineElement);
+    if (modelsElement) observer.observe(modelsElement);
 
     return () => {
-      if (titleRef.current) observer.unobserve(titleRef.current);
-      if (dividerRef.current) observer.unobserve(dividerRef.current);
-      if (timelineRef.current) observer.unobserve(timelineRef.current);
-      if (modelsRef.current) observer.unobserve(modelsRef.current);
+      if (titleElement) observer.unobserve(titleElement);
+      if (dividerElement) observer.unobserve(dividerElement);
+      if (timelineElement) observer.unobserve(timelineElement);
+      if (modelsElement) observer.unobserve(modelsElement);
     };
   }, []);
 
   return (
     <section
       id="engagement"
-      className="section-container py-24 relative overflow-hidden snap-start bg-muted/50 dark:bg-transparent"
+      className="section-container py-24 relative overflow-hidden snap-start bg-muted/50 dark:bg-transparent deferred-section"
     >
       {/* Background morphing shapes */}
       <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl morph-shape"></div>

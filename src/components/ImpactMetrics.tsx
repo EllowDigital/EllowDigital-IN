@@ -55,18 +55,24 @@ const ImpactMetrics = () => {
       { threshold: 0.2 }
     );
 
-    if (titleRef.current) observer.observe(titleRef.current);
-    if (dividerRef.current) observer.observe(dividerRef.current);
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    metricsRef.current.forEach((ref) => {
+    // Copy ref values to variables for cleanup
+    const titleElement = titleRef.current;
+    const dividerElement = dividerRef.current;
+    const sectionElement = sectionRef.current;
+    const metricElements = metricsRef.current;
+
+    if (titleElement) observer.observe(titleElement);
+    if (dividerElement) observer.observe(dividerElement);
+    if (sectionElement) observer.observe(sectionElement);
+    metricElements.forEach((ref) => {
       if (ref) observer.observe(ref);
     });
 
     return () => {
-      if (titleRef.current) observer.unobserve(titleRef.current);
-      if (dividerRef.current) observer.unobserve(dividerRef.current);
-      if (sectionRef.current) observer.unobserve(sectionRef.current);
-      metricsRef.current.forEach((ref) => {
+      if (titleElement) observer.unobserve(titleElement);
+      if (dividerElement) observer.unobserve(dividerElement);
+      if (sectionElement) observer.unobserve(sectionElement);
+      metricElements.forEach((ref) => {
         if (ref) observer.unobserve(ref);
       });
     };
@@ -99,7 +105,7 @@ const ImpactMetrics = () => {
     <section
       id="impact"
       ref={sectionRef}
-      className="py-16 md:py-24 relative overflow-hidden snap-start bg-gradient-to-b from-background to-card/30 dark:from-background dark:to-black/30"
+      className="py-16 md:py-24 relative overflow-hidden snap-start bg-gradient-to-b from-background to-card/30 dark:from-background dark:to-black/30 deferred-section"
     >
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-1/4 right-1/4 w-96 h-96 bg-brand-yellow/5 rounded-full blur-3xl morph-shape" />

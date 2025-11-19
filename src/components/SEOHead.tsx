@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 type SEOProps = {
   title?: string;
@@ -8,7 +8,7 @@ type SEOProps = {
   ogImage?: string;
   ogImageAlt?: string;
   twitterCard?: "summary" | "summary_large_image";
-  structuredData?: Record<string, any>;
+  structuredData?: Record<string, unknown>;
   children?: React.ReactNode;
 };
 

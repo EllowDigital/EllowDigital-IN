@@ -169,6 +169,8 @@ const CookiesPolicy = () => {
                 <a
                   href="https://www.allaboutcookies.org"
                   className="text-brand-yellow hover:underline"
+                  target="_blank"
+                  rel="noreferrer noopener"
                 >
                   www.allaboutcookies.org
                 </a>

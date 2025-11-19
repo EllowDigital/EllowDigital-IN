@@ -26,10 +26,18 @@ export const initScrollRevealAnimations = () => {
   };
 
   const observer = new IntersectionObserver(handleIntersect, observerOptions);
+  const observedElements = new WeakSet<Element>();
+  const observeTargets = () => {
+    const elementsToAnimate = document.querySelectorAll(".reveal-animate");
+    elementsToAnimate.forEach((element) => {
+      if (!observedElements.has(element)) {
+        observer.observe(element);
+        observedElements.add(element);
+      }
+    });
+  };
 
-  // Observe all elements with the 'reveal-animate' class
-  const elementsToAnimate = document.querySelectorAll(".reveal-animate");
-  elementsToAnimate.forEach((element) => observer.observe(element));
+  observeTargets();
 
   // Parallax effect for background elements
   const parallaxElements = document.querySelectorAll(".parallax");
@@ -56,17 +64,19 @@ export const initScrollRevealAnimations = () => {
   };
 
   window.addEventListener("scroll", optimizedHandleParallax, { passive: true });
+  window.addEventListener("lazy-section:visible", observeTargets);
 
   // Return cleanup function to remove listeners
   return () => {
     window.removeEventListener("scroll", optimizedHandleParallax);
-    elementsToAnimate.forEach((element) => observer.unobserve(element));
+    window.removeEventListener("lazy-section:visible", observeTargets);
+    observer.disconnect();
   };
 };
 
 // Enhanced 3D tilt effect on elements with better mouse tracking
 export const init3DTiltEffect = () => {
-  const tiltElements = document.querySelectorAll(".tilt-effect");
+  const attachedElements = new WeakSet<Element>();
 
   const handleMouseMove = (e: MouseEvent, element: Element) => {
     const { left, top, width, height } = element.getBoundingClientRect();
@@ -137,12 +147,21 @@ export const init3DTiltEffect = () => {
   };
 
   const cleanupFunctions: Array<() => void> = [];
-  tiltElements.forEach((element) =>
-    cleanupFunctions.push(attachEvents(element))
-  );
+  const bindTiltElements = () => {
+    const tiltElements = document.querySelectorAll(".tilt-effect");
+    tiltElements.forEach((element) => {
+      if (attachedElements.has(element)) return;
+      attachedElements.add(element);
+      cleanupFunctions.push(attachEvents(element));
+    });
+  };
+
+  bindTiltElements();
+  window.addEventListener("lazy-section:visible", bindTiltElements);
 
   // Return cleanup function to remove all event listeners
   return () => {
+    window.removeEventListener("lazy-section:visible", bindTiltElements);
     cleanupFunctions.forEach((cleanup) => cleanup());
   };
 };

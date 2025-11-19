@@ -55,16 +55,21 @@ const Footer = () => {
                 label: "Github",
                 icon: <Github className="w-5 h-5" />,
               },
-            ].map(({ href, label, icon }) => (
-              <a
-                key={label}
-                href={href}
-                aria-label={label}
-                className="w-9 h-9 rounded-full flex items-center justify-center bg-brand-yellow/15 hover:bg-brand-yellow hover:text-black text-brand-yellow/90 transition shadow-md"
-              >
-                {icon}
-              </a>
-            ))}
+            ].map(({ href, label, icon }) => {
+              const isExternal = href.startsWith("http");
+              return (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noreferrer noopener" : undefined}
+                  className="w-9 h-9 rounded-full flex items-center justify-center bg-brand-yellow/15 hover:bg-brand-yellow hover:text-black text-brand-yellow/90 transition shadow-md"
+                >
+                  {icon}
+                </a>
+              );
+            })}
           </div>
         </div>
 
@@ -120,6 +125,14 @@ const Footer = () => {
                       <a
                         href={link.href}
                         className="hover:text-brand-yellow/90 transition-colors"
+                        target={
+                          link.href.startsWith("http") ? "_blank" : undefined
+                        }
+                        rel={
+                          link.href.startsWith("http")
+                            ? "noreferrer noopener"
+                            : undefined
+                        }
                       >
                         {link.label}
                       </a>

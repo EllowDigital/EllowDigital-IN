@@ -57,14 +57,19 @@ const Testimonials = () => {
       { threshold: 0.1 }
     );
 
-    if (titleRef.current) observer.observe(titleRef.current);
-    if (dividerRef.current) observer.observe(dividerRef.current);
-    if (carouselRef.current) observer.observe(carouselRef.current);
+    // Copy ref values to variables for cleanup
+    const titleElement = titleRef.current;
+    const dividerElement = dividerRef.current;
+    const carouselElement = carouselRef.current;
+
+    if (titleElement) observer.observe(titleElement);
+    if (dividerElement) observer.observe(dividerElement);
+    if (carouselElement) observer.observe(carouselElement);
 
     return () => {
-      if (titleRef.current) observer.unobserve(titleRef.current);
-      if (dividerRef.current) observer.unobserve(dividerRef.current);
-      if (carouselRef.current) observer.unobserve(carouselRef.current);
+      if (titleElement) observer.unobserve(titleElement);
+      if (dividerElement) observer.unobserve(dividerElement);
+      if (carouselElement) observer.unobserve(carouselElement);
     };
   }, []);
 
@@ -82,7 +87,7 @@ const Testimonials = () => {
   return (
     <section
       id="testimonials"
-      className="py-24 relative overflow-hidden snap-start bg-card/30 dark:bg-black/20"
+      className="py-24 relative overflow-hidden snap-start bg-card/30 dark:bg-black/20 deferred-section"
     >
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -147,12 +152,14 @@ const Testimonials = () => {
                             src={testimonial.image}
                             alt={testimonial.name}
                             className="w-full h-full object-cover"
+                            loading="lazy"
+                            decoding="async"
                           />
                         </div>
                         <div>
-                          <h4 className="font-semibold text-foreground">
+                          <h3 className="font-semibold text-foreground text-base">
                             {testimonial.name}
-                          </h4>
+                          </h3>
                           <p className="text-xs text-muted-foreground">
                             {testimonial.position}, {testimonial.company}
                           </p>

@@ -13,7 +13,7 @@ export const useRenderCount = (componentName: string): void => {
 
   useEffect(() => {
     setRenderCount((prev) => prev + 1);
-  });
+  }, []);
 
   useEffect(() => {
     if (process.env.NODE_ENV === "development") {
@@ -30,7 +30,7 @@ export const useRenderCount = (componentName: string): void => {
  */
 export const useDeferredCalculation = <T>(
   callback: () => T,
-  dependencies: Array<any>
+  dependencies: Array<unknown>
 ): T | null => {
   const [result, setResult] = useState<T | null>(null);
 
@@ -46,7 +46,7 @@ export const useDeferredCalculation = <T>(
 
     return () => {
       if (window.requestIdleCallback) {
-        window.cancelIdleCallback(handle as any);
+        window.cancelIdleCallback(handle as number);
       } else {
         clearTimeout(handle);
       }

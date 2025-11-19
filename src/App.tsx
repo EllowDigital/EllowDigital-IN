@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { HelmetProvider } from "react-helmet-async";
 
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -40,6 +41,44 @@ const queryClient = new QueryClient({
 
 const isDev = process.env.NODE_ENV === "development";
 
+const AppLayout = () => (
+  <TooltipProvider>
+    <SkipToContent />
+    <AxiosInterceptor />
+
+    {/* Notifications */}
+    <Toaster />
+    <Sonner />
+
+    <Outlet />
+  </TooltipProvider>
+);
+
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <AppLayout />,
+      children: [
+        { index: true, element: <Index /> },
+        { path: "portfolio", element: <PortfolioPage /> },
+        { path: "privacy-policy", element: <PrivacyPolicy /> },
+        { path: "terms-of-service", element: <TermsOfService /> },
+        { path: "refund-policy", element: <RefundPolicy /> },
+        { path: "cookies-policy", element: <CookiesPolicy /> },
+        { path: "team", element: <TeamPage /> },
+        { path: "*", element: <NotFound /> },
+      ],
+    },
+  ],
+  {
+    future: {
+      v7_startTransition: true,
+      v7_relativeSplatPath: true,
+    },
+  }
+);
+
 const App = () => {
   useEffect(() => {
     // Init performance monitoring
@@ -70,30 +109,11 @@ const App = () => {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Router>
-        <TooltipProvider>
-          <SkipToContent />
-          <AxiosInterceptor />
-
-          {/* Notifications */}
-          <Toaster />
-          <Sonner />
-
-          {/* App Routes */}
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/portfolio" element={<PortfolioPage />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-of-service" element={<TermsOfService />} />
-            <Route path="/refund-policy" element={<RefundPolicy />} />
-            <Route path="/cookies-policy" element={<CookiesPolicy />} />
-            <Route path="/team" element={<TeamPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </TooltipProvider>
-      </Router>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 };
 

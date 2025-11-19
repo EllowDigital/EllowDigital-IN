@@ -9,7 +9,7 @@ interface Window {
 type GtagFunction = (
   command: "config" | "event" | "set" | "js",
   targetIdOrEventName: string,
-  params?: Record<string, any>
+  params?: Record<string, unknown>
 ) => void;
 
 // Declare global gtag function

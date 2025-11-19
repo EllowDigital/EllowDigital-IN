@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   // Disable dark mode
@@ -170,5 +171,5 @@ export default {
   },
 
   // Plugins for additional functionality (e.g., animations)
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;

@@ -73,7 +73,7 @@ const WorkProcess = () => {
   return (
     <section
       id="how-we-work"
-      className="section-container py-16 sm:py-20 md:py-24 relative overflow-hidden snap-start"
+      className="section-container py-16 sm:py-20 md:py-24 relative overflow-hidden snap-start deferred-section"
     >
       {/* Adaptive blob background */}
       <div className="absolute top-1/3 left-1/3 w-64 sm:w-96 h-64 sm:h-96 bg-brand-yellow/5 rounded-full blur-3xl morph-shape"></div>

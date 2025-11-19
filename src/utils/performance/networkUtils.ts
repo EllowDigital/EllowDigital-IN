@@ -13,7 +13,20 @@ export const optimizeNetworkRequests = () => {
   const connectionHandler = () => {
     // Safely check if the connection API is available
     const connection =
-      "connection" in navigator ? (navigator as any).connection : null;
+      "connection" in navigator
+        ? (
+            navigator as unknown as {
+              connection: {
+                effectiveType: string;
+                addEventListener: (type: string, listener: () => void) => void;
+                removeEventListener: (
+                  type: string,
+                  listener: () => void
+                ) => void;
+              };
+            }
+          ).connection
+        : null;
 
     if (connection) {
       // Adjust content quality based on connection type
@@ -39,7 +52,14 @@ export const optimizeNetworkRequests = () => {
 
   // Add event listener for connection changes if the connection API is available
   if ("connection" in navigator) {
-    const connection = (navigator as any).connection;
+    const connection = (
+      navigator as unknown as {
+        connection: {
+          addEventListener: (type: string, listener: () => void) => void;
+          removeEventListener: (type: string, listener: () => void) => void;
+        };
+      }
+    ).connection;
     connection.addEventListener("change", connectionHandler);
 
     // Return cleanup function to remove event listener

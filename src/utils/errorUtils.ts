@@ -13,8 +13,8 @@ export enum ErrorType {
 // Enhanced error interface with additional context
 export interface EnhancedError extends Error {
   type?: ErrorType;
-  context?: Record<string, any>;
-  originalError?: any;
+  context?: Record<string, unknown>;
+  originalError?: unknown;
 }
 
 /**
@@ -23,8 +23,8 @@ export interface EnhancedError extends Error {
 export const createError = (
   message: string,
   type: ErrorType = ErrorType.UNKNOWN,
-  context?: Record<string, any>,
-  originalError?: any
+  context?: Record<string, unknown>,
+  originalError?: unknown
 ): EnhancedError => {
   const error = new Error(message) as EnhancedError;
   error.type = type;
@@ -38,7 +38,7 @@ export const createError = (
  * @param error The error to handle
  * @param silent If true, suppress UI notifications
  */
-export const handleError = (error: any, silent = false): void => {
+export const handleError = (error: unknown, silent = false): void => {
   const enhancedError = normalizeError(error);
 
   // Log errors in development for debugging
@@ -62,7 +62,7 @@ export const handleError = (error: any, silent = false): void => {
 /**
  * Normalize any error into a standardized format
  */
-const normalizeError = (error: any): EnhancedError => {
+const normalizeError = (error: unknown): EnhancedError => {
   if (error instanceof Error) {
     // If error is already an instance of Error, enhance it
     const enhancedError = error as EnhancedError;
@@ -84,32 +84,46 @@ const normalizeError = (error: any): EnhancedError => {
 /**
  * Determine the type of the error based on its properties
  */
-const determineErrorType = (error: any): ErrorType => {
+const determineErrorType = (error: unknown): ErrorType => {
   if (
-    error.message?.includes("Network") ||
-    error.message?.includes("fetch") ||
-    error.message?.includes("connection") ||
-    error.name === "AbortError"
+    (error as { message?: string; name?: string }).message?.includes(
+      "Network"
+    ) ||
+    (error as { message?: string; name?: string }).message?.includes("fetch") ||
+    (error as { message?: string; name?: string }).message?.includes(
+      "connection"
+    ) ||
+    (error as { message?: string; name?: string }).name === "AbortError"
   ) {
     return ErrorType.NETWORK;
   }
 
   if (
-    error.status === 401 ||
-    error.status === 403 ||
-    error.message?.includes("unauthorized") ||
-    error.message?.includes("permission")
+    (error as { status?: number; message?: string }).status === 401 ||
+    (error as { status?: number; message?: string }).status === 403 ||
+    (error as { status?: number; message?: string }).message?.includes(
+      "unauthorized"
+    ) ||
+    (error as { status?: number; message?: string }).message?.includes(
+      "permission"
+    )
   ) {
     return ErrorType.AUTHORIZATION;
   }
 
-  if (error.status === 400 || error.message?.includes("validation")) {
+  if (
+    (error as { status?: number; message?: string }).status === 400 ||
+    (error as { status?: number; message?: string }).message?.includes(
+      "validation"
+    )
+  ) {
     return ErrorType.VALIDATION;
   }
 
   if (
-    (error.status && error.status >= 500) ||
-    error.message?.includes("server")
+    ((error as { status?: number }).status &&
+      (error as { status?: number }).status! >= 500) ||
+    (error as { message?: string }).message?.includes("server")
   ) {
     return ErrorType.SERVER;
   }
@@ -142,7 +156,7 @@ const getUserFriendlyMessage = (error: EnhancedError): string => {
  */
 export const tryCatch = async <T>(
   fn: () => Promise<T>,
-  errorHandler?: (error: any) => void
+  errorHandler?: (error: unknown) => void
 ): Promise<T | undefined> => {
   try {
     return await fn();
@@ -161,7 +175,7 @@ export const tryCatch = async <T>(
  * @param handler The event handler to wrap
  * @returns Wrapped handler with error handling
  */
-export const withErrorHandling = <T extends (...args: any[]) => any>(
+export const withErrorHandling = <T extends (...args: unknown[]) => unknown>(
   handler: T
 ): ((...args: Parameters<T>) => ReturnType<T> | void) => {
   return (...args: Parameters<T>) => {
@@ -172,10 +186,10 @@ export const withErrorHandling = <T extends (...args: any[]) => any>(
       if (result instanceof Promise) {
         return result.catch((error) => {
           handleError(error);
-        });
+        }) as ReturnType<T>;
       }
 
-      return result;
+      return result as ReturnType<T>;
     } catch (error) {
       handleError(error);
     }

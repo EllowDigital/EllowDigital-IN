@@ -15,7 +15,9 @@ export const monitorMemoryUsage = () => {
    */
   const checkMemory = () => {
     // Use the performance.memory API if available (currently works in Chrome only)
-    const performance = window.performance as any;
+    const performance = window.performance as unknown as {
+      memory: { usedJSHeapSize: number; jsHeapSizeLimit: number };
+    };
 
     if (performance && performance.memory) {
       const { usedJSHeapSize, jsHeapSizeLimit } = performance.memory;

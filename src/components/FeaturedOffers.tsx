@@ -88,7 +88,7 @@ const FeaturedOffers = () => {
     <section
       id="offers"
       aria-labelledby="offers-heading"
-      className="py-16 md:py-24 bg-gradient-to-b from-background to-background/95"
+      className="py-16 md:py-24 bg-gradient-to-b from-background to-background/95 deferred-section"
     >
       <div className="section-container px-4 sm:px-6">
         <h2 id="offers-heading" className="section-title">

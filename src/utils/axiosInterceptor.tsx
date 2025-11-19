@@ -1,15 +1,6 @@
-import axios from "axios";
 import { useEffect } from "react";
 import { toast } from "sonner";
-
-// Create a custom instance of axios
-export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "/",
-  timeout: 15000,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+import { api } from "@/utils/apiClient";
 
 // Component to set up axios interceptors
 export const AxiosInterceptor = () => {

@@ -39,7 +39,7 @@ const technologies = [
 
 const TechStack = () => {
   return (
-    <section id="techstack" className="py-24 bg-muted/30">
+    <section id="techstack" className="py-24 bg-muted/30 deferred-section">
       <div className="section-container">
         <h2 className="section-title">Our Tech Stack</h2>
         <p className="text-center text-muted-foreground text-lg max-w-2xl mx-auto mb-12">

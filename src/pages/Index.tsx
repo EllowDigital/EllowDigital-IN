@@ -1,28 +1,27 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
-import TechStack from "@/components/TechStack";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import FeaturedOffers from "@/components/FeaturedOffers";
 import Footer from "@/components/Footer";
-import FounderSection from "@/components/FounderSection";
-import EngagementModel from "@/components/EngagementModel";
-import WorkProcess from "@/components/WorkProcess";
-import Testimonials from "@/components/Testimonials";
 import Portfolio from "@/components/Portfolio";
-import ImpactMetrics from "@/components/ImpactMetrics";
 import SmartContactForm from "@/components/SmartContactForm";
 import SEOHead from "@/components/SEOHead";
 import {
   initScrollRevealAnimations,
   init3DTiltEffect,
-  init3DCodeAnimation,
-  initTypingAnimation,
 } from "@/utils/animationUtils";
 import Preloader from "@/components/Preloader";
-import { Toaster } from "sonner";
+import LazySection from "@/components/LazySection";
+
+const FounderSection = lazy(() => import("@/components/FounderSection"));
+const EngagementModel = lazy(() => import("@/components/EngagementModel"));
+const WorkProcess = lazy(() => import("@/components/WorkProcess"));
+const Testimonials = lazy(() => import("@/components/Testimonials"));
+const ImpactMetrics = lazy(() => import("@/components/ImpactMetrics"));
+const TechStack = lazy(() => import("@/components/TechStack"));
+const FeaturedOffers = lazy(() => import("@/components/FeaturedOffers"));
 
 // Homepage JSON-LD structured data
 const homePageSchema = {
@@ -63,31 +62,42 @@ const homePageSchema = {
 };
 
 const Index = () => {
-  const [isInitialized, setIsInitialized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate content loading
-    const timer = setTimeout(() => {
+    let fallbackTimer: ReturnType<typeof setTimeout> | undefined;
+
+    const markReady = () => {
       setIsLoading(false);
-    }, 1500);
+    };
 
-    // Initialize animations when component mounts
-    const cleanupScrollReveal = initScrollRevealAnimations();
-    const cleanupTiltEffect = init3DTiltEffect();
-    const cleanup3DCode = init3DCodeAnimation();
-    const cleanupTyping = initTypingAnimation();
+    if (document.readyState === "complete") {
+      markReady();
+    } else {
+      window.addEventListener("load", markReady, { once: true });
+      fallbackTimer = window.setTimeout(markReady, 2000);
+    }
 
-    // Set initialized state to avoid re-initializing animations
-    setIsInitialized(true);
+    const cleanupFns: Array<() => void> = [];
+    const scheduledCancels: Array<() => void> = [];
+    const scheduleInit = (initializer: () => () => void) => {
+      const frame = window.requestAnimationFrame(() => {
+        cleanupFns.push(initializer());
+      });
+      scheduledCancels.push(() => window.cancelAnimationFrame(frame));
+    };
+
+    scheduleInit(initScrollRevealAnimations);
+    scheduleInit(init3DTiltEffect);
 
     // Clean up event listeners on unmount
     return () => {
-      clearTimeout(timer);
-      cleanupScrollReveal();
-      cleanupTiltEffect();
-      cleanup3DCode();
-      cleanupTyping();
+      if (fallbackTimer) {
+        clearTimeout(fallbackTimer);
+      }
+      window.removeEventListener("load", markReady);
+      scheduledCancels.forEach((cancel) => cancel());
+      cleanupFns.forEach((cleanup) => cleanup());
     };
   }, []);
 
@@ -103,17 +113,6 @@ const Index = () => {
       {/* Enhanced Preloader with smooth transition */}
       {isLoading && <Preloader />}
 
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          style: {
-            background: "#191919",
-            color: "#F6F6F6",
-            border: "1px solid #222222",
-          },
-        }}
-      />
-
       <div
         className={`min-h-screen flex flex-col transition-all duration-500 bg-background text-foreground ${
           isLoading ? "opacity-0" : "opacity-100"
@@ -123,16 +122,44 @@ const Index = () => {
         <main className="flex-grow overflow-x-hidden" id="main-content">
           <HeroSection />
           <AboutSection />
-          <FounderSection />
+          <LazySection fallback={<SectionSkeleton />}>
+            <Suspense fallback={<SectionSkeleton />}>
+              <FounderSection />
+            </Suspense>
+          </LazySection>
           <ServicesSection />
-          <WorkProcess />
-          <EngagementModel />
+          <LazySection fallback={<SectionSkeleton minHeight={480} />}>
+            <Suspense fallback={<SectionSkeleton minHeight={480} />}>
+              <WorkProcess />
+            </Suspense>
+          </LazySection>
+          <LazySection fallback={<SectionSkeleton minHeight={520} />}>
+            <Suspense fallback={<SectionSkeleton minHeight={520} />}>
+              <EngagementModel />
+            </Suspense>
+          </LazySection>
           <Portfolio />
-          <ImpactMetrics />
-          <Testimonials />
-          <TechStack />
+          <LazySection fallback={<SectionSkeleton minHeight={420} />}>
+            <Suspense fallback={<SectionSkeleton minHeight={420} />}>
+              <ImpactMetrics />
+            </Suspense>
+          </LazySection>
+          <LazySection fallback={<SectionSkeleton minHeight={460} />}>
+            <Suspense fallback={<SectionSkeleton minHeight={460} />}>
+              <Testimonials />
+            </Suspense>
+          </LazySection>
+          <LazySection fallback={<SectionSkeleton />}>
+            <Suspense fallback={<SectionSkeleton />}>
+              <TechStack />
+            </Suspense>
+          </LazySection>
           <WhyChooseUs />
-          <FeaturedOffers />
+          <LazySection fallback={<SectionSkeleton />}>
+            <Suspense fallback={<SectionSkeleton />}>
+              <FeaturedOffers />
+            </Suspense>
+          </LazySection>
           <SmartContactForm />
         </main>
         <Footer />
@@ -140,5 +167,14 @@ const Index = () => {
     </>
   );
 };
+
+const SectionSkeleton = ({ minHeight = 360 }: { minHeight?: number }) => (
+  <div className="section-container" aria-hidden="true">
+    <div
+      className="w-full rounded-3xl bg-muted/30 animate-pulse"
+      style={{ minHeight }}
+    ></div>
+  </div>
+);
 
 export default Index;

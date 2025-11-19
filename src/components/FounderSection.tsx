@@ -6,7 +6,7 @@ const FounderSection = () => {
   return (
     <section
       id="founder"
-      className="section-container py-20 relative overflow-hidden"
+      className="section-container py-20 relative overflow-hidden deferred-section"
     >
       {/* Background blobs */}
       <div className="absolute top-1/3 right-1/4 w-56 h-56 md:w-72 md:h-72 bg-brand-yellow/10 rounded-full blur-3xl morph-shape"></div>
@@ -42,12 +42,18 @@ const FounderSection = () => {
                   <a
                     href="mailto:sarwanyadav6174@gmail.com"
                     className="w-8 h-8 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center text-white hover:bg-brand-yellow hover:text-black transition-colors"
+                    aria-label="Email Sarwan Yadav"
+                    title="Email Sarwan Yadav"
                   >
                     <Mail className="h-5 w-5" />
                   </a>
                   <a
                     href="https://sarwan.netlify.app/"
+                    target="_blank"
+                    rel="noreferrer noopener"
                     className="w-8 h-8 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center text-white hover:bg-brand-yellow hover:text-black transition-colors"
+                    aria-label="View Sarwan Yadav portfolio"
+                    title="Open Sarwan Yadav portfolio"
                   >
                     <User className="h-5 w-5" />
                   </a>

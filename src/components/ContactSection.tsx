@@ -68,28 +68,33 @@ const ContactSection = () => {
                   value: "github.com/ellowdigitals",
                   href: "https://github.com/ellowdigitals",
                 },
-              ].map((contact, index) => (
-                <div key={index} className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-brand-purple/10 flex items-center justify-center">
-                    {contact.icon}
+              ].map((contact, index) => {
+                const isExternal = contact.href?.startsWith("http");
+                return (
+                  <div key={index} className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-brand-purple/10 flex items-center justify-center">
+                      {contact.icon}
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">
+                        {contact.label}
+                      </p>
+                      {contact.href ? (
+                        <a
+                          href={contact.href}
+                          className="font-medium hover:text-brand-purple"
+                          target={isExternal ? "_blank" : undefined}
+                          rel={isExternal ? "noreferrer noopener" : undefined}
+                        >
+                          {contact.value}
+                        </a>
+                      ) : (
+                        <p className="font-medium">{contact.value}</p>
+                      )}
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">
-                      {contact.label}
-                    </p>
-                    {contact.href ? (
-                      <a
-                        href={contact.href}
-                        className="font-medium hover:text-brand-purple"
-                      >
-                        {contact.value}
-                      </a>
-                    ) : (
-                      <p className="font-medium">{contact.value}</p>
-                    )}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 

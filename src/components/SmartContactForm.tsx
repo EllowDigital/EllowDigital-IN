@@ -131,7 +131,7 @@ const SmartContactForm = () => {
   return (
     <section
       id="contact"
-      className="py-24 relative overflow-hidden snap-start bg-gradient-to-b from-card/40 to-background dark:from-black/20 dark:to-background"
+      className="py-24 relative overflow-hidden snap-start bg-gradient-to-b from-card/40 to-background dark:from-black/20 dark:to-background deferred-section"
     >
       <div className="section-container max-w-5xl mx-auto relative z-10">
         <h2 ref={titleRef} className="section-title reveal-animate">
@@ -344,6 +344,8 @@ const SmartContactForm = () => {
                   <a
                     href="https://instagram.com/ellowdigitals"
                     aria-label="Instagram"
+                    target="_blank"
+                    rel="noreferrer noopener"
                     className="w-8 h-8 rounded-full flex items-center justify-center bg-brand-yellow/20 hover:bg-brand-yellow hover:text-black text-brand-yellow/90 transition shadow-md"
                   >
                     <Instagram className="w-4 h-4" />
@@ -351,6 +353,8 @@ const SmartContactForm = () => {
                   <a
                     href="https://wa.me/918960446756"
                     aria-label="Whatsapp"
+                    target="_blank"
+                    rel="noreferrer noopener"
                     className="w-8 h-8 rounded-full flex items-center justify-center bg-brand-yellow/20 hover:bg-brand-yellow hover:text-black text-brand-yellow/90 transition shadow-md"
                   >
                     <MessageCircle className="w-4 h-4" />

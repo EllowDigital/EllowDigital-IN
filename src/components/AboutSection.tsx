@@ -37,7 +37,7 @@ const AboutSection = () => {
   return (
     <section
       id="about"
-      className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden"
+      className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden deferred-section"
     >
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-background to-muted/20"></div>

@@ -85,7 +85,7 @@ const ServiceCard = ({ title, description, icon: Icon, details }) => (
 
 // Services Section Component
 const ServicesSection = () => (
-  <section id="services" className="py-24">
+  <section id="services" className="py-24 deferred-section">
     <div className="section-container">
       {/* Section Header */}
       <div className="text-center mb-16">

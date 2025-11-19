@@ -114,7 +114,7 @@ const WhyChooseUs = () => {
     <section
       ref={sectionRef}
       id="why-us"
-      className="py-16 sm:py-20 md:py-24 relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 relative overflow-hidden deferred-section"
     >
       {/* Enhanced background elements with professional design */}
       <div className="absolute -z-10 top-1/4 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-brand-yellow/10 rounded-full blur-3xl morph-shape opacity-80"></div>

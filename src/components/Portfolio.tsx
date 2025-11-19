@@ -126,7 +126,7 @@ const Portfolio = () => {
   return (
     <section
       id="portfolio"
-      className="section-container py-16 sm:py-20 md:py-24 relative overflow-hidden"
+      className="section-container py-16 sm:py-20 md:py-24 relative overflow-hidden deferred-section"
     >
       {/* Responsive background blobs */}
       <div className="absolute top-1/4 left-1/4 w-60 sm:w-80 h-60 sm:h-80 bg-brand-gold/5 rounded-full blur-3xl morph-shape"></div>
