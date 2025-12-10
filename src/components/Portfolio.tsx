@@ -15,15 +15,6 @@ const categories = [
 
 const projects = [
   {
-    title: "TypeBlitz",
-    category: "Desktop App",
-    image: "/images/projects_img/project1_typeblitz.webp",
-    description:
-      "Desktop app to boost typing speed and accuracy with drills, progress tracking, and detailed live stats, plus customizable practice modes, streaks, and daily goals for steady improvement.",
-    tech: ["Python", "SQLite3"],
-    link: "https://typeblitz.netlify.app/",
-  },
-  {
     title: "Ghatak Sports Academy India™",
     category: "Web App",
     image: "/images/projects_img/project2_gsai.webp",
@@ -40,14 +31,32 @@ const projects = [
     link: "https://ghatakgsai.netlify.app/",
   },
   {
-    title: "Sarwan Portfolio",
-    category: "Website",
-    image: "/images/projects_img/project3_sarwan.webp",
+    title: "TypeBlitz",
+    category: "Desktop App",
+    image: "/images/projects_img/project1_typeblitz.webp",
     description:
-      "Modern personal portfolio highlighting work, achievements, projects, and an easy, streamlined contact flow, enhanced with smooth animations, responsive layouts, and SEO-friendly metadata.",
-    tech: ["HTML", "CSS", "JavaScript", "JQuery", "Netlify"],
-    link: "https://sarwan.netlify.app/",
+      "Desktop app to boost typing speed and accuracy with drills, progress tracking, and detailed live stats, plus customizable practice modes, streaks, and daily goals for steady improvement.",
+    tech: ["Python", "SQLite3"],
+    link: "https://typeblitz.netlify.app/",
   },
+  {
+    title: "DhanDiary",
+    category: "Mobile App",
+    image: "/images/projects_img/project6_dhandiary.webp",
+    description:
+      "Personal finance mobile app for tracking expenses, budgeting, and financial goals with intuitive charts, reminders, and secure data storage.",
+    tech: ["React Native", "TypeScript", "Expo", "NeonDB"],
+    link: "https://expo.dev/artifacts/eas/8oTjej2xLnBzFQZUwvuCjv.apk",
+  },
+  // {
+  //   title: "Sarwan Portfolio",
+  //   category: "Website",
+  //   image: "/images/projects_img/project3_sarwan.webp",
+  //   description:
+  //     "Modern personal portfolio highlighting work, achievements, projects, and an easy, streamlined contact flow, enhanced with smooth animations, responsive layouts, and SEO-friendly metadata.",
+  //   tech: ["HTML", "CSS", "JavaScript", "JQuery", "Netlify"],
+  //   link: "https://sarwan.netlify.app/",
+  // },
   {
     title: "Tent Decor Expo UP 2025",
     category: "Web App",
