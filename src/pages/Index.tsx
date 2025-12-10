@@ -63,7 +63,7 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    let fallbackTimer: ReturnType<typeof setTimeout> | undefined;
+    let fallbackTimer: number | undefined;
 
     const markReady = () => {
       setIsLoading(false);
@@ -73,7 +73,7 @@ const Index = () => {
       markReady();
     } else {
       window.addEventListener("load", markReady, { once: true });
-      fallbackTimer = window.setTimeout(markReady, 2000);
+      fallbackTimer = window.setTimeout(markReady, 2000) as unknown as number;
     }
 
     const cleanupFns: Array<() => void> = [];

@@ -49,7 +49,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden pt-24 z-10"
+      className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden pt-20 sm:pt-24 px-4 sm:px-6 z-10"
     >
       {/* Enhanced Abstract Background with Animated Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -163,9 +163,9 @@ const HeroSection = () => {
       </div>
 
       {/* Main Hero Content with enhanced styling */}
-      <div className="relative flex flex-col md:flex-row items-center w-full max-w-7xl mx-auto px-6 py-12 md:py-0 z-10">
+      <div className="relative flex flex-col lg:flex-row items-center w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 lg:py-0 z-10 gap-8 lg:gap-12">
         {/* Left: Enhanced Headline, tagline, CTA */}
-        <div className="w-full md:w-1/2 flex flex-col gap-8 items-start">
+        <div className="w-full lg:w-1/2 flex flex-col gap-4 sm:gap-6 lg:gap-8 items-center lg:items-start text-center lg:text-left">
           {/* Professional badge */}
           <div className="flex items-center gap-2 px-3 py-1.5 bg-brand-yellow/10 backdrop-blur-sm border border-brand-yellow/30 rounded-full mb-2">
             <Sparkles className="w-4 h-4 text-brand-yellow" />
@@ -176,7 +176,7 @@ const HeroSection = () => {
 
           <h1
             ref={headlineRef}
-            className="opacity-0 translate-y-7 transition-all duration-700 text-4xl sm:text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg"
+            className="opacity-0 translate-y-7 transition-all duration-700 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white drop-shadow-lg leading-tight"
           >
             Crafting Bold{" "}
             <span className="gradient-text relative">
@@ -187,7 +187,7 @@ const HeroSection = () => {
           </h1>
           <p
             ref={taglineRef}
-            className="opacity-0 translate-y-6 transition-all duration-700 text-lg md:text-xl text-white/90 max-w-xl"
+            className="opacity-0 translate-y-6 transition-all duration-700 text-base sm:text-lg lg:text-xl text-white/90 max-w-xl"
           >
             Elevate your ideas with intuitive design and robust technology.
             Future-proof, lightning-fast web/apps — all with personal,
@@ -195,8 +195,8 @@ const HeroSection = () => {
           </p>
 
           {/* Trust indicators */}
-          <div className="flex flex-wrap items-center gap-4 mb-2">
-            <div className="flex items-center gap-1 text-white/70 text-sm">
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-2">
+            <div className="flex items-center gap-1 text-white/70 text-xs sm:text-sm">
               <Star className="w-4 h-4 text-brand-yellow" fill="#FFD700" />
               <Star className="w-4 h-4 text-brand-yellow" fill="#FFD700" />
               <Star className="w-4 h-4 text-brand-yellow" fill="#FFD700" />
@@ -231,7 +231,7 @@ const HeroSection = () => {
         </div>
 
         {/* Right: Enhanced 3D code animation */}
-        <div className="hidden md:flex w-full md:w-1/2 justify-center mt-12 md:mt-0">
+        <div className="hidden lg:flex w-full lg:w-1/2 justify-center mt-8 lg:mt-0">
           <div ref={codeRef} className="floating-code-3d relative perspective">
             {/* Professional decorative elements */}
             <div className="absolute -top-10 -right-16 w-32 h-32">
