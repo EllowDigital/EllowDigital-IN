@@ -217,25 +217,28 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center"
-        initial={{ opacity: 0 }}
-        animate={isLoaded ? { opacity: 1 } : {}}
-        transition={{ delay: 1 }}
+      <motion.a
+        href="#about"
+        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center cursor-pointer group"
+        initial={{ opacity: 0, y: 20 }}
+        animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+        transition={{ delay: 1, duration: 0.6 }}
+        onClick={(e) => {
+          e.preventDefault();
+          document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+        }}
       >
-        <span className="text-xs text-muted-foreground mb-2">Scroll to explore</span>
+        <span className="text-xs text-muted-foreground mb-2 group-hover:text-foreground transition-colors">Scroll to explore</span>
         <motion.div
-          className="w-6 h-10 rounded-full border-2 border-border/50 flex items-start justify-center p-1"
-          animate={{ y: [0, 5, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          className="w-7 h-11 rounded-full border-2 border-border/50 group-hover:border-brand-yellow/50 flex items-start justify-center p-1.5 transition-colors"
         >
           <motion.div
-            className="w-1.5 h-3 bg-brand-yellow rounded-full"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            className="w-1.5 h-2.5 bg-brand-yellow rounded-full"
+            animate={{ y: [0, 14, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           />
         </motion.div>
-      </motion.div>
+      </motion.a>
     </section>
   );
 };
