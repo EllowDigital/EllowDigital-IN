@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import Logo from "./Logo";
 import SearchModal from "./SearchModal";
-import { ChevronDown, Menu, X, Search, Award, Zap, MapPin } from "lucide-react";
+import { Menu, X, Search, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_LINKS = [
@@ -29,7 +29,6 @@ const Navbar = () => {
   // Keyboard shortcut for search
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Ctrl+K or Cmd+K to open search
       if ((e.ctrlKey || e.metaKey) && e.key === "k") {
         e.preventDefault();
         setIsSearchOpen(true);
@@ -52,7 +51,6 @@ const Navbar = () => {
         const sections = document.querySelectorAll("section[id]");
         const offset = window.scrollY + 100;
 
-        // Find active section
         let activeId = "";
         for (const section of sections) {
           const top = (section as HTMLElement).offsetTop;
@@ -64,14 +62,12 @@ const Navbar = () => {
           }
         }
 
-        // Only update if different to prevent unnecessary renders
         if (activeId !== activeSection) {
           setActiveSection(activeId);
         }
       }
     };
 
-    // Throttle scroll event for better performance
     let ticking = false;
     const handleScrollThrottled = () => {
       if (!ticking) {
@@ -89,7 +85,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScrollThrottled);
   }, [isHomePage, activeSection]);
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
@@ -101,7 +96,6 @@ const Navbar = () => {
       }
     };
 
-    // Close mobile menu when route changes
     if (isMobileOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
@@ -109,30 +103,23 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobileOpen]);
 
-  // Handle navigation with smooth scroll
   const handleNavClick = (href: string) => {
-    // Always close the mobile menu first
     setIsMobileOpen(false);
 
     if (href.startsWith("/")) {
-      // If it's an internal page link (not a hash)
       navigate(href);
       return;
     }
 
     if (isHomePage) {
-      // If on home page, scroll to the section
       const element = document.querySelector(href);
       if (element) {
-        // Add a small delay to ensure mobile menu closing animation completes
         setTimeout(() => {
           element.scrollIntoView({ behavior: "smooth" });
         }, 150);
       }
     } else {
-      // If on another page, navigate to home and then to section
       navigate("/");
-      // Add a small delay to allow the home page to load before scrolling
       setTimeout(() => {
         const element = document.querySelector(href);
         if (element) {
@@ -142,28 +129,19 @@ const Navbar = () => {
     }
   };
 
-  // Toggle mobile menu
   const toggleMobileMenu = () => setIsMobileOpen((prev) => !prev);
 
-  // Animation variants
   const mobileMenuVariants = {
-    hidden: { opacity: 0, height: 0 },
-    visible: { opacity: 1, height: "auto" },
-    exit: { opacity: 0, height: 0 },
-  };
-
-  // Decorative elements animation variants
-  const decorVariants = {
-    initial: { opacity: 0, scale: 0.8 },
-    animate: { opacity: 0.7, scale: 1, transition: { duration: 0.5 } },
-    hover: { scale: 1.1, opacity: 0.9, transition: { duration: 0.3 } },
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -20 },
   };
 
   return (
     <>
-      {/* Yellow Scroll Indicator */}
+      {/* Scroll Progress Indicator */}
       <motion.div
-        className="fixed top-0 left-0 h-1 bg-brand-yellow z-50"
+        className="fixed top-0 left-0 h-0.5 bg-gradient-to-r from-brand-yellow via-brand-gold to-brand-yellow z-[60]"
         style={{ width: `${scrollProgress}%` }}
         initial={{ width: 0 }}
         animate={{ width: `${scrollProgress}%` }}
@@ -172,182 +150,164 @@ const Navbar = () => {
 
       <nav
         ref={navRef}
-        className={`fixed top-0 left-0 w-full z-40 transition-all duration-500 ${
+        className={`fixed top-2 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-black/90 shadow-md backdrop-blur-xl border-b border-brand-yellow/10"
-            : "bg-black/70 backdrop-blur-md"
+            ? "w-[95%] max-w-6xl"
+            : "w-[98%] max-w-7xl"
         }`}
       >
-        {/* Decorative elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <motion.div
-            className="absolute -top-10 -right-10 w-20 h-20 bg-brand-yellow/5 rounded-full blur-xl"
-            initial="initial"
-            animate="animate"
-            variants={decorVariants}
-          />
-          <motion.div
-            className="absolute -bottom-12 left-1/4 w-24 h-24 bg-brand-yellow/5 rounded-full blur-xl"
-            initial="initial"
-            animate="animate"
-            variants={decorVariants}
-            style={{ animationDelay: "0.2s" }}
-          />
-        </div>
+        <div
+          className={`relative rounded-2xl transition-all duration-500 ${
+            isScrolled
+              ? "bg-background/80 backdrop-blur-xl shadow-2xl shadow-black/20 border border-border/50"
+              : "bg-background/60 backdrop-blur-lg border border-border/30"
+          }`}
+        >
+          {/* Glow effect */}
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-brand-yellow/5 via-transparent to-brand-yellow/5 pointer-events-none" />
+          
+          <div className="relative px-4 sm:px-6 h-16 flex items-center justify-between">
+            {/* Logo - Left */}
+            <Link to="/" className="flex items-center gap-2 z-10 shrink-0">
+              <Logo />
+              <div className="hidden sm:flex flex-col text-left">
+                <span className="text-lg font-bold bg-gradient-to-r from-brand-yellow to-brand-gold text-transparent bg-clip-text">
+                  Ellow<span className="text-foreground">Digital</span>
+                </span>
+              </div>
+            </Link>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between relative">
-          <Link to="/" className="flex items-center gap-2 z-10">
-            <Logo />
-            <div className="flex flex-col text-left">
-              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-brand-yellow to-brand-gold text-transparent bg-clip-text">
-                Ellow<span className="text-foreground">Digital</span>
-              </span>
-              <span className="text-xs text-muted-foreground -mt-1">
-                Digital Excellence, Indian Brilliance
-              </span>
-            </div>
-          </Link>
-
-          {/* Desktop Menu with enhanced styling */}
-          <div className="hidden lg:flex gap-4 xl:gap-5 items-center">
-            {NAV_LINKS.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => handleNavClick(link.href)}
-                className={`relative px-3 xl:px-4 py-2 text-sm font-medium transition-all duration-300 ${
-                  (isHomePage && activeSection === link.href.substring(1)) ||
-                  (!isHomePage && location.pathname === link.href)
-                    ? "text-brand-yellow"
-                    : "text-white hover:text-brand-yellow"
-                } group`}
-              >
-                {link.name}
-                <span
-                  className={`absolute left-0 bottom-0 h-0.5 bg-brand-yellow transition-all duration-300 ${
+            {/* Desktop Navigation - Center */}
+            <div className="hidden lg:flex items-center justify-center absolute left-1/2 -translate-x-1/2">
+              <div className="flex items-center gap-1 bg-secondary/50 rounded-full px-2 py-1.5 border border-border/30">
+                {NAV_LINKS.map((link) => {
+                  const isActive =
                     (isHomePage && activeSection === link.href.substring(1)) ||
-                    (!isHomePage && location.pathname === link.href)
-                      ? "w-full"
-                      : "w-0 group-hover:w-full"
-                  }`}
-                />
-              </button>
-            ))}
+                    (!isHomePage && location.pathname === link.href);
+                  
+                  return (
+                    <button
+                      key={link.href}
+                      onClick={() => handleNavClick(link.href)}
+                      className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
+                        isActive
+                          ? "text-primary-foreground"
+                          : "text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeNav"
+                          className="absolute inset-0 bg-brand-yellow rounded-full"
+                          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        />
+                      )}
+                      <span className="relative z-10">{link.name}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
 
-            {/* Enhanced Action Buttons */}
-            <div className="flex items-center gap-3 ml-2">
+            {/* Right Actions */}
+            <div className="flex items-center gap-2 sm:gap-3 z-10">
+              {/* Search Button */}
               <button
-                className="p-2 rounded-full hover:bg-white/10 transition-all duration-300"
+                className="p-2.5 rounded-full bg-secondary/50 hover:bg-secondary border border-border/30 transition-all duration-300 group"
                 aria-label="Search"
                 onClick={() => setIsSearchOpen(true)}
               >
-                <Search className="w-4 h-4 text-white/80 hover:text-brand-yellow" />
+                <Search className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
               </button>
 
-              <div className="flex items-center text-xs text-white/70">
-                <MapPin className="w-3 h-3 mr-1 text-brand-yellow" />
-                <span>India</span>
-              </div>
-            </div>
-
-            <button
-              onClick={() => handleNavClick("#contact")}
-              className="group relative px-5 py-2 overflow-hidden bg-brand-yellow text-black font-bold rounded-full shadow hover:shadow-lg transition-all duration-300"
-            >
-              <span className="relative z-10 flex items-center">
-                Get Started
-                <ChevronDown className="w-4 h-4 ml-1 group-hover:rotate-180 transition-transform duration-300" />
-              </span>
-              <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
-            </button>
-          </div>
-
-          {/* Mobile Toggle Button with enhanced styling */}
-          <button
-            className="lg:hidden text-brand-yellow p-2 relative"
-            onClick={toggleMobileMenu}
-            aria-label="Toggle mobile menu"
-            aria-expanded={isMobileOpen}
-          >
-            <div className="absolute -inset-1 bg-brand-yellow/10 rounded-full blur-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-            {isMobileOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </button>
-        </div>
-
-        {/* Enhanced Mobile Menu Panel with AnimatePresence for smoother transitions */}
-        <AnimatePresence>
-          {isMobileOpen && (
-            <motion.div
-              className="lg:hidden bg-gradient-to-b from-black/95 to-black/90 border-t border-brand-yellow/10 py-2 px-2 space-y-1 overflow-hidden"
-              variants={mobileMenuVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              transition={{ duration: 0.2 }}
-            >
-              {NAV_LINKS.map((link) => (
-                <motion.button
-                  key={link.href}
-                  onClick={() => handleNavClick(link.href)}
-                  className={`block w-full text-center py-3 px-4 rounded-lg text-base font-medium transition-all duration-300 ${
-                    (isHomePage && activeSection === link.href.substring(1)) ||
-                    (!isHomePage && location.pathname === link.href)
-                      ? "bg-brand-yellow/10 text-brand-yellow"
-                      : "text-white hover:bg-brand-yellow/5 hover:text-brand-yellow"
-                  }`}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  {link.name}
-                </motion.button>
-              ))}
-
-              {/* Search button for mobile */}
+              {/* CTA Button - Desktop */}
               <motion.button
-                onClick={() => {
-                  setIsMobileOpen(false);
-                  setIsSearchOpen(true);
-                }}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg text-base font-medium text-white hover:bg-white/5"
+                onClick={() => handleNavClick("#contact")}
+                className="hidden sm:flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-brand-yellow to-brand-gold text-primary-foreground font-semibold rounded-full shadow-lg shadow-brand-yellow/20 hover:shadow-xl hover:shadow-brand-yellow/30 transition-all duration-300"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Search className="w-4 h-4" />
-                <span>Search</span>
+                <Sparkles className="w-4 h-4" />
+                <span>Get Started</span>
               </motion.button>
 
-              <motion.button
-                onClick={() => handleNavClick("#contact")}
-                className="block w-full text-center py-3 mt-2 bg-brand-yellow text-black font-bold rounded-lg shadow"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
+              {/* Mobile Menu Toggle */}
+              <button
+                className="lg:hidden p-2.5 rounded-full bg-secondary/50 hover:bg-secondary border border-border/30 transition-all duration-300"
+                onClick={toggleMobileMenu}
+                aria-label="Toggle mobile menu"
+                aria-expanded={isMobileOpen}
               >
-                Get Started
-              </motion.button>
+                {isMobileOpen ? (
+                  <X className="h-5 w-5 text-foreground" />
+                ) : (
+                  <Menu className="h-5 w-5 text-foreground" />
+                )}
+              </button>
+            </div>
+          </div>
 
-              {/* Additional elements with yellow theme */}
-              <div className="flex justify-center items-center gap-4 mt-4 pt-4 border-t border-white/10">
-                <motion.div
-                  className="flex items-center gap-2 text-white/70 text-sm"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <Award className="w-4 h-4 text-brand-yellow" />
-                  <span>Indian Excellence</span>
-                </motion.div>
-                <motion.div
-                  className="flex items-center gap-2 text-white/70 text-sm"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <Zap className="w-4 h-4 text-brand-yellow" />
-                  <span>24/7 Support</span>
-                </motion.div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+          {/* Mobile Menu */}
+          <AnimatePresence>
+            {isMobileOpen && (
+              <motion.div
+                className="lg:hidden border-t border-border/30 overflow-hidden"
+                variants={mobileMenuVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                transition={{ duration: 0.2 }}
+              >
+                <div className="p-4 space-y-2">
+                  {NAV_LINKS.map((link) => {
+                    const isActive =
+                      (isHomePage && activeSection === link.href.substring(1)) ||
+                      (!isHomePage && location.pathname === link.href);
+                    
+                    return (
+                      <motion.button
+                        key={link.href}
+                        onClick={() => handleNavClick(link.href)}
+                        className={`block w-full text-left py-3 px-4 rounded-xl text-base font-medium transition-all duration-300 ${
+                          isActive
+                            ? "bg-brand-yellow text-primary-foreground"
+                            : "text-foreground hover:bg-secondary"
+                        }`}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        {link.name}
+                      </motion.button>
+                    );
+                  })}
+
+                  {/* Mobile Search */}
+                  <motion.button
+                    onClick={() => {
+                      setIsMobileOpen(false);
+                      setIsSearchOpen(true);
+                    }}
+                    className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-base font-medium text-muted-foreground hover:bg-secondary transition-all"
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Search className="w-4 h-4" />
+                    <span>Search</span>
+                    <span className="text-xs text-muted-foreground/60 ml-auto">⌘K</span>
+                  </motion.button>
+
+                  {/* Mobile CTA */}
+                  <motion.button
+                    onClick={() => handleNavClick("#contact")}
+                    className="w-full flex items-center justify-center gap-2 py-3 mt-2 bg-gradient-to-r from-brand-yellow to-brand-gold text-primary-foreground font-bold rounded-xl shadow-lg"
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    <span>Get Started</span>
+                  </motion.button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </nav>
 
       {/* Search Modal */}
