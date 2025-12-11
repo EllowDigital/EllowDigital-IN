@@ -1,11 +1,4 @@
-import {
-  CheckCircle,
-  Users,
-  Award,
-  Briefcase,
-  LightbulbIcon,
-} from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { CheckCircle, Users, Award, Briefcase, LightbulbIcon, Target, Rocket } from "lucide-react";
 import { motion } from "framer-motion";
 
 const AboutSection = () => {
@@ -17,140 +10,144 @@ const AboutSection = () => {
     { text: "Future-proof solutions", icon: Award },
   ];
 
-  // Animation variants for improved performance and mobile responsiveness
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.3,
+        delayChildren: 0.2,
       },
     },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
     <section
       id="about"
-      className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden deferred-section"
+      className="py-16 sm:py-20 lg:py-28 relative overflow-hidden"
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-background to-muted/20"></div>
-      <div className="absolute top-1/4 right-0 h-64 w-64 bg-brand-gold/5 rounded-full filter blur-3xl"></div>
-      <div className="absolute bottom-1/4 left-0 h-64 w-64 bg-brand-gold/10 rounded-full filter blur-3xl"></div>
+      {/* Modern gradient background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
+        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-brand-yellow/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-brand-gold/5 rounded-full blur-[100px]" />
+      </div>
 
-      <div className="section-container">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-          {/* Left Column: About Information - Order adjusted for mobile */}
-          <div className="space-y-6 order-2 lg:order-1">
-            <div className="inline-block">
-              <h2 className="text-3xl md:text-4xl font-bold mb-2 flex flex-col sm:flex-row sm:items-center gap-2">
-                About <span className="gradient-text">EllowDigital</span>
-              </h2>
-              <div className="h-1 w-24 bg-gradient-to-r from-brand-gold to-brand-yellow rounded-full mt-2"></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
+          className="text-center mb-12 sm:mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="inline-flex items-center gap-2 px-4 py-2 mb-4 bg-secondary/50 border border-border/50 rounded-full text-sm text-muted-foreground">
+            <Target className="w-4 h-4 text-brand-yellow" />
+            Who We Are
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            About <span className="bg-gradient-to-r from-brand-yellow to-brand-gold bg-clip-text text-transparent">EllowDigital</span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            A solo-powered micro-agency delivering high-performance digital solutions tailored to your unique needs.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+          {/* Left Column: Content */}
+          <motion.div
+            className="space-y-6"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="space-y-4">
+              <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
+                At EllowDigital, we are dedicated to delivering high-performance websites, mobile apps, and software solutions that are tailored to your unique business needs.
+              </p>
+              <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
+                We believe that every project is an opportunity to make a lasting impact. That's why we focus on quality, efficiency, and user-centric design to ensure our solutions exceed expectations.
+              </p>
             </div>
 
-            <p className="text-muted-foreground text-lg max-w-prose">
-              At EllowDigital, we are a solo-powered micro-agency dedicated to
-              delivering high-performance websites, mobile apps, and software
-              solutions that are tailored to your unique business needs.
-            </p>
-
-            <p className="text-muted-foreground text-lg max-w-prose">
-              We believe that every project is an opportunity to make a lasting
-              impact. That's why we focus on quality, efficiency, and
-              user-centric design to ensure that our solutions not only meet
-              your needs but exceed expectations.
-            </p>
-
-            {/* Highlights with improved responsive layout */}
+            {/* Highlights Grid */}
             <motion.div
-              className="mt-8 grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-8"
               variants={containerVariants}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true }}
             >
               {highlights.map((item, index) => (
-                <motion.div key={index} variants={itemVariants}>
-                  <Card className="bg-card/50 border-border/50 hover:border-brand-gold/50 transition-colors overflow-hidden group h-full">
-                    <CardContent className="p-3 sm:p-4 flex items-center gap-3">
-                      <div className="rounded-full bg-brand-gold/10 p-2 group-hover:bg-brand-gold/20 transition-colors flex-shrink-0">
-                        <item.icon className="h-4 w-4 sm:h-5 sm:w-5 text-brand-gold" />
-                      </div>
-                      <span className="font-medium text-sm sm:text-base">
-                        {item.text}
-                      </span>
-                    </CardContent>
-                  </Card>
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  className="group flex items-center gap-3 p-4 bg-secondary/30 hover:bg-secondary/50 border border-border/30 hover:border-brand-yellow/30 rounded-xl transition-all duration-300"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-brand-yellow/10 group-hover:bg-brand-yellow/20 flex items-center justify-center transition-colors">
+                    <item.icon className="w-5 h-5 text-brand-yellow" />
+                  </div>
+                  <span className="font-medium text-sm sm:text-base text-foreground">{item.text}</span>
                 </motion.div>
               ))}
             </motion.div>
-          </div>
+          </motion.div>
 
-          {/* Right Column: Mission and Philosophy - Improved mobile responsiveness with motion */}
+          {/* Right Column: Mission & Philosophy Cards */}
           <motion.div
-            className="relative order-1 lg:order-2"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true, amount: 0.3 }}
+            className="space-y-5"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="absolute -inset-4 bg-gradient-to-r from-brand-purple/10 to-brand-cyan/10 rounded-2xl blur-xl"></div>
-            <Card className="relative bg-card border-border/50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 neo-effect">
-              <CardContent className="p-4 sm:p-6 space-y-4 sm:space-y-6">
-                <div className="w-20 h-1 bg-gradient-to-r from-brand-gold to-brand-yellow rounded-full"></div>
-
-                {/* Mission Section */}
-                <div className="space-y-2 sm:space-y-3">
-                  <h3 className="text-xl sm:text-2xl font-bold text-foreground flex items-center gap-2">
-                    <Award className="h-5 w-5 text-brand-gold flex-shrink-0" />
-                    Our Mission
-                  </h3>
-                  <p className="text-muted-foreground text-sm sm:text-base">
-                    Our mission is to empower businesses with meaningful digital
-                    experiences. By blending innovative technology, agile
-                    development, and human-centered design, we create results
-                    that not only meet your goals but resonate with your
-                    audience.
-                  </p>
-                </div>
-
-                {/* Philosophy Section */}
-                <div className="space-y-2 sm:space-y-3">
-                  <h3 className="text-xl sm:text-2xl font-bold text-foreground flex items-center gap-2">
-                    <LightbulbIcon className="h-5 w-5 text-brand-gold flex-shrink-0" />
-                    Our Philosophy
-                  </h3>
-                  <p className="text-muted-foreground text-sm sm:text-base">
-                    Our philosophy is simple: technology should empower people.
-                    With a passion for creating impactful digital experiences,
-                    we blend innovative technology with human-centered design to
-                    bring your boldest ideas to life. Every solution is crafted
-                    to be scalable, intuitive, and future-proof.
-                  </p>
-                </div>
-
-                {/* Quote - Improved for mobile */}
-                <div className="relative bg-muted/30 p-3 sm:p-5 rounded-lg mt-4 sm:mt-6 border-l-4 border-brand-gold">
-                  <div className="absolute top-0 right-0 text-4xl sm:text-5xl text-brand-gold/10 font-serif">
-                    "
+            {/* Mission Card */}
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-brand-yellow/20 to-brand-gold/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative p-6 bg-secondary/30 border border-border/30 rounded-2xl hover:border-brand-yellow/20 transition-colors">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-yellow/20 to-brand-gold/10 flex items-center justify-center">
+                    <Rocket className="w-6 h-6 text-brand-yellow" />
                   </div>
-                  <p className="text-xs sm:text-sm italic relative z-10">
-                    Every line of code and every pixel should serve a purpose —
-                    to create beautiful experiences that solve real problems.
-                  </p>
-                  <div className="absolute bottom-0 right-4 text-4xl sm:text-5xl text-brand-gold/10 font-serif">
-                    "
-                  </div>
+                  <h3 className="text-xl font-bold text-foreground">Our Mission</h3>
                 </div>
-              </CardContent>
-            </Card>
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                  To empower businesses with meaningful digital experiences. By blending innovative technology, agile development, and human-centered design, we create results that resonate with your audience.
+                </p>
+              </div>
+            </div>
+
+            {/* Philosophy Card */}
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-brand-gold/20 to-brand-yellow/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative p-6 bg-secondary/30 border border-border/30 rounded-2xl hover:border-brand-yellow/20 transition-colors">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-gold/20 to-brand-yellow/10 flex items-center justify-center">
+                    <LightbulbIcon className="w-6 h-6 text-brand-gold" />
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground">Our Philosophy</h3>
+                </div>
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                  Technology should empower people. With passion for creating impactful digital experiences, we blend innovative technology with human-centered design to bring your boldest ideas to life.
+                </p>
+              </div>
+            </div>
+
+            {/* Quote */}
+            <div className="relative p-5 bg-gradient-to-br from-brand-yellow/5 to-brand-gold/5 border border-brand-yellow/20 rounded-2xl">
+              <div className="absolute -top-3 left-4 text-5xl text-brand-yellow/30 font-serif leading-none">"</div>
+              <p className="text-sm sm:text-base italic text-foreground/80 pl-4 pr-2">
+                Every line of code and every pixel should serve a purpose — to create beautiful experiences that solve real problems.
+              </p>
+              <div className="absolute -bottom-3 right-4 text-5xl text-brand-yellow/30 font-serif leading-none rotate-180">"</div>
+            </div>
           </motion.div>
         </div>
       </div>
