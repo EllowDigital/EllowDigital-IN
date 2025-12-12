@@ -1,6 +1,6 @@
-import { Star, Quote } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Star, Quote, ArrowLeft, ArrowRight } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -18,6 +18,7 @@ const testimonials = [
     image: "images/nitesh.png",
     projectType: "Website Development",
     text: "EllowDigital truly elevated our digital presence. Their team captured the essence of our brand and delivered a sleek, functional website that has received fantastic feedback from our users.",
+    gradient: "from-blue-500 to-cyan-500",
   },
   {
     name: "Sarwan Yadav",
@@ -27,6 +28,7 @@ const testimonials = [
     image: "images/projects_img/project1_typeblitz.webp",
     projectType: "TypeBlitz - Boost Your Typing Skills",
     text: "The EllowDigital team was instrumental in shaping TypeBlitz into a user-centric platform. Their creative approach to design and deep understanding of user behavior made the final product both engaging and effective.",
+    gradient: "from-purple-500 to-pink-500",
   },
   {
     name: "Anish Yadav",
@@ -36,42 +38,13 @@ const testimonials = [
     image: "images/projects_img/project1_typeblitz.webp",
     projectType: "TypeBlitz - Boost Your Typing Skills",
     text: "From a technical standpoint, working with EllowDigital was seamless. Their attention to detail and commitment to performance optimization helped us build a fast, scalable learning tool that users appreciate.",
+    gradient: "from-orange-500 to-red-500",
   },
 ];
 
 const Testimonials = () => {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const dividerRef = useRef<HTMLDivElement>(null);
-  const carouselRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    // Copy ref values to variables for cleanup
-    const titleElement = titleRef.current;
-    const dividerElement = dividerRef.current;
-    const carouselElement = carouselRef.current;
-
-    if (titleElement) observer.observe(titleElement);
-    if (dividerElement) observer.observe(dividerElement);
-    if (carouselElement) observer.observe(carouselElement);
-
-    return () => {
-      if (titleElement) observer.unobserve(titleElement);
-      if (dividerElement) observer.unobserve(dividerElement);
-      if (carouselElement) observer.unobserve(carouselElement);
-    };
-  }, []);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }).map((_, index) => (
@@ -87,67 +60,98 @@ const Testimonials = () => {
   return (
     <section
       id="testimonials"
-      className="py-24 relative overflow-hidden snap-start bg-card/30 dark:bg-black/20 deferred-section"
+      className="py-24 relative overflow-hidden"
+      ref={sectionRef}
     >
-      {/* Background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/3 right-1/3 w-96 h-96 bg-brand-yellow/5 rounded-full blur-3xl morph-shape"></div>
-        <div
-          className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-brand-gold/5 rounded-full blur-3xl morph-shape"
-          style={{ animationDelay: "5s" }}
-        ></div>
-      </div>
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
+      <div className="absolute top-1/3 right-0 w-96 h-96 bg-brand-yellow/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/3 left-0 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-        <h2 ref={titleRef} className="section-title reveal-animate">
-          Client Testimonials
-        </h2>
-        <div
-          ref={dividerRef}
-          className="animated-divider reveal-animate mb-8"
-        ></div>
+      <div className="section-container relative z-10">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6"
+          >
+            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+            <span className="text-sm font-medium text-primary">Testimonials</span>
+          </motion.div>
 
-        <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-12 reveal-animate">
-          Don't just take our word for it. Here's what our clients have to say
-          about working with EllowDigitals.
-        </p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            What Our{" "}
+            <span className="bg-gradient-to-r from-primary via-brand-purple to-brand-cyan bg-clip-text text-transparent">
+              Clients Say
+            </span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
+            Don't just take our word for it. Here's what our clients have to say
+            about working with EllowDigitals.
+          </p>
+        </motion.div>
 
-        <div ref={carouselRef} className="reveal-animate">
+        {/* Testimonials Carousel */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
           <Carousel
             opts={{
               align: "start",
               loop: true,
             }}
-            className="mx-auto max-w-5xl"
+            className="mx-auto max-w-6xl"
           >
-            <CarouselContent>
+            <CarouselContent className="-ml-4">
               {testimonials.map((testimonial, index) => (
                 <CarouselItem
                   key={index}
                   className="md:basis-1/2 lg:basis-1/3 pl-4"
                 >
-                  <Card className="h-full neo-effect card-3d transition-all duration-300 hover:shadow-lg dark:bg-black/40 border border-brand-yellow/10 group">
-                    <CardContent className="p-6">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                    className="h-full"
+                  >
+                    <div className="group relative h-full bg-card/50 backdrop-blur-sm border border-border/40 rounded-2xl p-6 hover:border-primary/30 transition-all duration-500 overflow-hidden">
+                      {/* Gradient overlay on hover */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${testimonial.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+
+                      {/* Quote icon */}
+                      <div className="absolute top-4 right-4">
+                        <Quote className="w-10 h-10 text-primary/10 group-hover:text-primary/20 transition-colors duration-300" />
+                      </div>
+
                       {/* Project Type Badge */}
-                      <div className="mb-4 -mt-1">
-                        <span className="inline-block text-xs font-medium py-1 px-3 rounded-full bg-brand-yellow/10 text-brand-yellow border border-brand-yellow/20">
+                      <div className="mb-4">
+                        <span className={`inline-block text-xs font-medium py-1.5 px-3 rounded-full bg-gradient-to-r ${testimonial.gradient} text-white`}>
                           {testimonial.projectType}
                         </span>
                       </div>
 
-                      <div className="flex justify-between items-start mb-4">
-                        <div className="flex">
-                          {renderStars(testimonial.rating)}
-                        </div>
-                        <Quote className="w-10 h-10 text-brand-yellow/20 group-hover:text-brand-yellow/30 transition-colors duration-300" />
+                      {/* Stars */}
+                      <div className="flex gap-1 mb-4">
+                        {renderStars(testimonial.rating)}
                       </div>
 
-                      <p className="text-foreground mb-6 line-clamp-4">
-                        {testimonial.text}
+                      {/* Testimonial Text */}
+                      <p className="text-foreground mb-6 leading-relaxed line-clamp-4">
+                        "{testimonial.text}"
                       </p>
 
+                      {/* Author */}
                       <div className="flex items-center mt-auto pt-4 border-t border-border/30">
-                        <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border border-brand-gold/20 bg-brand-yellow/5">
+                        <div className={`w-12 h-12 rounded-xl overflow-hidden mr-4 ring-2 ring-offset-2 ring-offset-card ring-primary/20 group-hover:ring-primary/40 transition-all duration-300`}>
                           <img
                             src={testimonial.image}
                             alt={testimonial.name}
@@ -157,7 +161,7 @@ const Testimonials = () => {
                           />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-foreground text-base">
+                          <h3 className="font-bold text-foreground group-hover:text-primary transition-colors">
                             {testimonial.name}
                           </h3>
                           <p className="text-xs text-muted-foreground">
@@ -165,17 +169,42 @@ const Testimonials = () => {
                           </p>
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </motion.div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="flex justify-center mt-8 gap-4">
-              <CarouselPrevious className="static transform-none mx-2 bg-card hover:bg-brand-yellow/10 hover:text-brand-gold border-brand-gold/20 dark:bg-black/50 text-foreground" />
-              <CarouselNext className="static transform-none mx-2 bg-card hover:bg-brand-yellow/10 hover:text-brand-gold border-brand-gold/20 dark:bg-black/50 text-foreground" />
+
+            {/* Navigation Buttons */}
+            <div className="flex justify-center mt-10 gap-4">
+              <CarouselPrevious className="static transform-none w-12 h-12 rounded-xl bg-card/50 backdrop-blur-sm border border-border/40 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300">
+                <ArrowLeft className="w-5 h-5" />
+              </CarouselPrevious>
+              <CarouselNext className="static transform-none w-12 h-12 rounded-xl bg-card/50 backdrop-blur-sm border border-border/40 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300">
+                <ArrowRight className="w-5 h-5" />
+              </CarouselNext>
             </div>
           </Carousel>
-        </div>
+        </motion.div>
+
+        {/* Bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-center mt-16"
+        >
+          <p className="text-muted-foreground mb-4">
+            Ready to become our next success story?
+          </p>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all duration-300"
+          >
+            Start Your Project
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );
