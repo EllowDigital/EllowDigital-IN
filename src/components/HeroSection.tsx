@@ -195,31 +195,12 @@ const HeroSection = () => {
           ))}
         </motion.div>
 
-        {/* Trusted by section */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isLoaded ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-20 pt-12 border-t border-border/30"
-        >
-          <p className="text-sm text-muted-foreground mb-6">Trusted by innovative companies</p>
-          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 opacity-50">
-            {["TechCorp", "StartupX", "InnovateCo", "DigitalFirst", "NextGen"].map((company) => (
-              <div
-                key={company}
-                className="text-lg font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-default"
-              >
-                {company}
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - properly centered */}
       <motion.a
         href="#about"
-        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center cursor-pointer group"
+        className="absolute bottom-8 left-0 right-0 flex flex-col items-center justify-center cursor-pointer group"
         initial={{ opacity: 0, y: 20 }}
         animate={isLoaded ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 1, duration: 0.6 }}
@@ -228,7 +209,9 @@ const HeroSection = () => {
           document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
         }}
       >
-        <span className="text-xs text-muted-foreground mb-2 group-hover:text-foreground transition-colors">Scroll to explore</span>
+        <span className="text-xs text-muted-foreground mb-2 group-hover:text-foreground transition-colors">
+          Scroll to explore
+        </span>
         <motion.div
           className="w-7 h-11 rounded-full border-2 border-border/50 group-hover:border-brand-yellow/50 flex items-start justify-center p-1.5 transition-colors"
         >
