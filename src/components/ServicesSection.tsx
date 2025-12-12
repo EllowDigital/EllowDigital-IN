@@ -1,3 +1,5 @@
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import {
   Code,
   Smartphone,
@@ -5,6 +7,7 @@ import {
   Search,
   Server,
   HeartPulse,
+  ArrowRight,
 } from "lucide-react";
 import {
   Card,
@@ -22,12 +25,14 @@ const services = [
       "Lightning-fast, mobile-first, SEO-optimized websites using modern technologies.",
     icon: Code,
     details: "HTML5, CSS3, React, Node.js",
+    gradient: "from-blue-500 to-cyan-500",
   },
   {
     title: "Mobile App Development",
     description: "Beautiful and intuitive apps for Android and iOS platforms.",
     icon: Smartphone,
     details: "Flutter, React Native, Native Tools",
+    gradient: "from-purple-500 to-pink-500",
   },
   {
     title: "UI/UX Design",
@@ -35,6 +40,7 @@ const services = [
       "Clean, user-centered, and accessible interfaces that drive engagement.",
     icon: Layout,
     details: "Wireframing, Prototyping, User Testing",
+    gradient: "from-orange-500 to-red-500",
   },
   {
     title: "SEO & Performance",
@@ -42,6 +48,7 @@ const services = [
       "Implementing rank-ready strategies and speed optimizations for conversions.",
     icon: Search,
     details: "Technical SEO, Speed Optimization",
+    gradient: "from-green-500 to-emerald-500",
   },
   {
     title: "Custom Software",
@@ -49,6 +56,7 @@ const services = [
       "Tailored tools and automation systems to improve business efficiency.",
     icon: Server,
     details: "Business Solutions, Automation",
+    gradient: "from-indigo-500 to-violet-500",
   },
   {
     title: "Maintenance & Support",
@@ -56,60 +64,151 @@ const services = [
       "Ongoing updates, bug fixes, and expert consultation for your projects.",
     icon: HeartPulse,
     details: "Updates, Security, Performance",
+    gradient: "from-rose-500 to-pink-500",
   },
 ];
 
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
 // Service Card Component
-const ServiceCard = ({ title, description, icon: Icon, details }) => (
-  <Card className="relative border border-border/60 overflow-hidden hover:shadow-lg transition-shadow">
-    {/* Gradient Bar */}
-    <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-brand-purple to-brand-cyan" />
-    {/* Card Header */}
-    <CardHeader className="pb-2">
-      <div className="text-brand-purple mb-3">
-        <Icon className="h-10 w-10" />
+const ServiceCard = ({ title, description, icon: Icon, details, gradient, index }) => (
+  <motion.div variants={itemVariants}>
+    <Card className="group relative border border-border/40 overflow-hidden bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-all duration-500 h-full">
+      {/* Gradient overlay on hover */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+      
+      {/* Number badge */}
+      <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-secondary/80 flex items-center justify-center">
+        <span className="text-xs font-bold text-muted-foreground">0{index + 1}</span>
       </div>
-      <CardTitle className="text-xl font-semibold">{title}</CardTitle>
-      <CardDescription className="text-base text-muted-foreground">
-        {description}
-      </CardDescription>
-    </CardHeader>
-    {/* Card Content */}
-    <CardContent>
-      <div className="text-xs font-medium bg-secondary py-1 px-2 rounded-full inline-block">
-        {details}
-      </div>
-    </CardContent>
-  </Card>
+
+      {/* Card Header */}
+      <CardHeader className="pb-4">
+        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+          <Icon className="h-7 w-7 text-white" />
+        </div>
+        <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
+          {title}
+        </CardTitle>
+        <CardDescription className="text-base text-muted-foreground leading-relaxed">
+          {description}
+        </CardDescription>
+      </CardHeader>
+
+      {/* Card Content */}
+      <CardContent className="pt-0">
+        <div className="flex items-center justify-between">
+          <div className="text-xs font-medium bg-secondary/80 py-1.5 px-3 rounded-full text-muted-foreground">
+            {details}
+          </div>
+          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
+            <ArrowRight className="h-4 w-4 text-primary" />
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  </motion.div>
 );
 
 // Services Section Component
-const ServicesSection = () => (
-  <section id="services" className="py-24 deferred-section">
-    <div className="section-container">
-      {/* Section Header */}
-      <div className="text-center mb-16">
-        <h2 className="section-title text-4xl font-bold mb-4">Our Services</h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          From concept to deployment, we provide comprehensive digital services
-          to help your business thrive in the digital landscape.
-        </p>
-      </div>
+const ServicesSection = () => {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-      {/* Service Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {services.map(({ title, description, icon, details }) => (
-          <ServiceCard
-            key={title} // Use title as unique key (ensure titles are unique)
-            title={title}
-            description={description}
-            icon={icon}
-            details={details}
-          />
-        ))}
+  return (
+    <section id="services" className="py-24 relative overflow-hidden" ref={sectionRef}>
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-brand-cyan/5 rounded-full blur-3xl" />
+
+      <div className="section-container relative z-10">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6"
+          >
+            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+            <span className="text-sm font-medium text-primary">What We Offer</span>
+          </motion.div>
+
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Our{" "}
+            <span className="bg-gradient-to-r from-primary via-brand-purple to-brand-cyan bg-clip-text text-transparent">
+              Services
+            </span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
+            From concept to deployment, we provide comprehensive digital services
+            to help your business thrive in the digital landscape.
+          </p>
+        </motion.div>
+
+        {/* Service Cards Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+        >
+          {services.map((service, index) => (
+            <ServiceCard
+              key={service.title}
+              {...service}
+              index={index}
+            />
+          ))}
+        </motion.div>
+
+        {/* Bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-center mt-16"
+        >
+          <p className="text-muted-foreground mb-4">
+            Need something custom? Let's discuss your project.
+          </p>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all duration-300"
+          >
+            Get in Touch
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </motion.div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default ServicesSection;
