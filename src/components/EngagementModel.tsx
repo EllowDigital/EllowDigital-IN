@@ -1,3 +1,5 @@
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import {
   ArrowRight,
   Clock,
@@ -6,8 +8,6 @@ import {
   Briefcase,
   Check,
 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { useEffect, useRef } from "react";
 
 const models = [
   {
@@ -19,6 +19,7 @@ const models = [
       "Predictable cost",
       "Milestone-based payments",
     ],
+    gradient: "from-blue-500 to-cyan-500",
   },
   {
     icon: Clock,
@@ -29,6 +30,7 @@ const models = [
       "Transparent billing",
       "Scale up or down as needed",
     ],
+    gradient: "from-purple-500 to-pink-500",
   },
   {
     icon: Users,
@@ -39,12 +41,14 @@ const models = [
       "Deep product knowledge",
       "Enhanced productivity",
     ],
+    gradient: "from-orange-500 to-red-500",
   },
   {
     icon: DollarSign,
     title: "Student-Friendly",
     description: "Affordable options for educational and startup projects",
     features: ["Reduced rates", "Mentorship included", "Future growth options"],
+    gradient: "from-green-500 to-emerald-500",
   },
 ];
 
@@ -67,156 +71,199 @@ const steps = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
 const EngagementModel = () => {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const dividerRef = useRef<HTMLDivElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const modelsRef = useRef<HTMLDivElement>(null);
-  const modelCardsRef = useRef<HTMLDivElement[]>([]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-
-            // Staggered animation for model cards
-            if (entry.target === modelsRef.current) {
-              modelCardsRef.current.forEach((card, index) => {
-                if (card) {
-                  setTimeout(() => {
-                    card.classList.add("revealed");
-                  }, index * 200);
-                }
-              });
-            }
-
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    // Copy ref values to variables for cleanup
-    const titleElement = titleRef.current;
-    const dividerElement = dividerRef.current;
-    const timelineElement = timelineRef.current;
-    const modelsElement = modelsRef.current;
-
-    if (titleElement) observer.observe(titleElement);
-    if (dividerElement) observer.observe(dividerElement);
-    if (timelineElement) observer.observe(timelineElement);
-    if (modelsElement) observer.observe(modelsElement);
-
-    return () => {
-      if (titleElement) observer.unobserve(titleElement);
-      if (dividerElement) observer.unobserve(dividerElement);
-      if (timelineElement) observer.unobserve(timelineElement);
-      if (modelsElement) observer.unobserve(modelsElement);
-    };
-  }, []);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
     <section
       id="engagement"
-      className="section-container py-24 relative overflow-hidden snap-start bg-muted/50 dark:bg-transparent deferred-section"
+      className="py-24 relative overflow-hidden"
+      ref={sectionRef}
     >
-      {/* Background morphing shapes */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl morph-shape"></div>
-      <div
-        className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-brand-yellow/10 rounded-full blur-3xl morph-shape"
-        style={{ animationDelay: "10s" }}
-      ></div>
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-brand-yellow/5 rounded-full blur-3xl" />
 
-      <div className="max-w-6xl mx-auto">
-        <h2 ref={titleRef} className="section-title reveal-animate">
-          Our Engagement Models
-        </h2>
-        <div
-          ref={dividerRef}
-          className="animated-divider reveal-animate mb-12"
-        ></div>
+      <div className="section-container relative z-10">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6"
+          >
+            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+            <span className="text-sm font-medium text-primary">Flexible Options</span>
+          </motion.div>
+
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Our Engagement{" "}
+            <span className="bg-gradient-to-r from-primary via-brand-purple to-brand-cyan bg-clip-text text-transparent">
+              Models
+            </span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
+            Choose the collaboration model that best fits your project needs and budget.
+          </p>
+        </motion.div>
 
         {/* Process Timeline */}
-        <div ref={timelineRef} className="mb-20 reveal-animate">
-          <h3 className="text-2xl font-semibold mb-8 text-center">
-            How We Collaborate
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-20"
+        >
+          <h3 className="text-2xl font-bold mb-10 text-center">
+            How We{" "}
+            <span className="bg-gradient-to-r from-brand-yellow to-brand-gold bg-clip-text text-transparent">
+              Collaborate
+            </span>
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
             {/* Timeline connector */}
-            <div className="hidden md:block absolute top-8 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-gold to-brand-yellow z-0"></div>
+            <div className="hidden md:block absolute top-10 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-primary/20 via-primary/50 to-primary/20 z-0" />
 
             {steps.map((step, index) => (
-              <div key={index} className="relative z-10">
+              <motion.div
+                key={step.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                className="relative z-10 group"
+              >
                 {/* Timeline node */}
-                <div className="w-16 h-16 mx-auto rounded-full flex items-center justify-center bg-card shadow-md border border-brand-gold/30 mb-4">
-                  <span className="text-xl font-bold text-brand-gold">
-                    {index + 1}
+                <div className="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center bg-gradient-to-br from-primary to-brand-gold shadow-lg shadow-primary/20 mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-2xl font-bold text-primary-foreground">
+                    0{index + 1}
                   </span>
                 </div>
 
-                <div className="text-center">
-                  <h4 className="text-lg font-semibold mb-2">{step.title}</h4>
-                  <p className="text-sm text-foreground/80">
+                <div className="text-center bg-card/50 backdrop-blur-sm border border-border/40 rounded-xl p-4 hover:border-primary/30 transition-all duration-300">
+                  <h4 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                    {step.title}
+                  </h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {step.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Engagement Models */}
-        <h3 className="text-2xl font-semibold mb-8 text-center reveal-animate">
-          Flexible Engagement Options
-        </h3>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-center mb-10"
+        >
+          <h3 className="text-2xl font-bold">
+            Flexible{" "}
+            <span className="bg-gradient-to-r from-brand-yellow to-brand-gold bg-clip-text text-transparent">
+              Engagement Options
+            </span>
+          </h3>
+        </motion.div>
 
-        <div
-          ref={modelsRef}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {models.map((model, index) => (
-            <div
-              key={index}
-              ref={(el) => {
-                if (el) modelCardsRef.current[index] = el;
-              }}
-              className="reveal-animate opacity-0 transform translate-y-5"
+            <motion.div
+              key={model.title}
+              variants={itemVariants}
+              className="group"
             >
-              <Card className="h-full border border-border overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="mb-6 flex justify-center">
-                    <div className="w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-brand-gold/20 to-brand-yellow/20 border border-brand-gold/30">
-                      <model.icon className="w-6 h-6 text-brand-gold" />
-                    </div>
+              <div className="relative h-full bg-card/50 backdrop-blur-sm border border-border/40 rounded-2xl p-6 hover:border-primary/30 transition-all duration-500 overflow-hidden">
+                {/* Gradient overlay on hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${model.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+
+                {/* Icon */}
+                <div className="mb-6 flex justify-center">
+                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br ${model.gradient} group-hover:scale-110 transition-transform duration-300`}>
+                    <model.icon className="w-8 h-8 text-white" />
                   </div>
+                </div>
 
-                  <h4 className="text-xl font-semibold mb-2 text-center">
-                    {model.title}
-                  </h4>
-                  <p className="text-sm text-muted-foreground text-center mb-4">
-                    {model.description}
-                  </p>
+                {/* Content */}
+                <h4 className="text-xl font-bold mb-2 text-center group-hover:text-primary transition-colors">
+                  {model.title}
+                </h4>
+                <p className="text-sm text-muted-foreground text-center mb-6 leading-relaxed">
+                  {model.description}
+                </p>
 
-                  <ul className="space-y-2">
-                    {model.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start">
-                        <span className="w-5 h-5 rounded-full bg-brand-gold/20 flex-shrink-0 flex items-center justify-center mr-2 mt-0.5">
-                          <Check className="w-3 h-3 text-brand-gold" />
-                        </span>
-                        <span className="text-sm text-foreground/90">
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
+                {/* Features */}
+                <ul className="space-y-3">
+                  {model.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-start gap-3">
+                      <span className={`w-5 h-5 rounded-full bg-gradient-to-br ${model.gradient} flex-shrink-0 flex items-center justify-center mt-0.5`}>
+                        <Check className="w-3 h-3 text-white" />
+                      </span>
+                      <span className="text-sm text-muted-foreground">
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-center mt-16"
+        >
+          <p className="text-muted-foreground mb-4">
+            Not sure which model suits you best?
+          </p>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all duration-300"
+          >
+            Let's Discuss Your Project
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );
