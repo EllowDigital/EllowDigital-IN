@@ -15,6 +15,7 @@ import Testimonials from "@/components/Testimonials";
 import ImpactMetrics from "@/components/ImpactMetrics";
 import TechStack from "@/components/TechStack";
 import FeaturedOffers from "@/components/FeaturedOffers";
+import FloatingContactButton from "@/components/FloatingContactButton";
 import {
   initScrollRevealAnimations,
   init3DTiltEffect,
@@ -133,6 +134,7 @@ const Index = () => {
           <SmartContactForm />
         </main>
         <Footer />
+        <FloatingContactButton />
       </div>
     </>
   );
