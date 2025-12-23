@@ -10,6 +10,7 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react";
+import { AnimatedSectionHeader } from "./AnimatedGradient";
 
 const services = [
   {
@@ -187,43 +188,14 @@ const ServicesSection = () => {
 
       <div className="section-container relative z-10">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16 lg:mb-20"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-5 py-2 mb-6"
-          >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-semibold text-primary tracking-wide">
-              What We Offer
-            </span>
-          </motion.div>
-
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Our{" "}
-            <span className="relative">
-              <span className="bg-gradient-to-r from-primary via-primary to-primary/70 bg-clip-text text-transparent">
-                Services
-              </span>
-              <motion.span
-                className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary to-primary/50 rounded-full"
-                initial={{ scaleX: 0 }}
-                animate={isInView ? { scaleX: 1 } : {}}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              />
-            </span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-            From concept to deployment, we provide comprehensive digital
-            services to help your business thrive in the digital landscape.
-          </p>
-        </motion.div>
+        <AnimatedSectionHeader
+          badge="What We Offer"
+          badgeIcon={<Sparkles className="w-4 h-4 text-primary" />}
+          title="Our Services"
+          highlightedWord="Services"
+          description="From concept to deployment, we provide comprehensive digital services to help your business thrive in the digital landscape."
+          gradient="gold"
+        />
 
         {/* Service Cards Grid */}
         <motion.div

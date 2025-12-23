@@ -4,16 +4,17 @@ import { Cookie, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CookieConsent = () => {
+  // Temporarily disabled - set to false to hide banner
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Check if user has already made a choice
-    const consent = localStorage.getItem("cookie-consent");
-    if (!consent) {
-      // Show banner after a short delay for better UX
-      const timer = setTimeout(() => setIsVisible(true), 1500);
-      return () => clearTimeout(timer);
-    }
+    // Temporarily disabled cookie banner
+    // Uncomment below to re-enable:
+    // const consent = localStorage.getItem("cookie-consent");
+    // if (!consent) {
+    //   const timer = setTimeout(() => setIsVisible(true), 1500);
+    //   return () => clearTimeout(timer);
+    // }
   }, []);
 
   const handleAccept = () => {

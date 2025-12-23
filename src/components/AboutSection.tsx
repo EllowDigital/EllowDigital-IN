@@ -1,5 +1,6 @@
 import { CheckCircle, Users, Award, Briefcase, LightbulbIcon, Target, Rocket, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { AnimatedSectionHeader } from "./AnimatedGradient";
 
 const AboutSection = () => {
   const highlights = [
@@ -40,24 +41,14 @@ const AboutSection = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <motion.div
-          className="text-center mb-16 sm:mb-20"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-brand-yellow/10 border border-brand-yellow/20 rounded-full text-sm font-medium text-brand-yellow">
-            <Target className="w-4 h-4" />
-            Who We Are
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-5 tracking-tight">
-            About <span className="bg-gradient-to-r from-brand-yellow to-brand-gold bg-clip-text text-transparent">EllowDigital</span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-            A solo-powered micro-agency delivering high-performance digital solutions tailored to your unique needs.
-          </p>
-        </motion.div>
+        <AnimatedSectionHeader
+          badge="Who We Are"
+          badgeIcon={<Target className="w-4 h-4 text-primary" />}
+          title="About EllowDigital"
+          highlightedWord="EllowDigital"
+          description="A solo-powered micro-agency delivering high-performance digital solutions tailored to your unique needs."
+          gradient="gold"
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           {/* Left Column: Content */}

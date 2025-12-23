@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { AnimatedSectionHeader } from "./AnimatedGradient";
 
 const reasons = [
   {
@@ -104,29 +105,14 @@ const WhyChooseUs = () => {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={isInView ? { scale: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6"
-          >
-            <Award className="w-4 h-4 text-brand-gold" />
-            <span className="text-sm font-medium text-brand-gold">Industry-Recognized Excellence</span>
-          </motion.div>
-          
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-brand-yellow">EllowDigital?</span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            We pride ourselves on delivering exceptional value and building lasting relationships with our clients.
-          </p>
-        </motion.div>
+        <AnimatedSectionHeader
+          badge="Industry-Recognized Excellence"
+          badgeIcon={<Award className="w-4 h-4 text-primary" />}
+          title="Why Choose EllowDigital?"
+          highlightedWord="EllowDigital"
+          description="We pride ourselves on delivering exceptional value and building lasting relationships with our clients."
+          gradient="gold"
+        />
 
         {/* Client Logos */}
         <motion.div
