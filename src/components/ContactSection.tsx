@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, Phone, Github, Send, MapPin, Clock } from "lucide-react";
+import { Mail, Phone, Github, Send, MapPin, Clock, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -25,7 +25,6 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
       toast.success("Message sent successfully! We'll get back to you soon.");
@@ -38,35 +37,31 @@ const ContactSection = () => {
       icon: <Mail className="h-5 w-5" />,
       label: "Email",
       value: "contact@ellowdigitals.com",
-      color: "from-blue-500 to-cyan-500",
     },
     {
       icon: <Phone className="h-5 w-5" />,
       label: "Phone",
       value: "+91 98765 43210",
-      color: "from-green-500 to-emerald-500",
     },
     {
       icon: <Github className="h-5 w-5" />,
       label: "GitHub",
       value: "github.com/ellowdigitals",
       href: "https://github.com/ellowdigitals",
-      color: "from-purple-500 to-pink-500",
     },
     {
       icon: <MapPin className="h-5 w-5" />,
       label: "Location",
       value: "India",
-      color: "from-orange-500 to-red-500",
     },
   ];
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/5 via-background to-brand-pink/5" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-purple/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-pink/10 rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-primary/5" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
 
       <div className="section-container relative z-10">
         <motion.div
@@ -80,8 +75,9 @@ const ContactSection = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-1.5 rounded-full bg-gradient-to-r from-brand-purple/20 to-brand-pink/20 text-sm font-medium text-brand-purple mb-4"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium text-primary mb-4"
           >
+            <MessageSquare className="w-4 h-4" />
             Get In Touch
           </motion.span>
           <h2 className="section-title">Let's Connect</h2>
@@ -101,7 +97,7 @@ const ContactSection = () => {
             className="space-y-8"
           >
             <div className="space-y-4">
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-brand-purple to-brand-pink bg-clip-text text-transparent">
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
                 Get in Touch
               </h3>
               <p className="text-muted-foreground">
@@ -121,11 +117,9 @@ const ContactSection = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: 0.1 * index }}
                     whileHover={{ scale: 1.02, x: 5 }}
-                    className="flex items-center gap-4 p-4 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50 hover:border-brand-purple/30 transition-all duration-300 group"
+                    className="flex items-center gap-4 p-4 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300 group"
                   >
-                    <div
-                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${contact.color} flex items-center justify-center text-white shadow-lg group-hover:shadow-xl transition-shadow`}
-                    >
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center text-primary shadow-lg group-hover:shadow-xl transition-shadow">
                       {contact.icon}
                     </div>
                     <div>
@@ -135,7 +129,7 @@ const ContactSection = () => {
                       {contact.href ? (
                         <a
                           href={contact.href}
-                          className="font-medium hover:text-brand-purple transition-colors"
+                          className="font-medium hover:text-primary transition-colors"
                           target={isExternal ? "_blank" : undefined}
                           rel={isExternal ? "noreferrer noopener" : undefined}
                         >
@@ -156,10 +150,10 @@ const ContactSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: 0.5 }}
-              className="p-6 rounded-xl bg-gradient-to-br from-brand-purple/10 to-brand-pink/10 border border-brand-purple/20"
+              className="p-6 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20"
             >
               <div className="flex items-center gap-3 mb-3">
-                <Clock className="h-5 w-5 text-brand-purple" />
+                <Clock className="h-5 w-5 text-primary" />
                 <h4 className="font-semibold">Working Hours</h4>
               </div>
               <p className="text-muted-foreground text-sm">
@@ -179,7 +173,7 @@ const ContactSection = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/20 to-brand-pink/20 rounded-2xl blur-xl" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl blur-xl" />
             <div className="relative bg-card/80 backdrop-blur-sm rounded-2xl border border-border/60 p-8 shadow-xl">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
@@ -193,7 +187,7 @@ const ContactSection = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="bg-background/50 border-border/50 focus:border-brand-purple transition-colors"
+                    className="bg-background/50 border-border/50 focus:border-primary transition-colors"
                   />
                 </div>
 
@@ -209,7 +203,7 @@ const ContactSection = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="bg-background/50 border-border/50 focus:border-brand-purple transition-colors"
+                    className="bg-background/50 border-border/50 focus:border-primary transition-colors"
                   />
                 </div>
 
@@ -225,14 +219,14 @@ const ContactSection = () => {
                     onChange={handleChange}
                     rows={5}
                     required
-                    className="bg-background/50 border-border/50 focus:border-brand-purple transition-colors resize-none"
+                    className="bg-background/50 border-border/50 focus:border-primary transition-colors resize-none"
                   />
                 </div>
 
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                   <Button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-brand-purple to-brand-pink hover:from-brand-purple/90 hover:to-brand-pink/90 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (

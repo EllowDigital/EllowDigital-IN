@@ -2,94 +2,73 @@ import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
-  // Disable dark mode
   darkMode: "class",
-
-  // Paths to all of the template files that Tailwind should scan for class names
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
   ],
-
-  // Prefix for utility classes (empty in this case)
   prefix: "",
-
-  // Tailwind theme customization
   theme: {
     container: {
-      center: true, // Centers the container
-      padding: "2rem", // Adds padding to the container
+      center: true,
+      padding: "2rem",
       screens: {
-        "2xl": "1400px", // Sets container max width for '2xl' screen size
+        "2xl": "1400px",
       },
     },
     extend: {
-      // Custom colors for various UI elements
       colors: {
-        border: "#222222",
-        input: "#222222",
-        ring: "#FFD700",
-        background: "#121212",
-        foreground: "#F6F6F6",
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#FFD700", // Main accent color
-          foreground: "#121212",
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "#222222",
-          foreground: "#FFD700",
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
         },
         destructive: {
-          DEFAULT: "#b91c1c",
-          foreground: "#fff",
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT: "#353535",
-          foreground: "#BBBBBB",
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "#FFD700",
-          foreground: "#121212",
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
-          DEFAULT: "#1A1A1A",
-          foreground: "#FFD700",
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "#191919",
-          foreground: "#FFD700",
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
         },
         sidebar: {
-          DEFAULT: "#191919",
-          foreground: "#FFD700",
-          primary: "#FFD700",
-          "primary-foreground": "#191919",
-          accent: "#FFDF00",
-          "accent-foreground": "#191919",
-          border: "#353535",
-          ring: "#FFD700",
-        },
-        brand: {
-          gold: "#FFD700",
-          yellow: "#FFDF00",
-          softYellow: "#222222",
-          black: "#121212",
-          offBlack: "#1A1A1A",
-          white: "#F8F8F8",
-          offWhite: "#EBEBEB",
+          DEFAULT: "hsl(var(--sidebar-background))",
+          foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          border: "hsl(var(--sidebar-border))",
+          ring: "hsl(var(--sidebar-ring))",
         },
       },
-
-      // Custom border radii values
       borderRadius: {
-        lg: "var(--radius)", // Large border radius
-        md: "calc(var(--radius) - 2px)", // Medium border radius
-        sm: "calc(var(--radius) - 4px)", // Small border radius
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
-
-      // Custom breakpoints for responsive design
       screens: {
         xs: "475px",
         sm: "640px",
@@ -101,8 +80,6 @@ export default {
         "tablet-portrait": { min: "640px", max: "767px" },
         "tablet-landscape": { min: "768px", max: "1023px" },
       },
-
-      // Custom keyframes for animations
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -137,8 +114,6 @@ export default {
           "100%": { backgroundPosition: "500px 0" },
         },
       },
-
-      // Custom animations for transitions
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
@@ -149,18 +124,12 @@ export default {
         "rotate-slow": "rotate-slow 20s linear infinite",
         shimmer: "shimmer 2s infinite linear",
       },
-
-      // Custom box shadows for UI elements
       boxShadow: {
-        elegant: "0 10px 30px -10px rgba(0, 0, 0, 0.2)",
-        "card-hover": "0 20px 30px -15px rgba(0, 0, 0, 0.2)",
-        "button-3d":
-          "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 -2px 0 0 rgba(255, 255, 255, 0.1) inset, 0 2px 0 0 rgba(0, 0, 0, 0.1) inset",
-        "button-3d-hover":
-          "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 -2px 0 0 rgba(255, 255, 255, 0.15) inset, 0 2px 0 0 rgba(0, 0, 0, 0.1) inset",
+        elegant: "0 10px 30px -10px hsl(var(--foreground) / 0.1)",
+        "card-hover": "0 20px 30px -15px hsl(var(--foreground) / 0.15)",
+        "button-3d": "0 4px 6px -1px hsl(var(--foreground) / 0.1), 0 2px 4px -1px hsl(var(--foreground) / 0.06)",
+        "button-3d-hover": "0 10px 15px -3px hsl(var(--foreground) / 0.1), 0 4px 6px -2px hsl(var(--foreground) / 0.05)",
       },
-
-      // Custom transition properties
       transitionProperty: {
         height: "height",
         spacing: "margin, padding",
@@ -169,7 +138,5 @@ export default {
       },
     },
   },
-
-  // Plugins for additional functionality (e.g., animations)
   plugins: [tailwindcssAnimate],
 } satisfies Config;
