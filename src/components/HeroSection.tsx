@@ -1,9 +1,23 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Play, Star, Users, Zap, Globe, Sparkles } from "lucide-react";
 
 const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Parallax transforms
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 300]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
+  const orb1Y = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const orb2Y = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 100);
@@ -17,14 +31,21 @@ const HeroSection = () => {
 
   return (
     <section
+      ref={sectionRef}
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 px-4 sm:px-6"
     >
-      {/* Premium gradient background */}
-      <div className="absolute inset-0 -z-10">
+      {/* Parallax gradient background */}
+      <motion.div className="absolute inset-0 -z-10" style={{ y: bgY }}>
         <div className="absolute inset-0 bg-background" />
-        <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-brand-yellow/8 rounded-full blur-[150px] -translate-y-1/2" />
-        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-brand-gold/6 rounded-full blur-[120px] translate-y-1/2" />
+        <motion.div 
+          className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-brand-yellow/8 rounded-full blur-[150px] -translate-y-1/2"
+          style={{ y: orb1Y }}
+        />
+        <motion.div 
+          className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-brand-gold/6 rounded-full blur-[120px] translate-y-1/2"
+          style={{ y: orb2Y }}
+        />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gradient-radial from-brand-yellow/3 to-transparent rounded-full" />
         
         {/* Refined grid pattern */}
@@ -36,7 +57,7 @@ const HeroSection = () => {
             backgroundSize: "80px 80px",
           }}
         />
-      </div>
+      </motion.div>
 
       {/* Floating elements - more subtle */}
       <motion.div
@@ -71,8 +92,11 @@ const HeroSection = () => {
         <Users className="w-6 h-6 text-brand-gold/50" />
       </motion.div>
 
-      {/* Main content */}
-      <div className="relative z-10 max-w-5xl mx-auto text-center">
+      {/* Main content with parallax */}
+      <motion.div 
+        className="relative z-10 max-w-5xl mx-auto text-center"
+        style={{ y: contentY, opacity, scale }}
+      >
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -198,7 +222,7 @@ const HeroSection = () => {
             </motion.div>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Scroll indicator */}
       <motion.a

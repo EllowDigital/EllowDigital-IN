@@ -4,51 +4,95 @@ type SEOProps = {
   title?: string;
   description?: string;
   canonicalUrl?: string;
-  ogType?: "website" | "article";
+  ogType?: "website" | "article" | "product";
   ogImage?: string;
   ogImageAlt?: string;
   twitterCard?: "summary" | "summary_large_image";
   structuredData?: Record<string, unknown>;
+  keywords?: string;
+  author?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  section?: string;
+  noindex?: boolean;
   children?: React.ReactNode;
 };
 
 const SEOHead = ({
-  title = "EllowDigital | Empowering Digital Transformation for Businesses",
-  description = "EllowDigital specializes in digital transformation, offering SEO services, web development, UI/UX design, and digital marketing solutions to boost your business growth.",
+  title = "EllowDigital | Digital Transformation Services in India",
+  description = "EllowDigital offers expert web development, SEO optimization, and digital marketing solutions. Transform your business with cutting-edge digital services.",
   canonicalUrl = "https://ellowdigitals.me/",
   ogType = "website",
-  ogImage = "https://ellowdigital.netlify.app/favicon/share.jpg",
-  ogImageAlt = "EllowDigital logo and branding",
+  ogImage = "https://ellowdigitals.me/favicon/share.jpg",
+  ogImageAlt = "EllowDigital - Digital Transformation Services",
   twitterCard = "summary_large_image",
   structuredData,
+  keywords = "web development, digital marketing, SEO services, UI/UX design, business websites, India",
+  author = "EllowDigital",
+  publishedTime,
+  modifiedTime,
+  section,
+  noindex = false,
   children,
 }: SEOProps) => {
-  // Default structured data for the organization
+  // Default BreadcrumbList structured data
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://ellowdigitals.me/"
+      }
+    ]
+  };
+
+  // Default organization structured data
   const defaultStructuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "EllowDigital",
-    url: "https://ellowdigitals.me",
-    logo: "https://ellowdigitals.netlify.app/assets/favicon/share.jpg",
-    sameAs: [
+    "@id": "https://ellowdigitals.me/#organization",
+    "name": "EllowDigital",
+    "url": "https://ellowdigitals.me",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ellowdigitals.me/logo.webp",
+      "width": 512,
+      "height": 512
+    },
+    "sameAs": [
       "https://www.facebook.com/ellowdigitals",
       "https://twitter.com/ellowdigitals",
       "https://www.linkedin.com/company/ellowdigitals",
       "https://www.instagram.com/ellowdigitals",
     ],
-    description:
-      "EllowDigital provides digital transformation services including SEO, web development, and digital marketing solutions designed to accelerate business growth.",
+    "description": "EllowDigital provides digital transformation services including SEO, web development, and digital marketing solutions.",
+    "areaServed": {
+      "@type": "Country",
+      "name": "India"
+    }
   };
 
-  // Use custom structured data or default
   const jsonLd = structuredData || defaultStructuredData;
 
   return (
     <Helmet>
       {/* Primary Meta Tags */}
       <title>{title}</title>
+      <meta name="title" content={title} />
       <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
+      <meta name="author" content={author} />
       <link rel="canonical" href={canonicalUrl} />
+      
+      {/* Robots */}
+      {noindex ? (
+        <meta name="robots" content="noindex, nofollow" />
+      ) : (
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      )}
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={ogType} />
@@ -56,9 +100,17 @@ const SEOHead = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
+      <meta property="og:image:secure_url" content={ogImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta property="og:image:alt" content={ogImageAlt} />
       <meta property="og:site_name" content="EllowDigital" />
       <meta property="og:locale" content="en_IN" />
+      
+      {/* Article specific OG tags */}
+      {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+      {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+      {section && <meta property="article:section" content={section} />}
 
       {/* Twitter */}
       <meta name="twitter:card" content={twitterCard} />
@@ -72,6 +124,7 @@ const SEOHead = ({
 
       {/* Structured Data / JSON-LD */}
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
 
       {/* Additional meta tags can be passed as children */}
       {children}
