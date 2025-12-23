@@ -63,6 +63,9 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Brand colors - Yellow/Gold theme
+        "brand-yellow": "hsl(var(--brand-yellow))",
+        "brand-gold": "hsl(var(--brand-gold))",
       },
       borderRadius: {
         lg: "var(--radius)",

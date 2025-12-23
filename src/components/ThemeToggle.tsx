@@ -4,8 +4,10 @@ import { motion } from "framer-motion";
 
 const ThemeToggle = () => {
   const [isDark, setIsDark] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // Check for saved theme preference or default to dark
     const savedTheme = localStorage.getItem("theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -13,25 +15,39 @@ const ThemeToggle = () => {
     if (savedTheme === "light") {
       setIsDark(false);
       document.documentElement.classList.remove("dark");
-    } else if (savedTheme === "dark" || prefersDark) {
+    } else if (savedTheme === "dark") {
       setIsDark(true);
       document.documentElement.classList.add("dark");
+    } else if (prefersDark) {
+      setIsDark(true);
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      setIsDark(false);
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
   }, []);
 
   const toggleTheme = () => {
-    setIsDark((prev) => {
-      const newValue = !prev;
-      if (newValue) {
-        document.documentElement.classList.add("dark");
-        localStorage.setItem("theme", "dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-      }
-      return newValue;
-    });
+    const newValue = !isDark;
+    setIsDark(newValue);
+    
+    if (newValue) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
   };
+
+  // Prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <div className="p-2.5 rounded-full bg-secondary/50 border border-border/30 w-9 h-9" />
+    );
+  }
 
   return (
     <motion.button
@@ -47,9 +63,9 @@ const ThemeToggle = () => {
         transition={{ duration: 0.3 }}
       >
         {isDark ? (
-          <Sun className="w-4 h-4 text-primary group-hover:text-primary/80 transition-colors" />
+          <Sun className="w-4 h-4 text-brand-yellow group-hover:text-brand-gold transition-colors" />
         ) : (
-          <Moon className="w-4 h-4 text-primary group-hover:text-primary/80 transition-colors" />
+          <Moon className="w-4 h-4 text-brand-gold group-hover:text-brand-yellow transition-colors" />
         )}
       </motion.div>
     </motion.button>
