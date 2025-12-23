@@ -113,12 +113,11 @@ const ImpactMetrics = () => {
       className="relative py-20 sm:py-28 overflow-hidden deferred-section"
     >
       {/* Modern gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-brand-gold/5 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
       
       {/* Animated background elements */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-brand-yellow/8 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1.5s" }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-radial from-brand-gold/5 to-transparent rounded-full blur-2xl" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1.5s" }} />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
@@ -134,14 +133,14 @@ const ImpactMetrics = () => {
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
           >
-            <TrendingUp className="w-4 h-4 text-brand-gold" />
-            <span className="text-sm font-medium text-brand-gold">Our Achievements</span>
+            <TrendingUp className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium text-primary">Our Achievements</span>
           </motion.div>
           
           <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            Our Impact <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-brand-yellow">By the Numbers</span>
+            Our Impact <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80">By the Numbers</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             We're proud of the results we've achieved for our clients. These metrics showcase our commitment to excellence.
@@ -162,27 +161,27 @@ const ImpactMetrics = () => {
               variants={cardVariants}
               className="group"
             >
-              <div className="relative h-full p-8 rounded-2xl bg-gradient-to-b from-card/80 to-card border border-border/50 overflow-hidden transition-all duration-500 hover:border-brand-gold/30 hover:shadow-2xl hover:shadow-brand-gold/10 hover:-translate-y-2">
+              <div className="relative h-full p-8 rounded-2xl bg-gradient-to-b from-card/80 to-card border border-border/50 overflow-hidden transition-all duration-500 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2">
                 {/* Background glow on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/10 via-transparent to-brand-yellow/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 {/* Floating particles effect */}
-                <div className="absolute top-4 right-4 w-20 h-20 bg-brand-gold/5 rounded-full blur-2xl group-hover:bg-brand-gold/10 transition-all duration-500" />
+                <div className="absolute top-4 right-4 w-20 h-20 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all duration-500" />
 
                 {/* Icon */}
                 <div className="relative mb-6">
-                  <div className="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center bg-gradient-to-br from-brand-gold/20 to-brand-yellow/10 border border-brand-gold/20 group-hover:border-brand-gold/40 group-hover:scale-110 transition-all duration-500">
-                    <metric.icon className="w-10 h-10 text-brand-gold" />
+                  <div className="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 group-hover:border-primary/40 group-hover:scale-110 transition-all duration-500">
+                    <metric.icon className="w-10 h-10 text-primary" />
                   </div>
                 </div>
 
                 {/* Counter */}
                 <div className="relative text-center">
                   <div className="flex items-baseline justify-center mb-2">
-                    <span className="text-5xl font-bold bg-gradient-to-r from-brand-gold to-brand-yellow bg-clip-text text-transparent">
+                    <span className="text-5xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
                       {counts[index]}
                     </span>
-                    <span className="text-2xl font-bold text-brand-yellow ml-1">
+                    <span className="text-2xl font-bold text-primary ml-1">
                       {metric.suffix}
                     </span>
                   </div>
@@ -195,7 +194,7 @@ const ImpactMetrics = () => {
                 </div>
 
                 {/* Bottom gradient line */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-gold via-brand-yellow to-brand-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-primary/80 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
             </motion.div>
           ))}
@@ -209,8 +208,8 @@ const ImpactMetrics = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-brand-gold/10 to-brand-yellow/10 border border-brand-gold/20">
-            <Sparkles className="w-5 h-5 text-brand-gold" />
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20">
+            <Sparkles className="w-5 h-5 text-primary" />
             <span className="text-sm font-medium text-foreground">
               Delivering exceptional results since 2024
             </span>

@@ -41,7 +41,7 @@ const FloatingContactButton = () => {
             onClick={scrollToTop}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="w-12 h-12 rounded-full bg-card border border-border/60 text-muted-foreground hover:text-foreground shadow-lg hover:shadow-xl flex items-center justify-center transition-all hover:border-brand-purple/50"
+            className="w-12 h-12 rounded-full bg-card border border-border/60 text-muted-foreground hover:text-foreground shadow-lg hover:shadow-xl flex items-center justify-center transition-all hover:border-primary/50"
             aria-label="Scroll to top"
           >
             <ArrowUp className="h-5 w-5" />
@@ -53,7 +53,7 @@ const FloatingContactButton = () => {
               onClick={() => setIsExpanded(!isExpanded)}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="w-14 h-14 rounded-full bg-gradient-to-r from-brand-purple to-brand-pink text-white shadow-lg hover:shadow-xl flex items-center justify-center transition-shadow"
+              className="w-14 h-14 rounded-full bg-gradient-to-r from-primary to-primary/90 text-primary-foreground shadow-lg hover:shadow-xl flex items-center justify-center transition-shadow"
             >
               <AnimatePresence mode="wait">
                 {isExpanded ? (
@@ -91,7 +91,7 @@ const FloatingContactButton = () => {
                   </p>
                   <button
                     onClick={scrollToContact}
-                    className="w-full px-4 py-2 rounded-lg bg-gradient-to-r from-brand-purple to-brand-pink text-white text-sm font-medium hover:opacity-90 transition-opacity"
+                    className="w-full px-4 py-2 rounded-lg bg-gradient-to-r from-primary to-primary/90 text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
                   >
                     Contact Us
                   </button>

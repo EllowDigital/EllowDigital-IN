@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Sparkles } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 type Offer = {
   title: string;
@@ -16,7 +17,7 @@ type Offer = {
   description: string;
   features: string[];
   isPopular?: boolean;
-  priceUnit?: string; // e.g. "/website"
+  priceUnit?: string;
   ctaLabel?: string;
 };
 
@@ -88,103 +89,134 @@ const FeaturedOffers = () => {
     <section
       id="offers"
       aria-labelledby="offers-heading"
-      className="py-16 md:py-24 bg-gradient-to-b from-background to-background/95 deferred-section"
+      className="py-16 md:py-24 relative overflow-hidden deferred-section"
     >
-      <div className="section-container px-4 sm:px-6">
-        <h2 id="offers-heading" className="section-title">
-          Featured Offers
-        </h2>
-        <p className="text-center text-muted-foreground text-lg max-w-2xl mx-auto mb-12 md:mb-16">
-          Special packages designed to meet specific needs with exceptional
-          value.
-        </p>
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+      <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+
+      <div className="section-container px-4 sm:px-6 relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 md:mb-16"
+        >
+          <motion.div
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
+          >
+            <Sparkles className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium text-primary">Special Packages</span>
+          </motion.div>
+
+          <h2 id="offers-heading" className="text-4xl md:text-5xl font-bold mb-4">
+            Featured <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">Offers</span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Special packages designed to meet specific needs with exceptional value.
+          </p>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
-          {offers.map((offer) => (
-            <Card
+          {offers.map((offer, index) => (
+            <motion.div
               key={offer.title}
-              className={`relative overflow-hidden border ${
-                offer.isPopular ? "border-brand-yellow" : "border-border/60"
-              } hover:shadow-xl transition-all duration-500`}
-              aria-label={offer.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              {offer.isPopular && (
-                <div
-                  className="absolute -right-12 top-6 rotate-45 bg-brand-yellow text-black text-xs font-medium py-1 px-10 shadow-md"
-                  aria-hidden="true"
-                >
-                  Popular
-                </div>
-              )}
-
-              <div
-                className="absolute inset-x-0 h-1 bg-brand-yellow"
-                aria-hidden="true"
-              />
-
-              <CardHeader>
-                <CardTitle className="flex items-center flex-wrap gap-2">
-                  {offer.title}
-                  {offer.isPopular && (
-                    <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-brand-yellow text-black">
-                      Best Value
-                    </span>
-                  )}
-                </CardTitle>
-                <CardDescription className="text-base">
-                  {offer.description}
-                </CardDescription>
-              </CardHeader>
-
-              <CardContent className="space-y-6">
-                <div className="flex items-baseline">
-                  <div className="text-2xl md:text-3xl font-bold">
-                    {offer.price}
+              <Card
+                className={`relative overflow-hidden border h-full transition-all duration-500 hover:-translate-y-2 ${
+                  offer.isPopular ? "border-primary shadow-xl shadow-primary/10" : "border-border/60 hover:border-primary/30"
+                }`}
+                aria-label={offer.title}
+              >
+                {offer.isPopular && (
+                  <div
+                    className="absolute -right-12 top-6 rotate-45 bg-primary text-primary-foreground text-xs font-medium py-1 px-10 shadow-md"
+                    aria-hidden="true"
+                  >
+                    Popular
                   </div>
-                  {offer.priceUnit && (
-                    <>
-                      <div
-                        className="ml-2 text-sm text-muted-foreground"
-                        aria-hidden="true"
-                      >
-                        {offer.priceUnit}
-                      </div>
-                      <span className="sr-only">
-                        Price {offer.priceUnit.replace("/", " per ")}
+                )}
+
+                <div
+                  className="absolute inset-x-0 h-1 bg-gradient-to-r from-primary to-primary/80"
+                  aria-hidden="true"
+                />
+
+                <CardHeader>
+                  <CardTitle className="flex items-center flex-wrap gap-2">
+                    {offer.title}
+                    {offer.isPopular && (
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-primary text-primary-foreground">
+                        Best Value
                       </span>
-                    </>
-                  )}
-                </div>
+                    )}
+                  </CardTitle>
+                  <CardDescription className="text-base">
+                    {offer.description}
+                  </CardDescription>
+                </CardHeader>
 
-                <ul
-                  className="space-y-3"
-                  aria-label={`Features of ${offer.title}`}
-                >
-                  {offer.features.map((feature, idx) => (
-                    <li
-                      key={`${offer.title}-feature-${idx}`}
-                      className="flex items-start gap-2"
-                    >
-                      <CheckCircle
-                        className="h-5 w-5 text-brand-yellow shrink-0 mt-0.5"
-                        aria-hidden="true"
-                      />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
+                <CardContent className="space-y-6">
+                  <div className="flex items-baseline">
+                    <div className="text-2xl md:text-3xl font-bold">
+                      {offer.price}
+                    </div>
+                    {offer.priceUnit && (
+                      <>
+                        <div
+                          className="ml-2 text-sm text-muted-foreground"
+                          aria-hidden="true"
+                        >
+                          {offer.priceUnit}
+                        </div>
+                        <span className="sr-only">
+                          Price {offer.priceUnit.replace("/", " per ")}
+                        </span>
+                      </>
+                    )}
+                  </div>
 
-              <CardFooter>
-                <Button
-                  onClick={scrollToContact}
-                  className="w-full bg-brand-yellow hover:bg-brand-gold text-black font-semibold py-2 px-4 rounded-md transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-yellow"
-                  aria-label={`Get started with ${offer.title}`}
-                >
-                  {offer.ctaLabel ?? "Get Started"}
-                </Button>
-              </CardFooter>
-            </Card>
+                  <ul
+                    className="space-y-3"
+                    aria-label={`Features of ${offer.title}`}
+                  >
+                    {offer.features.map((feature, idx) => (
+                      <li
+                        key={`${offer.title}-feature-${idx}`}
+                        className="flex items-start gap-2"
+                      >
+                        <CheckCircle
+                          className="h-5 w-5 text-primary shrink-0 mt-0.5"
+                          aria-hidden="true"
+                        />
+                        <span className="text-sm">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+
+                <CardFooter>
+                  <Button
+                    onClick={scrollToContact}
+                    className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 text-primary-foreground font-semibold py-2 px-4 rounded-md transition-all duration-300 shadow-lg hover:shadow-xl"
+                    aria-label={`Get started with ${offer.title}`}
+                  >
+                    {offer.ctaLabel ?? "Get Started"}
+                  </Button>
+                </CardFooter>
+              </Card>
+            </motion.div>
           ))}
         </div>
 

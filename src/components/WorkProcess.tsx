@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Users, Activity, Eye, Check, ArrowRight } from "lucide-react";
+import { Users, Activity, Eye, Check, ArrowRight, Sparkles } from "lucide-react";
 
 const processes = [
   {
@@ -9,28 +9,24 @@ const processes = [
     description:
       "Direct communication and tailored solutions for your unique needs.",
     step: "01",
-    gradient: "from-blue-500 to-cyan-500",
   },
   {
     icon: Activity,
     title: "Agile Methodology",
     description: "Iterative development with flexible adaptation to changes.",
     step: "02",
-    gradient: "from-purple-500 to-pink-500",
   },
   {
     icon: Eye,
     title: "Transparency",
     description: "Clear communication and regular progress updates.",
     step: "03",
-    gradient: "from-orange-500 to-red-500",
   },
   {
     icon: Check,
     title: "Quality Delivery",
     description: "Rigorous testing and optimization for top performance.",
     step: "04",
-    gradient: "from-green-500 to-emerald-500",
   },
 ];
 
@@ -67,8 +63,8 @@ const WorkProcess = () => {
     >
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
-      <div className="absolute top-1/3 left-0 w-96 h-96 bg-brand-yellow/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/3 right-0 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl" />
+      <div className="absolute top-1/3 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/3 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
 
       <div className="section-container relative z-10">
         {/* Section Header */}
@@ -84,13 +80,13 @@ const WorkProcess = () => {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6"
           >
-            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+            <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-primary">Our Process</span>
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             How We{" "}
-            <span className="bg-gradient-to-r from-primary via-brand-purple to-brand-cyan bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
               Work
             </span>
           </h2>
@@ -131,12 +127,12 @@ const WorkProcess = () => {
               {/* Card */}
               <div className="relative bg-card/50 backdrop-blur-sm border border-border/40 rounded-2xl p-6 hover:border-primary/30 transition-all duration-500 h-full group-hover:bg-card/80">
                 {/* Gradient overlay on hover */}
-                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${process.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* Step number */}
                 <div className="flex items-center justify-between mb-6">
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${process.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                    <process.icon className="w-8 h-8 text-white" />
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <process.icon className="w-8 h-8 text-primary" />
                   </div>
                   <span className="text-4xl font-bold text-muted-foreground/20 group-hover:text-primary/20 transition-colors">
                     {process.step}
