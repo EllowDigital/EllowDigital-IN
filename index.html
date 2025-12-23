@@ -1,132 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Meta Information -->
+    <!-- Critical Performance Meta -->
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#fcc62d" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow" />
-    <meta name="google" content="notranslate" />
-    <meta name="rating" content="general" />
-    <meta name="distribution" content="global" />
-    <meta name="language" content="en" />
-    <meta name="coverage" content="Worldwide" />
-    <meta name="revisit-after" content="1 days" />
-
-    <title>
-      EllowDigital | Empowering Digital Transformation for Businesses
-    </title>
-
-    <!-- SEO Meta Tags -->
-    <meta
-      name="description"
-      content="EllowDigital specializes in digital transformation, offering SEO services, web development, UI/UX design, and digital marketing solutions to boost your business growth."
-    />
-    <meta
-      name="keywords"
-      content="EllowDigital, Digital Transformation, SEO Services, Web Development, UI/UX Design, Digital Marketing, Business Growth, Online Strategy"
-    />
-    <meta name="author" content="EllowDigital" />
-    <link rel="canonical" href="https://ellowdigitals.me/" />
-
-    <!-- Resource Hints -->
+    
+    <!-- Critical Preloads for LCP optimization -->
+    <link rel="preload" href="/preloader.css" as="style" />
+    <link rel="preload" href="/src/main.tsx" as="script" crossorigin />
+    
+    <!-- DNS Prefetch & Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.gpteng.co" crossorigin />
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="dns-prefetch" href="https://cdn.gpteng.co" />
+    
+    <!-- Theme color for browser UI -->
+    <meta name="theme-color" content="#fcc62d" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>EllowDigital | Digital Transformation Services in India</title>
+    <meta name="description" content="EllowDigital offers expert web development, SEO optimization, and digital marketing solutions. Transform your business with our cutting-edge digital services across India." />
+    <meta name="keywords" content="web development India, digital marketing agency, SEO services, UI/UX design, business websites, digital transformation, EllowDigital" />
+    <meta name="author" content="EllowDigital" />
+    <link rel="canonical" href="https://ellowdigitals.me/" />
+    
+    <!-- Robots & Indexing -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large" />
+    <meta name="bingbot" content="index, follow" />
+    <meta name="google" content="notranslate" />
+    
+    <!-- Language & Locale -->
+    <meta name="language" content="en-IN" />
+    <meta http-equiv="content-language" content="en-IN" />
+    <link rel="alternate" hreflang="en-IN" href="https://ellowdigitals.me/" />
+    <link rel="alternate" hreflang="en" href="https://ellowdigitals.me/" />
+    <link rel="alternate" hreflang="x-default" href="https://ellowdigitals.me/" />
 
-    <!-- Additional SEO and Social Meta Tags -->
-    <meta name="referrer" content="no-referrer-when-downgrade" />
-    <meta name="copyright" content="© 2025 EllowDigital" />
-    <meta
-      name="abstract"
-      content="EllowDigital specializes in digital transformation, web development, SEO, and marketing solutions."
-    />
-    <meta
-      name="subject"
-      content="Digital Transformation, SEO, Web Development, Business Growth"
-    />
-    <meta
-      name="classification"
-      content="Digital Services, Technology, SEO, Web Development, Online Strategy"
-    />
-    <meta name="generator" content="Custom HTML" />
-
-    <!-- Geolocation -->
+    <!-- Geolocation for Local SEO -->
     <meta name="geo.region" content="IN-UP" />
-    <meta name="geo.placename" content="Lucknow" />
+    <meta name="geo.placename" content="Lucknow, India" />
     <meta name="geo.position" content="26.8467;80.9462" />
     <meta name="ICBM" content="26.8467, 80.9462" />
-
-    <!-- Mobile Web App Capabilities -->
+    
+    <!-- Mobile & PWA Capabilities -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="EllowDigital" />
     <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="EllowDigital" />
     <meta name="msapplication-TileColor" content="#fcc62d" />
-    <meta name="theme-color" content="#fcc62d" />
-    <link rel="alternate" hreflang="en" href="https://ellowdigitals.me/" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    <meta name="format-detection" content="telephone=no" />
 
-    <!-- Pinterest Rich Pin -->
-    <meta name="pinterest-rich-pin" content="true" />
-
-    <!-- Open Graph Meta Tags (for social media sharing) -->
-    <meta
-      property="og:title"
-      content="EllowDigital | Empowering Digital Transformation for Businesses"
-    />
-    <meta
-      property="og:description"
-      content="EllowDigital provides innovative digital transformation solutions like SEO, web development, and digital marketing services to help businesses thrive."
-    />
-    <meta
-      property="og:image"
-      content="https://ellowdigital.netlify.app/favicon/share.jpg"
-    />
-    <meta property="og:url" content="https://ellowdigitals.me/" />
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ellowdigitals.me/" />
+    <meta property="og:title" content="EllowDigital | Digital Transformation Services in India" />
+    <meta property="og:description" content="Transform your business with expert web development, SEO, and digital marketing solutions. Serving clients across India." />
+    <meta property="og:image" content="https://ellowdigitals.me/favicon/share.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="EllowDigital - Digital Transformation Services" />
     <meta property="og:site_name" content="EllowDigital" />
+    <meta property="og:locale" content="en_IN" />
 
-    <!-- Twitter Card Meta Tags -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="EllowDigital | Empowering Digital Transformation for Businesses"
-    />
-    <meta
-      name="twitter:description"
-      content="EllowDigital provides cutting-edge digital transformation services such as SEO, web development, and digital marketing to accelerate your business growth."
-    />
-    <meta
-      name="twitter:image"
-      content="https://ellowdigital.netlify.app/favicon/share.jpg"
-    />
     <meta name="twitter:site" content="@EllowDigital" />
     <meta name="twitter:creator" content="@EllowDigital" />
+    <meta name="twitter:title" content="EllowDigital | Digital Transformation Services" />
+    <meta name="twitter:description" content="Expert web development, SEO, and digital marketing solutions for businesses in India." />
+    <meta name="twitter:image" content="https://ellowdigitals.me/favicon/share.jpg" />
+    <meta name="twitter:image:alt" content="EllowDigital branding" />
 
+    <!-- Pinterest Rich Pins -->
+    <meta name="pinterest-rich-pin" content="true" />
+    
     <!-- Google Site Verification -->
-    <meta
-      name="google-site-verification"
-      content="WMhKG8wyqadZSkX0PKIkyv--6CSGCaErWsG6j5pnV-Q"
-    />
+    <meta name="google-site-verification" content="WMhKG8wyqadZSkX0PKIkyv--6CSGCaErWsG6j5pnV-Q" />
+    
+    <!-- Additional SEO Signals -->
+    <meta name="copyright" content="© 2025 EllowDigital. All rights reserved." />
+    <meta name="rating" content="general" />
+    <meta name="distribution" content="global" />
+    <meta name="coverage" content="Worldwide" />
+    <meta name="revisit-after" content="3 days" />
+    <meta name="referrer" content="origin-when-cross-origin" />
 
-    <!-- JSON-LD Structured Data (Schema Markup for Search Engines) -->
+    <!-- Organization Schema - Enhanced -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
+        "@id": "https://ellowdigitals.me/#organization",
         "name": "EllowDigital",
         "url": "https://ellowdigitals.me",
-        "logo": "https://ellowdigitals.netlify.app/assets/favicon/share.jpg",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://ellowdigitals.me/logo.webp",
+          "width": 512,
+          "height": 512
+        },
+        "image": "https://ellowdigitals.me/favicon/share.jpg",
+        "description": "EllowDigital provides expert digital transformation services including web development, SEO optimization, and digital marketing solutions for businesses across India.",
+        "foundingDate": "2023",
+        "founder": {
+          "@type": "Person",
+          "name": "Nitesh Yadav"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Lucknow",
+          "addressRegion": "UP",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 26.8467,
+          "longitude": 80.9462
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "availableLanguage": ["English", "Hindi"]
+        },
         "sameAs": [
           "https://www.facebook.com/ellowdigitals",
           "https://twitter.com/ellowdigitals",
           "https://www.linkedin.com/company/ellowdigitals",
           "https://www.instagram.com/ellowdigitals"
         ],
-        "description": "EllowDigital provides digital transformation services including SEO, web development, and digital marketing solutions designed to accelerate business growth."
+        "areaServed": {
+          "@type": "Country",
+          "name": "India"
+        },
+        "priceRange": "₹₹"
+      }
+    </script>
+    
+    <!-- WebSite Schema with SearchAction -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://ellowdigitals.me/#website",
+        "url": "https://ellowdigitals.me",
+        "name": "EllowDigital",
+        "description": "Digital Transformation Services in India",
+        "publisher": {
+          "@id": "https://ellowdigitals.me/#organization"
+        },
+        "inLanguage": "en-IN"
+      }
+    </script>
+    
+    <!-- LocalBusiness Schema for Local SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://ellowdigitals.me/#localbusiness",
+        "name": "EllowDigital",
+        "image": "https://ellowdigitals.me/favicon/share.jpg",
+        "url": "https://ellowdigitals.me",
+        "priceRange": "₹₹",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Lucknow",
+          "addressRegion": "Uttar Pradesh",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 26.8467,
+          "longitude": 80.9462
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
+        "sameAs": [
+          "https://www.facebook.com/ellowdigitals",
+          "https://www.linkedin.com/company/ellowdigitals"
+        ]
       }
     </script>
 

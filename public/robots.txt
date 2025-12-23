@@ -1,23 +1,68 @@
 # EllowDigital Robots.txt
 # Website: https://ellowdigitals.me
+# Last updated: 2025-12-23
 
+# Allow all major search engines
 User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-Mobile
 Allow: /
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 2
 
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 3
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+# Social media crawlers
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
+User-agent: LinkedInBot
 Allow: /
 
-# Block certain paths
-Disallow: /api/
+User-agent: Pinterest
+Allow: /
 
-# Sitemap location
+# Default for all other bots
+User-agent: *
+Allow: /
+Crawl-delay: 5
+
+# Block administrative and sensitive paths
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /admin/
+Disallow: /private/
+
+# Block query parameters that create duplicate content
+Disallow: /*?*__lovable_token*
+Disallow: /*?*utm_*
+Disallow: /*?*ref=*
+
+# Sitemap locations
 Sitemap: https://ellowdigitals.me/sitemap.xml
+
+# Host directive
+Host: https://ellowdigitals.me
