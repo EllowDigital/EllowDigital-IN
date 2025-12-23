@@ -4,9 +4,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth scroll behavior */
-html {
+/* Prevent double scrollbar and enable smooth scroll */
+html, body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
 }
 
 /* Theme Variables - Yellow/Black/White Brand Colors */
@@ -90,15 +101,24 @@ html {
   html {
     @apply scroll-smooth;
     font-size: 16px;
+    overflow-x: hidden;
   }
 
   body {
-    @apply bg-background text-foreground overflow-x-hidden will-change-scroll;
+    @apply bg-background text-foreground;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-size-adjust: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  /* Prevent double scrollbar */
+  #root {
+    min-height: 100vh;
+    overflow-x: hidden;
   }
 
   /* Typography */

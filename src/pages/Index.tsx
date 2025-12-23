@@ -133,7 +133,7 @@ const Index = () => {
         }`}
       >
         <Navbar />
-        <main className="flex-grow overflow-x-hidden" id="main-content">
+        <main className="flex-grow" id="main-content">
           {/* Hero loads immediately */}
           <HeroSection />
 
