@@ -1,4 +1,4 @@
-import { CheckCircle, Users, Award, Briefcase, LightbulbIcon, Target, Rocket } from "lucide-react";
+import { CheckCircle, Users, Award, Briefcase, LightbulbIcon, Target, Rocket, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 const AboutSection = () => {
@@ -15,7 +15,7 @@ const AboutSection = () => {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.08,
         delayChildren: 0.2,
       },
     },
@@ -29,47 +29,47 @@ const AboutSection = () => {
   return (
     <section
       id="about"
-      className="py-16 sm:py-20 lg:py-28 relative overflow-hidden"
+      className="py-20 sm:py-28 lg:py-32 relative overflow-hidden"
     >
-      {/* Modern gradient background */}
+      {/* Premium gradient background */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
-        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-brand-yellow/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-brand-gold/5 rounded-full blur-[100px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
+        <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-brand-yellow/5 rounded-full blur-[150px]" />
+        <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-brand-gold/5 rounded-full blur-[120px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-16 sm:mb-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 px-4 py-2 mb-4 bg-secondary/50 border border-border/50 rounded-full text-sm text-muted-foreground">
-            <Target className="w-4 h-4 text-brand-yellow" />
+          <span className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-brand-yellow/10 border border-brand-yellow/20 rounded-full text-sm font-medium text-brand-yellow">
+            <Target className="w-4 h-4" />
             Who We Are
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-5 tracking-tight">
             About <span className="bg-gradient-to-r from-brand-yellow to-brand-gold bg-clip-text text-transparent">EllowDigital</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
             A solo-powered micro-agency delivering high-performance digital solutions tailored to your unique needs.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           {/* Left Column: Content */}
           <motion.div
-            className="space-y-6"
+            className="space-y-8"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="space-y-4">
-              <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
+            <div className="space-y-5">
+              <p className="text-foreground/80 text-base sm:text-lg leading-relaxed">
                 At EllowDigital, we are dedicated to delivering high-performance websites, mobile apps, and software solutions that are tailored to your unique business needs.
               </p>
               <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
@@ -79,7 +79,7 @@ const AboutSection = () => {
 
             {/* Highlights Grid */}
             <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-8"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3"
               variants={containerVariants}
               initial="hidden"
               whileInView="show"
@@ -89,18 +89,28 @@ const AboutSection = () => {
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  className="group flex items-center gap-3 p-4 bg-secondary/30 hover:bg-secondary/50 border border-border/30 hover:border-brand-yellow/30 rounded-xl transition-all duration-300"
+                  className="group flex items-center gap-3 p-4 bg-card/50 hover:bg-card border border-border/30 hover:border-brand-yellow/30 rounded-xl transition-all duration-300"
                 >
                   <div className="w-10 h-10 rounded-lg bg-brand-yellow/10 group-hover:bg-brand-yellow/20 flex items-center justify-center transition-colors">
                     <item.icon className="w-5 h-5 text-brand-yellow" />
                   </div>
-                  <span className="font-medium text-sm sm:text-base text-foreground">{item.text}</span>
+                  <span className="font-medium text-sm text-foreground">{item.text}</span>
                 </motion.div>
               ))}
             </motion.div>
+
+            {/* CTA */}
+            <motion.a
+              href="#contact"
+              className="inline-flex items-center gap-2 text-brand-yellow font-semibold group"
+              whileHover={{ x: 5 }}
+            >
+              Let's work together
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </motion.a>
           </motion.div>
 
-          {/* Right Column: Mission & Philosophy Cards */}
+          {/* Right Column: Cards */}
           <motion.div
             className="space-y-5"
             initial={{ opacity: 0, x: 30 }}
@@ -110,11 +120,11 @@ const AboutSection = () => {
           >
             {/* Mission Card */}
             <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-brand-yellow/20 to-brand-gold/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative p-6 bg-secondary/30 border border-border/30 rounded-2xl hover:border-brand-yellow/20 transition-colors">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-yellow/20 to-brand-gold/10 flex items-center justify-center">
-                    <Rocket className="w-6 h-6 text-brand-yellow" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-brand-yellow/20 to-brand-gold/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative p-7 bg-card/60 backdrop-blur-sm border border-border/40 rounded-2xl hover:border-brand-yellow/20 transition-all duration-300">
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-yellow/20 to-brand-gold/10 border border-brand-yellow/20 flex items-center justify-center">
+                    <Rocket className="w-7 h-7 text-brand-yellow" />
                   </div>
                   <h3 className="text-xl font-bold text-foreground">Our Mission</h3>
                 </div>
@@ -126,11 +136,11 @@ const AboutSection = () => {
 
             {/* Philosophy Card */}
             <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-brand-gold/20 to-brand-yellow/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative p-6 bg-secondary/30 border border-border/30 rounded-2xl hover:border-brand-yellow/20 transition-colors">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-gold/20 to-brand-yellow/10 flex items-center justify-center">
-                    <LightbulbIcon className="w-6 h-6 text-brand-gold" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-brand-gold/20 to-brand-yellow/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative p-7 bg-card/60 backdrop-blur-sm border border-border/40 rounded-2xl hover:border-brand-yellow/20 transition-all duration-300">
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-gold/20 to-brand-yellow/10 border border-brand-gold/20 flex items-center justify-center">
+                    <LightbulbIcon className="w-7 h-7 text-brand-gold" />
                   </div>
                   <h3 className="text-xl font-bold text-foreground">Our Philosophy</h3>
                 </div>
@@ -141,12 +151,12 @@ const AboutSection = () => {
             </div>
 
             {/* Quote */}
-            <div className="relative p-5 bg-gradient-to-br from-brand-yellow/5 to-brand-gold/5 border border-brand-yellow/20 rounded-2xl">
-              <div className="absolute -top-3 left-4 text-5xl text-brand-yellow/30 font-serif leading-none">"</div>
-              <p className="text-sm sm:text-base italic text-foreground/80 pl-4 pr-2">
+            <div className="relative p-6 bg-gradient-to-br from-brand-yellow/5 to-brand-gold/5 border border-brand-yellow/15 rounded-2xl overflow-hidden">
+              <div className="absolute -top-2 left-4 text-6xl text-brand-yellow/20 font-serif leading-none">"</div>
+              <p className="relative text-sm sm:text-base italic text-foreground/80 pl-6 pr-4 leading-relaxed">
                 Every line of code and every pixel should serve a purpose — to create beautiful experiences that solve real problems.
               </p>
-              <div className="absolute -bottom-3 right-4 text-5xl text-brand-yellow/30 font-serif leading-none rotate-180">"</div>
+              <div className="absolute -bottom-4 right-4 text-6xl text-brand-yellow/20 font-serif leading-none rotate-180">"</div>
             </div>
           </motion.div>
         </div>
