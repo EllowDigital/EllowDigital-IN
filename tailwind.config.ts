@@ -116,6 +116,31 @@ export default {
           "0%": { backgroundPosition: "-500px 0" },
           "100%": { backgroundPosition: "500px 0" },
         },
+        "gradient-x": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        "gradient-y": {
+          "0%, 100%": { backgroundPosition: "50% 0%" },
+          "50%": { backgroundPosition: "50% 100%" },
+        },
+        "gradient-xy": {
+          "0%, 100%": { backgroundPosition: "0% 0%" },
+          "25%": { backgroundPosition: "100% 0%" },
+          "50%": { backgroundPosition: "100% 100%" },
+          "75%": { backgroundPosition: "0% 100%" },
+        },
+        "text-shimmer": {
+          "0%": { backgroundPosition: "0% 50%" },
+          "100%": { backgroundPosition: "200% 50%" },
+        },
+        glow: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.5" },
+        },
+        "border-beam": {
+          "100%": { offsetDistance: "100%" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -126,6 +151,12 @@ export default {
         "pulse-subtle": "pulse-subtle 3s ease-in-out infinite",
         "rotate-slow": "rotate-slow 20s linear infinite",
         shimmer: "shimmer 2s infinite linear",
+        "gradient-x": "gradient-x 3s ease infinite",
+        "gradient-y": "gradient-y 3s ease infinite",
+        "gradient-xy": "gradient-xy 6s ease infinite",
+        "text-shimmer": "text-shimmer 3s ease-in-out infinite",
+        glow: "glow 2s ease-in-out infinite",
+        "border-beam": "border-beam 4s linear infinite",
       },
       boxShadow: {
         elegant: "0 10px 30px -10px hsl(var(--foreground) / 0.1)",
