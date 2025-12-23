@@ -10,13 +10,6 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 
 const services = [
   {
@@ -25,12 +18,14 @@ const services = [
       "Lightning-fast, mobile-first, SEO-optimized websites using modern technologies.",
     icon: Code,
     details: "HTML5, CSS3, React, Node.js",
+    gradient: "from-blue-500/20 to-cyan-500/20",
   },
   {
     title: "Mobile App Development",
     description: "Beautiful and intuitive apps for Android and iOS platforms.",
     icon: Smartphone,
     details: "Flutter, React Native, Native Tools",
+    gradient: "from-purple-500/20 to-pink-500/20",
   },
   {
     title: "UI/UX Design",
@@ -38,6 +33,7 @@ const services = [
       "Clean, user-centered, and accessible interfaces that drive engagement.",
     icon: Layout,
     details: "Wireframing, Prototyping, User Testing",
+    gradient: "from-orange-500/20 to-amber-500/20",
   },
   {
     title: "SEO & Performance",
@@ -45,6 +41,7 @@ const services = [
       "Implementing rank-ready strategies and speed optimizations for conversions.",
     icon: Search,
     details: "Technical SEO, Speed Optimization",
+    gradient: "from-green-500/20 to-emerald-500/20",
   },
   {
     title: "Custom Software",
@@ -52,6 +49,7 @@ const services = [
       "Tailored tools and automation systems to improve business efficiency.",
     icon: Server,
     details: "Business Solutions, Automation",
+    gradient: "from-indigo-500/20 to-violet-500/20",
   },
   {
     title: "Maintenance & Support",
@@ -59,6 +57,7 @@ const services = [
       "Ongoing updates, bug fixes, and expert consultation for your projects.",
     icon: HeartPulse,
     details: "Updates, Security, Performance",
+    gradient: "from-rose-500/20 to-red-500/20",
   },
 ];
 
@@ -67,62 +66,104 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
   visible: {
     opacity: 1,
     y: 0,
+    scale: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
     },
   },
 };
 
-const ServiceCard = ({ title, description, icon: Icon, details, index }: {
+const ServiceCard = ({
+  title,
+  description,
+  icon: Icon,
+  details,
+  index,
+  gradient,
+}: {
   title: string;
   description: string;
   icon: React.ElementType;
   details: string;
   index: number;
+  gradient: string;
 }) => (
-  <motion.div variants={itemVariants}>
-    <Card className="group relative border border-border/40 overflow-hidden bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-all duration-500 h-full">
-      {/* Gradient overlay on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      
-      {/* Number badge */}
-      <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-secondary/80 flex items-center justify-center">
-        <span className="text-xs font-bold text-muted-foreground">0{index + 1}</span>
-      </div>
+  <motion.div variants={itemVariants} className="group">
+    <div className="relative h-full rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5">
+      {/* Animated gradient background */}
+      <div
+        className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
+      />
 
-      <CardHeader className="pb-4">
-        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-          <Icon className="h-7 w-7 text-primary" />
+      {/* Glow effect on hover */}
+      <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/20 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+
+      {/* Card content */}
+      <div className="relative p-6 lg:p-8 h-full flex flex-col">
+        {/* Header with icon and number */}
+        <div className="flex items-start justify-between mb-6">
+          {/* Icon container with animated ring */}
+          <div className="relative">
+            <div className="absolute inset-0 rounded-xl bg-primary/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+              <Icon className="h-7 w-7 text-primary" strokeWidth={1.5} />
+            </div>
+          </div>
+
+          {/* Number badge */}
+          <div className="w-10 h-10 rounded-xl bg-secondary/80 border border-border/50 flex items-center justify-center group-hover:bg-primary/10 group-hover:border-primary/30 transition-all duration-300">
+            <span className="text-sm font-bold text-muted-foreground group-hover:text-primary transition-colors">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+          </div>
         </div>
-        <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
+
+        {/* Title */}
+        <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors duration-300">
           {title}
-        </CardTitle>
-        <CardDescription className="text-base text-muted-foreground leading-relaxed">
-          {description}
-        </CardDescription>
-      </CardHeader>
+        </h3>
 
-      <CardContent className="pt-0">
-        <div className="flex items-center justify-between">
-          <div className="text-xs font-medium bg-secondary/80 py-1.5 px-3 rounded-full text-muted-foreground">
-            {details}
+        {/* Description */}
+        <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
+          {description}
+        </p>
+
+        {/* Footer with tags and arrow */}
+        <div className="flex items-center justify-between pt-4 border-t border-border/30">
+          <div className="flex flex-wrap gap-1.5">
+            {details.split(", ").slice(0, 2).map((tag) => (
+              <span
+                key={tag}
+                className="text-xs font-medium bg-secondary/80 py-1 px-2.5 rounded-md text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary/80 transition-all duration-300"
+              >
+                {tag}
+              </span>
+            ))}
           </div>
-          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
-            <ArrowRight className="h-4 w-4 text-primary" />
-          </div>
+
+          {/* Arrow button */}
+          <motion.div
+            className="w-9 h-9 rounded-full bg-secondary/80 border border-border/50 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all duration-300"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary-foreground transition-colors duration-300 group-hover:translate-x-0.5" />
+          </motion.div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   </motion.div>
 );
 
@@ -131,11 +172,18 @@ const ServicesSection = () => {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section id="services" className="py-24 relative overflow-hidden" ref={sectionRef}>
+    <section
+      id="services"
+      className="py-24 lg:py-32 relative overflow-hidden"
+      ref={sectionRef}
+    >
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
-      <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[100px] pointer-events-none" />
+
+      {/* Decorative grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.03)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
 
       <div className="section-container relative z-10">
         {/* Section Header */}
@@ -143,27 +191,37 @@ const ServicesSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 lg:mb-20"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6"
+            className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-5 py-2 mb-6"
           >
             <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-primary">What We Offer</span>
+            <span className="text-sm font-semibold text-primary tracking-wide">
+              What We Offer
+            </span>
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Our{" "}
-            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-              Services
+            <span className="relative">
+              <span className="bg-gradient-to-r from-primary via-primary to-primary/70 bg-clip-text text-transparent">
+                Services
+              </span>
+              <motion.span
+                className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary to-primary/50 rounded-full"
+                initial={{ scaleX: 0 }}
+                animate={isInView ? { scaleX: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              />
             </span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-            From concept to deployment, we provide comprehensive digital services
-            to help your business thrive in the digital landscape.
+            From concept to deployment, we provide comprehensive digital
+            services to help your business thrive in the digital landscape.
           </p>
         </motion.div>
 
@@ -172,14 +230,10 @@ const ServicesSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6"
         >
           {services.map((service, index) => (
-            <ServiceCard
-              key={service.title}
-              {...service}
-              index={index}
-            />
+            <ServiceCard key={service.title} {...service} index={index} />
           ))}
         </motion.div>
 
@@ -188,18 +242,22 @@ const ServicesSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-16"
+          className="text-center mt-16 lg:mt-20"
         >
-          <p className="text-muted-foreground mb-4">
-            Need something custom? Let's discuss your project.
-          </p>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all duration-300"
-          >
-            Get in Touch
-            <ArrowRight className="h-4 w-4" />
-          </a>
+          <div className="inline-flex flex-col sm:flex-row items-center gap-4 p-6 rounded-2xl bg-card/60 backdrop-blur-sm border border-border/50">
+            <p className="text-muted-foreground">
+              Need something custom? Let's discuss your project.
+            </p>
+            <motion.a
+              href="#contact"
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-full shadow-lg shadow-primary/20 transition-all duration-300"
+              whileHover={{ scale: 1.02, gap: "0.75rem" }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Get in Touch
+              <ArrowRight className="h-4 w-4" />
+            </motion.a>
+          </div>
         </motion.div>
       </div>
     </section>
