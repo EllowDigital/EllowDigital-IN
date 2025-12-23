@@ -1,6 +1,14 @@
 import { Award, Clock, ThumbsUp, Users, Sparkles, TrendingUp } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import {
+  staggerContainer,
+  fadeUpItem,
+  headerVariants,
+  badgeVariants,
+  underlineVariants,
+  smoothEase,
+} from "@/utils/scrollAnimations";
 
 const metrics = [
   {
@@ -36,29 +44,15 @@ const metrics = [
 const ImpactMetrics = () => {
   const [counts, setCounts] = useState<number[]>(metrics.map(() => 0));
   const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated) {
-            animateCounters();
-            setHasAnimated(true);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    const sectionElement = sectionRef.current;
-    if (sectionElement) observer.observe(sectionElement);
-
-    return () => {
-      if (sectionElement) observer.unobserve(sectionElement);
-    };
-  }, [hasAnimated]);
+    if (isInView && !hasAnimated) {
+      animateCounters();
+      setHasAnimated(true);
+    }
+  }, [isInView, hasAnimated]);
 
   const animateCounters = () => {
     const duration = 2000;
@@ -83,95 +77,81 @@ const ImpactMetrics = () => {
     }, frameDuration);
   };
 
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 40, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut" as const,
-      },
-    },
-  };
-
   return (
     <section
       id="impact"
       ref={sectionRef}
-      className="relative py-20 sm:py-28 overflow-hidden deferred-section"
+      className="relative py-24 lg:py-32 overflow-hidden"
     >
-      {/* Modern gradient background */}
+      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
-      
-      {/* Animated background elements */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1.5s" }} />
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/8 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header Section */}
+      {/* Grid pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.03)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+
+      <div className="relative section-container">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="text-center mb-14 lg:mb-16"
         >
           <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
+            variants={badgeVariants}
+            className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-5 py-2 mb-6"
           >
             <TrendingUp className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Our Achievements</span>
+            <span className="text-sm font-semibold text-primary tracking-wide">
+              Our Achievements
+            </span>
           </motion.div>
-          
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            Our Impact <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80">By the Numbers</span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            We're proud of the results we've achieved for our clients. These metrics showcase our commitment to excellence.
-          </p>
+
+          <motion.h2
+            variants={headerVariants}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+          >
+            Our Impact{" "}
+            <span className="relative inline-block">
+              <span className="bg-gradient-to-r from-primary via-primary to-primary/70 bg-clip-text text-transparent">
+                By the Numbers
+              </span>
+              <motion.span
+                className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary to-primary/50 rounded-full origin-left"
+                variants={underlineVariants}
+              />
+            </span>
+          </motion.h2>
+          <motion.p
+            variants={headerVariants}
+            className="text-muted-foreground text-lg max-w-2xl mx-auto"
+          >
+            We're proud of the results we've achieved for our clients. These
+            metrics showcase our commitment to excellence.
+          </motion.p>
         </motion.div>
 
         {/* Metrics Grid */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
-          variants={containerVariants}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6"
+          variants={staggerContainer(0.1, 0.2)}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          animate={isInView ? "visible" : "hidden"}
         >
           {metrics.map((metric, index) => (
-            <motion.div
-              key={index}
-              variants={cardVariants}
-              className="group"
-            >
-              <div className="relative h-full p-8 rounded-2xl bg-gradient-to-b from-card/80 to-card border border-border/50 overflow-hidden transition-all duration-500 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2">
-                {/* Background glow on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                {/* Floating particles effect */}
-                <div className="absolute top-4 right-4 w-20 h-20 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all duration-500" />
+            <motion.div key={index} variants={fadeUpItem} className="group">
+              <div className="relative h-full p-7 lg:p-8 rounded-2xl bg-card/60 backdrop-blur-sm border border-border/50 overflow-hidden transition-all duration-500 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1">
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                {/* Glow effect */}
+                <div className="absolute top-4 right-4 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all duration-500" />
 
                 {/* Icon */}
                 <div className="relative mb-6">
-                  <div className="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 group-hover:border-primary/40 group-hover:scale-110 transition-all duration-500">
-                    <metric.icon className="w-10 h-10 text-primary" />
+                  <div className="w-16 h-16 mx-auto rounded-xl flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 group-hover:scale-110 group-hover:border-primary/40 transition-all duration-300">
+                    <metric.icon className="w-8 h-8 text-primary" />
                   </div>
                 </div>
 
@@ -193,8 +173,8 @@ const ImpactMetrics = () => {
                   </p>
                 </div>
 
-                {/* Bottom gradient line */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-primary/80 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Bottom accent */}
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
             </motion.div>
           ))}
@@ -202,13 +182,12 @@ const ImpactMetrics = () => {
 
         {/* Bottom Badge */}
         <motion.div
-          className="mt-16 text-center"
+          className="mt-14 text-center"
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5, ease: smoothEase }}
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20">
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-card/60 backdrop-blur-sm border border-border/50">
             <Sparkles className="w-5 h-5 text-primary" />
             <span className="text-sm font-medium text-foreground">
               Delivering exceptional results since 2024
