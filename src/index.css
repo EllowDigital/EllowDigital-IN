@@ -455,6 +455,99 @@ body {
   }
 }
 
+/* Micro-interaction utility classes */
+.hover-lift {
+  @apply transition-all duration-300 ease-out;
+}
+.hover-lift:hover {
+  @apply -translate-y-1 shadow-lg;
+}
+
+.hover-scale {
+  @apply transition-transform duration-300 ease-out;
+}
+.hover-scale:hover {
+  @apply scale-105;
+}
+
+.hover-glow {
+  @apply transition-shadow duration-300;
+}
+.hover-glow:hover {
+  box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+}
+
+.hover-border-glow {
+  @apply transition-all duration-300;
+}
+.hover-border-glow:hover {
+  @apply border-primary/50;
+  box-shadow: 0 0 15px hsl(var(--primary) / 0.2);
+}
+
+.press-effect {
+  @apply transition-transform duration-150;
+}
+.press-effect:active {
+  @apply scale-[0.97];
+}
+
+.magnetic-hover {
+  @apply transition-transform duration-200 ease-out;
+}
+
+/* Shine effect on hover */
+.shine-effect {
+  @apply relative overflow-hidden;
+}
+.shine-effect::before {
+  content: '';
+  @apply absolute inset-0 -translate-x-full;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: transform 0.6s ease;
+}
+.shine-effect:hover::before {
+  @apply translate-x-full;
+}
+
+/* Underline animation */
+.underline-hover {
+  @apply relative;
+}
+.underline-hover::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300;
+}
+.underline-hover:hover::after {
+  @apply w-full;
+}
+
+/* Icon rotation on hover */
+.icon-spin-hover [data-icon] {
+  @apply transition-transform duration-300;
+}
+.icon-spin-hover:hover [data-icon] {
+  @apply rotate-12;
+}
+
+/* Pulse on hover */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4); }
+  50% { box-shadow: 0 0 0 8px hsl(var(--primary) / 0); }
+}
+.pulse-hover:hover {
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+/* Gradient shift on hover */
+.gradient-shift {
+  background-size: 200% 200%;
+  transition: background-position 0.5s ease;
+}
+.gradient-shift:hover {
+  background-position: 100% 100%;
+}
+
 @media print {
   body {
     background: white !important;

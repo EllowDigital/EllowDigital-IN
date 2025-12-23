@@ -4,12 +4,26 @@ import { cn } from "@/lib/utils";
 
 const Card = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
+  React.HTMLAttributes<HTMLDivElement> & { 
+    interactive?: boolean;
+    glowOnHover?: boolean;
+  }
+>(({ className, interactive = false, glowOnHover = false, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
-      "rounded-lg border bg-card text-card-foreground shadow-sm",
+      "rounded-xl border bg-card text-card-foreground shadow-sm transition-all duration-300 ease-out",
+      interactive && [
+        "cursor-pointer",
+        "hover:shadow-xl hover:shadow-primary/5",
+        "hover:-translate-y-1",
+        "hover:border-primary/30",
+        "active:scale-[0.99]",
+        "transform-gpu",
+      ],
+      glowOnHover && [
+        "hover:shadow-[0_0_30px_hsl(var(--primary)/0.15)]",
+      ],
       className
     )}
     {...props}
@@ -36,7 +50,7 @@ const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-2xl font-semibold leading-none tracking-tight",
+      "text-2xl font-semibold leading-none tracking-tight transition-colors duration-300 group-hover:text-primary",
       className
     )}
     {...props}
@@ -50,7 +64,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
+    className={cn("text-sm text-muted-foreground transition-colors duration-300", className)}
     {...props}
   />
 ));
