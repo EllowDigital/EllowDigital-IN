@@ -1,12 +1,13 @@
 import { useRef, useCallback, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Star, Quote, ArrowLeft, ArrowRight, MessageSquare } from "lucide-react";
+import { Star, Quote, ArrowLeft, ArrowRight, MessageSquare, Pause, Play } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   type CarouselApi,
 } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const testimonials = [
   {
@@ -43,6 +44,16 @@ const Testimonials = () => {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  // Autoplay plugin with configuration
+  const autoplayPlugin = useRef(
+    Autoplay({
+      delay: 4000,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    })
+  );
 
   useEffect(() => {
     if (!api) return;
@@ -68,6 +79,18 @@ const Testimonials = () => {
     },
     [api]
   );
+
+  const toggleAutoplay = useCallback(() => {
+    const autoplay = autoplayPlugin.current;
+    if (!autoplay) return;
+    
+    if (isPlaying) {
+      autoplay.stop();
+    } else {
+      autoplay.play();
+    }
+    setIsPlaying(!isPlaying);
+  }, [isPlaying]);
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }).map((_, index) => (
@@ -146,7 +169,9 @@ const Testimonials = () => {
             opts={{
               align: "center",
               loop: true,
+              dragFree: true,
             }}
+            plugins={[autoplayPlugin.current]}
             className="mx-auto max-w-5xl"
           >
             <CarouselContent className="-ml-4 md:-ml-6">
@@ -278,6 +303,17 @@ const Testimonials = () => {
                 />
               ))}
             </div>
+
+            {/* Play/Pause button */}
+            <motion.button
+              onClick={toggleAutoplay}
+              className="w-10 h-10 rounded-full bg-card/70 backdrop-blur-sm border border-border/50 flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label={isPlaying ? "Pause autoplay" : "Resume autoplay"}
+            >
+              {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+            </motion.button>
 
             {/* Next button */}
             <motion.button
