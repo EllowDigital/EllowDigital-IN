@@ -9,6 +9,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { SkipToContent } from "@/components/accessibility/SkipToContent";
 import { AxiosInterceptor } from "@/utils/axiosInterceptor";
 import AnimatedOutlet from "@/components/AnimatedOutlet";
+import CookieConsent from "@/components/CookieConsent";
 
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -52,6 +53,9 @@ const AppLayout = () => (
     <Sonner />
 
     <AnimatedOutlet />
+    
+    {/* Cookie Consent Banner */}
+    <CookieConsent />
   </TooltipProvider>
 );
 
