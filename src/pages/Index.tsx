@@ -1,26 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense, lazy } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
-import ServicesSection from "@/components/ServicesSection";
-import WhyChooseUs from "@/components/WhyChooseUs";
 import Footer from "@/components/Footer";
-import Portfolio from "@/components/Portfolio";
-import SmartContactForm from "@/components/SmartContactForm";
 import SEOHead from "@/components/SEOHead";
-import FounderSection from "@/components/FounderSection";
-import EngagementModel from "@/components/EngagementModel";
-import WorkProcess from "@/components/WorkProcess";
-import Testimonials from "@/components/Testimonials";
-import ImpactMetrics from "@/components/ImpactMetrics";
-import TechStack from "@/components/TechStack";
-import FeaturedOffers from "@/components/FeaturedOffers";
 import FloatingContactButton from "@/components/FloatingContactButton";
+import { PageSkeleton, SectionSkeleton } from "@/components/skeletons";
 import {
   initScrollRevealAnimations,
   init3DTiltEffect,
 } from "@/utils/animationUtils";
-import Preloader from "@/components/Preloader";
+
+// Lazy load below-the-fold sections for better performance
+const AboutSection = lazy(() => import("@/components/AboutSection"));
+const FounderSection = lazy(() => import("@/components/FounderSection"));
+const ServicesSection = lazy(() => import("@/components/ServicesSection"));
+const WorkProcess = lazy(() => import("@/components/WorkProcess"));
+const EngagementModel = lazy(() => import("@/components/EngagementModel"));
+const Portfolio = lazy(() => import("@/components/Portfolio"));
+const ImpactMetrics = lazy(() => import("@/components/ImpactMetrics"));
+const Testimonials = lazy(() => import("@/components/Testimonials"));
+const TechStack = lazy(() => import("@/components/TechStack"));
+const WhyChooseUs = lazy(() => import("@/components/WhyChooseUs"));
+const FeaturedOffers = lazy(() => import("@/components/FeaturedOffers"));
+const SmartContactForm = lazy(() => import("@/components/SmartContactForm"));
+
+// Section loading fallback
+const SectionLoader = ({ cards = 3, columns = 3 }: { cards?: number; columns?: 2 | 3 | 4 }) => (
+  <SectionSkeleton cards={cards} columns={columns} />
+);
 
 // Homepage JSON-LD structured data
 const homePageSchema = {
@@ -89,7 +96,6 @@ const Index = () => {
     scheduleInit(initScrollRevealAnimations);
     scheduleInit(init3DTiltEffect);
 
-    // Clean up event listeners on unmount
     return () => {
       if (fallbackTimer) {
         clearTimeout(fallbackTimer);
@@ -100,6 +106,21 @@ const Index = () => {
     };
   }, []);
 
+  // Show page skeleton during initial load
+  if (isLoading) {
+    return (
+      <>
+        <SEOHead
+          title="EllowDigital | Digital Transformation Services in India"
+          description="EllowDigital offers web development, SEO, and digital marketing services to accelerate your business growth in the digital landscape across India."
+          canonicalUrl="https://ellowdigitals.me/"
+          structuredData={homePageSchema}
+        />
+        <PageSkeleton />
+      </>
+    );
+  }
+
   return (
     <>
       <SEOHead
@@ -109,29 +130,60 @@ const Index = () => {
         structuredData={homePageSchema}
       />
 
-      {/* Enhanced Preloader with smooth transition */}
-      {isLoading && <Preloader />}
-
-      <div
-        className={`min-h-screen flex flex-col transition-all duration-500 bg-background text-foreground ${
-          isLoading ? "opacity-0" : "opacity-100"
-        }`}
-      >
+      <div className="min-h-screen flex flex-col bg-background text-foreground">
         <Navbar />
         <main className="flex-grow overflow-x-hidden" id="main-content">
+          {/* Hero loads immediately */}
           <HeroSection />
-          <AboutSection />
-          <FounderSection />
-          <ServicesSection />
-          <WorkProcess />
-          <EngagementModel />
-          <Portfolio />
-          <ImpactMetrics />
-          <Testimonials />
-          <TechStack />
-          <WhyChooseUs />
-          <FeaturedOffers />
-          <SmartContactForm />
+
+          {/* Lazy-loaded sections with skeleton fallbacks */}
+          <Suspense fallback={<SectionLoader cards={4} columns={4} />}>
+            <AboutSection />
+          </Suspense>
+
+          <Suspense fallback={<SectionLoader cards={1} columns={2} />}>
+            <FounderSection />
+          </Suspense>
+
+          <Suspense fallback={<SectionLoader cards={6} columns={3} />}>
+            <ServicesSection />
+          </Suspense>
+
+          <Suspense fallback={<SectionLoader cards={4} columns={4} />}>
+            <WorkProcess />
+          </Suspense>
+
+          <Suspense fallback={<SectionLoader cards={3} columns={3} />}>
+            <EngagementModel />
+          </Suspense>
+
+          <Suspense fallback={<SectionLoader cards={5} columns={3} />}>
+            <Portfolio />
+          </Suspense>
+
+          <Suspense fallback={<SectionLoader cards={4} columns={4} />}>
+            <ImpactMetrics />
+          </Suspense>
+
+          <Suspense fallback={<SectionLoader cards={3} columns={3} />}>
+            <Testimonials />
+          </Suspense>
+
+          <Suspense fallback={<SectionLoader cards={9} columns={3} />}>
+            <TechStack />
+          </Suspense>
+
+          <Suspense fallback={<SectionLoader cards={6} columns={3} />}>
+            <WhyChooseUs />
+          </Suspense>
+
+          <Suspense fallback={<SectionLoader cards={2} columns={2} />}>
+            <FeaturedOffers />
+          </Suspense>
+
+          <Suspense fallback={<SectionLoader cards={2} columns={2} />}>
+            <SmartContactForm />
+          </Suspense>
         </main>
         <Footer />
         <FloatingContactButton />
