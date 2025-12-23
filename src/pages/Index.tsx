@@ -4,7 +4,8 @@ import HeroSection from "@/components/HeroSection";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import FloatingContactButton from "@/components/FloatingContactButton";
-import { PageSkeleton, SectionSkeleton } from "@/components/skeletons";
+import Preloader from "@/components/Preloader";
+import { SectionSkeleton } from "@/components/skeletons";
 import {
   initScrollRevealAnimations,
   init3DTiltEffect,
@@ -106,21 +107,6 @@ const Index = () => {
     };
   }, []);
 
-  // Show page skeleton during initial load
-  if (isLoading) {
-    return (
-      <>
-        <SEOHead
-          title="EllowDigital | Digital Transformation Services in India"
-          description="EllowDigital offers web development, SEO, and digital marketing services to accelerate your business growth in the digital landscape across India."
-          canonicalUrl="https://ellowdigitals.me/"
-          structuredData={homePageSchema}
-        />
-        <PageSkeleton />
-      </>
-    );
-  }
-
   return (
     <>
       <SEOHead
@@ -130,7 +116,14 @@ const Index = () => {
         structuredData={homePageSchema}
       />
 
-      <div className="min-h-screen flex flex-col bg-background text-foreground">
+      {/* Enhanced Preloader */}
+      {isLoading && <Preloader />}
+
+      <div
+        className={`min-h-screen flex flex-col bg-background text-foreground transition-opacity duration-500 ${
+          isLoading ? "opacity-0" : "opacity-100"
+        }`}
+      >
         <Navbar />
         <main className="flex-grow overflow-x-hidden" id="main-content">
           {/* Hero loads immediately */}
