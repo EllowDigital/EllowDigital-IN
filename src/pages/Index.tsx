@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import Preloader from "@/components/Preloader";
+import ScrollProgress from "@/components/ScrollProgress";
+import ScrollReveal from "@/components/ScrollReveal";
 import { SectionSkeleton } from "@/components/skeletons";
 import useSmoothScroll from "@/hooks/useSmoothScroll";
 import {
@@ -123,6 +125,8 @@ const Index = () => {
       {/* Enhanced Preloader */}
       {isLoading && <Preloader />}
 
+      <ScrollProgress />
+      
       <div
         className={`min-h-screen flex flex-col bg-background text-foreground transition-opacity duration-500 ${
           isLoading ? "opacity-0" : "opacity-100"
@@ -133,54 +137,78 @@ const Index = () => {
           {/* Hero loads immediately */}
           <HeroSection />
 
-          {/* Lazy-loaded sections with skeleton fallbacks */}
-          <Suspense fallback={<SectionLoader cards={4} columns={4} />}>
-            <AboutSection />
-          </Suspense>
+          {/* Lazy-loaded sections with scroll reveal animations */}
+          <ScrollReveal animation="fadeUp">
+            <Suspense fallback={<SectionLoader cards={4} columns={4} />}>
+              <AboutSection />
+            </Suspense>
+          </ScrollReveal>
 
-          <Suspense fallback={<SectionLoader cards={1} columns={2} />}>
-            <FounderSection />
-          </Suspense>
+          <ScrollReveal animation="fadeLeft" delay={0.1}>
+            <Suspense fallback={<SectionLoader cards={1} columns={2} />}>
+              <FounderSection />
+            </Suspense>
+          </ScrollReveal>
 
-          <Suspense fallback={<SectionLoader cards={6} columns={3} />}>
-            <ServicesSection />
-          </Suspense>
+          <ScrollReveal animation="fadeUp" delay={0.1}>
+            <Suspense fallback={<SectionLoader cards={6} columns={3} />}>
+              <ServicesSection />
+            </Suspense>
+          </ScrollReveal>
 
-          <Suspense fallback={<SectionLoader cards={4} columns={4} />}>
-            <WorkProcess />
-          </Suspense>
+          <ScrollReveal animation="fadeRight" delay={0.1}>
+            <Suspense fallback={<SectionLoader cards={4} columns={4} />}>
+              <WorkProcess />
+            </Suspense>
+          </ScrollReveal>
 
-          <Suspense fallback={<SectionLoader cards={3} columns={3} />}>
-            <EngagementModel />
-          </Suspense>
+          <ScrollReveal animation="scale" delay={0.1}>
+            <Suspense fallback={<SectionLoader cards={3} columns={3} />}>
+              <EngagementModel />
+            </Suspense>
+          </ScrollReveal>
 
-          <Suspense fallback={<SectionLoader cards={5} columns={3} />}>
-            <Portfolio />
-          </Suspense>
+          <ScrollReveal animation="fadeUp" delay={0.1}>
+            <Suspense fallback={<SectionLoader cards={5} columns={3} />}>
+              <Portfolio />
+            </Suspense>
+          </ScrollReveal>
 
-          <Suspense fallback={<SectionLoader cards={4} columns={4} />}>
-            <ImpactMetrics />
-          </Suspense>
+          <ScrollReveal animation="blur" delay={0.1}>
+            <Suspense fallback={<SectionLoader cards={4} columns={4} />}>
+              <ImpactMetrics />
+            </Suspense>
+          </ScrollReveal>
 
-          <Suspense fallback={<SectionLoader cards={3} columns={3} />}>
-            <Testimonials />
-          </Suspense>
+          <ScrollReveal animation="fadeLeft" delay={0.1}>
+            <Suspense fallback={<SectionLoader cards={3} columns={3} />}>
+              <Testimonials />
+            </Suspense>
+          </ScrollReveal>
 
-          <Suspense fallback={<SectionLoader cards={9} columns={3} />}>
-            <TechStack />
-          </Suspense>
+          <ScrollReveal animation="fadeUp" delay={0.1}>
+            <Suspense fallback={<SectionLoader cards={9} columns={3} />}>
+              <TechStack />
+            </Suspense>
+          </ScrollReveal>
 
-          <Suspense fallback={<SectionLoader cards={6} columns={3} />}>
-            <WhyChooseUs />
-          </Suspense>
+          <ScrollReveal animation="fadeRight" delay={0.1}>
+            <Suspense fallback={<SectionLoader cards={6} columns={3} />}>
+              <WhyChooseUs />
+            </Suspense>
+          </ScrollReveal>
 
-          <Suspense fallback={<SectionLoader cards={2} columns={2} />}>
-            <FeaturedOffers />
-          </Suspense>
+          <ScrollReveal animation="scale" delay={0.1}>
+            <Suspense fallback={<SectionLoader cards={2} columns={2} />}>
+              <FeaturedOffers />
+            </Suspense>
+          </ScrollReveal>
 
-          <Suspense fallback={<SectionLoader cards={2} columns={2} />}>
-            <SmartContactForm />
-          </Suspense>
+          <ScrollReveal animation="fadeUp" delay={0.1}>
+            <Suspense fallback={<SectionLoader cards={2} columns={2} />}>
+              <SmartContactForm />
+            </Suspense>
+          </ScrollReveal>
         </main>
         <Footer />
         <FloatingContactButton />
