@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import { ExternalLink, Sparkles, ArrowRight, Eye } from "lucide-react";
+import { useState, useRef, useCallback, useEffect } from "react";
+import { ExternalLink, Sparkles, ArrowRight, Eye, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 
@@ -12,7 +12,7 @@ const categories = [
   "Desktop App",
 ];
 
-const projects = [
+const allProjects = [
   {
     title: "Ghatak Sports Academy India™",
     category: "Web App",
@@ -63,17 +63,131 @@ const projects = [
     link: "https://rgsktechnologies.netlify.app/",
     featured: false,
   },
+  // Additional projects for infinite scroll demo
+  {
+    title: "Portfolio Showcase",
+    category: "Website",
+    image: "/images/projects_img/project2_gsai.webp",
+    description:
+      "Modern portfolio website with smooth animations and responsive design for creative professionals.",
+    tech: ["React", "Framer Motion", "Tailwind"],
+    link: "#",
+    featured: false,
+  },
+  {
+    title: "E-Commerce Dashboard",
+    category: "Web App",
+    image: "/images/projects_img/project4_tdexpoup25.webp",
+    description:
+      "Comprehensive admin dashboard for managing products, orders, and customer analytics.",
+    tech: ["Next.js", "Prisma", "PostgreSQL"],
+    link: "#",
+    featured: false,
+  },
+  {
+    title: "Fitness Tracker",
+    category: "Mobile App",
+    image: "/images/projects_img/project6_dhandiary.webp",
+    description:
+      "Health and fitness mobile app with workout plans, calorie tracking, and progress visualization.",
+    tech: ["React Native", "Firebase", "Charts"],
+    link: "#",
+    featured: false,
+  },
 ];
+
+const ITEMS_PER_PAGE = 5;
+
+// Skeleton component for loading state
+const ProjectSkeleton = ({ featured = false }: { featured?: boolean }) => (
+  <motion.div
+    className={`rounded-2xl border border-border/30 bg-card/50 overflow-hidden ${
+      featured ? "md:col-span-2" : ""
+    }`}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+  >
+    <motion.div
+      className={`w-full bg-secondary/40 ${
+        featured ? "aspect-[2.5/1]" : "aspect-[4/3]"
+      }`}
+      animate={{ opacity: [0.5, 0.8, 0.5] }}
+      transition={{ duration: 1.5, repeat: Infinity }}
+    />
+    <div className="p-5">
+      <motion.div
+        className="h-6 w-3/4 rounded bg-secondary/50 mb-2"
+        animate={{ opacity: [0.5, 0.8, 0.5] }}
+        transition={{ duration: 1.5, repeat: Infinity, delay: 0.1 }}
+      />
+      <motion.div
+        className="h-4 w-full rounded bg-secondary/30 mb-4"
+        animate={{ opacity: [0.5, 0.8, 0.5] }}
+        transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
+      />
+      <div className="flex gap-2">
+        {Array.from({ length: 3 }).map((_, j) => (
+          <motion.div
+            key={j}
+            className="h-6 w-16 rounded-md bg-secondary/40"
+            animate={{ opacity: [0.5, 0.8, 0.5] }}
+            transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 + j * 0.05 }}
+          />
+        ))}
+      </div>
+    </div>
+  </motion.div>
+);
 
 const Portfolio = () => {
   const [filter, setFilter] = useState("All");
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+  const [isLoading, setIsLoading] = useState(false);
   const sectionRef = useRef(null);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const filteredProjects =
     filter === "All"
-      ? projects
-      : projects.filter((project) => project.category === filter);
+      ? allProjects
+      : allProjects.filter((project) => project.category === filter);
+
+  const visibleProjects = filteredProjects.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredProjects.length;
+
+  // Reset visible count when filter changes
+  useEffect(() => {
+    setVisibleCount(ITEMS_PER_PAGE);
+  }, [filter]);
+
+  // Infinite scroll observer
+  const loadMore = useCallback(() => {
+    if (isLoading || !hasMore) return;
+    
+    setIsLoading(true);
+    // Simulate loading delay for smooth UX
+    setTimeout(() => {
+      setVisibleCount((prev) => Math.min(prev + ITEMS_PER_PAGE, filteredProjects.length));
+      setIsLoading(false);
+    }, 800);
+  }, [isLoading, hasMore, filteredProjects.length]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore && !isLoading) {
+          loadMore();
+        }
+      },
+      { threshold: 0.1, rootMargin: "100px" }
+    );
+
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasMore, isLoading, loadMore]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -194,7 +308,7 @@ const Portfolio = () => {
             animate="visible"
             exit="exit"
           >
-            {filteredProjects.map((project, index) => (
+            {visibleProjects.map((project, index) => (
               <motion.div
                 key={project.title}
                 variants={itemVariants}
@@ -281,8 +395,50 @@ const Portfolio = () => {
                 </div>
               </motion.div>
             ))}
+
+            {/* Loading skeletons */}
+            {isLoading && (
+              <>
+                <ProjectSkeleton />
+                <ProjectSkeleton />
+                <ProjectSkeleton />
+              </>
+            )}
           </motion.div>
         </AnimatePresence>
+
+        {/* Infinite scroll trigger */}
+        <div ref={loadMoreRef} className="h-4" />
+
+        {/* Loading indicator */}
+        {isLoading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex items-center justify-center gap-2 mt-8 text-muted-foreground"
+          >
+            <Loader2 className="w-5 h-5 animate-spin text-primary" />
+            <span className="text-sm">Loading more projects...</span>
+          </motion.div>
+        )}
+
+        {/* Load more button (fallback) */}
+        {hasMore && !isLoading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex justify-center mt-8"
+          >
+            <Button
+              variant="outline"
+              onClick={loadMore}
+              className="gap-2"
+            >
+              Load More Projects
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          </motion.div>
+        )}
 
         {/* Empty State */}
         {filteredProjects.length === 0 && (

@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
+const AUTOPLAY_DELAY = 4000;
+
 const testimonials = [
   {
     name: "Nitish Yadav",
@@ -45,25 +47,65 @@ const Testimonials = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const progressInterval = useRef<NodeJS.Timeout | null>(null);
 
   // Autoplay plugin with configuration
   const autoplayPlugin = useRef(
     Autoplay({
-      delay: 4000,
+      delay: AUTOPLAY_DELAY,
       stopOnInteraction: false,
       stopOnMouseEnter: true,
     })
   );
 
+  // Progress bar animation
+  const startProgressAnimation = useCallback(() => {
+    if (progressInterval.current) {
+      clearInterval(progressInterval.current);
+    }
+    setProgress(0);
+    
+    const startTime = Date.now();
+    progressInterval.current = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const newProgress = Math.min((elapsed / AUTOPLAY_DELAY) * 100, 100);
+      setProgress(newProgress);
+      
+      if (newProgress >= 100) {
+        clearInterval(progressInterval.current!);
+      }
+    }, 16);
+  }, []);
+
+  const stopProgressAnimation = useCallback(() => {
+    if (progressInterval.current) {
+      clearInterval(progressInterval.current);
+    }
+  }, []);
+
   useEffect(() => {
     if (!api) return;
 
     setCurrent(api.selectedScrollSnap());
+    if (isPlaying) {
+      startProgressAnimation();
+    }
 
-    api.on("select", () => {
+    const onSelect = () => {
       setCurrent(api.selectedScrollSnap());
-    });
-  }, [api]);
+      if (isPlaying) {
+        startProgressAnimation();
+      }
+    };
+
+    api.on("select", onSelect);
+
+    return () => {
+      api.off("select", onSelect);
+      stopProgressAnimation();
+    };
+  }, [api, isPlaying, startProgressAnimation, stopProgressAnimation]);
 
   const scrollPrev = useCallback(() => {
     api?.scrollPrev();
@@ -86,11 +128,13 @@ const Testimonials = () => {
     
     if (isPlaying) {
       autoplay.stop();
+      stopProgressAnimation();
     } else {
       autoplay.play();
+      startProgressAnimation();
     }
     setIsPlaying(!isPlaying);
-  }, [isPlaying]);
+  }, [isPlaying, startProgressAnimation, stopProgressAnimation]);
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }).map((_, index) => (
@@ -288,19 +332,30 @@ const Testimonials = () => {
               <ArrowLeft className="w-5 h-5" />
             </motion.button>
 
-            {/* Dots */}
+            {/* Dots with progress indicator */}
             <div className="flex items-center gap-2">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => scrollTo(index)}
-                  className={`transition-all duration-300 rounded-full ${
+                  className={`relative transition-all duration-300 rounded-full overflow-hidden ${
                     current === index
-                      ? "w-8 h-2 bg-primary"
+                      ? "w-10 h-2 bg-border/50"
                       : "w-2 h-2 bg-border hover:bg-primary/50"
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
-                />
+                >
+                  {current === index && isPlaying && (
+                    <motion.div
+                      className="absolute inset-0 bg-primary rounded-full origin-left"
+                      style={{ scaleX: progress / 100 }}
+                      transition={{ duration: 0.016, ease: "linear" }}
+                    />
+                  )}
+                  {current === index && !isPlaying && (
+                    <div className="absolute inset-0 bg-primary rounded-full" />
+                  )}
+                </button>
               ))}
             </div>
 
