@@ -7,6 +7,7 @@ import {
   Users,
   Briefcase,
   Check,
+  Sparkles,
 } from "lucide-react";
 
 const models = [
@@ -19,7 +20,6 @@ const models = [
       "Predictable cost",
       "Milestone-based payments",
     ],
-    gradient: "from-blue-500 to-cyan-500",
   },
   {
     icon: Clock,
@@ -30,7 +30,6 @@ const models = [
       "Transparent billing",
       "Scale up or down as needed",
     ],
-    gradient: "from-purple-500 to-pink-500",
   },
   {
     icon: Users,
@@ -41,14 +40,12 @@ const models = [
       "Deep product knowledge",
       "Enhanced productivity",
     ],
-    gradient: "from-orange-500 to-red-500",
   },
   {
     icon: DollarSign,
     title: "Student-Friendly",
     description: "Affordable options for educational and startup projects",
     features: ["Reduced rates", "Mentorship included", "Future growth options"],
-    gradient: "from-green-500 to-emerald-500",
   },
 ];
 
@@ -104,8 +101,8 @@ const EngagementModel = () => {
     >
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-brand-yellow/5 rounded-full blur-3xl" />
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
 
       <div className="section-container relative z-10">
         {/* Section Header */}
@@ -121,13 +118,13 @@ const EngagementModel = () => {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6"
           >
-            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+            <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-primary">Flexible Options</span>
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Our Engagement{" "}
-            <span className="bg-gradient-to-r from-primary via-brand-purple to-brand-cyan bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
               Models
             </span>
           </h2>
@@ -145,7 +142,7 @@ const EngagementModel = () => {
         >
           <h3 className="text-2xl font-bold mb-10 text-center">
             How We{" "}
-            <span className="bg-gradient-to-r from-brand-yellow to-brand-gold bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
               Collaborate
             </span>
           </h3>
@@ -163,7 +160,7 @@ const EngagementModel = () => {
                 className="relative z-10 group"
               >
                 {/* Timeline node */}
-                <div className="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center bg-gradient-to-br from-primary to-brand-gold shadow-lg shadow-primary/20 mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center bg-gradient-to-br from-primary to-primary/80 shadow-lg shadow-primary/20 mb-6 group-hover:scale-110 transition-transform duration-300">
                   <span className="text-2xl font-bold text-primary-foreground">
                     0{index + 1}
                   </span>
@@ -191,7 +188,7 @@ const EngagementModel = () => {
         >
           <h3 className="text-2xl font-bold">
             Flexible{" "}
-            <span className="bg-gradient-to-r from-brand-yellow to-brand-gold bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
               Engagement Options
             </span>
           </h3>
@@ -203,7 +200,7 @@ const EngagementModel = () => {
           animate={isInView ? "visible" : "hidden"}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
-          {models.map((model, index) => (
+          {models.map((model) => (
             <motion.div
               key={model.title}
               variants={itemVariants}
@@ -211,12 +208,12 @@ const EngagementModel = () => {
             >
               <div className="relative h-full bg-card/50 backdrop-blur-sm border border-border/40 rounded-2xl p-6 hover:border-primary/30 transition-all duration-500 overflow-hidden">
                 {/* Gradient overlay on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${model.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* Icon */}
                 <div className="mb-6 flex justify-center">
-                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br ${model.gradient} group-hover:scale-110 transition-transform duration-300`}>
-                    <model.icon className="w-8 h-8 text-white" />
+                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 group-hover:scale-110 transition-transform duration-300">
+                    <model.icon className="w-8 h-8 text-primary" />
                   </div>
                 </div>
 
@@ -232,8 +229,8 @@ const EngagementModel = () => {
                 <ul className="space-y-3">
                   {model.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-start gap-3">
-                      <span className={`w-5 h-5 rounded-full bg-gradient-to-br ${model.gradient} flex-shrink-0 flex items-center justify-center mt-0.5`}>
-                        <Check className="w-3 h-3 text-white" />
+                      <span className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex-shrink-0 flex items-center justify-center mt-0.5">
+                        <Check className="w-3 h-3 text-primary" />
                       </span>
                       <span className="text-sm text-muted-foreground">
                         {feature}
