@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Theme Variables - Yellow/Black/White Brand Colors */
 @layer base {
   /* Light Mode */

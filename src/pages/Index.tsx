@@ -6,6 +6,7 @@ import SEOHead from "@/components/SEOHead";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import Preloader from "@/components/Preloader";
 import { SectionSkeleton } from "@/components/skeletons";
+import useSmoothScroll from "@/hooks/useSmoothScroll";
 import {
   initScrollRevealAnimations,
   init3DTiltEffect,
@@ -70,6 +71,9 @@ const homePageSchema = {
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
+  
+  // Enable smooth scroll for all anchor links
+  useSmoothScroll();
 
   useEffect(() => {
     let fallbackTimer: number | undefined;
