@@ -72,11 +72,11 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="w-full bg-gradient-to-b from-background to-black/95 text-foreground border-t border-border/40 relative overflow-hidden">
+    <footer className="w-full bg-gradient-to-b from-background to-secondary/50 text-foreground border-t border-border/40 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-purple/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-pink/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10">
@@ -93,7 +93,7 @@ const Footer = () => {
               <div className="flex items-center gap-3 mb-4">
                 <Logo />
                 <span className="text-2xl font-extrabold tracking-tight">
-                  Ellow<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-pink">Digital</span>
+                  Ellow<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80">Digital</span>
                 </span>
               </div>
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">
@@ -113,7 +113,7 @@ const Footer = () => {
                       rel={isExternal ? "noreferrer noopener" : undefined}
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-10 h-10 rounded-xl flex items-center justify-center bg-gradient-to-br from-brand-purple/20 to-brand-pink/20 border border-border/40 hover:border-brand-purple/50 text-muted-foreground hover:text-brand-purple transition-all duration-300"
+                      className="w-10 h-10 rounded-xl flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/10 border border-border/40 hover:border-primary/50 text-muted-foreground hover:text-primary transition-all duration-300"
                     >
                       {icon}
                     </motion.a>
@@ -131,7 +131,7 @@ const Footer = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <h4 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-pink mb-4 tracking-wide">
+                <h4 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80 mb-4 tracking-wide">
                   {section.title}
                 </h4>
                 <ul className="space-y-3">
@@ -142,7 +142,7 @@ const Footer = () => {
                           to={link.href}
                           className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200 flex items-center gap-2 group"
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-brand-purple/50 group-hover:bg-brand-purple transition-colors" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors" />
                           {link.label}
                         </Link>
                       ) : (
@@ -150,7 +150,7 @@ const Footer = () => {
                           href={link.href}
                           className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200 flex items-center gap-2 group"
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-brand-purple/50 group-hover:bg-brand-purple transition-colors" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors" />
                           {link.label}
                         </a>
                       )}
@@ -167,7 +167,7 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              <h4 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-pink mb-4 tracking-wide">
+              <h4 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80 mb-4 tracking-wide">
                 Contact
               </h4>
               <ul className="space-y-4">
@@ -176,7 +176,7 @@ const Footer = () => {
                     href="mailto:ellowdigitalindia@gmail.com"
                     className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200 flex items-start gap-3"
                   >
-                    <Mail className="w-4 h-4 mt-0.5 text-brand-purple" />
+                    <Mail className="w-4 h-4 mt-0.5 text-primary" />
                     <span>ellowdigitalindia@gmail.com</span>
                   </a>
                 </li>
@@ -185,16 +185,16 @@ const Footer = () => {
                     href="tel:+918960446756"
                     className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200 flex items-start gap-3"
                   >
-                    <Phone className="w-4 h-4 mt-0.5 text-brand-purple" />
+                    <Phone className="w-4 h-4 mt-0.5 text-primary" />
                     <span>+91 89604 46756</span>
                   </a>
                 </li>
                 <li className="flex items-start gap-3 text-muted-foreground text-sm">
-                  <MapPin className="w-4 h-4 mt-0.5 text-brand-purple" />
+                  <MapPin className="w-4 h-4 mt-0.5 text-primary" />
                   <span>India</span>
                 </li>
                 <li className="flex items-start gap-3 text-muted-foreground text-sm">
-                  <Clock className="w-4 h-4 mt-0.5 text-brand-purple" />
+                  <Clock className="w-4 h-4 mt-0.5 text-primary" />
                   <span>Mon - Sat: 10AM - 7PM IST</span>
                 </li>
               </ul>
@@ -203,20 +203,20 @@ const Footer = () => {
         </div>
 
         {/* Footer Bottom Bar */}
-        <div className="border-t border-border/40 bg-black/30">
+        <div className="border-t border-border/40 bg-secondary/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
               {/* Copyright */}
               <div className="text-muted-foreground text-sm text-center lg:text-left">
                 &copy; {currentYear}{" "}
-                <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-pink">
+                <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80">
                   EllowDigital
                 </span>
                 . All Rights Reserved.
               </div>
 
               {/* Tagline */}
-              <div className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-pink font-semibold text-sm">
+              <div className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80 font-semibold text-sm">
                 Making Digital Simple.
               </div>
 

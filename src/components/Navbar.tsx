@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import Logo from "./Logo";
 import SearchModal from "./SearchModal";
+import ThemeToggle from "./ThemeToggle";
 import { Menu, X, Search, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -219,6 +220,9 @@ const Navbar = () => {
               >
                 <Search className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
               </button>
+
+              {/* Theme Toggle */}
+              <ThemeToggle />
 
               {/* CTA Button - Desktop */}
               <motion.button

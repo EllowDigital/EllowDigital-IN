@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Star, Quote, ArrowLeft, ArrowRight } from "lucide-react";
+import { Star, Quote, ArrowLeft, ArrowRight, MessageSquare } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -18,7 +18,6 @@ const testimonials = [
     image: "images/nitesh.png",
     projectType: "Website Development",
     text: "EllowDigital truly elevated our digital presence. Their team captured the essence of our brand and delivered a sleek, functional website that has received fantastic feedback from our users.",
-    gradient: "from-blue-500 to-cyan-500",
   },
   {
     name: "Sarwan Yadav",
@@ -28,7 +27,6 @@ const testimonials = [
     image: "images/projects_img/project1_typeblitz.webp",
     projectType: "TypeBlitz - Boost Your Typing Skills",
     text: "The EllowDigital team was instrumental in shaping TypeBlitz into a user-centric platform. Their creative approach to design and deep understanding of user behavior made the final product both engaging and effective.",
-    gradient: "from-purple-500 to-pink-500",
   },
   {
     name: "Anish Yadav",
@@ -38,7 +36,6 @@ const testimonials = [
     image: "images/projects_img/project1_typeblitz.webp",
     projectType: "TypeBlitz - Boost Your Typing Skills",
     text: "From a technical standpoint, working with EllowDigital was seamless. Their attention to detail and commitment to performance optimization helped us build a fast, scalable learning tool that users appreciate.",
-    gradient: "from-orange-500 to-red-500",
   },
 ];
 
@@ -51,7 +48,7 @@ const Testimonials = () => {
       <Star
         key={index}
         className={`w-4 h-4 ${
-          index < rating ? "text-brand-yellow fill-brand-yellow" : "text-muted"
+          index < rating ? "text-primary fill-primary" : "text-muted"
         }`}
       />
     ));
@@ -65,8 +62,8 @@ const Testimonials = () => {
     >
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
-      <div className="absolute top-1/3 right-0 w-96 h-96 bg-brand-yellow/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/3 left-0 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl" />
+      <div className="absolute top-1/3 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/3 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
 
       <div className="section-container relative z-10">
         {/* Section Header */}
@@ -82,13 +79,13 @@ const Testimonials = () => {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6"
           >
-            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+            <MessageSquare className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-primary">Testimonials</span>
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             What Our{" "}
-            <span className="bg-gradient-to-r from-primary via-brand-purple to-brand-cyan bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
               Clients Say
             </span>
           </h2>
@@ -125,7 +122,7 @@ const Testimonials = () => {
                   >
                     <div className="group relative h-full bg-card/50 backdrop-blur-sm border border-border/40 rounded-2xl p-6 hover:border-primary/30 transition-all duration-500 overflow-hidden">
                       {/* Gradient overlay on hover */}
-                      <div className={`absolute inset-0 bg-gradient-to-br ${testimonial.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                       {/* Quote icon */}
                       <div className="absolute top-4 right-4">
@@ -134,7 +131,7 @@ const Testimonials = () => {
 
                       {/* Project Type Badge */}
                       <div className="mb-4">
-                        <span className={`inline-block text-xs font-medium py-1.5 px-3 rounded-full bg-gradient-to-r ${testimonial.gradient} text-white`}>
+                        <span className="inline-block text-xs font-medium py-1.5 px-3 rounded-full bg-gradient-to-r from-primary to-primary/90 text-primary-foreground">
                           {testimonial.projectType}
                         </span>
                       </div>
@@ -151,7 +148,7 @@ const Testimonials = () => {
 
                       {/* Author */}
                       <div className="flex items-center mt-auto pt-4 border-t border-border/30">
-                        <div className={`w-12 h-12 rounded-xl overflow-hidden mr-4 ring-2 ring-offset-2 ring-offset-card ring-primary/20 group-hover:ring-primary/40 transition-all duration-300`}>
+                        <div className="w-12 h-12 rounded-xl overflow-hidden mr-4 ring-2 ring-offset-2 ring-offset-card ring-primary/20 group-hover:ring-primary/40 transition-all duration-300">
                           <img
                             src={testimonial.image}
                             alt={testimonial.name}

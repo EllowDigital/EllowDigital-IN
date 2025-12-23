@@ -8,6 +8,7 @@ import {
   Server,
   HeartPulse,
   ArrowRight,
+  Sparkles,
 } from "lucide-react";
 import {
   Card,
@@ -17,7 +18,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-// Services Data Array
 const services = [
   {
     title: "Web Development",
@@ -25,14 +25,12 @@ const services = [
       "Lightning-fast, mobile-first, SEO-optimized websites using modern technologies.",
     icon: Code,
     details: "HTML5, CSS3, React, Node.js",
-    gradient: "from-blue-500 to-cyan-500",
   },
   {
     title: "Mobile App Development",
     description: "Beautiful and intuitive apps for Android and iOS platforms.",
     icon: Smartphone,
     details: "Flutter, React Native, Native Tools",
-    gradient: "from-purple-500 to-pink-500",
   },
   {
     title: "UI/UX Design",
@@ -40,7 +38,6 @@ const services = [
       "Clean, user-centered, and accessible interfaces that drive engagement.",
     icon: Layout,
     details: "Wireframing, Prototyping, User Testing",
-    gradient: "from-orange-500 to-red-500",
   },
   {
     title: "SEO & Performance",
@@ -48,7 +45,6 @@ const services = [
       "Implementing rank-ready strategies and speed optimizations for conversions.",
     icon: Search,
     details: "Technical SEO, Speed Optimization",
-    gradient: "from-green-500 to-emerald-500",
   },
   {
     title: "Custom Software",
@@ -56,7 +52,6 @@ const services = [
       "Tailored tools and automation systems to improve business efficiency.",
     icon: Server,
     details: "Business Solutions, Automation",
-    gradient: "from-indigo-500 to-violet-500",
   },
   {
     title: "Maintenance & Support",
@@ -64,11 +59,9 @@ const services = [
       "Ongoing updates, bug fixes, and expert consultation for your projects.",
     icon: HeartPulse,
     details: "Updates, Security, Performance",
-    gradient: "from-rose-500 to-pink-500",
   },
 ];
 
-// Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -90,22 +83,26 @@ const itemVariants = {
   },
 };
 
-// Service Card Component
-const ServiceCard = ({ title, description, icon: Icon, details, gradient, index }) => (
+const ServiceCard = ({ title, description, icon: Icon, details, index }: {
+  title: string;
+  description: string;
+  icon: React.ElementType;
+  details: string;
+  index: number;
+}) => (
   <motion.div variants={itemVariants}>
     <Card className="group relative border border-border/40 overflow-hidden bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-all duration-500 h-full">
       {/* Gradient overlay on hover */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       
       {/* Number badge */}
       <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-secondary/80 flex items-center justify-center">
         <span className="text-xs font-bold text-muted-foreground">0{index + 1}</span>
       </div>
 
-      {/* Card Header */}
       <CardHeader className="pb-4">
-        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-          <Icon className="h-7 w-7 text-white" />
+        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+          <Icon className="h-7 w-7 text-primary" />
         </div>
         <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
           {title}
@@ -115,7 +112,6 @@ const ServiceCard = ({ title, description, icon: Icon, details, gradient, index 
         </CardDescription>
       </CardHeader>
 
-      {/* Card Content */}
       <CardContent className="pt-0">
         <div className="flex items-center justify-between">
           <div className="text-xs font-medium bg-secondary/80 py-1.5 px-3 rounded-full text-muted-foreground">
@@ -130,7 +126,6 @@ const ServiceCard = ({ title, description, icon: Icon, details, gradient, index 
   </motion.div>
 );
 
-// Services Section Component
 const ServicesSection = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
@@ -140,7 +135,7 @@ const ServicesSection = () => {
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-brand-cyan/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
 
       <div className="section-container relative z-10">
         {/* Section Header */}
@@ -156,13 +151,13 @@ const ServicesSection = () => {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6"
           >
-            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+            <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-primary">What We Offer</span>
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Our{" "}
-            <span className="bg-gradient-to-r from-primary via-brand-purple to-brand-cyan bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
               Services
             </span>
           </h2>
