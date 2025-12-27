@@ -10,7 +10,6 @@ import {
   FileX,
   MapPin,
   Clock,
-  ArrowUp,
 } from "lucide-react";
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
@@ -64,10 +63,6 @@ const Footer = () => {
     { to: "/refund-policy", icon: FileX, label: "Refund" },
     { to: "/cookies-policy", icon: Cookie, label: "Cookies" },
   ];
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
     <footer className="w-full bg-gradient-to-b from-background to-card text-foreground border-t border-border/30 relative overflow-hidden">
@@ -224,19 +219,6 @@ const Footer = () => {
               </ul>
             </motion.div>
           </div>
-        </div>
-
-        {/* Back to Top Button */}
-        <div className="flex justify-end px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto -mt-4 mb-4">
-          <motion.button
-            onClick={scrollToTop}
-            className="w-10 h-10 rounded-lg bg-secondary/80 border border-border/50 flex items-center justify-center text-muted-foreground hover:text-brand-yellow hover:border-brand-yellow/50 transition-all duration-300"
-            whileHover={{ scale: 1.1, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Scroll to top"
-          >
-            <ArrowUp className="w-4 h-4" />
-          </motion.button>
         </div>
 
         {/* Footer Bottom Bar */}

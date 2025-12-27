@@ -1,8 +1,20 @@
+import { useRef } from "react";
 import { CheckCircle, Users, Award, Briefcase, LightbulbIcon, Target, Rocket, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { AnimatedSectionHeader } from "./AnimatedGradient";
 
 const AboutSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const opacityGlow = useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 1, 0.3]);
+
   const highlights = [
     { text: "Solo-powered micro-agency", icon: Users },
     { text: "Creative UI/UX design", icon: LightbulbIcon },
@@ -23,20 +35,37 @@ const AboutSection = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: { 
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+      } 
+    },
   };
 
   return (
     <section
       id="about"
+      ref={sectionRef}
       className="py-20 sm:py-28 lg:py-32 relative overflow-hidden"
     >
-      {/* Premium gradient background */}
+      {/* Premium gradient background with parallax */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
-        <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-brand-yellow/5 rounded-full blur-[150px]" />
-        <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-brand-gold/5 rounded-full blur-[120px]" />
+        <motion.div 
+          className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-brand-yellow/8 rounded-full blur-[150px]" 
+          style={{ y: backgroundY, opacity: opacityGlow }}
+        />
+        <motion.div 
+          className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-brand-gold/8 rounded-full blur-[120px]" 
+          style={{ y: useTransform(scrollYProgress, [0, 1], [0, -80]) }}
+        />
+        {/* Grid pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.03)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -80,9 +109,10 @@ const AboutSection = () => {
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  className="group flex items-center gap-3 p-4 bg-card/50 hover:bg-card border border-border/30 hover:border-brand-yellow/30 rounded-xl transition-all duration-300"
+                  whileHover={{ scale: 1.02, x: 4 }}
+                  className="group flex items-center gap-3 p-4 bg-card/50 hover:bg-card/80 backdrop-blur-sm border border-border/30 hover:border-brand-yellow/40 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-brand-yellow/5"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-brand-yellow/10 group-hover:bg-brand-yellow/20 flex items-center justify-center transition-colors">
+                  <div className="w-10 h-10 rounded-lg bg-brand-yellow/10 group-hover:bg-brand-yellow/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
                     <item.icon className="w-5 h-5 text-brand-yellow" />
                   </div>
                   <span className="font-medium text-sm text-foreground">{item.text}</span>
