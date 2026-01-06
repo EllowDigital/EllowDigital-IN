@@ -26,6 +26,34 @@
   box-sizing: border-box;
 }
 
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: 12px;
+  z-index: 50;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: var(--shadow);
+  transform: translateY(-200%);
+  transition:
+    transform 140ms ease,
+    opacity 140ms ease;
+  opacity: 0;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  opacity: 1;
+  outline: 3px solid rgba(15, 98, 254, 0.35);
+  outline-offset: 3px;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -256,4 +284,64 @@ footer {
 footer a {
   color: var(--accent);
   text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 3px solid rgba(15, 98, 254, 0.35);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    padding: 16px;
+  }
+
+  .card-frame {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .hero {
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .doc-switch {
+    gap: 8px;
+  }
+
+  .doc-switch a {
+    padding: 10px 14px;
+  }
+
+  .section-nav {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    margin: 18px 0 22px;
+  }
+
+  .section-card {
+    padding: 18px;
+  }
+
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 420px) {
+  .skip-link {
+    left: 12px;
+    top: 10px;
+    font-size: 13px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+  }
 }
