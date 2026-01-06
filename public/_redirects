@@ -1,1 +1,5 @@
+/DhanDiary /DhanDiary/index.html 200
+/DhanDiary/ /DhanDiary/index.html 200
+/DhanDiary/* /DhanDiary/:splat 200
+
 /* /index.html 200
