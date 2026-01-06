@@ -29,6 +29,35 @@ const Navbar = () => {
   const navigate = useNavigate();
   const isHomePage = location.pathname === "/";
 
+  const handleNavClick = useCallback(
+    (href: string) => {
+      setIsMobileOpen(false);
+
+      if (href.startsWith("/")) {
+        navigate(href);
+        return;
+      }
+
+      if (isHomePage) {
+        const element = document.querySelector(href);
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: "smooth" });
+          }, 150);
+        }
+      } else {
+        navigate("/");
+        setTimeout(() => {
+          const element = document.querySelector(href);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 300);
+      }
+    },
+    [isHomePage, navigate]
+  );
+
   // Handle keyboard navigation
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -91,7 +120,7 @@ const Navbar = () => {
         (navButtons[NAV_LINKS.length - 1] as HTMLButtonElement)?.focus();
       }
     },
-    [focusedIndex, isMobileOpen]
+    [focusedIndex, handleNavClick, isMobileOpen]
   );
 
   useEffect(() => {
@@ -169,32 +198,6 @@ const Navbar = () => {
       document.body.style.overflow = "";
     };
   }, [isMobileOpen]);
-
-  const handleNavClick = (href: string) => {
-    setIsMobileOpen(false);
-
-    if (href.startsWith("/")) {
-      navigate(href);
-      return;
-    }
-
-    if (isHomePage) {
-      const element = document.querySelector(href);
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: "smooth" });
-        }, 150);
-      }
-    } else {
-      navigate("/");
-      setTimeout(() => {
-        const element = document.querySelector(href);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 300);
-    }
-  };
 
   const toggleMobileMenu = () => setIsMobileOpen((prev) => !prev);
 
