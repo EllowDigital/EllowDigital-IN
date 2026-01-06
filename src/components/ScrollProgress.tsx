@@ -3,7 +3,7 @@ import { motion, useSpring } from "framer-motion";
 
 const ScrollProgress = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
-  
+
   const scaleX = useSpring(0, {
     stiffness: 100,
     damping: 30,
@@ -12,7 +12,8 @@ const ScrollProgress = () => {
 
   useEffect(() => {
     const updateProgress = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
       setScrollProgress(progress);
       scaleX.set(progress);

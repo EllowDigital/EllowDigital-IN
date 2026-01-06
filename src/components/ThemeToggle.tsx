@@ -10,8 +10,10 @@ const ThemeToggle = () => {
   useEffect(() => {
     setMounted(true);
     const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+
     if (savedTheme === "light") {
       setIsDark(false);
       document.documentElement.classList.remove("dark");
@@ -31,11 +33,11 @@ const ThemeToggle = () => {
 
   const toggleTheme = () => {
     if (isAnimating) return;
-    
+
     setIsAnimating(true);
     const newValue = !isDark;
     setIsDark(newValue);
-    
+
     if (newValue) {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
@@ -43,7 +45,7 @@ const ThemeToggle = () => {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
-    
+
     setTimeout(() => setIsAnimating(false), 600);
   };
 
@@ -66,13 +68,13 @@ const ThemeToggle = () => {
         className="absolute inset-0 rounded-full"
         initial={false}
         animate={{
-          background: isDark 
+          background: isDark
             ? "radial-gradient(circle, hsl(48 100% 50% / 0.2) 0%, transparent 70%)"
             : "radial-gradient(circle, hsl(38 95% 50% / 0.3) 0%, transparent 70%)",
         }}
         transition={{ duration: 0.5 }}
       />
-      
+
       {/* Rotating rays for sun */}
       <AnimatePresence mode="wait">
         {!isDark && (
@@ -91,13 +93,13 @@ const ThemeToggle = () => {
                   transformOrigin: "center 12px",
                   rotate: `${i * 45}deg`,
                 }}
-                animate={{ 
+                animate={{
                   opacity: [0.3, 0.7, 0.3],
                   scaleY: [0.8, 1.2, 0.8],
                 }}
-                transition={{ 
-                  duration: 2, 
-                  repeat: Infinity, 
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
                   delay: i * 0.1,
                 }}
               />
@@ -105,7 +107,7 @@ const ThemeToggle = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       {/* Stars for dark mode */}
       <AnimatePresence>
         {isDark && (
@@ -119,13 +121,13 @@ const ThemeToggle = () => {
                   left: `${15 + i * 30}%`,
                 }}
                 initial={{ opacity: 0, scale: 0 }}
-                animate={{ 
+                animate={{
                   opacity: [0.4, 1, 0.4],
                   scale: [0.5, 1, 0.5],
                 }}
                 exit={{ opacity: 0, scale: 0 }}
-                transition={{ 
-                  duration: 1.5 + i * 0.5, 
+                transition={{
+                  duration: 1.5 + i * 0.5,
                   repeat: Infinity,
                   delay: i * 0.3,
                 }}
@@ -161,7 +163,7 @@ const ThemeToggle = () => {
           )}
         </AnimatePresence>
       </div>
-      
+
       {/* Ripple effect on click */}
       <AnimatePresence>
         {isAnimating && (
@@ -172,7 +174,7 @@ const ThemeToggle = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             style={{
-              background: isDark 
+              background: isDark
                 ? "radial-gradient(circle, hsl(48 100% 50% / 0.4) 0%, transparent 70%)"
                 : "radial-gradient(circle, hsl(220 20% 20% / 0.3) 0%, transparent 70%)",
             }}

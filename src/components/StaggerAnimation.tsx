@@ -28,8 +28,8 @@ const containerVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     y: 30,
     scale: 0.95,
   },
@@ -74,10 +74,7 @@ export const StaggerContainer = ({
   );
 };
 
-export const StaggerItem = ({
-  children,
-  className = "",
-}: StaggerItemProps) => {
+export const StaggerItem = ({ children, className = "" }: StaggerItemProps) => {
   return (
     <motion.div variants={itemVariants} className={className}>
       {children}
@@ -87,8 +84,8 @@ export const StaggerItem = ({
 
 // Preset animations for different card types
 export const cardItemVariants: Variants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     y: 40,
     scale: 0.9,
   },
@@ -104,8 +101,8 @@ export const cardItemVariants: Variants = {
 };
 
 export const listItemVariants: Variants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     x: -20,
   },
   visible: {
@@ -119,8 +116,8 @@ export const listItemVariants: Variants = {
 };
 
 export const gridItemVariants: Variants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     scale: 0.8,
     rotate: -5,
   },

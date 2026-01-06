@@ -23,7 +23,7 @@ const TechItem: FC<TechItemProps> = memo(({ name, category, index }) => {
       <div className="relative flex flex-col items-center p-6 rounded-2xl bg-gradient-to-b from-card/80 to-card border border-border/50 transition-all duration-500 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2">
         {/* Background glow */}
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        
+
         {/* Icon Circle */}
         <div className="relative mb-4">
           <div className="absolute -inset-3 bg-gradient-to-r from-primary to-primary/80 rounded-full opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
@@ -63,13 +63,19 @@ const technologies = [
 
 const TechStack = () => {
   return (
-    <section id="techstack" className="relative py-20 sm:py-28 overflow-hidden deferred-section">
+    <section
+      id="techstack"
+      className="relative py-20 sm:py-28 overflow-hidden deferred-section"
+    >
       {/* Modern gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
-      
+
       {/* Animated background elements */}
       <div className="absolute top-20 right-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-20 left-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+      <div
+        className="absolute bottom-20 left-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse"
+        style={{ animationDelay: "1s" }}
+      />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
@@ -105,7 +111,12 @@ const TechStack = () => {
         {/* Tech Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
           {technologies.map((tech, index) => (
-            <TechItem key={index} name={tech.name} category={tech.category} index={index} />
+            <TechItem
+              key={index}
+              name={tech.name}
+              category={tech.category}
+              index={index}
+            />
           ))}
         </div>
 

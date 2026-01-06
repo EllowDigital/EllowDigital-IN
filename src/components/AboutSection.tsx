@@ -1,12 +1,21 @@
 import { useRef } from "react";
-import { CheckCircle, Users, Award, Briefcase, LightbulbIcon, Target, Rocket, ArrowRight } from "lucide-react";
+import {
+  CheckCircle,
+  Users,
+  Award,
+  Briefcase,
+  LightbulbIcon,
+  Target,
+  Rocket,
+  ArrowRight,
+} from "lucide-react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { AnimatedSectionHeader } from "./AnimatedGradient";
 
 const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-  
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
@@ -36,14 +45,14 @@ const AboutSection = () => {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20, scale: 0.95 },
-    show: { 
-      opacity: 1, 
-      y: 0, 
+    show: {
+      opacity: 1,
+      y: 0,
       scale: 1,
-      transition: { 
+      transition: {
         duration: 0.5,
         ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-      } 
+      },
     },
   };
 
@@ -56,12 +65,12 @@ const AboutSection = () => {
       {/* Premium gradient background with parallax */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
-        <motion.div 
-          className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-brand-yellow/8 rounded-full blur-[150px]" 
+        <motion.div
+          className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-brand-yellow/8 rounded-full blur-[150px]"
           style={{ y: backgroundY, opacity: opacityGlow }}
         />
-        <motion.div 
-          className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-brand-gold/8 rounded-full blur-[120px]" 
+        <motion.div
+          className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-brand-gold/8 rounded-full blur-[120px]"
           style={{ y: useTransform(scrollYProgress, [0, 1], [0, -80]) }}
         />
         {/* Grid pattern */}
@@ -90,10 +99,14 @@ const AboutSection = () => {
           >
             <div className="space-y-5">
               <p className="text-foreground/80 text-base sm:text-lg leading-relaxed">
-                At EllowDigital, we are dedicated to delivering high-performance websites, mobile apps, and software solutions that are tailored to your unique business needs.
+                At EllowDigital, we are dedicated to delivering high-performance
+                websites, mobile apps, and software solutions that are tailored
+                to your unique business needs.
               </p>
               <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
-                We believe that every project is an opportunity to make a lasting impact. That's why we focus on quality, efficiency, and user-centric design to ensure our solutions exceed expectations.
+                We believe that every project is an opportunity to make a
+                lasting impact. That's why we focus on quality, efficiency, and
+                user-centric design to ensure our solutions exceed expectations.
               </p>
             </div>
 
@@ -115,7 +128,9 @@ const AboutSection = () => {
                   <div className="w-10 h-10 rounded-lg bg-brand-yellow/10 group-hover:bg-brand-yellow/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
                     <item.icon className="w-5 h-5 text-brand-yellow" />
                   </div>
-                  <span className="font-medium text-sm text-foreground">{item.text}</span>
+                  <span className="font-medium text-sm text-foreground">
+                    {item.text}
+                  </span>
                 </motion.div>
               ))}
             </motion.div>
@@ -147,10 +162,15 @@ const AboutSection = () => {
                   <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-yellow/20 to-brand-gold/10 border border-brand-yellow/20 flex items-center justify-center">
                     <Rocket className="w-7 h-7 text-brand-yellow" />
                   </div>
-                  <h3 className="text-xl font-bold text-foreground">Our Mission</h3>
+                  <h3 className="text-xl font-bold text-foreground">
+                    Our Mission
+                  </h3>
                 </div>
                 <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                  To empower businesses with meaningful digital experiences. By blending innovative technology, agile development, and human-centered design, we create results that resonate with your audience.
+                  To empower businesses with meaningful digital experiences. By
+                  blending innovative technology, agile development, and
+                  human-centered design, we create results that resonate with
+                  your audience.
                 </p>
               </div>
             </div>
@@ -163,21 +183,31 @@ const AboutSection = () => {
                   <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-gold/20 to-brand-yellow/10 border border-brand-gold/20 flex items-center justify-center">
                     <LightbulbIcon className="w-7 h-7 text-brand-gold" />
                   </div>
-                  <h3 className="text-xl font-bold text-foreground">Our Philosophy</h3>
+                  <h3 className="text-xl font-bold text-foreground">
+                    Our Philosophy
+                  </h3>
                 </div>
                 <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                  Technology should empower people. With passion for creating impactful digital experiences, we blend innovative technology with human-centered design to bring your boldest ideas to life.
+                  Technology should empower people. With passion for creating
+                  impactful digital experiences, we blend innovative technology
+                  with human-centered design to bring your boldest ideas to
+                  life.
                 </p>
               </div>
             </div>
 
             {/* Quote */}
             <div className="relative p-6 bg-gradient-to-br from-brand-yellow/5 to-brand-gold/5 border border-brand-yellow/15 rounded-2xl overflow-hidden">
-              <div className="absolute -top-2 left-4 text-6xl text-brand-yellow/20 font-serif leading-none">"</div>
+              <div className="absolute -top-2 left-4 text-6xl text-brand-yellow/20 font-serif leading-none">
+                "
+              </div>
               <p className="relative text-sm sm:text-base italic text-foreground/80 pl-6 pr-4 leading-relaxed">
-                Every line of code and every pixel should serve a purpose — to create beautiful experiences that solve real problems.
+                Every line of code and every pixel should serve a purpose — to
+                create beautiful experiences that solve real problems.
               </p>
-              <div className="absolute -bottom-4 right-4 text-6xl text-brand-yellow/20 font-serif leading-none rotate-180">"</div>
+              <div className="absolute -bottom-4 right-4 text-6xl text-brand-yellow/20 font-serif leading-none rotate-180">
+                "
+              </div>
             </div>
           </motion.div>
         </div>

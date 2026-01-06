@@ -1,6 +1,13 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Users, Activity, Eye, Check, ArrowRight, Sparkles } from "lucide-react";
+import {
+  Users,
+  Activity,
+  Eye,
+  Check,
+  ArrowRight,
+  Sparkles,
+} from "lucide-react";
 import {
   staggerContainer,
   fadeUpItem,

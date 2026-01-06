@@ -1,7 +1,13 @@
 import { ReactNode } from "react";
 import { motion, Variants } from "framer-motion";
 
-type AnimationType = "fadeUp" | "fadeDown" | "fadeLeft" | "fadeRight" | "scale" | "blur";
+type AnimationType =
+  | "fadeUp"
+  | "fadeDown"
+  | "fadeLeft"
+  | "fadeRight"
+  | "scale"
+  | "blur";
 
 interface ScrollRevealProps {
   children: ReactNode;

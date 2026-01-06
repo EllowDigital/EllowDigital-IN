@@ -39,14 +39,14 @@ const SEOHead = ({
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://ellowdigitals.me/"
-      }
-    ]
+        position: 1,
+        name: "Home",
+        item: "https://ellowdigitals.me/",
+      },
+    ],
   };
 
   // Default organization structured data
@@ -54,25 +54,26 @@ const SEOHead = ({
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": "https://ellowdigitals.me/#organization",
-    "name": "EllowDigital",
-    "url": "https://ellowdigitals.me",
-    "logo": {
+    name: "EllowDigital",
+    url: "https://ellowdigitals.me",
+    logo: {
       "@type": "ImageObject",
-      "url": "https://ellowdigitals.me/logo.webp",
-      "width": 512,
-      "height": 512
+      url: "https://ellowdigitals.me/logo.webp",
+      width: 512,
+      height: 512,
     },
-    "sameAs": [
+    sameAs: [
       "https://www.facebook.com/ellowdigitals",
       "https://twitter.com/ellowdigitals",
       "https://www.linkedin.com/company/ellowdigitals",
       "https://www.instagram.com/ellowdigitals",
     ],
-    "description": "EllowDigital provides digital transformation services including SEO, web development, and digital marketing solutions.",
-    "areaServed": {
+    description:
+      "EllowDigital provides digital transformation services including SEO, web development, and digital marketing solutions.",
+    areaServed: {
       "@type": "Country",
-      "name": "India"
-    }
+      name: "India",
+    },
   };
 
   const jsonLd = structuredData || defaultStructuredData;
@@ -86,12 +87,15 @@ const SEOHead = ({
       <meta name="keywords" content={keywords} />
       <meta name="author" content={author} />
       <link rel="canonical" href={canonicalUrl} />
-      
+
       {/* Robots */}
       {noindex ? (
         <meta name="robots" content="noindex, nofollow" />
       ) : (
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
       )}
 
       {/* Open Graph / Facebook */}
@@ -106,10 +110,14 @@ const SEOHead = ({
       <meta property="og:image:alt" content={ogImageAlt} />
       <meta property="og:site_name" content="EllowDigital" />
       <meta property="og:locale" content="en_IN" />
-      
+
       {/* Article specific OG tags */}
-      {publishedTime && <meta property="article:published_time" content={publishedTime} />}
-      {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+      {publishedTime && (
+        <meta property="article:published_time" content={publishedTime} />
+      )}
+      {modifiedTime && (
+        <meta property="article:modified_time" content={modifiedTime} />
+      )}
       {section && <meta property="article:section" content={section} />}
 
       {/* Twitter */}
@@ -124,7 +132,9 @@ const SEOHead = ({
 
       {/* Structured Data / JSON-LD */}
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+      <script type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </script>
 
       {/* Additional meta tags can be passed as children */}
       {children}

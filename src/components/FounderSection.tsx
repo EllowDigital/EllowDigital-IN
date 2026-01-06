@@ -1,5 +1,14 @@
 import { useRef } from "react";
-import { User, Mail, Briefcase, Award, MapPin, ExternalLink, Quote, ArrowRight } from "lucide-react";
+import {
+  User,
+  Mail,
+  Briefcase,
+  Award,
+  MapPin,
+  ExternalLink,
+  Quote,
+  ArrowRight,
+} from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import {
   headerVariants,

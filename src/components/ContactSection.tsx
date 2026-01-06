@@ -1,5 +1,16 @@
 import { useState, useRef } from "react";
-import { Mail, Phone, Github, Send, MapPin, Clock, MessageSquare, CheckCircle, AlertCircle, Sparkles } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  Github,
+  Send,
+  MapPin,
+  Clock,
+  MessageSquare,
+  CheckCircle,
+  AlertCircle,
+  Sparkles,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -39,11 +50,16 @@ const ContactSection = () => {
     message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({});
+  const [touched, setTouched] = useState<
+    Partial<Record<keyof FormData, boolean>>
+  >({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const validateField = (name: keyof FormData, value: string): string | undefined => {
+  const validateField = (
+    name: keyof FormData,
+    value: string
+  ): string | undefined => {
     try {
       const fieldSchema = contactSchema.shape[name];
       fieldSchema.parse(value);

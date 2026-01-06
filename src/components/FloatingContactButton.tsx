@@ -19,7 +19,7 @@ const FloatingContactButton = () => {
         footerRef.current = footer;
         const footerRect = footer.getBoundingClientRect();
         const windowHeight = window.innerHeight;
-        
+
         // If footer is visible in viewport, move buttons up
         if (footerRect.top < windowHeight - 100) {
           setIsNearFooter(true);
@@ -93,7 +93,9 @@ const FloatingContactButton = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 flex items-center justify-center transition-all duration-300"
-              aria-label={isExpanded ? "Close contact menu" : "Open contact menu"}
+              aria-label={
+                isExpanded ? "Close contact menu" : "Open contact menu"
+              }
             >
               <AnimatePresence mode="wait">
                 {isExpanded ? (
@@ -131,7 +133,7 @@ const FloatingContactButton = () => {
                 >
                   {/* Background glow */}
                   <div className="absolute top-0 right-0 w-20 h-20 bg-primary/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
-                  
+
                   <div className="relative z-10">
                     <div className="flex items-center gap-2 mb-2">
                       <Sparkles className="w-4 h-4 text-primary" />

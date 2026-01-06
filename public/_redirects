@@ -1,5 +1,19 @@
+
+# Support lowercase URLs (case-sensitive hosts)
+/dhandiary /DhanDiary 301
+/dhandiary/ /DhanDiary/ 301
+/dhandiary/* /DhanDiary/:splat 301
+
+# Ensure the DhanDiary landing page always works
 /DhanDiary /DhanDiary/index.html 200
 /DhanDiary/ /DhanDiary/index.html 200
-/DhanDiary/* /DhanDiary/:splat 200
+
+# Support “pretty URLs” (no .html) for policy pages
+/DhanDiary/app/privacy-policy /DhanDiary/app/privacy-policy.html 200
+/DhanDiary/app/privacy-policy/ /DhanDiary/app/privacy-policy.html 200
+/DhanDiary/app/terms /DhanDiary/app/terms.html 200
+/DhanDiary/app/terms/ /DhanDiary/app/terms.html 200
+/DhanDiary/app/eula /DhanDiary/app/eula.html 200
+/DhanDiary/app/eula/ /DhanDiary/app/eula.html 200
 
 /* /index.html 200

@@ -1,11 +1,4 @@
-import {
-  Mail,
-  Phone,
-  Instagram,
-  Github,
-  MapPin,
-  Clock,
-} from "lucide-react";
+import { Mail, Phone, Instagram, Github, MapPin, Clock } from "lucide-react";
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
 
@@ -13,12 +6,16 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   // Smooth scroll to section
-  const smoothScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+  const smoothScrollTo = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    targetId: string
+  ) => {
     e.preventDefault();
     const element = document.getElementById(targetId.replace("#", ""));
     if (element) {
       const offset = 80; // Navbar height offset
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
       const offsetPosition = elementPosition - offset;
 
       window.scrollTo({
@@ -31,7 +28,11 @@ const Footer = () => {
   const socialLinks = [
     { href: "mailto:ellowdigitalindia@gmail.com", label: "Mail", icon: Mail },
     { href: "tel:+918960446756", label: "Phone", icon: Phone },
-    { href: "https://instagram.com/ellowdigital", label: "Instagram", icon: Instagram },
+    {
+      href: "https://instagram.com/ellowdigital",
+      label: "Instagram",
+      icon: Instagram,
+    },
     { href: "https://github.com/ellowdigital", label: "Github", icon: Github },
   ];
 
@@ -59,14 +60,27 @@ const Footer = () => {
   ];
 
   const contactInfo = [
-    { icon: Mail, value: "ellowdigitalindia@gmail.com", href: "mailto:ellowdigitalindia@gmail.com", isLink: true },
-    { icon: Phone, value: "+91 89604 46756", href: "tel:+918960446756", isLink: true },
+    {
+      icon: Mail,
+      value: "ellowdigitalindia@gmail.com",
+      href: "mailto:ellowdigitalindia@gmail.com",
+      isLink: true,
+    },
+    {
+      icon: Phone,
+      value: "+91 89604 46756",
+      href: "tel:+918960446756",
+      isLink: true,
+    },
     { icon: MapPin, value: "India", isLink: false },
     { icon: Clock, value: "Mon - Sat: 10AM - 7PM", isLink: false },
   ];
 
   // Render navigation link with smooth scroll
-  const renderNavLink = (link: { label: string; href: string }, className: string) => {
+  const renderNavLink = (
+    link: { label: string; href: string },
+    className: string
+  ) => {
     if (link.href.startsWith("/")) {
       return (
         <Link to={link.href} className={className}>
@@ -98,7 +112,6 @@ const Footer = () => {
       {/* Main Footer Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12 lg:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12">
-          
           {/* Brand Section */}
           <div className="text-center sm:text-left sm:col-span-2 lg:col-span-1">
             {/* Logo */}
@@ -109,12 +122,13 @@ const Footer = () => {
                 <span className="text-foreground">Digital</span>
               </span>
             </div>
-            
+
             {/* Tagline */}
             <p className="text-muted-foreground text-sm leading-relaxed mb-6 max-w-xs mx-auto sm:mx-0">
-              Crafting innovative digital experiences that empower your brand online.
+              Crafting innovative digital experiences that empower your brand
+              online.
             </p>
-            
+
             {/* Social Links */}
             <div className="flex items-center justify-center sm:justify-start gap-2">
               {socialLinks.map(({ href, label, icon: Icon }) => {
@@ -208,7 +222,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-5">
           <div className="flex flex-col gap-4">
             {/* Legal Links */}
-            <nav 
+            <nav
               className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5"
               aria-label="Legal navigation"
             >
@@ -231,7 +245,10 @@ const Footer = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 text-center">
               <p className="text-muted-foreground text-xs">
                 © {currentYear}{" "}
-                <span className="font-semibold text-brand-yellow">EllowDigital</span>. All Rights Reserved.
+                <span className="font-semibold text-brand-yellow">
+                  EllowDigital
+                </span>
+                . All Rights Reserved.
               </p>
               <p className="text-brand-yellow font-semibold text-xs">
                 Making Digital Simple.

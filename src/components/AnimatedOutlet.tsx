@@ -24,9 +24,7 @@ const AnimatedOutlet = () => {
 
   return (
     <AnimatePresence mode="wait" initial={true}>
-      <PageTransition key={location.pathname}>
-        {outlet}
-      </PageTransition>
+      <PageTransition key={location.pathname}>{outlet}</PageTransition>
     </AnimatePresence>
   );
 };

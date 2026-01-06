@@ -29,9 +29,13 @@ const FeaturedOffers = lazy(() => import("@/components/FeaturedOffers"));
 const SmartContactForm = lazy(() => import("@/components/SmartContactForm"));
 
 // Section loading fallback
-const SectionLoader = ({ cards = 3, columns = 3 }: { cards?: number; columns?: 2 | 3 | 4 }) => (
-  <SectionSkeleton cards={cards} columns={columns} />
-);
+const SectionLoader = ({
+  cards = 3,
+  columns = 3,
+}: {
+  cards?: number;
+  columns?: 2 | 3 | 4;
+}) => <SectionSkeleton cards={cards} columns={columns} />;
 
 // Homepage JSON-LD structured data
 const homePageSchema = {
@@ -73,7 +77,7 @@ const homePageSchema = {
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
-  
+
   // Enable smooth scroll for all anchor links
   useSmoothScroll();
 
@@ -126,7 +130,7 @@ const Index = () => {
       {isLoading && <Preloader />}
 
       <ScrollProgress />
-      
+
       <div
         className={`min-h-screen flex flex-col bg-background text-foreground transition-opacity duration-500 ${
           isLoading ? "opacity-0" : "opacity-100"

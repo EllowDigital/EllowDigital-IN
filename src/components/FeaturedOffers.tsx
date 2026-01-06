@@ -94,7 +94,10 @@ const FeaturedOffers = () => {
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
       <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+      <div
+        className="absolute bottom-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse"
+        style={{ animationDelay: "1s" }}
+      />
 
       <div className="section-container px-4 sm:px-6 relative z-10">
         {/* Header */}
@@ -113,14 +116,23 @@ const FeaturedOffers = () => {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
           >
             <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Special Packages</span>
+            <span className="text-sm font-medium text-primary">
+              Special Packages
+            </span>
           </motion.div>
 
-          <h2 id="offers-heading" className="text-4xl md:text-5xl font-bold mb-4">
-            Featured <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">Offers</span>
+          <h2
+            id="offers-heading"
+            className="text-4xl md:text-5xl font-bold mb-4"
+          >
+            Featured{" "}
+            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+              Offers
+            </span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Special packages designed to meet specific needs with exceptional value.
+            Special packages designed to meet specific needs with exceptional
+            value.
           </p>
         </motion.div>
 
@@ -135,7 +147,9 @@ const FeaturedOffers = () => {
             >
               <Card
                 className={`relative overflow-hidden border h-full transition-all duration-500 hover:-translate-y-2 ${
-                  offer.isPopular ? "border-primary shadow-xl shadow-primary/10" : "border-border/60 hover:border-primary/30"
+                  offer.isPopular
+                    ? "border-primary shadow-xl shadow-primary/10"
+                    : "border-border/60 hover:border-primary/30"
                 }`}
                 aria-label={offer.title}
               >

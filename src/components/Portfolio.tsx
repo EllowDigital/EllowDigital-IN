@@ -131,7 +131,11 @@ const ProjectSkeleton = ({ featured = false }: { featured?: boolean }) => (
             key={j}
             className="h-6 w-16 rounded-md bg-secondary/40"
             animate={{ opacity: [0.5, 0.8, 0.5] }}
-            transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 + j * 0.05 }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              delay: 0.3 + j * 0.05,
+            }}
           />
         ))}
       </div>
@@ -163,11 +167,13 @@ const Portfolio = () => {
   // Infinite scroll observer
   const loadMore = useCallback(() => {
     if (isLoading || !hasMore) return;
-    
+
     setIsLoading(true);
     // Simulate loading delay for smooth UX
     setTimeout(() => {
-      setVisibleCount((prev) => Math.min(prev + ITEMS_PER_PAGE, filteredProjects.length));
+      setVisibleCount((prev) =>
+        Math.min(prev + ITEMS_PER_PAGE, filteredProjects.length)
+      );
       setIsLoading(false);
     }, 800);
   }, [isLoading, hasMore, filteredProjects.length]);
@@ -429,11 +435,7 @@ const Portfolio = () => {
             animate={{ opacity: 1 }}
             className="flex justify-center mt-8"
           >
-            <Button
-              variant="outline"
-              onClick={loadMore}
-              className="gap-2"
-            >
+            <Button variant="outline" onClick={loadMore} className="gap-2">
               Load More Projects
               <ArrowRight className="w-4 h-4" />
             </Button>

@@ -1,4 +1,11 @@
-import { Award, Clock, ThumbsUp, Users, Sparkles, TrendingUp } from "lucide-react";
+import {
+  Award,
+  Clock,
+  ThumbsUp,
+  Users,
+  Sparkles,
+  TrendingUp,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import {

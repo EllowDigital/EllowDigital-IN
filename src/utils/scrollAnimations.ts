@@ -1,7 +1,12 @@
 import { Variants } from "framer-motion";
 
 // Smooth easing curve for professional animations
-export const smoothEase = [0.22, 1, 0.36, 1] as [number, number, number, number];
+export const smoothEase = [0.22, 1, 0.36, 1] as [
+  number,
+  number,
+  number,
+  number
+];
 
 // Container variants with staggered children
 export const staggerContainer = (
@@ -20,10 +25,10 @@ export const staggerContainer = (
 
 // Fade up animation for cards and items
 export const fadeUpItem: Variants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     y: 40,
-    scale: 0.95 
+    scale: 0.95,
   },
   visible: {
     opacity: 1,
@@ -38,9 +43,9 @@ export const fadeUpItem: Variants = {
 
 // Fade in from left
 export const fadeInLeft: Variants = {
-  hidden: { 
-    opacity: 0, 
-    x: -40 
+  hidden: {
+    opacity: 0,
+    x: -40,
   },
   visible: {
     opacity: 1,
@@ -54,9 +59,9 @@ export const fadeInLeft: Variants = {
 
 // Fade in from right
 export const fadeInRight: Variants = {
-  hidden: { 
-    opacity: 0, 
-    x: 40 
+  hidden: {
+    opacity: 0,
+    x: 40,
   },
   visible: {
     opacity: 1,
@@ -70,9 +75,9 @@ export const fadeInRight: Variants = {
 
 // Scale up animation
 export const scaleUp: Variants = {
-  hidden: { 
-    opacity: 0, 
-    scale: 0.8 
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
   },
   visible: {
     opacity: 1,

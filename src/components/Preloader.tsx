@@ -103,7 +103,12 @@ const Preloader = ({ minDuration = 1200 }: PreloaderProps) => {
                 y: [0, 40, 0],
                 scale: [1.2, 1, 1.2],
               }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.5,
+              }}
             />
             <motion.div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-primary/8 blur-[120px]"
@@ -134,16 +139,26 @@ const Preloader = ({ minDuration = 1200 }: PreloaderProps) => {
                   scale: [1, 1.2, 1],
                   opacity: [0.5, 0.8, 0.5],
                 }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               />
-              
+
               {/* Logo container */}
               <motion.div
                 className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-2xl shadow-primary/30"
                 animate={{ rotate: [0, 5, -5, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               >
-                <span className="text-3xl font-bold text-primary-foreground">E</span>
+                <span className="text-3xl font-bold text-primary-foreground">
+                  E
+                </span>
               </motion.div>
             </motion.div>
 
@@ -185,14 +200,14 @@ const Preloader = ({ minDuration = 1200 }: PreloaderProps) => {
                 animate={{ rotate: 360 }}
                 transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
               />
-              
+
               {/* Spinning arc */}
               <motion.div
                 className="absolute inset-0 rounded-full border-2 border-transparent border-t-primary"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
               />
-              
+
               {/* Inner pulsing dot */}
               <motion.div
                 className="absolute inset-0 m-auto w-3 h-3 rounded-full bg-primary"
@@ -200,7 +215,11 @@ const Preloader = ({ minDuration = 1200 }: PreloaderProps) => {
                   scale: [1, 1.5, 1],
                   opacity: [1, 0.5, 1],
                 }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               />
             </motion.div>
 

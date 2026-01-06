@@ -1,6 +1,14 @@
 import { useRef, useCallback, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Star, Quote, ArrowLeft, ArrowRight, MessageSquare, Pause, Play } from "lucide-react";
+import {
+  Star,
+  Quote,
+  ArrowLeft,
+  ArrowRight,
+  MessageSquare,
+  Pause,
+  Play,
+} from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -65,13 +73,13 @@ const Testimonials = () => {
       clearInterval(progressInterval.current);
     }
     setProgress(0);
-    
+
     const startTime = Date.now();
     progressInterval.current = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const newProgress = Math.min((elapsed / AUTOPLAY_DELAY) * 100, 100);
       setProgress(newProgress);
-      
+
       if (newProgress >= 100) {
         clearInterval(progressInterval.current!);
       }
@@ -125,7 +133,7 @@ const Testimonials = () => {
   const toggleAutoplay = useCallback(() => {
     const autoplay = autoplayPlugin.current;
     if (!autoplay) return;
-    
+
     if (isPlaying) {
       autoplay.stop();
       stopProgressAnimation();
@@ -367,7 +375,11 @@ const Testimonials = () => {
               whileTap={{ scale: 0.95 }}
               aria-label={isPlaying ? "Pause autoplay" : "Resume autoplay"}
             >
-              {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+              {isPlaying ? (
+                <Pause className="w-4 h-4" />
+              ) : (
+                <Play className="w-4 h-4" />
+              )}
             </motion.button>
 
             {/* Next button */}

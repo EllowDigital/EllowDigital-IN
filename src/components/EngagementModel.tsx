@@ -119,7 +119,9 @@ const EngagementModel = () => {
             className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6"
           >
             <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Flexible Options</span>
+            <span className="text-sm font-medium text-primary">
+              Flexible Options
+            </span>
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -129,7 +131,8 @@ const EngagementModel = () => {
             </span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-            Choose the collaboration model that best fits your project needs and budget.
+            Choose the collaboration model that best fits your project needs and
+            budget.
           </p>
         </motion.div>
 

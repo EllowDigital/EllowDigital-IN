@@ -7,7 +7,12 @@ interface PageTransitionProps {
 
 // Smooth easing curves
 const smoothEase = [0.22, 1, 0.36, 1] as [number, number, number, number];
-const bounceEase = [0.68, -0.55, 0.265, 1.55] as [number, number, number, number];
+const bounceEase = [0.68, -0.55, 0.265, 1.55] as [
+  number,
+  number,
+  number,
+  number
+];
 
 const pageVariants: Variants = {
   initial: {
@@ -88,21 +93,21 @@ const lineVariants: Variants = {
 // Particles for visual flair
 const ParticleEffect = () => {
   const particles = Array.from({ length: 6 });
-  
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {particles.map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-2 h-2 rounded-full bg-primary"
-          initial={{ 
-            x: `${20 + i * 15}%`, 
-            y: "100%", 
+          initial={{
+            x: `${20 + i * 15}%`,
+            y: "100%",
             opacity: 0,
             scale: 0,
           }}
-          animate={{ 
-            y: "-20%", 
+          animate={{
+            y: "-20%",
             opacity: [0, 1, 0],
             scale: [0, 1.5, 0],
           }}
@@ -137,16 +142,16 @@ const PageTransition = ({ children }: PageTransitionProps) => {
       >
         {/* Gradient background */}
         <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary/95 to-primary/90" />
-        
+
         {/* Decorative pattern */}
-        <div 
+        <div
           className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: `radial-gradient(circle at 2px 2px, hsl(var(--primary-foreground)) 1px, transparent 0)`,
             backgroundSize: "24px 24px",
           }}
         />
-        
+
         {/* Center logo/icon placeholder */}
         <div className="absolute inset-0 flex items-center justify-center">
           <motion.div
@@ -163,11 +168,11 @@ const PageTransition = ({ children }: PageTransitionProps) => {
             />
           </motion.div>
         </div>
-        
+
         {/* Particles */}
         {showParticles && <ParticleEffect />}
       </motion.div>
-      
+
       {/* Progress line at bottom of curtain */}
       <motion.div
         className="fixed bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-brand-gold to-primary z-50 origin-left pointer-events-none"
@@ -176,7 +181,7 @@ const PageTransition = ({ children }: PageTransitionProps) => {
         animate="enter"
         exit="exit"
       />
-      
+
       {/* Page content */}
       <motion.div
         variants={pageVariants}

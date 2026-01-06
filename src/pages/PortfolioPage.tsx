@@ -221,26 +221,38 @@ const PortfolioPage = () => {
                   Complete Portfolio
                 </h1>
                 <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
-                  Explore our diverse range of {projects.length} projects spanning web
-                  development, mobile applications, desktop software, and
-                  digital transformation solutions.
+                  Explore our diverse range of {projects.length} projects
+                  spanning web development, mobile applications, desktop
+                  software, and digital transformation solutions.
                 </p>
 
                 {/* Stats */}
                 <div className="flex items-center justify-center gap-6 sm:gap-10 mt-8">
                   <div className="text-center">
-                    <div className="text-2xl sm:text-3xl font-bold text-brand-yellow">{projects.length}</div>
-                    <div className="text-xs sm:text-sm text-muted-foreground">Total Projects</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-brand-yellow">
+                      {projects.length}
+                    </div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">
+                      Total Projects
+                    </div>
                   </div>
                   <div className="w-px h-10 bg-border"></div>
                   <div className="text-center">
-                    <div className="text-2xl sm:text-3xl font-bold text-brand-gold">{featuredCount}</div>
-                    <div className="text-xs sm:text-sm text-muted-foreground">Featured</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-brand-gold">
+                      {featuredCount}
+                    </div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">
+                      Featured
+                    </div>
                   </div>
                   <div className="w-px h-10 bg-border"></div>
                   <div className="text-center">
-                    <div className="text-2xl sm:text-3xl font-bold text-white">{categories.length - 1}</div>
-                    <div className="text-xs sm:text-sm text-muted-foreground">Categories</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-white">
+                      {categories.length - 1}
+                    </div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">
+                      Categories
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -326,7 +338,10 @@ const PortfolioPage = () => {
                             }`}
                           >
                             {project.link !== "#" ? (
-                              <Button className="bg-gradient-to-r from-brand-gold to-brand-yellow hover:from-brand-yellow hover:to-brand-gold text-black font-semibold shadow-lg" asChild>
+                              <Button
+                                className="bg-gradient-to-r from-brand-gold to-brand-yellow hover:from-brand-yellow hover:to-brand-gold text-black font-semibold shadow-lg"
+                                asChild
+                              >
                                 <a
                                   href={project.link}
                                   target="_blank"

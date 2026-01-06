@@ -41,12 +41,12 @@ const NotFound = () => {
         description="The page you're looking for doesn't exist. Let's get you back on track."
         noindex={true}
       />
-      
+
       <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden px-4">
         {/* Animated background */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
-          
+
           {/* Floating orbs */}
           <motion.div
             className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[100px]"
@@ -64,7 +64,7 @@ const NotFound = () => {
               y: -mousePosition.y * 1.5,
             }}
           />
-          
+
           {/* Grid pattern */}
           <div
             className="absolute inset-0 opacity-[0.02]"
@@ -92,11 +92,11 @@ const NotFound = () => {
             >
               404
             </motion.h1>
-            
+
             {/* Decorative elements */}
             <motion.div
               className="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-primary/20 border border-primary/30"
-              animate={{ 
+              animate={{
                 scale: [1, 1.2, 1],
                 rotate: [0, 180, 360],
               }}
@@ -104,7 +104,7 @@ const NotFound = () => {
             />
             <motion.div
               className="absolute -bottom-2 -left-6 w-6 h-6 rounded-lg bg-primary/15 border border-primary/25"
-              animate={{ 
+              animate={{
                 y: [0, -10, 0],
                 rotate: [0, -10, 0],
               }}
@@ -122,8 +122,8 @@ const NotFound = () => {
               Oops! Page not found
             </h2>
             <p className="text-muted-foreground text-lg mb-8 max-w-md mx-auto">
-              The page you're looking for seems to have wandered off. 
-              Let's get you back on track.
+              The page you're looking for seems to have wandered off. Let's get
+              you back on track.
             </p>
           </motion.div>
 
@@ -134,18 +134,13 @@ const NotFound = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
           >
-            <Button
-              asChild
-              size="lg"
-              className="gap-2 px-8"
-              variant="default"
-            >
+            <Button asChild size="lg" className="gap-2 px-8" variant="default">
               <Link to="/">
                 <Home className="w-4 h-4" />
                 Back to Home
               </Link>
             </Button>
-            
+
             <Button
               asChild
               size="lg"
@@ -196,7 +191,10 @@ const NotFound = () => {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="mt-12 text-xs text-muted-foreground/60"
           >
-            Attempted path: <code className="px-2 py-1 rounded bg-secondary/50">{location.pathname}</code>
+            Attempted path:{" "}
+            <code className="px-2 py-1 rounded bg-secondary/50">
+              {location.pathname}
+            </code>
           </motion.p>
         </div>
       </div>

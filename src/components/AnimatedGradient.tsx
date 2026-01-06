@@ -23,7 +23,9 @@ export const AnimatedGradientText = ({
 }: AnimatedGradientTextProps) => {
   return (
     <span
-      className={`relative inline-block bg-gradient-to-r ${gradients[gradient]} bg-clip-text text-transparent ${
+      className={`relative inline-block bg-gradient-to-r ${
+        gradients[gradient]
+      } bg-clip-text text-transparent ${
         animate ? "animate-gradient-x bg-[length:200%_auto]" : ""
       } ${className}`}
     >
@@ -54,9 +56,7 @@ export const AnimatedSectionHeader = ({
   centered = true,
 }: SectionHeaderProps) => {
   // Split title to insert highlighted word
-  const titleParts = highlightedWord 
-    ? title.split(highlightedWord)
-    : [title];
+  const titleParts = highlightedWord ? title.split(highlightedWord) : [title];
 
   return (
     <motion.div
@@ -145,8 +145,10 @@ export const AnimatedGradientBackground = ({
   return (
     <div className={`relative overflow-hidden ${className}`}>
       {/* Animated gradient background */}
-      <div className={`absolute inset-0 bg-gradient-to-b ${variants[variant]}`} />
-      
+      <div
+        className={`absolute inset-0 bg-gradient-to-b ${variants[variant]}`}
+      />
+
       {/* Animated orbs */}
       <motion.div
         className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"
@@ -175,7 +177,7 @@ export const AnimatedGradientBackground = ({
           delay: 2,
         }}
       />
-      
+
       {/* Content */}
       <div className="relative z-10">{children}</div>
     </div>

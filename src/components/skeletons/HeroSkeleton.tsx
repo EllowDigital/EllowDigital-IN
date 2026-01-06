@@ -58,18 +58,30 @@ const HeroSkeleton = () => {
               <motion.div
                 className="w-12 h-12 rounded-xl bg-secondary/50"
                 animate={{ opacity: [0.5, 0.8, 0.5] }}
-                transition={{ duration: 1.5, repeat: Infinity, delay: 0.7 + i * 0.1 }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  delay: 0.7 + i * 0.1,
+                }}
               />
               <div className="space-y-2">
                 <motion.div
                   className="h-6 w-16 rounded bg-secondary/50"
                   animate={{ opacity: [0.5, 0.8, 0.5] }}
-                  transition={{ duration: 1.5, repeat: Infinity, delay: 0.8 + i * 0.1 }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    delay: 0.8 + i * 0.1,
+                  }}
                 />
                 <motion.div
                   className="h-4 w-20 rounded bg-secondary/30"
                   animate={{ opacity: [0.5, 0.8, 0.5] }}
-                  transition={{ duration: 1.5, repeat: Infinity, delay: 0.9 + i * 0.1 }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    delay: 0.9 + i * 0.1,
+                  }}
                 />
               </div>
             </div>

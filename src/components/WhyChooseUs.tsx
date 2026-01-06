@@ -97,10 +97,13 @@ const WhyChooseUs = () => {
     >
       {/* Modern gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-brand-gold/5 to-background" />
-      
+
       {/* Animated background elements */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-brand-gold/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-yellow/8 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+      <div
+        className="absolute bottom-20 right-10 w-96 h-96 bg-brand-yellow/8 rounded-full blur-3xl animate-pulse"
+        style={{ animationDelay: "1s" }}
+      />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-radial from-brand-gold/5 to-transparent rounded-full blur-2xl" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -130,9 +133,13 @@ const WhyChooseUs = () => {
               className="group flex flex-col items-center gap-3"
             >
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-b from-card/80 to-card border border-border/50 flex items-center justify-center transition-all duration-300 group-hover:border-brand-gold/30 group-hover:shadow-lg group-hover:shadow-brand-gold/10 group-hover:-translate-y-1">
-                <div className="text-brand-gold/70 group-hover:text-brand-gold transition-colors duration-300">{client.logo}</div>
+                <div className="text-brand-gold/70 group-hover:text-brand-gold transition-colors duration-300">
+                  {client.logo}
+                </div>
               </div>
-              <span className="text-xs text-muted-foreground group-hover:text-foreground transition-colors duration-300">{client.name}</span>
+              <span className="text-xs text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                {client.name}
+              </span>
             </motion.div>
           ))}
         </motion.div>
@@ -145,15 +152,11 @@ const WhyChooseUs = () => {
           animate={isInView ? "visible" : "hidden"}
         >
           {reasons.map((reason, index) => (
-            <motion.div
-              key={index}
-              variants={cardVariants}
-              className="group"
-            >
+            <motion.div key={index} variants={cardVariants} className="group">
               <div className="relative h-full p-8 rounded-2xl bg-gradient-to-b from-card/80 to-card border border-border/50 overflow-hidden transition-all duration-500 hover:border-brand-gold/30 hover:shadow-2xl hover:shadow-brand-gold/10 hover:-translate-y-2">
                 {/* Background glow on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/10 via-transparent to-brand-yellow/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
+
                 {/* Floating particle */}
                 <div className="absolute top-4 right-4 w-20 h-20 bg-brand-gold/5 rounded-full blur-2xl group-hover:bg-brand-gold/10 transition-all duration-500" />
 
@@ -190,12 +193,13 @@ const WhyChooseUs = () => {
             {/* CTA Background */}
             <div className="absolute inset-0 bg-gradient-to-r from-brand-gold to-brand-yellow" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(0,0,0,0.1),transparent_70%)]" />
-            
+
             {/* Pattern overlay */}
             <div
               className="absolute inset-0 opacity-10"
               style={{
-                backgroundImage: "radial-gradient(circle at 25px 25px, black 2%, transparent 0%)",
+                backgroundImage:
+                  "radial-gradient(circle at 25px 25px, black 2%, transparent 0%)",
                 backgroundSize: "50px 50px",
               }}
             />
@@ -204,16 +208,19 @@ const WhyChooseUs = () => {
               <div className="text-center lg:text-left">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/10 mb-4">
                   <Sparkles className="w-4 h-4 text-black/70" />
-                  <span className="text-sm font-medium text-black/70">Start Your Project</span>
+                  <span className="text-sm font-medium text-black/70">
+                    Start Your Project
+                  </span>
                 </div>
                 <h3 className="text-3xl sm:text-4xl font-bold mb-3 text-black">
                   Ready to elevate your digital presence?
                 </h3>
                 <p className="text-black/80 text-lg max-w-xl">
-                  Let's collaborate to create something exceptional that elevates your brand and engages your audience.
+                  Let's collaborate to create something exceptional that
+                  elevates your brand and engages your audience.
                 </p>
               </div>
-              
+
               <motion.a
                 href="#contact"
                 className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-full bg-black text-brand-yellow font-semibold text-lg shadow-xl shadow-black/20 hover:shadow-black/30 transition-all duration-300"
@@ -221,7 +228,9 @@ const WhyChooseUs = () => {
                 whileTap={{ scale: 0.98 }}
                 onClick={(e) => {
                   e.preventDefault();
-                  document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+                  document
+                    .querySelector("#contact")
+                    ?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
                 Let's Talk

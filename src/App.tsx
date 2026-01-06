@@ -53,7 +53,7 @@ const AppLayout = () => (
     <Sonner />
 
     <AnimatedOutlet />
-    
+
     {/* Cookie Consent Banner */}
     <CookieConsent />
   </TooltipProvider>

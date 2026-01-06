@@ -161,8 +161,10 @@ export default {
       boxShadow: {
         elegant: "0 10px 30px -10px hsl(var(--foreground) / 0.1)",
         "card-hover": "0 20px 30px -15px hsl(var(--foreground) / 0.15)",
-        "button-3d": "0 4px 6px -1px hsl(var(--foreground) / 0.1), 0 2px 4px -1px hsl(var(--foreground) / 0.06)",
-        "button-3d-hover": "0 10px 15px -3px hsl(var(--foreground) / 0.1), 0 4px 6px -2px hsl(var(--foreground) / 0.05)",
+        "button-3d":
+          "0 4px 6px -1px hsl(var(--foreground) / 0.1), 0 2px 4px -1px hsl(var(--foreground) / 0.06)",
+        "button-3d-hover":
+          "0 10px 15px -3px hsl(var(--foreground) / 0.1), 0 4px 6px -2px hsl(var(--foreground) / 0.05)",
       },
       transitionProperty: {
         height: "height",

@@ -44,7 +44,7 @@ const CookieConsent = () => {
           <div className="relative bg-card/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-2xl shadow-black/20 overflow-hidden">
             {/* Gradient accent */}
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-yellow via-brand-gold to-brand-yellow" />
-            
+
             {/* Close button */}
             <button
               onClick={handleClose}
@@ -65,10 +65,11 @@ const CookieConsent = () => {
 
               {/* Description */}
               <p className="text-muted-foreground text-sm leading-relaxed mb-5">
-                We use cookies to enhance your browsing experience and analyze site traffic. 
-                By clicking "Accept", you consent to our use of cookies.{" "}
-                <Link 
-                  to="/cookies-policy" 
+                We use cookies to enhance your browsing experience and analyze
+                site traffic. By clicking "Accept", you consent to our use of
+                cookies.{" "}
+                <Link
+                  to="/cookies-policy"
                   className="text-brand-yellow hover:underline font-medium"
                 >
                   Learn more

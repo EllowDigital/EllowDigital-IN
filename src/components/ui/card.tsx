@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 const Card = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & { 
+  React.HTMLAttributes<HTMLDivElement> & {
     interactive?: boolean;
     glowOnHover?: boolean;
   }
@@ -21,9 +21,7 @@ const Card = React.forwardRef<
         "active:scale-[0.99]",
         "transform-gpu",
       ],
-      glowOnHover && [
-        "hover:shadow-[0_0_30px_hsl(var(--primary)/0.15)]",
-      ],
+      glowOnHover && ["hover:shadow-[0_0_30px_hsl(var(--primary)/0.15)]"],
       className
     )}
     {...props}
@@ -64,7 +62,10 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-muted-foreground transition-colors duration-300", className)}
+    className={cn(
+      "text-sm text-muted-foreground transition-colors duration-300",
+      className
+    )}
     {...props}
   />
 ));

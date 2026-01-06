@@ -63,14 +63,16 @@ const Navbar = () => {
 
       if (e.key === "ArrowRight" || e.key === "ArrowDown") {
         e.preventDefault();
-        const nextIndex = focusedIndex < NAV_LINKS.length - 1 ? focusedIndex + 1 : 0;
+        const nextIndex =
+          focusedIndex < NAV_LINKS.length - 1 ? focusedIndex + 1 : 0;
         setFocusedIndex(nextIndex);
         (navButtons[nextIndex] as HTMLButtonElement)?.focus();
       }
 
       if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
         e.preventDefault();
-        const prevIndex = focusedIndex > 0 ? focusedIndex - 1 : NAV_LINKS.length - 1;
+        const prevIndex =
+          focusedIndex > 0 ? focusedIndex - 1 : NAV_LINKS.length - 1;
         setFocusedIndex(prevIndex);
         (navButtons[prevIndex] as HTMLButtonElement)?.focus();
       }
@@ -278,17 +280,29 @@ const Navbar = () => {
                       }`}
                       role="menuitem"
                       aria-current={isActive ? "page" : undefined}
-                      tabIndex={focusedIndex === index || (focusedIndex === -1 && index === 0) ? 0 : -1}
+                      tabIndex={
+                        focusedIndex === index ||
+                        (focusedIndex === -1 && index === 0)
+                          ? 0
+                          : -1
+                      }
                     >
                       {isActive && (
                         <motion.div
                           layoutId="activeNav"
                           className="absolute inset-0 bg-primary rounded-full"
-                          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                          transition={{
+                            type: "spring",
+                            bounce: 0.2,
+                            duration: 0.6,
+                          }}
                         />
                       )}
                       <span className="relative z-10">{link.name}</span>
-                      <span className="sr-only"> (Press Alt+{link.key} for quick access)</span>
+                      <span className="sr-only">
+                        {" "}
+                        (Press Alt+{link.key} for quick access)
+                      </span>
                     </button>
                   );
                 })}
@@ -354,7 +368,8 @@ const Navbar = () => {
                 <div className="p-4 space-y-2">
                   {NAV_LINKS.map((link, index) => {
                     const isActive =
-                      (isHomePage && activeSection === link.href.substring(1)) ||
+                      (isHomePage &&
+                        activeSection === link.href.substring(1)) ||
                       (!isHomePage && location.pathname === link.href);
 
                     return (
@@ -388,7 +403,9 @@ const Navbar = () => {
                   >
                     <Search className="w-4 h-4" />
                     <span>Search</span>
-                    <span className="text-xs text-muted-foreground/60 ml-auto">⌘K</span>
+                    <span className="text-xs text-muted-foreground/60 ml-auto">
+                      ⌘K
+                    </span>
                   </motion.button>
 
                   {/* Mobile CTA */}
@@ -413,7 +430,8 @@ const Navbar = () => {
 
       {/* Keyboard shortcuts help (screen reader only) */}
       <div className="sr-only" aria-live="polite">
-        Keyboard shortcuts: Press Ctrl+K to search, Alt+1 through Alt+7 for quick navigation, Arrow keys to navigate menu items.
+        Keyboard shortcuts: Press Ctrl+K to search, Alt+1 through Alt+7 for
+        quick navigation, Arrow keys to navigate menu items.
       </div>
     </>
   );

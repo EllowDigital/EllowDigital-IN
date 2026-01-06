@@ -144,14 +144,17 @@ const ServiceCard = ({
         {/* Footer with tags and arrow */}
         <div className="flex items-center justify-between pt-4 border-t border-border/30">
           <div className="flex flex-wrap gap-1.5">
-            {details.split(", ").slice(0, 2).map((tag) => (
-              <span
-                key={tag}
-                className="text-xs font-medium bg-secondary/80 py-1 px-2.5 rounded-md text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary/80 transition-all duration-300"
-              >
-                {tag}
-              </span>
-            ))}
+            {details
+              .split(", ")
+              .slice(0, 2)
+              .map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs font-medium bg-secondary/80 py-1 px-2.5 rounded-md text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary/80 transition-all duration-300"
+                >
+                  {tag}
+                </span>
+              ))}
           </div>
 
           {/* Arrow button */}
