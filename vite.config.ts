@@ -8,7 +8,12 @@ import { componentTagger } from "lovable-tagger";
 export default defineConfig(({ mode }) => {
   const isDevelopment = mode === "development";
 
+  const nodeEnv = isDevelopment ? "development" : "production";
+
   return {
+    define: {
+      "process.env.NODE_ENV": JSON.stringify(nodeEnv),
+    },
     server: {
       host: "::",
       port: 8080,
@@ -26,6 +31,15 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
+        ...(isDevelopment
+          ? {
+              "react/jsx-dev-runtime":
+                path.resolve(
+                  __dirname,
+                  "node_modules/react/cjs/react-jsx-dev-runtime.development.js"
+                ),
+            }
+          : {}),
       },
     },
     build: {
@@ -45,6 +59,11 @@ export default defineConfig(({ mode }) => {
     },
     optimizeDeps: {
       include: ["react", "react-dom"],
+      esbuildOptions: {
+        define: {
+          "process.env.NODE_ENV": JSON.stringify(nodeEnv),
+        },
+      },
     },
     esbuild: {
       drop: isDevelopment ? [] : ["console", "debugger"],

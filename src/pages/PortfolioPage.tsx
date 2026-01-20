@@ -58,7 +58,7 @@ const projects: Project[] = [
     description:
       "Personal finance mobile app for tracking expenses, budgeting, and financial goals with intuitive charts, reminders, and secure data storage.",
     tech: ["React Native", "TypeScript", "Expo", "NeonDB"],
-    link: "https://expo.dev/artifacts/eas/8oTjej2xLnBzFQZUwvuCjv.apk",
+    link: "https://dhandiary.netlify.app",
     featured: true,
   },
   {
