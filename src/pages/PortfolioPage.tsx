@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { ExternalLink, ArrowLeft, Sparkles, Layers } from "lucide-react";
+import { useState, useEffect, useMemo } from "react";
+import { ExternalLink, ArrowLeft, Sparkles, Layers, Github, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,19 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 
+// --- Types ---
+interface Project {
+  title: string;
+  category: string;
+  image: string;
+  description: string;
+  tech: string[];
+  link: string;
+  featured: boolean;
+  github?: string; // Optional: Add if you have repo links
+}
+
+// --- Data ---
 const categories = [
   "All",
   "UI/UX",
@@ -17,7 +30,7 @@ const categories = [
   "Desktop App",
 ];
 
-const projects = [
+const projects: Project[] = [
   {
     title: "Ghatak Sports Academy India™",
     category: "Web App",
@@ -49,16 +62,6 @@ const projects = [
     featured: true,
   },
   {
-    title: "Sarwan Portfolio",
-    category: "Website",
-    image: "/images/projects_img/project3_sarwan.webp",
-    description:
-      "Modern personal portfolio highlighting work, achievements, projects, and an easy, streamlined contact flow, enhanced with smooth animations, responsive layouts, and SEO-friendly metadata.",
-    tech: ["HTML", "CSS", "JavaScript", "JQuery"],
-    link: "https://sarwan.netlify.app/",
-    featured: false,
-  },
-  {
     title: "Tent Decor Expo UP 2025",
     category: "Web App",
     image: "/images/projects_img/project4_tdexpoup25.webp",
@@ -69,16 +72,6 @@ const projects = [
     featured: true,
   },
   {
-    title: "RGSK Technologies Pvt. Ltd.",
-    category: "Website",
-    image: "/images/projects_img/project5_rgsktech.webp",
-    description:
-      "Business website for RGSK Technologies with a modern, responsive UI focused on clarity, trust, and performance.",
-    tech: ["React (Vite)", "TypeScript", "Tailwind CSS"],
-    link: "https://rgsktechnologies.netlify.app/",
-    featured: false,
-  },
-  {
     title: "UpdateAlchemist",
     category: "Web App",
     image: "/images/projects_img/project3_updatealchemist.webp",
@@ -86,6 +79,26 @@ const projects = [
       "Modern changelog and product update management platform with real-time notifications, user feedback collection, and analytics dashboard for tracking feature adoption and user engagement.",
     tech: ["React", "TypeScript", "Node.js", "MongoDB", "Express"],
     link: "#",
+    featured: false,
+  },
+  {
+    title: "Sarwan Portfolio",
+    category: "Website",
+    image: "/images/projects_img/project3_sarwan.webp",
+    description:
+      "Modern personal portfolio highlighting work, achievements, projects, and an easy, streamlined contact flow, enhanced with smooth animations, responsive layouts, and SEO-friendly metadata.",
+    tech: ["HTML", "CSS", "JavaScript", "JQuery"],
+    link: "https://sarwan.netlify.app/",
+    featured: false,
+  },
+  {
+    title: "RGSK Technologies Pvt. Ltd.",
+    category: "Website",
+    image: "/images/projects_img/project5_rgsktech.webp",
+    description:
+      "Business website for RGSK Technologies with a modern, responsive UI focused on clarity, trust, and performance.",
+    tech: ["React (Vite)", "TypeScript", "Tailwind CSS"],
+    link: "https://rgsktechnologies.netlify.app/",
     featured: false,
   },
   {
@@ -100,6 +113,7 @@ const projects = [
   },
 ];
 
+// --- Schema Data ---
 const portfolioPageSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
@@ -127,6 +141,30 @@ const portfolioPageSchema = {
   },
 };
 
+// --- Animations ---
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring", stiffness: 50, damping: 15 },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.9,
+    transition: { duration: 0.2 },
+  },
+};
+
 const PortfolioPage = () => {
   const [filter, setFilter] = useState("All");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -136,123 +174,85 @@ const PortfolioPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Filter projects based on selected category
-  const filteredProjects =
-    filter === "All"
+  // Filter projects with Memoization for performance
+  const filteredProjects = useMemo(() => {
+    return filter === "All"
       ? projects
       : projects.filter((project) => project.category === filter);
+  }, [filter]);
 
-  const featuredCount = projects.filter((p) => p.featured).length;
-
-  // Animation variants
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.4,
-      },
-    },
-    exit: {
-      opacity: 0,
-      y: 20,
-      scale: 0.95,
-      transition: {
-        duration: 0.2,
-      },
-    },
-  } as const;
+  const featuredCount = useMemo(() => projects.filter((p) => p.featured).length, []);
 
   return (
     <>
       <SEOHead
         title="Portfolio - Complete Project Gallery | EllowDigital"
-        description="Browse our complete portfolio featuring web development, mobile applications, desktop software, and digital transformation projects across various industries."
+        description="Browse our complete portfolio featuring web development, mobile applications, desktop software, and digital transformation projects."
         canonicalUrl="https://ellowdigitals.me/portfolio"
         structuredData={portfolioPageSchema}
       />
 
-      <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-brand-gold/30">
         <Navbar />
 
         <main className="flex-grow overflow-x-hidden" id="main-content">
           {/* Hero Section */}
-          <section className="relative pt-24 sm:pt-28 pb-12 sm:pb-16 overflow-hidden">
+          <section className="relative pt-24 sm:pt-32 pb-12 sm:pb-20 overflow-hidden">
             {/* Background elements */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black via-background to-background"></div>
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-gold/10 rounded-full blur-[100px]"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-gold/10 via-background to-background"></div>
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-gold/5 rounded-full blur-[100px] animate-pulse-slow"></div>
             <div className="absolute top-20 right-1/4 w-80 h-80 bg-brand-yellow/5 rounded-full blur-[80px]"></div>
 
             <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
                 className="text-center"
               >
                 <Link
                   to="/"
-                  className="inline-flex items-center text-brand-gold hover:text-brand-yellow transition-colors mb-6 group"
+                  className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-brand-gold transition-colors mb-6 group"
                 >
                   <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
                   Back to Home
                 </Link>
 
                 <div className="flex items-center justify-center gap-2 mb-4">
-                  <Layers className="w-5 h-5 text-brand-yellow" />
-                  <span className="text-sm text-brand-gold font-medium uppercase tracking-wider">
+                  <div className="p-1.5 rounded-md bg-brand-yellow/10 border border-brand-yellow/20">
+                    <Layers className="w-5 h-5 text-brand-yellow" />
+                  </div>
+                  <span className="text-sm text-brand-gold font-semibold uppercase tracking-wider">
                     Our Work
                   </span>
                 </div>
 
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-brand-gold to-brand-yellow bg-clip-text text-transparent">
-                  Complete Portfolio
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight">
+                  <span className="bg-gradient-to-r from-white via-brand-gold to-brand-yellow bg-clip-text text-transparent">
+                    Digital Excellence
+                  </span>
+                  <br className="hidden sm:block" />
+                  <span className="text-foreground"> in Every Pixel</span>
                 </h1>
-                <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
-                  Explore our diverse range of {projects.length} projects
-                  spanning web development, mobile applications, desktop
-                  software, and digital transformation solutions.
+                
+                <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+                  Explore our curated collection of {projects.length} impactful projects spanning 
+                  enterprise web applications, mobile solutions, and next-gen digital experiences.
                 </p>
 
                 {/* Stats */}
-                <div className="flex items-center justify-center gap-6 sm:gap-10 mt-8">
+                <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto border-t border-border/50 pt-8">
                   <div className="text-center">
-                    <div className="text-2xl sm:text-3xl font-bold text-brand-yellow">
-                      {projects.length}
-                    </div>
-                    <div className="text-xs sm:text-sm text-muted-foreground">
-                      Total Projects
-                    </div>
+                    <div className="text-3xl font-bold text-brand-yellow">{projects.length}</div>
+                    <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1">Total Projects</div>
                   </div>
-                  <div className="w-px h-10 bg-border"></div>
-                  <div className="text-center">
-                    <div className="text-2xl sm:text-3xl font-bold text-brand-gold">
-                      {featuredCount}
-                    </div>
-                    <div className="text-xs sm:text-sm text-muted-foreground">
-                      Featured
-                    </div>
+                  <div className="text-center border-l border-border/50">
+                    <div className="text-3xl font-bold text-brand-gold">{featuredCount}</div>
+                    <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1">Featured</div>
                   </div>
-                  <div className="w-px h-10 bg-border"></div>
-                  <div className="text-center">
-                    <div className="text-2xl sm:text-3xl font-bold text-white">
-                      {categories.length - 1}
-                    </div>
-                    <div className="text-xs sm:text-sm text-muted-foreground">
-                      Categories
-                    </div>
+                  <div className="text-center border-l border-border/50">
+                    <div className="text-3xl font-bold text-white">{categories.length - 1}</div>
+                    <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1">Categories</div>
                   </div>
                 </div>
               </motion.div>
@@ -260,39 +260,36 @@ const PortfolioPage = () => {
           </section>
 
           {/* Projects Grid Section */}
-          <section className="section-container py-12 sm:py-16 relative overflow-hidden">
-            <div className="absolute bottom-1/3 right-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-brand-yellow/5 rounded-full blur-3xl"></div>
-
-            <div className="max-w-6xl mx-auto">
-              {/* Category filter */}
+          <section className="section-container py-12 sm:py-16 relative">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6">
+              
+              {/* Category Filters */}
               <motion.div
-                className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-14"
+                className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12 sm:mb-16"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 {categories.map((category, index) => (
-                  <motion.button
+                  <button
                     key={index}
-                    className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all text-sm font-medium whitespace-nowrap ${
-                      filter === category
-                        ? "bg-gradient-to-r from-brand-gold to-brand-yellow text-black shadow-lg shadow-brand-yellow/20"
-                        : "bg-card/80 border border-border hover:border-brand-yellow/30 hover:bg-brand-yellow/10"
-                    }`}
                     onClick={() => setFilter(category)}
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
+                    className={`relative px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-brand-gold ${
+                      filter === category
+                        ? "text-black bg-brand-gold shadow-[0_0_20px_-5px_rgba(234,179,8,0.5)] scale-105"
+                        : "bg-card/40 text-muted-foreground border border-border hover:border-brand-yellow/50 hover:text-foreground hover:bg-card/80"
+                    }`}
                   >
                     {category}
-                  </motion.button>
+                  </button>
                 ))}
               </motion.div>
 
-              {/* Projects grid */}
+              {/* Grid */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={filter}
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10"
                   variants={containerVariants}
                   initial="hidden"
                   animate="visible"
@@ -305,87 +302,81 @@ const PortfolioPage = () => {
                       onMouseEnter={() => setHoveredIndex(index)}
                       onMouseLeave={() => setHoveredIndex(null)}
                       layout
-                      className="flex flex-col h-full"
+                      className="group h-full"
                     >
-                      <Card className="overflow-hidden border border-border hover:border-brand-yellow/40 transition-all duration-300 h-full flex flex-col group bg-card/50 backdrop-blur-sm hover:shadow-xl hover:shadow-brand-yellow/5">
-                        <div className="relative aspect-video overflow-hidden">
+                      <Card className="h-full flex flex-col overflow-hidden bg-card/40 backdrop-blur-sm border-border hover:border-brand-yellow/30 transition-all duration-500 hover:shadow-2xl hover:shadow-brand-yellow/5 hover:-translate-y-2">
+                        {/* Image Container */}
+                        <div className="relative aspect-[16/10] overflow-hidden bg-muted">
                           <img
                             src={project.image}
                             alt={project.title}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                             loading="lazy"
                           />
-
-                          {/* Category badge */}
-                          <div className="absolute top-3 left-3 flex items-center gap-2">
-                            <span className="bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-full border border-white/10">
+                          
+                          {/* Badges */}
+                          <div className="absolute top-4 left-4 flex items-center gap-2 z-10">
+                            <span className="bg-black/70 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-white/10 shadow-lg">
                               {project.category}
                             </span>
                             {project.featured && (
-                              <span className="bg-brand-yellow/90 text-black text-xs px-2 py-1.5 rounded-full flex items-center gap-1">
+                              <span className="bg-brand-yellow text-black text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full flex items-center gap-1 shadow-lg shadow-brand-yellow/20">
                                 <Sparkles className="w-3 h-3" />
                                 Featured
                               </span>
                             )}
                           </div>
 
-                          {/* Hover overlay */}
+                          {/* Overlay Buttons */}
                           <div
-                            className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-end justify-center p-4 sm:p-6 transition-all duration-300 ${
-                              hoveredIndex === index
-                                ? "opacity-100"
-                                : "opacity-0"
+                            className={`absolute inset-0 bg-black/60 backdrop-blur-[2px] flex items-center justify-center gap-4 transition-all duration-300 ${
+                              hoveredIndex === index ? "opacity-100 visible" : "opacity-0 invisible"
                             }`}
                           >
                             {project.link !== "#" ? (
                               <Button
-                                className="bg-gradient-to-r from-brand-gold to-brand-yellow hover:from-brand-yellow hover:to-brand-gold text-black font-semibold shadow-lg"
+                                className="bg-brand-gold hover:bg-brand-yellow text-black font-semibold rounded-full px-6 transition-transform hover:scale-105"
                                 asChild
                               >
                                 <a
                                   href={project.link}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="flex items-center"
                                 >
-                                  View Project{" "}
-                                  <ExternalLink className="ml-2 w-4 h-4" />
+                                  Visit Site <ExternalLink className="ml-2 w-4 h-4" />
                                 </a>
                               </Button>
                             ) : (
-                              <Button
-                                disabled
-                                className="bg-muted text-muted-foreground cursor-not-allowed"
-                              >
+                              <span className="px-6 py-2 bg-muted/80 backdrop-blur text-muted-foreground rounded-full text-sm font-medium border border-white/10">
                                 Coming Soon
-                              </Button>
+                              </span>
                             )}
                           </div>
                         </div>
 
-                        <CardContent className="p-4 sm:p-6 flex-grow flex flex-col">
-                          <h3 className="text-lg sm:text-xl font-semibold mb-2 group-hover:text-brand-gold transition-colors">
+                        {/* Content */}
+                        <CardContent className="p-6 flex-grow flex flex-col relative">
+                          {/* Subtle gradient background line at top of content */}
+                          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-yellow/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                          
+                          <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-brand-gold transition-colors duration-300">
                             {project.title}
                           </h3>
-                          <p className="text-muted-foreground text-sm sm:text-base mb-4 flex-grow line-clamp-3">
+                          
+                          <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
                             {project.description}
                           </p>
 
-                          {/* Tech stack tags */}
-                          <div className="flex flex-wrap gap-1.5 mt-auto">
-                            {project.tech.slice(0, 4).map((tech, techIndex) => (
+                          {/* Tech Stack */}
+                          <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-border/40">
+                            {project.tech.map((tech, techIndex) => (
                               <span
                                 key={techIndex}
-                                className="text-xs bg-brand-yellow/10 text-brand-gold px-2.5 py-1 rounded-full border border-brand-yellow/20"
+                                className="text-[11px] font-medium bg-brand-yellow/5 text-brand-gold/90 px-2.5 py-1 rounded-md border border-brand-yellow/10"
                               >
                                 {tech}
                               </span>
                             ))}
-                            {project.tech.length > 4 && (
-                              <span className="text-xs bg-muted text-muted-foreground px-2.5 py-1 rounded-full">
-                                +{project.tech.length - 4}
-                              </span>
-                            )}
                           </div>
                         </CardContent>
                       </Card>
@@ -394,22 +385,24 @@ const PortfolioPage = () => {
                 </motion.div>
               </AnimatePresence>
 
+              {/* Empty State */}
               {filteredProjects.length === 0 && (
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="text-center py-16"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="flex flex-col items-center justify-center py-20 text-center"
                 >
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
-                    <Layers className="w-8 h-8 text-muted-foreground" />
+                  <div className="w-20 h-20 rounded-full bg-muted/30 flex items-center justify-center mb-6 ring-1 ring-border">
+                    <Layers className="w-10 h-10 text-muted-foreground/50" />
                   </div>
-                  <p className="text-muted-foreground text-lg">
-                    No projects found in this category.
+                  <h3 className="text-xl font-semibold mb-2">No projects found</h3>
+                  <p className="text-muted-foreground mb-6 max-w-sm">
+                    We couldn't find any projects in the "{filter}" category.
                   </p>
                   <Button
                     variant="outline"
-                    className="mt-4"
                     onClick={() => setFilter("All")}
+                    className="border-brand-gold/30 hover:border-brand-gold hover:text-brand-gold transition-colors"
                   >
                     View All Projects
                   </Button>
