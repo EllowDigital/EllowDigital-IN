@@ -1,15 +1,28 @@
 import { FC, memo } from "react";
 import { motion } from "framer-motion";
 import { Code2, Sparkles } from "lucide-react";
+import type { IconType } from "react-icons";
+import {
+  SiCss3,
+  SiFirebase,
+  SiFlutter,
+  SiHtml5,
+  SiJavascript,
+  SiMysql,
+  SiNodedotjs,
+  SiPython,
+  SiReact,
+} from "react-icons/si";
 import { AnimatedSectionHeader } from "./AnimatedGradient";
 
 interface TechItemProps {
   name: string;
   category: string;
+  Icon?: IconType;
   index: number;
 }
 
-const TechItem: FC<TechItemProps> = memo(({ name, category, index }) => {
+const TechItem: FC<TechItemProps> = memo(({ name, category, Icon, index }) => {
   const initial = name.substring(0, 2).toUpperCase();
 
   return (
@@ -28,7 +41,11 @@ const TechItem: FC<TechItemProps> = memo(({ name, category, index }) => {
         <div className="relative mb-4">
           <div className="absolute -inset-3 bg-gradient-to-r from-primary to-primary/80 rounded-full opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
           <div className="relative w-20 h-20 flex items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 shadow-lg group-hover:scale-110 transition-all duration-500">
-            <span className="text-xl font-bold text-primary">{initial}</span>
+            {Icon ? (
+              <Icon className="w-9 h-9 text-primary" aria-hidden="true" />
+            ) : (
+              <span className="text-xl font-bold text-primary">{initial}</span>
+            )}
           </div>
         </div>
 
@@ -50,15 +67,15 @@ const TechItem: FC<TechItemProps> = memo(({ name, category, index }) => {
 });
 
 const technologies = [
-  { name: "HTML5", category: "frontend" },
-  { name: "CSS3", category: "frontend" },
-  { name: "JavaScript", category: "frontend" },
-  { name: "React", category: "frontend" },
-  { name: "Node.js", category: "backend" },
-  { name: "Flutter", category: "mobile" },
-  { name: "Firebase", category: "backend" },
-  { name: "Python", category: "backend" },
-  { name: "MySQL", category: "database" },
+  { name: "HTML5", category: "frontend", Icon: SiHtml5 },
+  { name: "CSS3", category: "frontend", Icon: SiCss3 },
+  { name: "JavaScript", category: "frontend", Icon: SiJavascript },
+  { name: "React", category: "frontend", Icon: SiReact },
+  { name: "Node.js", category: "backend", Icon: SiNodedotjs },
+  { name: "Flutter", category: "mobile", Icon: SiFlutter },
+  { name: "Firebase", category: "backend", Icon: SiFirebase },
+  { name: "Python", category: "backend", Icon: SiPython },
+  { name: "MySQL", category: "database", Icon: SiMysql },
 ];
 
 const TechStack = () => {
@@ -115,6 +132,7 @@ const TechStack = () => {
               key={index}
               name={tech.name}
               category={tech.category}
+              Icon={tech.Icon}
               index={index}
             />
           ))}
