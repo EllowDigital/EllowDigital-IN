@@ -1,5 +1,12 @@
 import { useState, useEffect, useMemo } from "react";
-import { ExternalLink, ArrowLeft, Sparkles, Layers, Github, Globe } from "lucide-react";
+import {
+  ExternalLink,
+  ArrowLeft,
+  Sparkles,
+  Layers,
+  Github,
+  Globe,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -181,7 +188,10 @@ const PortfolioPage = () => {
       : projects.filter((project) => project.category === filter);
   }, [filter]);
 
-  const featuredCount = useMemo(() => projects.filter((p) => p.featured).length, []);
+  const featuredCount = useMemo(
+    () => projects.filter((p) => p.featured).length,
+    []
+  );
 
   return (
     <>
@@ -234,25 +244,38 @@ const PortfolioPage = () => {
                   <br className="hidden sm:block" />
                   <span className="text-foreground"> in Every Pixel</span>
                 </h1>
-                
+
                 <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-                  Explore our curated collection of {projects.length} impactful projects spanning 
-                  enterprise web applications, mobile solutions, and next-gen digital experiences.
+                  Explore our curated collection of {projects.length} impactful
+                  projects spanning enterprise web applications, mobile
+                  solutions, and next-gen digital experiences.
                 </p>
 
                 {/* Stats */}
                 <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto border-t border-border/50 pt-8">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-brand-yellow">{projects.length}</div>
-                    <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1">Total Projects</div>
+                    <div className="text-3xl font-bold text-brand-yellow">
+                      {projects.length}
+                    </div>
+                    <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1">
+                      Total Projects
+                    </div>
                   </div>
                   <div className="text-center border-l border-border/50">
-                    <div className="text-3xl font-bold text-brand-gold">{featuredCount}</div>
-                    <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1">Featured</div>
+                    <div className="text-3xl font-bold text-brand-gold">
+                      {featuredCount}
+                    </div>
+                    <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1">
+                      Featured
+                    </div>
                   </div>
                   <div className="text-center border-l border-border/50">
-                    <div className="text-3xl font-bold text-white">{categories.length - 1}</div>
-                    <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1">Categories</div>
+                    <div className="text-3xl font-bold text-white">
+                      {categories.length - 1}
+                    </div>
+                    <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1">
+                      Categories
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -262,7 +285,6 @@ const PortfolioPage = () => {
           {/* Projects Grid Section */}
           <section className="section-container py-12 sm:py-16 relative">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
-              
               {/* Category Filters */}
               <motion.div
                 className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12 sm:mb-16"
@@ -313,7 +335,7 @@ const PortfolioPage = () => {
                             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                             loading="lazy"
                           />
-                          
+
                           {/* Badges */}
                           <div className="absolute top-4 left-4 flex items-center gap-2 z-10">
                             <span className="bg-black/70 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-white/10 shadow-lg">
@@ -330,7 +352,9 @@ const PortfolioPage = () => {
                           {/* Overlay Buttons */}
                           <div
                             className={`absolute inset-0 bg-black/60 backdrop-blur-[2px] flex items-center justify-center gap-4 transition-all duration-300 ${
-                              hoveredIndex === index ? "opacity-100 visible" : "opacity-0 invisible"
+                              hoveredIndex === index
+                                ? "opacity-100 visible"
+                                : "opacity-0 invisible"
                             }`}
                           >
                             {project.link !== "#" ? (
@@ -343,7 +367,8 @@ const PortfolioPage = () => {
                                   target="_blank"
                                   rel="noopener noreferrer"
                                 >
-                                  Visit Site <ExternalLink className="ml-2 w-4 h-4" />
+                                  Visit Site{" "}
+                                  <ExternalLink className="ml-2 w-4 h-4" />
                                 </a>
                               </Button>
                             ) : (
@@ -358,11 +383,11 @@ const PortfolioPage = () => {
                         <CardContent className="p-6 flex-grow flex flex-col relative">
                           {/* Subtle gradient background line at top of content */}
                           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-yellow/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                          
+
                           <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-brand-gold transition-colors duration-300">
                             {project.title}
                           </h3>
-                          
+
                           <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
                             {project.description}
                           </p>
@@ -395,7 +420,9 @@ const PortfolioPage = () => {
                   <div className="w-20 h-20 rounded-full bg-muted/30 flex items-center justify-center mb-6 ring-1 ring-border">
                     <Layers className="w-10 h-10 text-muted-foreground/50" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">No projects found</h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    No projects found
+                  </h3>
                   <p className="text-muted-foreground mb-6 max-w-sm">
                     We couldn't find any projects in the "{filter}" category.
                   </p>

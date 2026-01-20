@@ -33,11 +33,10 @@ export default defineConfig(({ mode }) => {
         "@": path.resolve(__dirname, "./src"),
         ...(isDevelopment
           ? {
-              "react/jsx-dev-runtime":
-                path.resolve(
-                  __dirname,
-                  "node_modules/react/cjs/react-jsx-dev-runtime.development.js"
-                ),
+              "react/jsx-dev-runtime": path.resolve(
+                __dirname,
+                "node_modules/react/cjs/react-jsx-dev-runtime.development.js"
+              ),
             }
           : {}),
       },

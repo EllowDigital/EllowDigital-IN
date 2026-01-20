@@ -1,5 +1,13 @@
 import { useState, useRef, useCallback, useEffect, useMemo } from "react";
-import { ExternalLink, Sparkles, ArrowRight, Eye, Loader2, Code2, Layers } from "lucide-react";
+import {
+  ExternalLink,
+  Sparkles,
+  ArrowRight,
+  Eye,
+  Loader2,
+  Code2,
+  Layers,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 
@@ -83,7 +91,7 @@ const Portfolio = () => {
   const [filter, setFilter] = useState("All");
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const sectionRef = useRef(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
@@ -191,8 +199,8 @@ const Portfolio = () => {
             Selected <span className="text-primary">Works</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-            A curated selection of projects demonstrating our expertise in digital transformation, 
-            web engineering, and mobile solutions.
+            A curated selection of projects demonstrating our expertise in
+            digital transformation, web engineering, and mobile solutions.
           </p>
         </motion.div>
 
@@ -239,18 +247,21 @@ const Portfolio = () => {
                 }`}
               >
                 <div className="relative h-full flex flex-col rounded-2xl bg-card border border-border/50 overflow-hidden hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
-                  
                   {/* Image Section */}
-                  <div className={`relative overflow-hidden w-full ${
-                    filter === "All" && index === 0 ? "aspect-video" : "aspect-[4/3]"
-                  }`}>
+                  <div
+                    className={`relative overflow-hidden w-full ${
+                      filter === "All" && index === 0
+                        ? "aspect-video"
+                        : "aspect-[4/3]"
+                    }`}
+                  >
                     <img
                       src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                       loading="lazy"
                     />
-                    
+
                     {/* Overlay Gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
 
@@ -268,11 +279,15 @@ const Portfolio = () => {
 
                     {/* Hover Action */}
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40 backdrop-blur-[2px]">
-                      <Button 
-                        asChild 
+                      <Button
+                        asChild
                         className="rounded-full bg-white text-black hover:bg-white/90 font-semibold shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"
                       >
-                        <a href={project.link} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           View Project <ExternalLink className="ml-2 w-4 h-4" />
                         </a>
                       </Button>
@@ -339,7 +354,8 @@ const Portfolio = () => {
               </div>
             ) : (
               <Button variant="outline" onClick={loadMore} className="group">
-                Load More <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                Load More{" "}
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             )}
           </div>
