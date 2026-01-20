@@ -1,8 +1,20 @@
-import { useState, useRef, useCallback, useEffect } from "react";
-import { ExternalLink, Sparkles, ArrowRight, Eye, Loader2 } from "lucide-react";
+import { useState, useRef, useCallback, useEffect, useMemo } from "react";
+import { ExternalLink, Sparkles, ArrowRight, Eye, Loader2, Code2, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 
+// --- Types ---
+interface Project {
+  title: string;
+  category: string;
+  image: string;
+  description: string;
+  tech: string[];
+  link: string;
+  featured: boolean;
+}
+
+// --- Data ---
 const categories = [
   "All",
   "UI/UX",
@@ -12,7 +24,7 @@ const categories = [
   "Desktop App",
 ];
 
-const allProjects = [
+const allProjects: Project[] = [
   {
     title: "Ghatak Sports Academy India™",
     category: "Web App",
@@ -31,7 +43,7 @@ const allProjects = [
       "Desktop app to boost typing speed and accuracy with drills, progress tracking, and detailed live stats.",
     tech: ["Python", "SQLite3"],
     link: "https://typeblitz.netlify.app/",
-    featured: false,
+    featured: true,
   },
   {
     title: "DhanDiary",
@@ -51,7 +63,7 @@ const allProjects = [
       "End-to-end event system with online registration, secure e-passes, and real-time validation.",
     tech: ["Node.js", "PostgreSQL", "Cloudinary"],
     link: "https://td-expoup25.netlify.app/",
-    featured: false,
+    featured: true,
   },
   {
     title: "RGSK Technologies Pvt. Ltd.",
@@ -63,113 +75,43 @@ const allProjects = [
     link: "https://rgsktechnologies.netlify.app/",
     featured: false,
   },
-  // Additional projects for infinite scroll demo
-  {
-    title: "Portfolio Showcase",
-    category: "Website",
-    image: "/images/projects_img/project2_gsai.webp",
-    description:
-      "Modern portfolio website with smooth animations and responsive design for creative professionals.",
-    tech: ["React", "Framer Motion", "Tailwind"],
-    link: "#",
-    featured: false,
-  },
-  {
-    title: "E-Commerce Dashboard",
-    category: "Web App",
-    image: "/images/projects_img/project4_tdexpoup25.webp",
-    description:
-      "Comprehensive admin dashboard for managing products, orders, and customer analytics.",
-    tech: ["Next.js", "Prisma", "PostgreSQL"],
-    link: "#",
-    featured: false,
-  },
-  {
-    title: "Fitness Tracker",
-    category: "Mobile App",
-    image: "/images/projects_img/project6_dhandiary.webp",
-    description:
-      "Health and fitness mobile app with workout plans, calorie tracking, and progress visualization.",
-    tech: ["React Native", "Firebase", "Charts"],
-    link: "#",
-    featured: false,
-  },
 ];
 
-const ITEMS_PER_PAGE = 5;
-
-// Skeleton component for loading state
-const ProjectSkeleton = ({ featured = false }: { featured?: boolean }) => (
-  <motion.div
-    className={`rounded-2xl border border-border/30 bg-card/50 overflow-hidden ${
-      featured ? "md:col-span-2" : ""
-    }`}
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-  >
-    <motion.div
-      className={`w-full bg-secondary/40 ${
-        featured ? "aspect-[2.5/1]" : "aspect-[4/3]"
-      }`}
-      animate={{ opacity: [0.5, 0.8, 0.5] }}
-      transition={{ duration: 1.5, repeat: Infinity }}
-    />
-    <div className="p-5">
-      <motion.div
-        className="h-6 w-3/4 rounded bg-secondary/50 mb-2"
-        animate={{ opacity: [0.5, 0.8, 0.5] }}
-        transition={{ duration: 1.5, repeat: Infinity, delay: 0.1 }}
-      />
-      <motion.div
-        className="h-4 w-full rounded bg-secondary/30 mb-4"
-        animate={{ opacity: [0.5, 0.8, 0.5] }}
-        transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
-      />
-      <div className="flex gap-2">
-        {Array.from({ length: 3 }).map((_, j) => (
-          <motion.div
-            key={j}
-            className="h-6 w-16 rounded-md bg-secondary/40"
-            animate={{ opacity: [0.5, 0.8, 0.5] }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              delay: 0.3 + j * 0.05,
-            }}
-          />
-        ))}
-      </div>
-    </div>
-  </motion.div>
-);
+const ITEMS_PER_PAGE = 6; // Adjusted to 6 for better grid alignment (2x3 or 3x2)
 
 const Portfolio = () => {
   const [filter, setFilter] = useState("All");
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
   const [isLoading, setIsLoading] = useState(false);
+  
   const sectionRef = useRef(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  const filteredProjects =
-    filter === "All"
+  // 1. Optimized Filtering
+  const filteredProjects = useMemo(() => {
+    return filter === "All"
       ? allProjects
       : allProjects.filter((project) => project.category === filter);
+  }, [filter]);
 
-  const visibleProjects = filteredProjects.slice(0, visibleCount);
+  const visibleProjects = useMemo(() => {
+    return filteredProjects.slice(0, visibleCount);
+  }, [filteredProjects, visibleCount]);
+
   const hasMore = visibleCount < filteredProjects.length;
 
-  // Reset visible count when filter changes
+  // 2. Reset visible count when filter changes
   useEffect(() => {
     setVisibleCount(ITEMS_PER_PAGE);
   }, [filter]);
 
-  // Infinite scroll observer
+  // 3. Infinite scroll observer
   const loadMore = useCallback(() => {
     if (isLoading || !hasMore) return;
 
     setIsLoading(true);
-    // Simulate loading delay for smooth UX
+    // Simulate loading delay
     setTimeout(() => {
       setVisibleCount((prev) =>
         Math.min(prev + ITEMS_PER_PAGE, filteredProjects.length)
@@ -195,120 +137,92 @@ const Portfolio = () => {
     return () => observer.disconnect();
   }, [hasMore, isLoading, loadMore]);
 
+  // --- Animations ---
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.1,
+        staggerChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 40, scale: 0.95 },
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-      },
+      transition: { duration: 0.4, ease: "easeOut" },
     },
-    exit: {
-      opacity: 0,
-      scale: 0.95,
-      transition: { duration: 0.25 },
-    },
+    exit: { opacity: 0, scale: 0.9, transition: { duration: 0.2 } },
   };
 
   return (
     <section
       id="portfolio"
       ref={sectionRef}
-      className="relative py-24 lg:py-32 overflow-hidden"
+      className="relative py-24 lg:py-32 overflow-hidden bg-background"
     >
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/5 to-background" />
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/3 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+      {/* Background Decor */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/5 via-background to-background" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
+        <div className="absolute top-[10%] left-[10%] w-72 h-72 bg-primary/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-[20%] right-[5%] w-96 h-96 bg-secondary/10 rounded-full blur-[120px]" />
+      </div>
 
-      {/* Grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.03)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
-
-      <div className="relative section-container">
+      <div className="relative section-container max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-14 lg:mb-16"
+          className="text-center mb-16"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-5 py-2 mb-6"
-          >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-semibold text-primary tracking-wide">
-              Featured Work
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 border border-secondary mb-6 backdrop-blur-sm">
+            <Layers className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium text-foreground/80">
+              Our Masterpieces
             </span>
-          </motion.div>
+          </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Our{" "}
-            <span className="relative inline-block">
-              <span className="bg-gradient-to-r from-primary via-primary to-primary/70 bg-clip-text text-transparent">
-                Portfolio
-              </span>
-              <motion.span
-                className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary to-primary/50 rounded-full"
-                initial={{ scaleX: 0 }}
-                animate={isInView ? { scaleX: 1 } : {}}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              />
-            </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+            Selected <span className="text-primary">Works</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Explore our collection of successful projects that showcase our
-            expertise and commitment to excellence
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
+            A curated selection of projects demonstrating our expertise in digital transformation, 
+            web engineering, and mobile solutions.
           </p>
         </motion.div>
 
-        {/* Category Filter */}
+        {/* Filter */}
         <motion.div
-          className="flex justify-center mb-12"
+          className="flex flex-wrap justify-center gap-2 mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div className="inline-flex flex-wrap justify-center gap-2 p-1.5 rounded-2xl bg-card/60 backdrop-blur-sm border border-border/50">
-            {categories.map((category) => (
-              <motion.button
-                key={category}
-                className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
-                  filter === category
-                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
-                    : "text-muted-foreground hover:text-foreground hover:bg-secondary/80"
-                }`}
-                onClick={() => setFilter(category)}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {category}
-              </motion.button>
-            ))}
-          </div>
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setFilter(category)}
+              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border ${
+                filter === category
+                  ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20"
+                  : "bg-card/50 text-muted-foreground border-border hover:border-primary/50 hover:bg-card hover:text-foreground"
+              }`}
+            >
+              {category}
+            </button>
+          ))}
         </motion.div>
 
-        {/* Projects Grid - Bento Style */}
+        {/* Grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={filter}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 auto-rows-fr"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -319,169 +233,135 @@ const Portfolio = () => {
                 key={project.title}
                 variants={itemVariants}
                 layout
-                className={`group ${
-                  project.featured && index === 0
-                    ? "md:col-span-2 md:row-span-1"
-                    : ""
+                className={`group relative flex flex-col ${
+                  // Make the first item span 2 columns ONLY if filtering 'All' and on desktop
+                  filter === "All" && index === 0 ? "md:col-span-2" : ""
                 }`}
               >
-                <div className="relative h-full rounded-2xl bg-card/70 backdrop-blur-sm border border-border/50 overflow-hidden transition-all duration-500 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10">
-                  {/* Image */}
-                  <div
-                    className={`relative overflow-hidden ${
-                      project.featured && index === 0
-                        ? "aspect-[2/1] md:aspect-[2.5/1]"
-                        : "aspect-[4/3]"
-                    }`}
-                  >
+                <div className="relative h-full flex flex-col rounded-2xl bg-card border border-border/50 overflow-hidden hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
+                  
+                  {/* Image Section */}
+                  <div className={`relative overflow-hidden w-full ${
+                    filter === "All" && index === 0 ? "aspect-video" : "aspect-[4/3]"
+                  }`}>
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                       loading="lazy"
                     />
+                    
+                    {/* Overlay Gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
 
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
-
-                    {/* Category badge */}
-                    <div className="absolute top-4 left-4">
-                      <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-primary/90 text-primary-foreground backdrop-blur-sm shadow-lg">
+                    {/* Top Badges */}
+                    <div className="absolute top-4 left-4 flex gap-2">
+                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-background/90 text-foreground backdrop-blur-md shadow-sm border border-border/20">
                         {project.category}
                       </span>
-                    </div>
-
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/60 to-background/20 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                      <motion.a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-semibold shadow-xl shadow-primary/30 hover:shadow-primary/50 transition-all duration-300"
-                        initial={{ y: 20, opacity: 0 }}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <Eye className="w-4 h-4" />
-                        View Project
-                        <ExternalLink className="w-4 h-4" />
-                      </motion.a>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-5 lg:p-6">
-                    <h3 className="text-lg lg:text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors duration-300 line-clamp-1">
-                      {project.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">
-                      {project.description}
-                    </p>
-
-                    {/* Tech stack */}
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.tech.slice(0, 3).map((tech) => (
-                        <span
-                          key={tech}
-                          className="text-xs px-2.5 py-1 rounded-md bg-secondary/80 text-muted-foreground font-medium border border-border/30 group-hover:border-primary/20 group-hover:bg-primary/5 group-hover:text-primary/80 transition-all duration-300"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {project.tech.length > 3 && (
-                        <span className="text-xs px-2.5 py-1 rounded-md bg-secondary/50 text-muted-foreground/70 font-medium">
-                          +{project.tech.length - 3}
+                      {project.featured && (
+                        <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary text-primary-foreground flex items-center gap-1 shadow-lg shadow-primary/20">
+                          <Sparkles className="w-3 h-3" /> Featured
                         </span>
                       )}
                     </div>
+
+                    {/* Hover Action */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40 backdrop-blur-[2px]">
+                      <Button 
+                        asChild 
+                        className="rounded-full bg-white text-black hover:bg-white/90 font-semibold shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+                      >
+                        <a href={project.link} target="_blank" rel="noopener noreferrer">
+                          View Project <ExternalLink className="ml-2 w-4 h-4" />
+                        </a>
+                      </Button>
+                    </div>
                   </div>
 
-                  {/* Bottom accent line */}
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  {/* Content Section */}
+                  <div className="p-6 flex flex-col flex-grow">
+                    <div className="mb-4">
+                      <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    <div className="mt-auto flex flex-wrap gap-2 pt-4 border-t border-border/40">
+                      {project.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="text-xs px-2.5 py-1 rounded-md bg-secondary/50 text-secondary-foreground font-medium flex items-center gap-1.5"
+                        >
+                          <Code2 className="w-3 h-3 opacity-50" />
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
-
-            {/* Loading skeletons */}
-            {isLoading && (
-              <>
-                <ProjectSkeleton />
-                <ProjectSkeleton />
-                <ProjectSkeleton />
-              </>
-            )}
           </motion.div>
         </AnimatePresence>
-
-        {/* Infinite scroll trigger */}
-        <div ref={loadMoreRef} className="h-4" />
-
-        {/* Loading indicator */}
-        {isLoading && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex items-center justify-center gap-2 mt-8 text-muted-foreground"
-          >
-            <Loader2 className="w-5 h-5 animate-spin text-primary" />
-            <span className="text-sm">Loading more projects...</span>
-          </motion.div>
-        )}
-
-        {/* Load more button (fallback) */}
-        {hasMore && !isLoading && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex justify-center mt-8"
-          >
-            <Button variant="outline" onClick={loadMore} className="gap-2">
-              Load More Projects
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </motion.div>
-        )}
 
         {/* Empty State */}
         {filteredProjects.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-20"
+            className="text-center py-24 flex flex-col items-center justify-center"
           >
-            <p className="text-muted-foreground text-lg mb-4">
-              No projects found in this category.
+            <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4">
+              <Layers className="w-8 h-8 text-muted-foreground/50" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2">No projects found</h3>
+            <p className="text-muted-foreground mb-6">
+              We haven't uploaded any projects in the "{filter}" category yet.
             </p>
             <Button variant="outline" onClick={() => setFilter("All")}>
-              View All Projects
+              Clear Filters
             </Button>
           </motion.div>
         )}
 
-        {/* View All CTA */}
+        {/* Load More Trigger (Only shows if there are actually more items) */}
+        {hasMore && (
+          <div className="flex flex-col items-center mt-12">
+            <div ref={loadMoreRef} className="h-4 w-full" />
+            {isLoading ? (
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Loader2 className="w-5 h-5 animate-spin text-primary" />
+                <span>Loading more works...</span>
+              </div>
+            ) : (
+              <Button variant="outline" onClick={loadMore} className="group">
+                Load More <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            )}
+          </div>
+        )}
+
+        {/* View Full Portfolio CTA */}
         <motion.div
-          className="text-center mt-14 lg:mt-16"
+          className="text-center mt-20"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <motion.div
-            className="inline-flex flex-col sm:flex-row items-center gap-4 p-6 rounded-2xl bg-card/60 backdrop-blur-sm border border-border/50"
-            whileHover={{ scale: 1.01 }}
-          >
-            <p className="text-muted-foreground">
-              Want to see more of our work?
-            </p>
-            <Button
-              asChild
-              className="group bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-full shadow-lg shadow-primary/20"
-            >
-              <a href="/portfolio" className="flex items-center gap-2">
-                Explore All Projects
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+          <div className="inline-flex flex-col sm:flex-row items-center gap-6 p-1 pr-1 pl-6 rounded-full bg-card border border-border/50 shadow-xl shadow-black/5">
+            <span className="text-sm font-medium text-muted-foreground py-2">
+              Interested in seeing our complete timeline?
+            </span>
+            <Button asChild size="lg" className="rounded-full px-8 shadow-lg">
+              <a href="/portfolio">
+                View Full Portfolio <ArrowRight className="ml-2 w-4 h-4" />
               </a>
             </Button>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
