@@ -162,7 +162,7 @@ const Portfolio = () => {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.4, ease: "easeOut" },
+      transition: { duration: 0.4, ease: [0, 0, 0.2, 1] as const },
     },
     exit: { opacity: 0, scale: 0.9, transition: { duration: 0.2 } },
   };
