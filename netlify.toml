@@ -1,0 +1,9 @@
+[build]
+  publish = "dist"
+  # Force a clean deterministic install so Rollup's platform optional dependency is present.
+  # Netlify's default npm install can intermittently miss optional deps.
+  command = "npm ci --include=optional && npm run build"
+
+[build.environment]
+  # Pin to a stable LTS; Netlify log shows Node 22 which can be coupled with npm optional-deps issues.
+  NODE_VERSION = "20"
