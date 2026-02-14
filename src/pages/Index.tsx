@@ -41,14 +41,14 @@ const SectionLoader = ({
 const homePageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "@id": "https://ellowdigitals.me/",
-  url: "https://ellowdigitals.me/",
+  "@id": "https://ellowdigital.space/",
+  url: "https://ellowdigital.space/",
   name: "EllowDigital - Digital Transformation Services in India",
   description:
     "EllowDigital offers expert digital services including web development, SEO, and digital marketing solutions for businesses in India.",
   isPartOf: {
     "@type": "WebSite",
-    url: "https://ellowdigitals.me/",
+    url: "https://ellowdigital.space/",
     name: "EllowDigital",
     description: "Professional digital services for businesses in India",
   },

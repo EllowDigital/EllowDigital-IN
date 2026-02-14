@@ -21,9 +21,9 @@ type SEOProps = {
 const SEOHead = ({
   title = "EllowDigital | Digital Transformation Services in India",
   description = "EllowDigital offers expert web development, SEO optimization, and digital marketing solutions. Transform your business with cutting-edge digital services.",
-  canonicalUrl = "https://ellowdigitals.me/",
+  canonicalUrl = "https://ellowdigital.space/",
   ogType = "website",
-  ogImage = "https://ellowdigitals.me/favicon/share.jpg",
+  ogImage = "https://ellowdigital.space/favicon/share.jpg",
   ogImageAlt = "EllowDigital - Digital Transformation Services",
   twitterCard = "summary_large_image",
   structuredData,
@@ -44,7 +44,7 @@ const SEOHead = ({
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://ellowdigitals.me/",
+        item: "https://ellowdigital.space/",
       },
     ],
   };
@@ -53,12 +53,12 @@ const SEOHead = ({
   const defaultStructuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": "https://ellowdigitals.me/#organization",
+    "@id": "https://ellowdigital.space/#organization",
     name: "EllowDigital",
-    url: "https://ellowdigitals.me",
+    url: "https://ellowdigital.space",
     logo: {
       "@type": "ImageObject",
-      url: "https://ellowdigitals.me/logo.webp",
+      url: "https://ellowdigital.space/logo.webp",
       width: 512,
       height: 512,
     },
