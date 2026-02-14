@@ -289,7 +289,7 @@ const Index = () => {
           </ScrollReveal>
 
           <ScrollReveal animation="fadeUp" delay={0.1}>
-            <Suspense fallback={<SectionLoader cards={8} columns={1} />}>
+            <Suspense fallback={<SectionLoader cards={8} columns={2} />}>
               <FAQSection />
             </Suspense>
           </ScrollReveal>
