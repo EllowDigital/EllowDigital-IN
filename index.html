@@ -1,153 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Critical Performance Meta -->
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- Critical Preloads for LCP optimization -->
-    <link rel="preload" href="/preloader.css" as="style" />
-    <link rel="preload" href="/src/main.tsx" as="script" crossorigin />
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-18CRT29WMW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-    <!-- DNS Prefetch & Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link rel="dns-prefetch" href="https://cdn.gpteng.co" />
+    gtag('config', 'G-18CRT29WMW');
+  </script>
+  <!-- Critical Performance Meta -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- Theme color for browser UI -->
-    <meta
-      name="theme-color"
-      content="#fcc62d"
-      media="(prefers-color-scheme: light)"
-    />
-    <meta
-      name="theme-color"
-      content="#1a1a1a"
-      media="(prefers-color-scheme: dark)"
-    />
+  <!-- Critical Preloads for LCP optimization -->
+  <link rel="preload" href="/preloader.css" as="style" />
+  <link rel="preload" href="/src/main.tsx" as="script" crossorigin />
 
-    <!-- Primary SEO Meta Tags -->
-    <title>EllowDigital | Top Web Development & SEO Services in India 🚀</title>
-    <meta
-      name="description"
-      content="Transform your business with EllowDigital's expert web development, SEO, and digital marketing services. ⭐ 100+ Successful Projects ⭐ Affordable Pricing ⭐ Fast Delivery. Get a FREE Quote Today!"
-    />
-    <meta
-      name="keywords"
-      content="web development India, digital marketing agency, SEO services India, UI/UX design, business website development, e-commerce solutions, mobile app development, digital transformation, affordable web design, EllowDigital"
-    />
-    <meta name="author" content="EllowDigital" />
-    <link rel="canonical" href="https://ellowdigital.space/" />
+  <!-- DNS Prefetch & Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="dns-prefetch" href="https://cdn.gpteng.co" />
 
-    <!-- Robots & Indexing -->
-    <meta
-      name="robots"
-      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
-    />
-    <meta name="googlebot" content="index, follow, max-image-preview:large" />
-    <meta name="bingbot" content="index, follow" />
-    <meta name="google" content="notranslate" />
+  <!-- Theme color for browser UI -->
+  <meta name="theme-color" content="#fcc62d" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
 
-    <!-- Language & Locale -->
-    <meta name="language" content="en-IN" />
-    <meta http-equiv="content-language" content="en-IN" />
-    <link rel="alternate" hreflang="en-IN" href="https://ellowdigital.space/" />
-    <link rel="alternate" hreflang="en" href="https://ellowdigital.space/" />
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href="https://ellowdigital.space/"
-    />
+  <!-- Primary SEO Meta Tags -->
+  <title>EllowDigital | Top Web Development & SEO Services in India 🚀</title>
+  <meta name="description"
+    content="Transform your business with EllowDigital's expert web development, SEO, and digital marketing services. ⭐ 100+ Successful Projects ⭐ Affordable Pricing ⭐ Fast Delivery. Get a FREE Quote Today!" />
+  <meta name="keywords"
+    content="web development India, digital marketing agency, SEO services India, UI/UX design, business website development, e-commerce solutions, mobile app development, digital transformation, affordable web design, EllowDigital" />
+  <meta name="author" content="EllowDigital" />
+  <link rel="canonical" href="https://ellowdigital.space/" />
 
-    <!-- Geolocation for Local SEO -->
-    <meta name="geo.region" content="IN-UP" />
-    <meta name="geo.placename" content="Lucknow, India" />
-    <meta name="geo.position" content="26.8467;80.9462" />
-    <meta name="ICBM" content="26.8467, 80.9462" />
+  <!-- Robots & Indexing -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-image-preview:large" />
+  <meta name="bingbot" content="index, follow" />
+  <meta name="google" content="notranslate" />
 
-    <!-- Mobile & PWA Capabilities -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
-    <meta name="apple-mobile-web-app-title" content="EllowDigital" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content="EllowDigital" />
-    <meta name="msapplication-TileColor" content="#fcc62d" />
-    <meta name="msapplication-config" content="/browserconfig.xml" />
-    <meta name="format-detection" content="telephone=no" />
+  <!-- Language & Locale -->
+  <meta name="language" content="en-IN" />
+  <meta http-equiv="content-language" content="en-IN" />
+  <link rel="alternate" hreflang="en-IN" href="https://ellowdigital.space/" />
+  <link rel="alternate" hreflang="en" href="https://ellowdigital.space/" />
+  <link rel="alternate" hreflang="x-default" href="https://ellowdigital.space/" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://ellowdigital.space/" />
-    <meta
-      property="og:title"
-      content="EllowDigital | Top Web Development & SEO Services in India"
-    />
-    <meta
-      property="og:description"
-      content="Transform your business with expert web development, SEO, and digital marketing solutions. 100+ Successful Projects. Affordable Pricing. Fast Delivery."
-    />
-    <meta
-      property="og:image"
-      content="https://ellowdigital.space/favicon/share.jpg"
-    />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta
-      property="og:image:alt"
-      content="EllowDigital - Digital Transformation Services"
-    />
-    <meta property="og:site_name" content="EllowDigital" />
-    <meta property="og:locale" content="en_IN" />
+  <!-- Geolocation for Local SEO -->
+  <meta name="geo.region" content="IN-UP" />
+  <meta name="geo.placename" content="Lucknow, India" />
+  <meta name="geo.position" content="26.8467;80.9462" />
+  <meta name="ICBM" content="26.8467, 80.9462" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@EllowDigital" />
-    <meta name="twitter:creator" content="@EllowDigital" />
-    <meta
-      name="twitter:title"
-      content="EllowDigital | Top Web Development & SEO Services"
-    />
-    <meta
-      name="twitter:description"
-      content="Expert web development, SEO, and digital marketing solutions. 100+ Successful Projects. Get a FREE Quote Today!"
-    />
-    <meta
-      name="twitter:image"
-      content="https://ellowdigital.space/favicon/share.jpg"
-    />
-    <meta name="twitter:image:alt" content="EllowDigital branding" />
+  <!-- Mobile & PWA Capabilities -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="EllowDigital" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="application-name" content="EllowDigital" />
+  <meta name="msapplication-TileColor" content="#fcc62d" />
+  <meta name="msapplication-config" content="/browserconfig.xml" />
+  <meta name="format-detection" content="telephone=no" />
 
-    <!-- Pinterest Rich Pins -->
-    <meta name="pinterest-rich-pin" content="true" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ellowdigital.space/" />
+  <meta property="og:title" content="EllowDigital | Top Web Development & SEO Services in India" />
+  <meta property="og:description"
+    content="Transform your business with expert web development, SEO, and digital marketing solutions. 100+ Successful Projects. Affordable Pricing. Fast Delivery." />
+  <meta property="og:image" content="https://ellowdigital.space/favicon/share.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="EllowDigital - Digital Transformation Services" />
+  <meta property="og:site_name" content="EllowDigital" />
+  <meta property="og:locale" content="en_IN" />
 
-    <!-- Google Site Verification -->
-    <meta
-      name="google-site-verification"
-      content="WMhKG8wyqadZSkX0PKIkyv--6CSGCaErWsG6j5pnV-Q"
-    />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@EllowDigital" />
+  <meta name="twitter:creator" content="@EllowDigital" />
+  <meta name="twitter:title" content="EllowDigital | Top Web Development & SEO Services" />
+  <meta name="twitter:description"
+    content="Expert web development, SEO, and digital marketing solutions. 100+ Successful Projects. Get a FREE Quote Today!" />
+  <meta name="twitter:image" content="https://ellowdigital.space/favicon/share.jpg" />
+  <meta name="twitter:image:alt" content="EllowDigital branding" />
 
-    <!-- Additional SEO Signals -->
-    <meta
-      name="copyright"
-      content="© 2025 EllowDigital. All rights reserved."
-    />
-    <meta name="rating" content="general" />
-    <meta name="distribution" content="global" />
-    <meta name="coverage" content="Worldwide" />
-    <meta name="revisit-after" content="3 days" />
-    <meta name="referrer" content="origin-when-cross-origin" />
+  <!-- Pinterest Rich Pins -->
+  <meta name="pinterest-rich-pin" content="true" />
 
-    <!-- Organization Schema - Enhanced -->
-    <script type="application/ld+json">
+  <!-- Google Site Verification -->
+  <meta name="google-site-verification" content="WMhKG8wyqadZSkX0PKIkyv--6CSGCaErWsG6j5pnV-Q" />
+
+  <!-- Additional SEO Signals -->
+  <meta name="copyright" content="© 2025 EllowDigital. All rights reserved." />
+  <meta name="rating" content="general" />
+  <meta name="distribution" content="global" />
+  <meta name="coverage" content="Worldwide" />
+  <meta name="revisit-after" content="3 days" />
+  <meta name="referrer" content="origin-when-cross-origin" />
+
+  <!-- Organization Schema - Enhanced -->
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
@@ -197,8 +157,8 @@
       }
     </script>
 
-    <!-- WebSite Schema with SearchAction -->
-    <script type="application/ld+json">
+  <!-- WebSite Schema with SearchAction -->
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
@@ -213,8 +173,8 @@
       }
     </script>
 
-    <!-- LocalBusiness Schema for Local SEO -->
-    <script type="application/ld+json">
+  <!-- LocalBusiness Schema for Local SEO -->
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
@@ -254,71 +214,57 @@
       }
     </script>
 
-    <!-- Favicon and App Icons -->
-    <link rel="icon" href="/favicon/favicon.ico" />
-    <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/favicon/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/favicon/favicon-16x16.png"
-    />
-    <link rel="manifest" href="/favicon/site.webmanifest" />
-    <link rel="preload" href="/preloader.css" as="style" />
-    <link
-      rel="stylesheet"
-      href="/preloader.css"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link rel="stylesheet" href="/preloader.css" />
-    </noscript>
-  </head>
+  <!-- Favicon and App Icons -->
+  <link rel="icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+  <link rel="preload" href="/preloader.css" as="style" />
+  <link rel="stylesheet" href="/preloader.css" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="/preloader.css" />
+  </noscript>
+</head>
 
-  <body>
-    <!-- Theme initialization to prevent flash -->
-    <script>
-      (function () {
-        const theme = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-        if (theme === "dark" || (!theme && prefersDark)) {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-        }
-      })();
-    </script>
-    <div id="root"></div>
+<body>
+  <!-- Theme initialization to prevent flash -->
+  <script>
+    (function () {
+      const theme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      if (theme === "dark" || (!theme && prefersDark)) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    })();
+  </script>
+  <div id="root"></div>
 
-    <!-- Important Script Tags -->
-    <script type="module" src="/src/main.tsx"></script>
-    <script>
-      (() => {
-        const loadThirdParty = () => {
-          const script = document.createElement("script");
-          script.type = "module";
-          script.defer = true;
-          script.src = "https://cdn.gpteng.co/gptengineer.js";
-          document.body.appendChild(script);
-        };
+  <!-- Important Script Tags -->
+  <script type="module" src="/src/main.tsx"></script>
+  <script>
+    (() => {
+      const loadThirdParty = () => {
+        const script = document.createElement("script");
+        script.type = "module";
+        script.defer = true;
+        script.src = "https://cdn.gpteng.co/gptengineer.js";
+        document.body.appendChild(script);
+      };
 
-        if ("requestIdleCallback" in window) {
-          window.requestIdleCallback(loadThirdParty, { timeout: 2000 });
-        } else {
-          window.addEventListener("load", () => loadThirdParty(), {
-            once: true,
-          });
-        }
-      })();
-    </script>
-  </body>
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(loadThirdParty, { timeout: 2000 });
+      } else {
+        window.addEventListener("load", () => loadThirdParty(), {
+          once: true,
+        });
+      }
+    })();
+  </script>
+</body>
+
 </html>
