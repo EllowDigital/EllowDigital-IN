@@ -107,11 +107,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({ faqs = defaultFAQs }) => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-4xl mx-auto"
         >
-          <Accordion
-            type="single"
-            collapsible
-            className="space-y-4"
-          >
+          <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
               <AccordionItem
                 key={index}
