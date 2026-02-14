@@ -1,12 +1,19 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import { FileLock } from "lucide-react";
 import { motion } from "framer-motion";
 
 const TermsOfService = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <SEOHead
+        title="Terms of Service | EllowDigital - Service Agreement"
+        description="Read EllowDigital's terms of service to understand our service agreement, user responsibilities, and business policies."
+        canonicalUrl="https://ellowdigital.space/terms-of-service"
+        keywords="terms of service, service agreement, EllowDigital policies"
+      />
       <Navbar />
       <main className="flex-grow py-20 lg:py-28">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">

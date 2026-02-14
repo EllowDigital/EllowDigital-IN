@@ -199,8 +199,9 @@ const Index = () => {
   return (
     <>
       <SEOHead
-        title="EllowDigital | Digital Transformation Services in India"
-        description="EllowDigital offers web development, SEO, and digital marketing services to accelerate your business growth in the digital landscape across India."
+        title="EllowDigital | Top Web Development & SEO Services in India 🚀"
+        description="Transform your business with EllowDigital's expert web development, SEO, and digital marketing services. ⭐ 100+ Successful Projects ⭐ Affordable Pricing ⭐ Fast Delivery. Get a FREE Quote Today!"
+        keywords="web development India, digital marketing agency, SEO services India, UI/UX design, business website development, e-commerce solutions, mobile app development, digital transformation, affordable web design, EllowDigital"
         canonicalUrl="https://ellowdigital.space/"
         structuredData={homePageSchema}
       />

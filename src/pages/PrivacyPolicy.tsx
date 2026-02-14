@@ -1,12 +1,19 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import { Shield } from "lucide-react";
 import { motion } from "framer-motion";
 
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <SEOHead
+        title="Privacy Policy | EllowDigital - Your Data Protection"
+        description="Learn how EllowDigital protects your privacy and handles your personal information. Our comprehensive privacy policy ensures transparency and data security."
+        canonicalUrl="https://ellowdigital.space/privacy-policy"
+        keywords="privacy policy, data protection, GDPR compliance, EllowDigital privacy"
+      />
       <Navbar />
       <main className="flex-grow py-20 lg:py-28">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">

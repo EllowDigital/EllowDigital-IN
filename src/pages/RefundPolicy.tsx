@@ -1,12 +1,19 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import { FileMinus } from "lucide-react";
 import { motion } from "framer-motion";
 
 const RefundPolicy = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <SEOHead
+        title="Refund Policy | EllowDigital - Fair & Transparent"
+        description="Understand EllowDigital's refund policy. We maintain transparent, fair refund terms for all our digital services and products."
+        canonicalUrl="https://ellowdigital.space/refund-policy"
+        keywords="refund policy, money back guarantee, EllowDigital refunds"
+      />
       <Navbar />
       <main className="flex-grow py-20 lg:py-28">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">

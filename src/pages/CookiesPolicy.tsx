@@ -1,12 +1,19 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import { Cookie } from "lucide-react";
 import { motion } from "framer-motion";
 
 const CookiesPolicy = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <SEOHead
+        title="Cookie Policy | EllowDigital - How We Use Cookies"
+        description="Learn about EllowDigital's cookie usage. We use cookies to enhance your browsing experience and provide personalized services."
+        canonicalUrl="https://ellowdigital.space/cookies-policy"
+        keywords="cookie policy, cookies, EllowDigital tracking"
+      />
       <Navbar />
       <main className="flex-grow py-20 lg:py-28">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">

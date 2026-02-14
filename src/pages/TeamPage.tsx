@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -78,15 +78,39 @@ const TeamPage = () => {
     // },
   ];
 
+  // Team Page Schema
+  const teamPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": "https://ellowdigital.space/team",
+    url: "https://ellowdigital.space/team",
+    name: "EllowDigital Team - Meet Our Expert Developers",
+    description:
+      "Meet the talented team behind EllowDigital - expert developers, designers, and digital marketing specialists passionate about delivering exceptional digital solutions.",
+    mainEntity: {
+      "@type": "Organization",
+      "@id": "https://ellowdigital.space/#organization",
+      name: "EllowDigital",
+      employee: teamMembers.map((member) => ({
+        "@type": "Person",
+        name: member.name,
+        jobTitle: member.role,
+        image: `https://ellowdigital.space${member.image}`,
+        description: member.bio,
+        knowsAbout: member.specialties,
+      })),
+    },
+  };
+
   return (
     <>
-      <Helmet>
-        <title>Our Team | EllowDigital</title>
-        <meta
-          name="description"
-          content="Meet the talented team behind EllowDigital - experts in web development, design, and digital marketing."
-        />
-      </Helmet>
+      <SEOHead
+        title="Meet Our Team | EllowDigital - Expert Developers & Designers"
+        description="Meet the passionate team behind EllowDigital. Our expert developers, designers, and digital marketing specialists are dedicated to transforming your digital presence and delivering cutting-edge solutions."
+        keywords="EllowDigital team, web developers India, digital marketing experts, UI/UX designers, Sarwan Yadav, software development team"
+        canonicalUrl="https://ellowdigital.space/team"
+        structuredData={teamPageSchema}
+      />
 
       <Navbar />
 
