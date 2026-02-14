@@ -122,7 +122,7 @@ const Index = () => {
       <SEOHead
         title="EllowDigital | Digital Transformation Services in India"
         description="EllowDigital offers web development, SEO, and digital marketing services to accelerate your business growth in the digital landscape across India."
-        canonicalUrl="https://ellowdigitals.me/"
+        canonicalUrl="https://ellowdigital.space/"
         structuredData={homePageSchema}
       />
 
