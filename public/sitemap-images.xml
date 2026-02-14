@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- ==================== PRIMARY BRAND IMAGES ==================== -->
+  
+  <!-- Homepage Hero Images -->
+  <url>
+    <loc>https://ellowdigital.space/</loc>
+    <image:image>
+      <image:loc>https://ellowdigital.space/favicon/share.jpg</image:loc>
+      <image:title>EllowDigital - Digital Transformation Services</image:title>
+      <image:caption>Professional web development and digital marketing services in India</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ellowdigital.space/logo.webp</image:loc>
+      <image:title>EllowDigital Logo</image:title>
+      <image:caption>Official EllowDigital brand logo</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Team Page Images -->
+  <url>
+    <loc>https://ellowdigital.space/team</loc>
+    <image:image>
+      <image:loc>https://ellowdigital.space/images/founder.jpg</image:loc>
+      <image:title>Sarwan Yadav - Founder of EllowDigital</image:title>
+      <image:caption>Sarwan Yadav, Founder and Lead Developer at EllowDigital</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Favicon Images -->
+  <url>
+    <loc>https://ellowdigital.space/</loc>
+    <image:image>
+      <image:loc>https://ellowdigital.space/favicon/apple-touch-icon.png</image:loc>
+      <image:title>EllowDigital Apple Touch Icon</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ellowdigital.space/favicon/favicon-32x32.png</image:loc>
+      <image:title>EllowDigital Favicon 32x32</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ellowdigital.space/favicon/favicon-16x16.png</image:loc>
+      <image:title>EllowDigital Favicon 16x16</image:title>
+    </image:image>
+  </url>
+  
+</urlset>

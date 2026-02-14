@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Primary Pages Sitemap -->
+  <sitemap>
+    <loc>https://ellowdigital.space/sitemap-pages.xml</loc>
+    <lastmod>2026-02-14T12:00:00+00:00</lastmod>
+  </sitemap>
+  
+  <!-- Services Sitemap -->
+  <sitemap>
+    <loc>https://ellowdigital.space/sitemap-services.xml</loc>
+    <lastmod>2026-02-14T12:00:00+00:00</lastmod>
+  </sitemap>
+  
+  <!-- Images Sitemap -->
+  <sitemap>
+    <loc>https://ellowdigital.space/sitemap-images.xml</loc>
+    <lastmod>2026-02-14T12:00:00+00:00</lastmod>
+  </sitemap>
+  
+</sitemapindex>

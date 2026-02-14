@@ -1,38 +1,58 @@
-# EllowDigital Robots.txt
-# Website: https://ellowdigitals.me
-# Last updated: 2025-12-23
+# ============================================
+# Ellow Digital - Enterprise Robots.txt
+# Website: https://ellowdigital.space
+# Last updated: 2026-02-14
+# Purpose: Optimal crawl budget & indexing
+# ============================================
 
-# Allow all major search engines
+# ========== PRIMARY SEARCH ENGINES ==========
+
+# Google Crawlers (All Variants)
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 1
+Crawl-delay: 0
 
 User-agent: Googlebot-Image
 Allow: /
+Disallow: /public/images/projects_img/
 
 User-agent: Googlebot-Mobile
 Allow: /
+Crawl-delay: 0
 
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /
+
+# Bing Crawler
 User-agent: Bingbot
 Allow: /
-Crawl-delay: 2
+Crawl-delay: 1
 
+# Yahoo (Slurp)
 User-agent: Slurp
 Allow: /
-Crawl-delay: 2
+Crawl-delay: 1
 
+# DuckDuckGo
 User-agent: DuckDuckBot
 Allow: /
+Crawl-delay: 1
 
+# Baidu (Chinese Search Engine)
 User-agent: Baiduspider
-Allow: /
-Crawl-delay: 3
-
-User-agent: YandexBot
 Allow: /
 Crawl-delay: 2
 
-# Social media crawlers
+# Yandex (Russian Search Engine)
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+
+# ========== SOCIAL MEDIA CRAWLERS ==========
+
 User-agent: Twitterbot
 Allow: /
 
@@ -45,24 +65,63 @@ Allow: /
 User-agent: Pinterest
 Allow: /
 
-# Default for all other bots
+User-agent: Slackbot
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# ========== DEFAULT FOR ALL BOTS ==========
+
 User-agent: *
 Allow: /
-Crawl-delay: 5
+Crawl-delay: 2
 
-# Block administrative and sensitive paths
-Disallow: /api/
+# Disallow admin, build, and config files
+Disallow: /node_modules/
+Disallow: /src/
 Disallow: /*.json$
+Disallow: /*.config.*$
+Disallow: /package*.json
+Disallow: /tsconfig*.json
+Disallow: /vite.config.*
+Disallow: /netlify.toml
+Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
 
-# Block query parameters that create duplicate content
+# Block query parameters causing duplicate content
 Disallow: /*?*__lovable_token*
 Disallow: /*?*utm_*
 Disallow: /*?*ref=*
+Disallow: /*?*fbclid=*
+Disallow: /*?*gclid=*
 
-# Sitemap locations
-Sitemap: https://ellowdigitals.me/sitemap.xml
+# Block specific file types
+Disallow: /*.git$
+Disallow: /*.env$
+Disallow: /desktop.ini
+Disallow: /*.lock$
+Disallow: /*.lockb$
 
-# Host directive
-Host: https://ellowdigitals.me
+# Allow CSS, JS, images for rendering (Critical for Google)
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.webp$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.svg$
+Allow: /*.gif$
+Allow: /*.woff$
+Allow: /*.woff2$
+
+# ========== SITEMAP LOCATION ==========
+Sitemap: https://ellowdigital.space/sitemap-index.xml
+Sitemap: https://ellowdigital.space/sitemap.xml
+
+# ========== HOST DIRECTIVE ==========
+Host: https://ellowdigital.space

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- ==================== SERVICE-FOCUSED CONTENT ==================== -->
+  <!-- These URLs are anchor sections on the homepage but represent distinct service offerings -->
+  
+  <!-- Web Development Services -->
+  <url>
+    <loc>https://ellowdigital.space/#services</loc>
+    <lastmod>2026-02-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- About Ellow Digital -->
+  <url>
+    <loc>https://ellowdigital.space/#about</loc>
+    <lastmod>2026-02-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Work Process -->
+  <url>
+    <loc>https://ellowdigital.space/#process</loc>
+    <lastmod>2026-02-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Contact Form -->
+  <url>
+    <loc>https://ellowdigital.space/#contact</loc>
+    <lastmod>2026-02-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Testimonials -->
+  <url>
+    <loc>https://ellowdigital.space/#testimonials</loc>
+    <lastmod>2026-02-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+</urlset>
