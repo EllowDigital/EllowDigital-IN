@@ -289,11 +289,11 @@ Test each page with: https://search.google.com/test/rich-results
 - [ ] Monitoring set up
 - [ ] Team trained on maintenance
 
-**Verified By:** ********\_********
+**Verified By:** **\*\*\*\***\_**\*\*\*\***
 
-**Date:** ********\_********
+**Date:** **\*\*\*\***\_**\*\*\*\***
 
-**Next Review Date:** ********\_********
+**Next Review Date:** **\*\*\*\***\_**\*\*\*\***
 
 ---
 
