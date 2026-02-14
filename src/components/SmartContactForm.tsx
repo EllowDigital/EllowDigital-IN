@@ -99,7 +99,7 @@ const SmartContactForm = () => {
       const formDataWithHiddenFields = {
         ...formData,
         _captcha: "false",
-        _next: "https://www.ellowdigitals.me/", // Redirect URL after success
+        _next: "https://ellowdigital.space/", // Redirect URL after success
         _subject: "New Message from Contact Form",
       };
       const formAction = "https://formsubmit.co/ellowdigitalindia@gmail.com";

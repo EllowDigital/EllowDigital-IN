@@ -124,14 +124,14 @@ const projects: Project[] = [
 const portfolioPageSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "@id": "https://ellowdigitals.me/portfolio",
-  url: "https://ellowdigitals.me/portfolio",
+  "@id": "https://ellowdigital.space/portfolio",
+  url: "https://ellowdigital.space/portfolio",
   name: "Portfolio - EllowDigital Projects",
   description:
     "Explore our complete portfolio of web development, mobile apps, and digital transformation projects.",
   isPartOf: {
     "@type": "WebSite",
-    url: "https://ellowdigitals.me/",
+    url: "https://ellowdigital.space/",
     name: "EllowDigital",
   },
   mainEntity: {
@@ -198,7 +198,7 @@ const PortfolioPage = () => {
       <SEOHead
         title="Portfolio - Complete Project Gallery | EllowDigital"
         description="Browse our complete portfolio featuring web development, mobile applications, desktop software, and digital transformation projects."
-        canonicalUrl="https://ellowdigitals.me/portfolio"
+        canonicalUrl="https://ellowdigital.space/portfolio"
         structuredData={portfolioPageSchema}
       />
 
