@@ -26,6 +26,7 @@ const Testimonials = lazy(() => import("@/components/Testimonials"));
 const TechStack = lazy(() => import("@/components/TechStack"));
 const WhyChooseUs = lazy(() => import("@/components/WhyChooseUs"));
 const FeaturedOffers = lazy(() => import("@/components/FeaturedOffers"));
+const FAQSection = lazy(() => import("@/components/FAQSection"));
 const SmartContactForm = lazy(() => import("@/components/SmartContactForm"));
 
 // Section loading fallback
@@ -205,6 +206,12 @@ const Index = () => {
           <ScrollReveal animation="scale" delay={0.1}>
             <Suspense fallback={<SectionLoader cards={2} columns={2} />}>
               <FeaturedOffers />
+            </Suspense>
+          </ScrollReveal>
+
+          <ScrollReveal animation="fadeUp" delay={0.1}>
+            <Suspense fallback={<SectionLoader cards={8} columns={1} />}>
+              <FAQSection />
             </Suspense>
           </ScrollReveal>
 
