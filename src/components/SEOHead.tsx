@@ -49,18 +49,38 @@ const SEOHead = ({
     ],
   };
 
-  // Default organization structured data
+  // Default organization structured data (Enhanced for E-E-A-T)
   const defaultStructuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": "https://ellowdigital.space/#organization",
     name: "EllowDigital",
+    alternateName: "Ellow Digital",
     url: "https://ellowdigital.space",
     logo: {
       "@type": "ImageObject",
       url: "https://ellowdigital.space/logo.webp",
       width: 512,
       height: 512,
+    },
+    image: "https://ellowdigital.space/favicon/share.jpg",
+    foundingDate: "2023",
+    founder: {
+      "@type": "Person",
+      name: "Sarwan Yadav",
+      jobTitle: "Founder & Lead Developer",
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Lucknow",
+      addressRegion: "Uttar Pradesh",
+      addressCountry: "IN",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      email: "ellowdigitalindia@gmail.com",
+      availableLanguage: ["English", "Hindi"],
     },
     sameAs: [
       "https://www.facebook.com/ellowdigitals",
@@ -69,11 +89,20 @@ const SEOHead = ({
       "https://www.instagram.com/ellowdigitals",
     ],
     description:
-      "EllowDigital provides digital transformation services including SEO, web development, and digital marketing solutions.",
+      "EllowDigital provides professional digital transformation services including web development, SEO optimization, UI/UX design, and digital marketing solutions for businesses across India.",
     areaServed: {
       "@type": "Country",
       name: "India",
     },
+    slogan: "Transform Your Digital Presence",
+    knowsAbout: [
+      "Web Development",
+      "SEO Services",
+      "Digital Marketing",
+      "UI/UX Design",
+      "Mobile App Development",
+      "E-commerce Solutions",
+    ],
   };
 
   const jsonLd = structuredData || defaultStructuredData;
