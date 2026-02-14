@@ -13,7 +13,7 @@ import {
   initScrollRevealAnimations,
   init3DTiltEffect,
 } from "@/utils/animationUtils";
-import { generateFAQSchema } from "@/components/FAQSection";
+import { generateFAQSchema } from "@/utils/faqSchema";
 
 // Lazy load below-the-fold sections for better performance
 const AboutSection = lazy(() => import("@/components/AboutSection"));

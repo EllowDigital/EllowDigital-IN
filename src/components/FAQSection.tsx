@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
 import { HelpCircle } from "lucide-react";
+import { generateFAQSchema } from "@/utils/faqSchema";
 
 interface FAQItem {
   question: string;
@@ -60,19 +61,8 @@ const defaultFAQs: FAQItem[] = [
   },
 ];
 
-// Generate FAQPage Schema for SEO
-export const generateFAQSchema = (faqs: FAQItem[]) => ({
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((faq) => ({
-    "@type": "Question",
-    name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.answer,
-    },
-  })),
-});
+// Export for use in schemas
+export { generateFAQSchema };
 
 const FAQSection: React.FC<FAQSectionProps> = ({ faqs = defaultFAQs }) => {
   return (
