@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { AnimatedSectionHeader } from "./AnimatedGradient";
+import { ScrollNarrative, FloatingShapes, ParallaxLayer } from "./storytelling";
 
 const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -36,10 +37,7 @@ const AboutSection = () => {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.08, delayChildren: 0.2 },
     },
   };
 
@@ -62,6 +60,9 @@ const AboutSection = () => {
       ref={sectionRef}
       className="py-20 sm:py-28 lg:py-32 relative overflow-hidden"
     >
+      {/* 3D Floating shapes */}
+      <FloatingShapes variant="minimal" />
+
       {/* Premium gradient background with parallax */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
@@ -73,12 +74,10 @@ const AboutSection = () => {
           className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-brand-gold/8 rounded-full blur-[120px]"
           style={{ y: useTransform(scrollYProgress, [0, 1], [0, -80]) }}
         />
-        {/* Grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.03)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <AnimatedSectionHeader
           badge="Who We Are"
           badgeIcon={<Target className="w-4 h-4 text-primary" />}
@@ -89,26 +88,22 @@ const AboutSection = () => {
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          {/* Left Column: Content */}
-          <motion.div
-            className="space-y-8"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="space-y-5">
-              <p className="text-foreground/80 text-base sm:text-lg leading-relaxed">
-                At EllowDigital, we are dedicated to delivering high-performance
-                websites, mobile apps, and software solutions that are tailored
-                to your unique business needs.
-              </p>
-              <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
-                We believe that every project is an opportunity to make a
-                lasting impact. That's why we focus on quality, efficiency, and
-                user-centric design to ensure our solutions exceed expectations.
-              </p>
-            </div>
+          {/* Left Column: Scroll-driven narrative content */}
+          <div className="space-y-8">
+            <ScrollNarrative direction="left" intensity={40}>
+              <div className="space-y-5">
+                <p className="text-foreground/80 text-base sm:text-lg leading-relaxed">
+                  At EllowDigital, we are dedicated to delivering high-performance
+                  websites, mobile apps, and software solutions that are tailored
+                  to your unique business needs.
+                </p>
+                <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
+                  We believe that every project is an opportunity to make a
+                  lasting impact. That's why we focus on quality, efficiency, and
+                  user-centric design to ensure our solutions exceed expectations.
+                </p>
+              </div>
+            </ScrollNarrative>
 
             {/* Highlights Grid */}
             <motion.div
@@ -122,7 +117,8 @@ const AboutSection = () => {
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  whileHover={{ scale: 1.02, x: 4 }}
+                  whileHover={{ scale: 1.02, x: 4, rotateY: 3 }}
+                  style={{ transformStyle: "preserve-3d" }}
                   className="group flex items-center gap-3 p-4 bg-card/50 hover:bg-card/80 backdrop-blur-sm border border-border/30 hover:border-brand-yellow/40 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-brand-yellow/5"
                 >
                   <div className="w-10 h-10 rounded-lg bg-brand-yellow/10 group-hover:bg-brand-yellow/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
@@ -135,7 +131,6 @@ const AboutSection = () => {
               ))}
             </motion.div>
 
-            {/* CTA */}
             <motion.a
               href="#contact"
               className="inline-flex items-center gap-2 text-brand-yellow font-semibold group"
@@ -144,72 +139,76 @@ const AboutSection = () => {
               Let's work together
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </motion.a>
-          </motion.div>
+          </div>
 
-          {/* Right Column: Cards */}
-          <motion.div
-            className="space-y-5"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {/* Mission Card */}
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-brand-yellow/20 to-brand-gold/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative p-7 bg-card/60 backdrop-blur-sm border border-border/40 rounded-2xl hover:border-brand-yellow/20 transition-all duration-300">
-                <div className="flex items-center gap-4 mb-5">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-yellow/20 to-brand-gold/10 border border-brand-yellow/20 flex items-center justify-center">
-                    <Rocket className="w-7 h-7 text-brand-yellow" />
+          {/* Right Column: Parallax cards */}
+          <div className="space-y-5">
+            <ParallaxLayer speed={0.15}>
+              <ScrollNarrative direction="right" intensity={30}>
+                {/* Mission Card */}
+                <div className="relative group mb-5">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-brand-yellow/20 to-brand-gold/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative p-7 bg-card/60 backdrop-blur-sm border border-border/40 rounded-2xl hover:border-brand-yellow/20 transition-all duration-300">
+                    <div className="flex items-center gap-4 mb-5">
+                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-yellow/20 to-brand-gold/10 border border-brand-yellow/20 flex items-center justify-center">
+                        <Rocket className="w-7 h-7 text-brand-yellow" />
+                      </div>
+                      <h3 className="text-xl font-bold text-foreground">
+                        Our Mission
+                      </h3>
+                    </div>
+                    <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                      To empower businesses with meaningful digital experiences. By
+                      blending innovative technology, agile development, and
+                      human-centered design, we create results that resonate with
+                      your audience.
+                    </p>
                   </div>
-                  <h3 className="text-xl font-bold text-foreground">
-                    Our Mission
-                  </h3>
                 </div>
-                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                  To empower businesses with meaningful digital experiences. By
-                  blending innovative technology, agile development, and
-                  human-centered design, we create results that resonate with
-                  your audience.
-                </p>
-              </div>
-            </div>
+              </ScrollNarrative>
+            </ParallaxLayer>
 
-            {/* Philosophy Card */}
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-brand-gold/20 to-brand-yellow/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative p-7 bg-card/60 backdrop-blur-sm border border-border/40 rounded-2xl hover:border-brand-yellow/20 transition-all duration-300">
-                <div className="flex items-center gap-4 mb-5">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-gold/20 to-brand-yellow/10 border border-brand-gold/20 flex items-center justify-center">
-                    <LightbulbIcon className="w-7 h-7 text-brand-gold" />
+            <ParallaxLayer speed={0.25}>
+              <ScrollNarrative direction="scale" intensity={30}>
+                {/* Philosophy Card */}
+                <div className="relative group mb-5">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-brand-gold/20 to-brand-yellow/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative p-7 bg-card/60 backdrop-blur-sm border border-border/40 rounded-2xl hover:border-brand-yellow/20 transition-all duration-300">
+                    <div className="flex items-center gap-4 mb-5">
+                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-gold/20 to-brand-yellow/10 border border-brand-gold/20 flex items-center justify-center">
+                        <LightbulbIcon className="w-7 h-7 text-brand-gold" />
+                      </div>
+                      <h3 className="text-xl font-bold text-foreground">
+                        Our Philosophy
+                      </h3>
+                    </div>
+                    <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                      Technology should empower people. With passion for creating
+                      impactful digital experiences, we blend innovative technology
+                      with human-centered design to bring your boldest ideas to
+                      life.
+                    </p>
                   </div>
-                  <h3 className="text-xl font-bold text-foreground">
-                    Our Philosophy
-                  </h3>
                 </div>
-                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                  Technology should empower people. With passion for creating
-                  impactful digital experiences, we blend innovative technology
-                  with human-centered design to bring your boldest ideas to
-                  life.
-                </p>
-              </div>
-            </div>
+              </ScrollNarrative>
+            </ParallaxLayer>
 
-            {/* Quote */}
-            <div className="relative p-6 bg-gradient-to-br from-brand-yellow/5 to-brand-gold/5 border border-brand-yellow/15 rounded-2xl overflow-hidden">
-              <div className="absolute -top-2 left-4 text-6xl text-brand-yellow/20 font-serif leading-none">
-                "
+            {/* Quote with reveal */}
+            <ScrollNarrative direction="reveal">
+              <div className="relative p-6 bg-gradient-to-br from-brand-yellow/5 to-brand-gold/5 border border-brand-yellow/15 rounded-2xl overflow-hidden">
+                <div className="absolute -top-2 left-4 text-6xl text-brand-yellow/20 font-serif leading-none">
+                  "
+                </div>
+                <p className="relative text-sm sm:text-base italic text-foreground/80 pl-6 pr-4 leading-relaxed">
+                  Every line of code and every pixel should serve a purpose — to
+                  create beautiful experiences that solve real problems.
+                </p>
+                <div className="absolute -bottom-4 right-4 text-6xl text-brand-yellow/20 font-serif leading-none rotate-180">
+                  "
+                </div>
               </div>
-              <p className="relative text-sm sm:text-base italic text-foreground/80 pl-6 pr-4 leading-relaxed">
-                Every line of code and every pixel should serve a purpose — to
-                create beautiful experiences that solve real problems.
-              </p>
-              <div className="absolute -bottom-4 right-4 text-6xl text-brand-yellow/20 font-serif leading-none rotate-180">
-                "
-              </div>
-            </div>
-          </motion.div>
+            </ScrollNarrative>
+          </div>
         </div>
       </div>
     </section>

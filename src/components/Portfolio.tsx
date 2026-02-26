@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import { TiltCard, FloatingShapes, ScrollNarrative } from "./storytelling";
 
 // --- Types ---
 interface Project {
@@ -85,7 +86,7 @@ const allProjects: Project[] = [
   },
 ];
 
-const ITEMS_PER_PAGE = 6; // Adjusted to 6 for better grid alignment (2x3 or 3x2)
+const ITEMS_PER_PAGE = 6;
 
 const Portfolio = () => {
   const [filter, setFilter] = useState("All");
@@ -96,7 +97,6 @@ const Portfolio = () => {
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  // 1. Optimized Filtering
   const filteredProjects = useMemo(() => {
     return filter === "All"
       ? allProjects
@@ -109,17 +109,13 @@ const Portfolio = () => {
 
   const hasMore = visibleCount < filteredProjects.length;
 
-  // 2. Reset visible count when filter changes
   useEffect(() => {
     setVisibleCount(ITEMS_PER_PAGE);
   }, [filter]);
 
-  // 3. Infinite scroll observer
   const loadMore = useCallback(() => {
     if (isLoading || !hasMore) return;
-
     setIsLoading(true);
-    // Simulate loading delay
     setTimeout(() => {
       setVisibleCount((prev) =>
         Math.min(prev + ITEMS_PER_PAGE, filteredProjects.length)
@@ -137,22 +133,17 @@ const Portfolio = () => {
       },
       { threshold: 0.1, rootMargin: "100px" }
     );
-
     if (loadMoreRef.current) {
       observer.observe(loadMoreRef.current);
     }
-
     return () => observer.disconnect();
   }, [hasMore, isLoading, loadMore]);
 
-  // --- Animations ---
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.1 },
     },
   };
 
@@ -173,7 +164,8 @@ const Portfolio = () => {
       ref={sectionRef}
       className="relative py-24 lg:py-32 overflow-hidden bg-background"
     >
-      {/* Background Decor */}
+      {/* Background with 3D shapes */}
+      <FloatingShapes variant="section" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/5 via-background to-background" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
         <div className="absolute top-[10%] left-[10%] w-72 h-72 bg-primary/5 rounded-full blur-[100px]" />
@@ -182,27 +174,29 @@ const Portfolio = () => {
 
       <div className="relative section-container max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 border border-secondary mb-6 backdrop-blur-sm">
-            <Layers className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-foreground/80">
-              Our Masterpieces
-            </span>
-          </div>
+        <ScrollNarrative direction="up" intensity={30}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 border border-secondary mb-6 backdrop-blur-sm">
+              <Layers className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium text-foreground/80">
+                Our Masterpieces
+              </span>
+            </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-            Selected <span className="text-primary">Works</span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-            A curated selection of projects demonstrating our expertise in
-            digital transformation, web engineering, and mobile solutions.
-          </p>
-        </motion.div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+              Selected <span className="text-primary">Works</span>
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
+              A curated selection of projects demonstrating our expertise in
+              digital transformation, web engineering, and mobile solutions.
+            </p>
+          </motion.div>
+        </ScrollNarrative>
 
         {/* Filter */}
         <motion.div
@@ -226,7 +220,7 @@ const Portfolio = () => {
           ))}
         </motion.div>
 
-        {/* Grid */}
+        {/* Grid with TiltCards */}
         <AnimatePresence mode="wait">
           <motion.div
             key={filter}
@@ -242,82 +236,79 @@ const Portfolio = () => {
                 variants={itemVariants}
                 layout
                 className={`group relative flex flex-col ${
-                  // Make the first item span 2 columns ONLY if filtering 'All' and on desktop
                   filter === "All" && index === 0 ? "md:col-span-2" : ""
                 }`}
               >
-                <div className="relative h-full flex flex-col rounded-2xl bg-card border border-border/50 overflow-hidden hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
-                  {/* Image Section */}
-                  <div
-                    className={`relative overflow-hidden w-full ${
-                      filter === "All" && index === 0
-                        ? "aspect-video"
-                        : "aspect-[4/3]"
-                    }`}
-                  >
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                      loading="lazy"
-                    />
+                <TiltCard className="h-full" tiltAmount={6} glareEnabled={true}>
+                  <div className="relative h-full flex flex-col rounded-2xl bg-card border border-border/50 overflow-hidden hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
+                    {/* Image */}
+                    <div
+                      className={`relative overflow-hidden w-full ${
+                        filter === "All" && index === 0
+                          ? "aspect-video"
+                          : "aspect-[4/3]"
+                      }`}
+                    >
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
 
-                    {/* Overlay Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
-
-                    {/* Top Badges */}
-                    <div className="absolute top-4 left-4 flex gap-2">
-                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-background/90 text-foreground backdrop-blur-md shadow-sm border border-border/20">
-                        {project.category}
-                      </span>
-                      {project.featured && (
-                        <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary text-primary-foreground flex items-center gap-1 shadow-lg shadow-primary/20">
-                          <Sparkles className="w-3 h-3" /> Featured
+                      <div className="absolute top-4 left-4 flex gap-2">
+                        <span className="px-3 py-1 rounded-full text-xs font-semibold bg-background/90 text-foreground backdrop-blur-md shadow-sm border border-border/20">
+                          {project.category}
                         </span>
-                      )}
+                        {project.featured && (
+                          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary text-primary-foreground flex items-center gap-1 shadow-lg shadow-primary/20">
+                            <Sparkles className="w-3 h-3" /> Featured
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40 backdrop-blur-[2px]">
+                        <Button
+                          asChild
+                          className="rounded-full bg-white text-black hover:bg-white/90 font-semibold shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+                        >
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View Project <ExternalLink className="ml-2 w-4 h-4" />
+                          </a>
+                        </Button>
+                      </div>
                     </div>
 
-                    {/* Hover Action */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40 backdrop-blur-[2px]">
-                      <Button
-                        asChild
-                        className="rounded-full bg-white text-black hover:bg-white/90 font-semibold shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"
-                      >
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          View Project <ExternalLink className="ml-2 w-4 h-4" />
-                        </a>
-                      </Button>
+                    {/* Content */}
+                    <div className="p-6 flex flex-col flex-grow">
+                      <div className="mb-4">
+                        <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                          {project.title}
+                        </h3>
+                        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
+                          {project.description}
+                        </p>
+                      </div>
+
+                      <div className="mt-auto flex flex-wrap gap-2 pt-4 border-t border-border/40">
+                        {project.tech.map((tech) => (
+                          <span
+                            key={tech}
+                            className="text-xs px-2.5 py-1 rounded-md bg-secondary/50 text-secondary-foreground font-medium flex items-center gap-1.5"
+                          >
+                            <Code2 className="w-3 h-3 opacity-50" />
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-
-                  {/* Content Section */}
-                  <div className="p-6 flex flex-col flex-grow">
-                    <div className="mb-4">
-                      <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
-                        {project.description}
-                      </p>
-                    </div>
-
-                    <div className="mt-auto flex flex-wrap gap-2 pt-4 border-t border-border/40">
-                      {project.tech.map((tech) => (
-                        <span
-                          key={tech}
-                          className="text-xs px-2.5 py-1 rounded-md bg-secondary/50 text-secondary-foreground font-medium flex items-center gap-1.5"
-                        >
-                          <Code2 className="w-3 h-3 opacity-50" />
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                </TiltCard>
               </motion.div>
             ))}
           </motion.div>
@@ -343,7 +334,6 @@ const Portfolio = () => {
           </motion.div>
         )}
 
-        {/* Load More Trigger (Only shows if there are actually more items) */}
         {hasMore && (
           <div className="flex flex-col items-center mt-12">
             <div ref={loadMoreRef} className="h-4 w-full" />
@@ -361,7 +351,6 @@ const Portfolio = () => {
           </div>
         )}
 
-        {/* View Full Portfolio CTA */}
         <motion.div
           className="text-center mt-20"
           initial={{ opacity: 0, y: 20 }}
