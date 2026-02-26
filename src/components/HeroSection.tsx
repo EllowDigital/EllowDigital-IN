@@ -7,8 +7,8 @@ import {
   Users,
   Zap,
   Globe,
-  Sparkles,
 } from "lucide-react";
+import { TypewriterText, FloatingShapes } from "./storytelling";
 
 const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -19,7 +19,6 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
 
-  // Parallax transforms
   const bgY = useTransform(scrollYProgress, [0, 1], [0, 300]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
@@ -43,6 +42,9 @@ const HeroSection = () => {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 px-4 sm:px-6"
     >
+      {/* 3D Floating shapes */}
+      <FloatingShapes variant="hero" />
+
       {/* Parallax gradient background */}
       <motion.div className="absolute inset-0 -z-10" style={{ y: bgY }}>
         <div className="absolute inset-0 bg-background" />
@@ -56,7 +58,7 @@ const HeroSection = () => {
         />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gradient-radial from-brand-yellow/3 to-transparent rounded-full" />
 
-        {/* Refined grid pattern */}
+        {/* Grid pattern */}
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -65,54 +67,6 @@ const HeroSection = () => {
             backgroundSize: "80px 80px",
           }}
         />
-      </motion.div>
-
-      {/* Floating elements - more subtle */}
-      <motion.div
-        className="absolute top-32 left-[8%] w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-yellow/15 to-brand-gold/10 border border-brand-yellow/10 backdrop-blur-sm hidden lg:flex items-center justify-center"
-        animate={{ y: [0, -12, 0], rotate: [0, 3, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <Sparkles className="w-6 h-6 text-brand-yellow/60" />
-      </motion.div>
-
-      <motion.div
-        className="absolute top-48 right-[10%] w-14 h-14 rounded-xl bg-gradient-to-br from-secondary to-secondary/50 border border-border/30 backdrop-blur-sm hidden lg:flex items-center justify-center"
-        animate={{ y: [0, 10, 0], rotate: [0, -3, 0] }}
-        transition={{
-          duration: 7,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1,
-        }}
-      >
-        <Zap className="w-5 h-5 text-brand-gold/60" />
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-40 left-[12%] w-12 h-12 rounded-full bg-gradient-to-br from-brand-gold/15 to-transparent border border-brand-gold/10 backdrop-blur-sm hidden lg:flex items-center justify-center"
-        animate={{ y: [0, 8, 0], scale: [1, 1.02, 1] }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0.5,
-        }}
-      >
-        <Globe className="w-4 h-4 text-brand-yellow/50" />
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-32 right-[8%] w-20 h-20 rounded-2xl bg-gradient-to-br from-secondary/60 to-secondary/30 border border-border/20 backdrop-blur-sm hidden lg:flex items-center justify-center"
-        animate={{ y: [0, -8, 0], rotate: [0, -2, 0] }}
-        transition={{
-          duration: 9,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2,
-        }}
-      >
-        <Users className="w-6 h-6 text-brand-gold/50" />
       </motion.div>
 
       {/* Main content with parallax */}
@@ -145,7 +99,7 @@ const HeroSection = () => {
           </div>
         </motion.div>
 
-        {/* Headline */}
+        {/* Headline with Typewriter */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
@@ -155,7 +109,24 @@ const HeroSection = () => {
           We Build{" "}
           <span className="relative inline-block">
             <span className="bg-gradient-to-r from-brand-yellow via-brand-gold to-brand-yellow bg-clip-text text-transparent">
-              Digital Products
+              {isLoaded ? (
+                <TypewriterText
+                  texts={[
+                    "Digital Products",
+                    "Modern Websites",
+                    "Mobile Apps",
+                    "Brand Experiences",
+                    "Growth Engines",
+                  ]}
+                  speed={100}
+                  deleteSpeed={50}
+                  pauseDuration={2500}
+                  cursor={true}
+                  cursorChar="▎"
+                />
+              ) : (
+                "Digital Products"
+              )}
             </span>
             <motion.svg
               className="absolute -bottom-1 left-0 w-full"
@@ -191,7 +162,7 @@ const HeroSection = () => {
           </span>
         </motion.h1>
 
-        {/* Subheadline */}
+        {/* Scroll-driven narrative subheadline */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
@@ -237,7 +208,7 @@ const HeroSection = () => {
           </motion.a>
         </motion.div>
 
-        {/* Stats */}
+        {/* Stats with 3D tilt */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
@@ -247,10 +218,12 @@ const HeroSection = () => {
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              className="flex items-center gap-4"
+              className="flex items-center gap-4 cursor-default"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
+              whileHover={{ scale: 1.05, rotateY: 5 }}
+              style={{ transformStyle: "preserve-3d" }}
             >
               <div className="w-14 h-14 rounded-2xl bg-secondary/60 border border-border/40 flex items-center justify-center">
                 <stat.icon className="w-6 h-6 text-brand-yellow" />
