@@ -14,6 +14,7 @@ import {
   SiReact,
 } from "react-icons/si";
 import { AnimatedSectionHeader } from "./AnimatedGradient";
+import { TiltCard, FloatingShapes, ScrollNarrative } from "./storytelling";
 
 interface TechItemProps {
   name: string;
@@ -33,35 +34,37 @@ const TechItem: FC<TechItemProps> = memo(({ name, category, Icon, index }) => {
       transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
       className="group"
     >
-      <div className="relative flex flex-col items-center p-6 rounded-2xl bg-gradient-to-b from-card/80 to-card border border-border/50 transition-all duration-500 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2">
-        {/* Background glow */}
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <TiltCard tiltAmount={10} glareEnabled={true}>
+        <div className="relative flex flex-col items-center p-6 rounded-2xl bg-gradient-to-b from-card/80 to-card border border-border/50 transition-all duration-500 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10">
+          {/* Background glow */}
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-        {/* Icon Circle */}
-        <div className="relative mb-4">
-          <div className="absolute -inset-3 bg-gradient-to-r from-primary to-primary/80 rounded-full opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
-          <div className="relative w-20 h-20 flex items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 shadow-lg group-hover:scale-110 transition-all duration-500">
-            {Icon ? (
-              <Icon className="w-9 h-9 text-primary" aria-hidden="true" />
-            ) : (
-              <span className="text-xl font-bold text-primary">{initial}</span>
-            )}
+          {/* Icon Circle */}
+          <div className="relative mb-4">
+            <div className="absolute -inset-3 bg-gradient-to-r from-primary to-primary/80 rounded-full opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+            <div className="relative w-20 h-20 flex items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 shadow-lg group-hover:scale-110 transition-all duration-500">
+              {Icon ? (
+                <Icon className="w-9 h-9 text-primary" aria-hidden="true" />
+              ) : (
+                <span className="text-xl font-bold text-primary">{initial}</span>
+              )}
+            </div>
           </div>
+
+          {/* Name */}
+          <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+            {name}
+          </h3>
+
+          {/* Category Badge */}
+          <span className="text-xs font-medium px-3 py-1 rounded-full border capitalize bg-primary/10 border-primary/20 text-primary">
+            {category}
+          </span>
+
+          {/* Bottom gradient line */}
+          <div className="absolute bottom-0 left-0 right-0 h-1 rounded-b-2xl bg-gradient-to-r from-primary via-primary/80 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         </div>
-
-        {/* Name */}
-        <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
-          {name}
-        </h3>
-
-        {/* Category Badge */}
-        <span className="text-xs font-medium px-3 py-1 rounded-full border capitalize bg-primary/10 border-primary/20 text-primary">
-          {category}
-        </span>
-
-        {/* Bottom gradient line */}
-        <div className="absolute bottom-0 left-0 right-0 h-1 rounded-b-2xl bg-gradient-to-r from-primary via-primary/80 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      </div>
+      </TiltCard>
     </motion.div>
   );
 });
@@ -84,6 +87,9 @@ const TechStack = () => {
       id="techstack"
       className="relative py-20 sm:py-28 overflow-hidden deferred-section"
     >
+      {/* 3D Floating Shapes */}
+      <FloatingShapes variant="section" />
+
       {/* Modern gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
 
@@ -95,15 +101,17 @@ const TechStack = () => {
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header Section */}
-        <AnimatedSectionHeader
-          badge="Technologies"
-          badgeIcon={<Code2 className="w-4 h-4 text-primary" />}
-          title="Our Tech Stack"
-          highlightedWord="Tech Stack"
-          description="We leverage the latest technologies to create fast, secure, and scalable digital solutions."
-          gradient="gold"
-        />
+        {/* Header Section with ScrollNarrative */}
+        <ScrollNarrative direction="up" intensity={20}>
+          <AnimatedSectionHeader
+            badge="Technologies"
+            badgeIcon={<Code2 className="w-4 h-4 text-primary" />}
+            title="Our Tech Stack"
+            highlightedWord="Tech Stack"
+            description="We leverage the latest technologies to create fast, secure, and scalable digital solutions."
+            gradient="gold"
+          />
+        </ScrollNarrative>
 
         {/* Divider */}
         <motion.div
@@ -125,7 +133,7 @@ const TechStack = () => {
           </div>
         </motion.div>
 
-        {/* Tech Grid */}
+        {/* Tech Grid with TiltCards */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
           {technologies.map((tech, index) => (
             <TechItem

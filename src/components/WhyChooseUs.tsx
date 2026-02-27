@@ -14,6 +14,7 @@ import {
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { AnimatedSectionHeader } from "./AnimatedGradient";
+import { TiltCard, FloatingShapes, ScrollNarrative } from "./storytelling";
 
 const reasons = [
   {
@@ -95,6 +96,9 @@ const WhyChooseUs = () => {
       id="why-us"
       className="relative py-20 sm:py-28 overflow-hidden deferred-section"
     >
+      {/* 3D Floating Shapes */}
+      <FloatingShapes variant="section" />
+
       {/* Modern gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-brand-gold/5 to-background" />
 
@@ -104,18 +108,19 @@ const WhyChooseUs = () => {
         className="absolute bottom-20 right-10 w-96 h-96 bg-brand-yellow/8 rounded-full blur-3xl animate-pulse"
         style={{ animationDelay: "1s" }}
       />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-radial from-brand-gold/5 to-transparent rounded-full blur-2xl" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header Section */}
-        <AnimatedSectionHeader
-          badge="Industry-Recognized Excellence"
-          badgeIcon={<Award className="w-4 h-4 text-primary" />}
-          title="Why Choose EllowDigital?"
-          highlightedWord="EllowDigital"
-          description="We pride ourselves on delivering exceptional value and building lasting relationships with our clients."
-          gradient="gold"
-        />
+        {/* Header Section with ScrollNarrative */}
+        <ScrollNarrative direction="up" intensity={20}>
+          <AnimatedSectionHeader
+            badge="Industry-Recognized Excellence"
+            badgeIcon={<Award className="w-4 h-4 text-primary" />}
+            title="Why Choose EllowDigital?"
+            highlightedWord="EllowDigital"
+            description="We pride ourselves on delivering exceptional value and building lasting relationships with our clients."
+            gradient="gold"
+          />
+        </ScrollNarrative>
 
         {/* Client Logos */}
         <motion.div
@@ -144,7 +149,7 @@ const WhyChooseUs = () => {
           ))}
         </motion.div>
 
-        {/* Reasons Grid */}
+        {/* Reasons Grid with TiltCards */}
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
           variants={containerVariants}
@@ -153,31 +158,33 @@ const WhyChooseUs = () => {
         >
           {reasons.map((reason, index) => (
             <motion.div key={index} variants={cardVariants} className="group">
-              <div className="relative h-full p-8 rounded-2xl bg-gradient-to-b from-card/80 to-card border border-border/50 overflow-hidden transition-all duration-500 hover:border-brand-gold/30 hover:shadow-2xl hover:shadow-brand-gold/10 hover:-translate-y-2">
-                {/* Background glow on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/10 via-transparent to-brand-yellow/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <TiltCard tiltAmount={8} glareEnabled={true} className="h-full">
+                <div className="relative h-full p-8 rounded-2xl bg-gradient-to-b from-card/80 to-card border border-border/50 overflow-hidden transition-all duration-500 hover:border-brand-gold/30 hover:shadow-2xl hover:shadow-brand-gold/10">
+                  {/* Background glow on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/10 via-transparent to-brand-yellow/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                {/* Floating particle */}
-                <div className="absolute top-4 right-4 w-20 h-20 bg-brand-gold/5 rounded-full blur-2xl group-hover:bg-brand-gold/10 transition-all duration-500" />
+                  {/* Floating particle */}
+                  <div className="absolute top-4 right-4 w-20 h-20 bg-brand-gold/5 rounded-full blur-2xl group-hover:bg-brand-gold/10 transition-all duration-500" />
 
-                {/* Icon */}
-                <div className="relative mb-6">
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br from-brand-gold/20 to-brand-yellow/10 border border-brand-gold/20 group-hover:border-brand-gold/40 group-hover:scale-110 transition-all duration-500">
-                    <reason.icon className="w-8 h-8 text-brand-gold" />
+                  {/* Icon */}
+                  <div className="relative mb-6">
+                    <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br from-brand-gold/20 to-brand-yellow/10 border border-brand-gold/20 group-hover:border-brand-gold/40 group-hover:scale-110 transition-all duration-500">
+                      <reason.icon className="w-8 h-8 text-brand-gold" />
+                    </div>
                   </div>
+
+                  {/* Content */}
+                  <h3 className="relative text-xl font-bold mb-3 text-foreground group-hover:text-brand-gold transition-colors duration-300">
+                    {reason.title}
+                  </h3>
+                  <p className="relative text-muted-foreground text-sm leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
+                    {reason.description}
+                  </p>
+
+                  {/* Bottom gradient line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-gold via-brand-yellow to-brand-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
-
-                {/* Content */}
-                <h3 className="relative text-xl font-bold mb-3 text-foreground group-hover:text-brand-gold transition-colors duration-300">
-                  {reason.title}
-                </h3>
-                <p className="relative text-muted-foreground text-sm leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
-                  {reason.description}
-                </p>
-
-                {/* Bottom gradient line */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-gold via-brand-yellow to-brand-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>
@@ -190,11 +197,8 @@ const WhyChooseUs = () => {
           className="mt-20"
         >
           <div className="relative rounded-3xl overflow-hidden">
-            {/* CTA Background */}
             <div className="absolute inset-0 bg-gradient-to-r from-brand-gold to-brand-yellow" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(0,0,0,0.1),transparent_70%)]" />
-
-            {/* Pattern overlay */}
             <div
               className="absolute inset-0 opacity-10"
               style={{

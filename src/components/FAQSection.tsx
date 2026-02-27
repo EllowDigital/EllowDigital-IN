@@ -8,6 +8,7 @@ import {
 import { motion } from "framer-motion";
 import { HelpCircle } from "lucide-react";
 import { generateFAQSchema } from "@/utils/faqSchema";
+import { FloatingShapes, ScrollNarrative, TiltCard } from "./storytelling";
 
 interface FAQItem {
   question: string;
@@ -68,27 +69,32 @@ const FAQSection: React.FC<FAQSectionProps> = ({ faqs = defaultFAQs }) => {
   return (
     <section
       id="faq"
-      className="py-16 lg:py-24 bg-gradient-to-b from-background to-muted/20"
+      className="py-16 lg:py-24 bg-gradient-to-b from-background to-muted/20 relative overflow-hidden"
     >
-      <div className="container mx-auto px-4 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12 lg:mb-16"
-        >
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 mb-6">
-            <HelpCircle className="w-8 h-8 text-primary" />
-          </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-primary/90 to-primary/80 bg-clip-text text-transparent">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Find answers to common questions about our services, pricing, and
-            process
-          </p>
-        </motion.div>
+      {/* 3D Floating Shapes */}
+      <FloatingShapes variant="section" />
+
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <ScrollNarrative direction="up" intensity={20}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12 lg:mb-16"
+          >
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 mb-6">
+              <HelpCircle className="w-8 h-8 text-primary" />
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-primary/90 to-primary/80 bg-clip-text text-transparent">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Find answers to common questions about our services, pricing, and
+              process
+            </p>
+          </motion.div>
+        </ScrollNarrative>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -99,18 +105,19 @@ const FAQSection: React.FC<FAQSectionProps> = ({ faqs = defaultFAQs }) => {
         >
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
-              <AccordionItem
-                key={index}
-                value={`item-${index}`}
-                className="border border-border/50 rounded-xl px-6 bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-colors"
-              >
-                <AccordionTrigger className="text-left text-base md:text-lg font-semibold hover:text-primary py-5">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed pb-5">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
+              <TiltCard key={index} tiltAmount={3} glareEnabled={false}>
+                <AccordionItem
+                  value={`item-${index}`}
+                  className="border border-border/50 rounded-xl px-6 bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-colors"
+                >
+                  <AccordionTrigger className="text-left text-base md:text-lg font-semibold hover:text-primary py-5">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed pb-5">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              </TiltCard>
             ))}
           </Accordion>
         </motion.div>

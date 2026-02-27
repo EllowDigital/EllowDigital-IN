@@ -257,7 +257,7 @@ const Portfolio = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
 
-                      <div className="absolute top-4 left-4 flex gap-2">
+                      <div className="absolute top-4 left-4 flex gap-2 flex-wrap">
                         <span className="px-3 py-1 rounded-full text-xs font-semibold bg-background/90 text-foreground backdrop-blur-md shadow-sm border border-border/20">
                           {project.category}
                         </span>
@@ -285,23 +285,23 @@ const Portfolio = () => {
                     </div>
 
                     {/* Content */}
-                    <div className="p-6 flex flex-col flex-grow">
-                      <div className="mb-4">
-                        <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                    <div className="p-5 sm:p-6 flex flex-col flex-grow">
+                      <div className="mb-3">
+                        <h3 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-primary transition-colors leading-tight">
                           {project.title}
                         </h3>
-                        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
+                        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 sm:line-clamp-3">
                           {project.description}
                         </p>
                       </div>
 
-                      <div className="mt-auto flex flex-wrap gap-2 pt-4 border-t border-border/40">
+                      <div className="mt-auto flex flex-wrap gap-1.5 sm:gap-2 pt-3 sm:pt-4 border-t border-border/40">
                         {project.tech.map((tech) => (
                           <span
                             key={tech}
-                            className="text-xs px-2.5 py-1 rounded-md bg-secondary/50 text-secondary-foreground font-medium flex items-center gap-1.5"
+                            className="text-xs px-2 sm:px-2.5 py-1 rounded-md bg-secondary/50 text-secondary-foreground font-medium flex items-center gap-1"
                           >
-                            <Code2 className="w-3 h-3 opacity-50" />
+                            <Code2 className="w-3 h-3 opacity-50 hidden sm:inline" />
                             {tech}
                           </span>
                         ))}
@@ -351,17 +351,18 @@ const Portfolio = () => {
           </div>
         )}
 
+        {/* Bottom CTA - Fixed mobile layout */}
         <motion.div
-          className="text-center mt-20"
+          className="text-center mt-16 sm:mt-20"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <div className="inline-flex flex-col sm:flex-row items-center gap-6 p-1 pr-1 pl-6 rounded-full bg-card border border-border/50 shadow-xl shadow-black/5">
-            <span className="text-sm font-medium text-muted-foreground py-2">
+          <div className="inline-flex flex-col items-center gap-4 p-6 sm:p-4 sm:pl-6 sm:pr-1 sm:flex-row rounded-2xl sm:rounded-full bg-card border border-border/50 shadow-xl shadow-black/5">
+            <span className="text-sm font-medium text-muted-foreground">
               Interested in seeing our complete timeline?
             </span>
-            <Button asChild size="lg" className="rounded-full px-8 shadow-lg">
+            <Button asChild size="lg" className="rounded-full px-8 shadow-lg w-full sm:w-auto">
               <a href="/portfolio">
                 View Full Portfolio <ArrowRight className="ml-2 w-4 h-4" />
               </a>

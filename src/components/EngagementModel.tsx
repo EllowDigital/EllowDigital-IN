@@ -9,6 +9,7 @@ import {
   Check,
   Sparkles,
 } from "lucide-react";
+import { TiltCard, FloatingShapes, ScrollNarrative } from "./storytelling";
 
 const models = [
   {
@@ -99,6 +100,9 @@ const EngagementModel = () => {
       className="py-24 relative overflow-hidden"
       ref={sectionRef}
     >
+      {/* 3D Floating Shapes */}
+      <FloatingShapes variant="section" />
+
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -106,37 +110,39 @@ const EngagementModel = () => {
 
       <div className="section-container relative z-10">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <ScrollNarrative direction="up" intensity={25}>
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
           >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-primary">
-              Flexible Options
-            </span>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6"
+            >
+              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium text-primary">
+                Flexible Options
+              </span>
+            </motion.div>
+
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Our Engagement{" "}
+              <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+                Models
+              </span>
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
+              Choose the collaboration model that best fits your project needs and
+              budget.
+            </p>
           </motion.div>
+        </ScrollNarrative>
 
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Our Engagement{" "}
-            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-              Models
-            </span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-            Choose the collaboration model that best fits your project needs and
-            budget.
-          </p>
-        </motion.div>
-
-        {/* Process Timeline */}
+        {/* Process Timeline with TiltCards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -169,20 +175,22 @@ const EngagementModel = () => {
                   </span>
                 </div>
 
-                <div className="text-center bg-card/50 backdrop-blur-sm border border-border/40 rounded-xl p-4 hover:border-primary/30 transition-all duration-300">
-                  <h4 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
-                    {step.title}
-                  </h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
+                <TiltCard tiltAmount={6} glareEnabled={true}>
+                  <div className="text-center bg-card/50 backdrop-blur-sm border border-border/40 rounded-xl p-4 hover:border-primary/30 transition-all duration-300">
+                    <h4 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                      {step.title}
+                    </h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </TiltCard>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* Engagement Models */}
+        {/* Engagement Models with TiltCards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -209,39 +217,41 @@ const EngagementModel = () => {
               variants={itemVariants}
               className="group"
             >
-              <div className="relative h-full bg-card/50 backdrop-blur-sm border border-border/40 rounded-2xl p-6 hover:border-primary/30 transition-all duration-500 overflow-hidden">
-                {/* Gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <TiltCard tiltAmount={8} glareEnabled={true} className="h-full">
+                <div className="relative h-full bg-card/50 backdrop-blur-sm border border-border/40 rounded-2xl p-6 hover:border-primary/30 transition-all duration-500 overflow-hidden">
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                {/* Icon */}
-                <div className="mb-6 flex justify-center">
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 group-hover:scale-110 transition-transform duration-300">
-                    <model.icon className="w-8 h-8 text-primary" />
+                  {/* Icon */}
+                  <div className="mb-6 flex justify-center">
+                    <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 group-hover:scale-110 transition-transform duration-300">
+                      <model.icon className="w-8 h-8 text-primary" />
+                    </div>
                   </div>
+
+                  {/* Content */}
+                  <h4 className="text-xl font-bold mb-2 text-center group-hover:text-primary transition-colors">
+                    {model.title}
+                  </h4>
+                  <p className="text-sm text-muted-foreground text-center mb-6 leading-relaxed">
+                    {model.description}
+                  </p>
+
+                  {/* Features */}
+                  <ul className="space-y-3">
+                    {model.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-start gap-3">
+                        <span className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex-shrink-0 flex items-center justify-center mt-0.5">
+                          <Check className="w-3 h-3 text-primary" />
+                        </span>
+                        <span className="text-sm text-muted-foreground">
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-
-                {/* Content */}
-                <h4 className="text-xl font-bold mb-2 text-center group-hover:text-primary transition-colors">
-                  {model.title}
-                </h4>
-                <p className="text-sm text-muted-foreground text-center mb-6 leading-relaxed">
-                  {model.description}
-                </p>
-
-                {/* Features */}
-                <ul className="space-y-3">
-                  {model.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start gap-3">
-                      <span className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex-shrink-0 flex items-center justify-center mt-0.5">
-                        <Check className="w-3 h-3 text-primary" />
-                      </span>
-                      <span className="text-sm text-muted-foreground">
-                        {feature}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>
