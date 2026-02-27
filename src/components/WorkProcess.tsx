@@ -16,6 +16,7 @@ import {
   underlineVariants,
   smoothEase,
 } from "@/utils/scrollAnimations";
+import { TiltCard, FloatingShapes, ScrollNarrative } from "./storytelling";
 
 const processes = [
   {
@@ -55,6 +56,9 @@ const WorkProcess = () => {
       className="py-24 lg:py-32 relative overflow-hidden"
       ref={sectionRef}
     >
+      {/* 3D Floating Shapes */}
+      <FloatingShapes variant="section" />
+
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
@@ -64,47 +68,49 @@ const WorkProcess = () => {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.03)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
 
       <div className="section-container relative z-10">
-        {/* Header */}
-        <motion.div
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="text-center mb-14 lg:mb-16"
-        >
+        {/* Header with scroll narrative */}
+        <ScrollNarrative direction="up" intensity={20}>
           <motion.div
-            variants={badgeVariants}
-            className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-5 py-2 mb-6"
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="text-center mb-14 lg:mb-16"
           >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-semibold text-primary tracking-wide">
-              Our Process
-            </span>
-          </motion.div>
-
-          <motion.h2
-            variants={headerVariants}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-          >
-            How We{" "}
-            <span className="relative inline-block">
-              <span className="bg-gradient-to-r from-primary via-primary to-primary/70 bg-clip-text text-transparent">
-                Work
+            <motion.div
+              variants={badgeVariants}
+              className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-5 py-2 mb-6"
+            >
+              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-sm font-semibold text-primary tracking-wide">
+                Our Process
               </span>
-              <motion.span
-                className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary to-primary/50 rounded-full origin-left"
-                variants={underlineVariants}
-              />
-            </span>
-          </motion.h2>
-          <motion.p
-            variants={headerVariants}
-            className="text-muted-foreground text-lg max-w-2xl mx-auto"
-          >
-            Our streamlined process ensures every project is delivered with
-            excellence, from initial concept to final deployment.
-          </motion.p>
-        </motion.div>
+            </motion.div>
 
-        {/* Process Steps */}
+            <motion.h2
+              variants={headerVariants}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+            >
+              How We{" "}
+              <span className="relative inline-block">
+                <span className="bg-gradient-to-r from-primary via-primary to-primary/70 bg-clip-text text-transparent">
+                  Work
+                </span>
+                <motion.span
+                  className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary to-primary/50 rounded-full origin-left"
+                  variants={underlineVariants}
+                />
+              </span>
+            </motion.h2>
+            <motion.p
+              variants={headerVariants}
+              className="text-muted-foreground text-lg max-w-2xl mx-auto"
+            >
+              Our streamlined process ensures every project is delivered with
+              excellence, from initial concept to final deployment.
+            </motion.p>
+          </motion.div>
+        </ScrollNarrative>
+
+        {/* Process Steps with TiltCards */}
         <motion.div
           variants={staggerContainer(0.12, 0.2)}
           initial="hidden"
@@ -142,32 +148,34 @@ const WorkProcess = () => {
                 </div>
               )}
 
-              {/* Card */}
-              <div className="relative bg-card/60 backdrop-blur-sm border border-border/50 rounded-2xl p-6 lg:p-7 hover:border-primary/40 transition-all duration-500 h-full group-hover:shadow-2xl group-hover:shadow-primary/10 group-hover:-translate-y-1">
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Card with TiltCard */}
+              <TiltCard tiltAmount={8} glareEnabled={true} className="h-full">
+                <div className="relative bg-card/60 backdrop-blur-sm border border-border/50 rounded-2xl p-6 lg:p-7 hover:border-primary/40 transition-all duration-500 h-full group-hover:shadow-2xl group-hover:shadow-primary/10">
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                {/* Step number & icon */}
-                <div className="relative flex items-center justify-between mb-6">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center group-hover:scale-110 group-hover:border-primary/40 transition-all duration-300">
-                    <process.icon className="w-7 h-7 text-primary" />
+                  {/* Step number & icon */}
+                  <div className="relative flex items-center justify-between mb-6">
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center group-hover:scale-110 group-hover:border-primary/40 transition-all duration-300">
+                      <process.icon className="w-7 h-7 text-primary" />
+                    </div>
+                    <span className="text-4xl font-bold text-muted-foreground/15 group-hover:text-primary/20 transition-colors">
+                      {process.step}
+                    </span>
                   </div>
-                  <span className="text-4xl font-bold text-muted-foreground/15 group-hover:text-primary/20 transition-colors">
-                    {process.step}
-                  </span>
+
+                  {/* Content */}
+                  <h3 className="relative text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                    {process.title}
+                  </h3>
+                  <p className="relative text-muted-foreground text-sm leading-relaxed">
+                    {process.description}
+                  </p>
+
+                  {/* Bottom accent */}
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
-
-                {/* Content */}
-                <h3 className="relative text-lg font-bold mb-2 group-hover:text-primary transition-colors">
-                  {process.title}
-                </h3>
-                <p className="relative text-muted-foreground text-sm leading-relaxed">
-                  {process.description}
-                </p>
-
-                {/* Bottom accent */}
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>
