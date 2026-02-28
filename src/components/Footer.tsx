@@ -197,8 +197,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Mobile safe area */}
-      <div className="h-16 sm:h-0" aria-hidden="true" />
     </footer>
   );
 };

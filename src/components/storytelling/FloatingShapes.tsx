@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface FloatingShapesProps {
   variant?: "hero" | "section" | "minimal";
@@ -6,6 +7,8 @@ interface FloatingShapesProps {
 }
 
 const FloatingShapes = ({ variant = "hero", className = "" }: FloatingShapesProps) => {
+  const isMobile = useIsMobile();
+
   const shapes = {
     hero: [
       { type: "sphere", size: 120, x: "10%", y: "20%", delay: 0, duration: 18, color: "primary" },
@@ -26,8 +29,24 @@ const FloatingShapes = ({ variant = "hero", className = "" }: FloatingShapesProp
     ],
   };
 
+  // On mobile: reduce shapes count and sizes for better FPS
+  const getShapes = () => {
+    const allShapes = shapes[variant];
+    if (!isMobile) return allShapes;
+    
+    // On mobile: take only first 2 shapes for hero/section, 1 for minimal
+    const limit = variant === "minimal" ? 1 : 2;
+    return allShapes.slice(0, limit).map(s => ({
+      ...s,
+      size: Math.round(s.size * 0.6),
+      duration: s.duration * 1.3, // slower = less CPU
+    }));
+  };
+
+  const activeShapes = getShapes();
+
   const renderShape = (shape: typeof shapes.hero[0], index: number) => {
-    const baseClasses = "absolute pointer-events-none";
+    const baseClasses = "absolute pointer-events-none will-change-transform";
     const colorMap: Record<string, string> = {
       primary: "hsl(var(--primary) / 0.12)",
       "brand-yellow": "hsl(var(--brand-yellow) / 0.1)",
@@ -47,7 +66,6 @@ const FloatingShapes = ({ variant = "hero", className = "" }: FloatingShapesProp
         borderRadius: "50%",
         background: `radial-gradient(circle at 30% 30%, ${colorMap[shape.color]}, transparent)`,
         border: `1px solid ${borderColor[shape.color]}`,
-        backdropFilter: "blur(1px)",
       },
       torus: {
         width: shape.size,
@@ -89,6 +107,7 @@ const FloatingShapes = ({ variant = "hero", className = "" }: FloatingShapesProp
           left: shape.x,
           top: shape.y,
           ...shapeStyles[shape.type],
+          transition: "background 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease",
         }}
         animate={{
           y: [0, -20, 0, 15, 0],
@@ -108,7 +127,7 @@ const FloatingShapes = ({ variant = "hero", className = "" }: FloatingShapesProp
 
   return (
     <div className={`absolute inset-0 overflow-hidden pointer-events-none -z-10 ${className}`}>
-      {shapes[variant].map((shape, i) => renderShape(shape, i))}
+      {activeShapes.map((shape, i) => renderShape(shape, i))}
     </div>
   );
 };

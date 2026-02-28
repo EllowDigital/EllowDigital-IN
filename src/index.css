@@ -93,6 +93,14 @@ body {
   }
 }
 
+/* Theme transition for smooth dark/light mode morphing */
+.dark-transitioning,
+.dark-transitioning *,
+.dark-transitioning *::before,
+.dark-transitioning *::after {
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.4s ease, box-shadow 0.5s ease, fill 0.4s ease, stroke 0.4s ease !important;
+}
+
 /* Base Styles */
 @layer base {
   * {
