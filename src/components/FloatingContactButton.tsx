@@ -46,8 +46,8 @@ const FloatingContactButton = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Dynamic bottom position based on footer visibility
-  const bottomOffset = isNearFooter ? "bottom-24 sm:bottom-20" : "bottom-6";
+  // Dynamic bottom position based on footer visibility - higher on mobile to avoid overlap
+  const bottomOffset = isNearFooter ? "bottom-28 sm:bottom-24" : "bottom-20 sm:bottom-6";
 
   return (
     <AnimatePresence>
@@ -57,14 +57,14 @@ const FloatingContactButton = () => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0, y: 20 }}
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
-          className={`fixed right-4 sm:right-6 z-50 flex flex-col gap-3 ${bottomOffset} transition-all duration-300`}
+          className={`fixed right-4 sm:right-6 z-50 flex flex-col gap-3 ${bottomOffset} transition-all duration-500`}
         >
           {/* Scroll to Top Button */}
           <motion.button
             onClick={scrollToTop}
-            whileHover={{ scale: 1.1, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            className="group relative w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-card/90 backdrop-blur-md border border-border/60 text-muted-foreground shadow-lg flex items-center justify-center transition-all duration-300 hover:border-primary/50 hover:text-primary hover:shadow-xl hover:shadow-primary/10"
+            whileHover={{ scale: 1.15, y: -3 }}
+            whileTap={{ scale: 0.9 }}
+            className="group relative w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-card/90 backdrop-blur-md border border-border/60 text-muted-foreground shadow-lg flex items-center justify-center transition-all duration-300 hover:border-primary/50 hover:text-primary hover:shadow-xl hover:shadow-primary/10"
             aria-label="Scroll to top"
           >
             {/* Glow effect on hover */}
@@ -92,7 +92,7 @@ const FloatingContactButton = () => {
               onClick={() => setIsExpanded(!isExpanded)}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 flex items-center justify-center transition-all duration-300"
+              className="relative w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 flex items-center justify-center transition-all duration-300"
               aria-label={
                 isExpanded ? "Close contact menu" : "Open contact menu"
               }
