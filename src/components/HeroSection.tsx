@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import {
   ArrowRight,
   Play,
@@ -9,10 +9,28 @@ import {
   Globe,
 } from "lucide-react";
 import { TypewriterText, FloatingShapes } from "./storytelling";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
+
+  // Mouse parallax
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const smoothMouseX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const smoothMouseY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (isMobile) return;
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const centerX = (e.clientX - rect.left) / rect.width - 0.5;
+    const centerY = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(centerX * 40);
+    mouseY.set(centerY * 30);
+  }, [isMobile, mouseX, mouseY]);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -25,6 +43,11 @@ const HeroSection = () => {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
   const orb1Y = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const orb2Y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  // Derived mouse transforms for counter-parallax
+  const negMouseX = useTransform(smoothMouseX, v => -v * 0.6);
+  const negMouseY = useTransform(smoothMouseY, v => -v * 0.6);
+  const gridMouseX = useTransform(smoothMouseX, v => v * 0.3);
+  const gridMouseY = useTransform(smoothMouseY, v => v * 0.3);
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 100);
@@ -41,30 +64,33 @@ const HeroSection = () => {
       ref={sectionRef}
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 px-4 sm:px-6"
+      onMouseMove={handleMouseMove}
     >
       {/* 3D Floating shapes */}
       <FloatingShapes variant="hero" />
 
-      {/* Parallax gradient background */}
+      {/* Parallax gradient background - responds to mouse on desktop */}
       <motion.div className="absolute inset-0 -z-10" style={{ y: bgY }}>
         <div className="absolute inset-0 bg-background" />
         <motion.div
           className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-brand-yellow/8 rounded-full blur-[150px] -translate-y-1/2"
-          style={{ y: orb1Y }}
+          style={{ y: orb1Y, x: smoothMouseX, translateY: smoothMouseY }}
         />
         <motion.div
           className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-brand-gold/6 rounded-full blur-[120px] translate-y-1/2"
-          style={{ y: orb2Y }}
+          style={{ y: orb2Y, x: negMouseX, translateY: negMouseY }}
         />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gradient-radial from-brand-yellow/3 to-transparent rounded-full" />
 
-        {/* Grid pattern */}
-        <div
+        {/* Grid pattern - subtle mouse shift */}
+        <motion.div
           className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: `linear-gradient(hsl(var(--brand-yellow)) 1px, transparent 1px), 
                             linear-gradient(90deg, hsl(var(--brand-yellow)) 1px, transparent 1px)`,
             backgroundSize: "80px 80px",
+            x: gridMouseX,
+            y: gridMouseY,
           }}
         />
       </motion.div>
