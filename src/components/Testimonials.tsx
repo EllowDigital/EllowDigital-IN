@@ -120,7 +120,9 @@ const Testimonials = () => {
     Array.from({ length: 5 }).map((_, index) => (
       <Star
         key={index}
-        className={`w-4 h-4 ${index < rating ? "text-primary fill-primary" : "text-muted/30"}`}
+        className={`w-4 h-4 ${
+          index < rating ? "text-primary fill-primary" : "text-muted/30"
+        }`}
       />
     ));
 
@@ -175,8 +177,8 @@ const Testimonials = () => {
               </span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Don't just take our word for it. Here's what our clients have to say
-              about working with EllowDigital.
+              Don't just take our word for it. Here's what our clients have to
+              say about working with EllowDigital.
             </p>
           </motion.div>
         </ScrollNarrative>
@@ -206,7 +208,10 @@ const Testimonials = () => {
                     transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                     className="h-full"
                   >
-                    <TiltCard tiltAmount={current === index ? 5 : 0} glareEnabled={current === index}>
+                    <TiltCard
+                      tiltAmount={current === index ? 5 : 0}
+                      glareEnabled={current === index}
+                    >
                       <div
                         className={`group relative h-full rounded-2xl p-6 lg:p-8 transition-all duration-500 overflow-hidden ${
                           current === index
@@ -228,7 +233,8 @@ const Testimonials = () => {
                           <div className="flex items-center justify-between mb-5">
                             <span className="inline-flex items-center text-xs font-semibold py-1.5 px-3 rounded-full bg-primary/10 text-primary border border-primary/20">
                               {testimonial.projectType.length > 20
-                                ? testimonial.projectType.substring(0, 20) + "..."
+                                ? testimonial.projectType.substring(0, 20) +
+                                  "..."
                                 : testimonial.projectType}
                             </span>
                             <div className="flex gap-0.5">
@@ -248,7 +254,9 @@ const Testimonials = () => {
                             <div className="relative mr-4">
                               <div
                                 className={`w-14 h-14 rounded-xl overflow-hidden ring-2 ring-offset-2 ring-offset-card transition-all duration-300 ${
-                                  current === index ? "ring-primary/50" : "ring-border/30"
+                                  current === index
+                                    ? "ring-primary/50"
+                                    : "ring-border/30"
                                 }`}
                               >
                                 <img
@@ -263,7 +271,9 @@ const Testimonials = () => {
                             <div>
                               <h3
                                 className={`font-bold text-lg transition-colors duration-300 ${
-                                  current === index ? "text-primary" : "text-foreground"
+                                  current === index
+                                    ? "text-primary"
+                                    : "text-foreground"
                                 }`}
                               >
                                 {testimonial.name}
@@ -330,7 +340,11 @@ const Testimonials = () => {
               whileTap={{ scale: 0.95 }}
               aria-label={isPlaying ? "Pause autoplay" : "Resume autoplay"}
             >
-              {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+              {isPlaying ? (
+                <Pause className="w-4 h-4" />
+              ) : (
+                <Play className="w-4 h-4" />
+              )}
             </motion.button>
 
             <motion.button

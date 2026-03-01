@@ -40,7 +40,7 @@ const ThemeToggle = () => {
 
     // Add transition class for smooth theme morphing
     document.documentElement.classList.add("dark-transitioning");
-    
+
     if (newValue) {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");

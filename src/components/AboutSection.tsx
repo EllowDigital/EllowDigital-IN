@@ -93,14 +93,15 @@ const AboutSection = () => {
             <ScrollNarrative direction="left" intensity={40}>
               <div className="space-y-5">
                 <p className="text-foreground/80 text-base sm:text-lg leading-relaxed">
-                  At EllowDigital, we are dedicated to delivering high-performance
-                  websites, mobile apps, and software solutions that are tailored
-                  to your unique business needs.
+                  At EllowDigital, we are dedicated to delivering
+                  high-performance websites, mobile apps, and software solutions
+                  that are tailored to your unique business needs.
                 </p>
                 <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
                   We believe that every project is an opportunity to make a
-                  lasting impact. That's why we focus on quality, efficiency, and
-                  user-centric design to ensure our solutions exceed expectations.
+                  lasting impact. That's why we focus on quality, efficiency,
+                  and user-centric design to ensure our solutions exceed
+                  expectations.
                 </p>
               </div>
             </ScrollNarrative>
@@ -158,10 +159,10 @@ const AboutSection = () => {
                       </h3>
                     </div>
                     <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                      To empower businesses with meaningful digital experiences. By
-                      blending innovative technology, agile development, and
-                      human-centered design, we create results that resonate with
-                      your audience.
+                      To empower businesses with meaningful digital experiences.
+                      By blending innovative technology, agile development, and
+                      human-centered design, we create results that resonate
+                      with your audience.
                     </p>
                   </div>
                 </div>
@@ -183,10 +184,10 @@ const AboutSection = () => {
                       </h3>
                     </div>
                     <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                      Technology should empower people. With passion for creating
-                      impactful digital experiences, we blend innovative technology
-                      with human-centered design to bring your boldest ideas to
-                      life.
+                      Technology should empower people. With passion for
+                      creating impactful digital experiences, we blend
+                      innovative technology with human-centered design to bring
+                      your boldest ideas to life.
                     </p>
                   </div>
                 </div>

@@ -1,5 +1,7 @@
 // FAQ Schema Generator for SEO
-export const generateFAQSchema = (faqs: Array<{ question: string; answer: string }>) => ({
+export const generateFAQSchema = (
+  faqs: Array<{ question: string; answer: string }>
+) => ({
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: faqs.map((faq) => ({

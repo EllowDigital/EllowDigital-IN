@@ -136,8 +136,8 @@ const EngagementModel = () => {
               </span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-              Choose the collaboration model that best fits your project needs and
-              budget.
+              Choose the collaboration model that best fits your project needs
+              and budget.
             </p>
           </motion.div>
         </ScrollNarrative>

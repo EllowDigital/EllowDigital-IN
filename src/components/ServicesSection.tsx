@@ -114,7 +114,10 @@ const ServiceCard = ({
         <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/20 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
 
         {/* Card content */}
-        <div className="relative p-6 lg:p-8 h-full flex flex-col" style={{ transform: "translateZ(30px)" }}>
+        <div
+          className="relative p-6 lg:p-8 h-full flex flex-col"
+          style={{ transform: "translateZ(30px)" }}
+        >
           {/* Header with icon and number */}
           <div className="flex items-start justify-between mb-6">
             <div className="relative">

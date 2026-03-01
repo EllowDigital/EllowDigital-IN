@@ -47,7 +47,9 @@ const FloatingContactButton = () => {
   };
 
   // Dynamic bottom position based on footer visibility - higher on mobile to avoid overlap
-  const bottomOffset = isNearFooter ? "bottom-28 sm:bottom-24" : "bottom-20 sm:bottom-6";
+  const bottomOffset = isNearFooter
+    ? "bottom-28 sm:bottom-24"
+    : "bottom-20 sm:bottom-6";
 
   return (
     <AnimatePresence>

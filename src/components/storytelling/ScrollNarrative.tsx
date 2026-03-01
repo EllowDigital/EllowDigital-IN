@@ -22,19 +22,35 @@ const ScrollNarrative = ({
 
   const transforms = {
     up: {
-      y: useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [intensity, 0, 0, -intensity * 0.5]),
+      y: useTransform(
+        scrollYProgress,
+        [0, 0.3, 0.7, 1],
+        [intensity, 0, 0, -intensity * 0.5]
+      ),
       opacity: useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.3]),
     },
     left: {
-      x: useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [-intensity, 0, 0, intensity * 0.3]),
+      x: useTransform(
+        scrollYProgress,
+        [0, 0.3, 0.7, 1],
+        [-intensity, 0, 0, intensity * 0.3]
+      ),
       opacity: useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.3]),
     },
     right: {
-      x: useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [intensity, 0, 0, -intensity * 0.3]),
+      x: useTransform(
+        scrollYProgress,
+        [0, 0.3, 0.7, 1],
+        [intensity, 0, 0, -intensity * 0.3]
+      ),
       opacity: useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.3]),
     },
     scale: {
-      scale: useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.85, 1, 1, 0.95]),
+      scale: useTransform(
+        scrollYProgress,
+        [0, 0.3, 0.7, 1],
+        [0.85, 1, 1, 0.95]
+      ),
       opacity: useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.3]),
     },
     reveal: {

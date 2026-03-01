@@ -1,4 +1,12 @@
-import { Mail, Phone, Instagram, Github, MapPin, Clock, ArrowUpRight } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  Instagram,
+  Github,
+  MapPin,
+  Clock,
+  ArrowUpRight,
+} from "lucide-react";
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
 
@@ -13,7 +21,8 @@ const Footer = () => {
     const element = document.getElementById(targetId.replace("#", ""));
     if (element) {
       const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({ top: elementPosition - offset, behavior: "smooth" });
     }
   };
@@ -21,7 +30,11 @@ const Footer = () => {
   const socialLinks = [
     { href: "mailto:ellowdigitalindia@gmail.com", label: "Mail", icon: Mail },
     { href: "tel:+918960446756", label: "Phone", icon: Phone },
-    { href: "https://instagram.com/ellowdigital", label: "Instagram", icon: Instagram },
+    {
+      href: "https://instagram.com/ellowdigital",
+      label: "Instagram",
+      icon: Instagram,
+    },
     { href: "https://github.com/ellowdigital", label: "Github", icon: Github },
   ];
 
@@ -49,14 +62,25 @@ const Footer = () => {
   ];
 
   const contactInfo = [
-    { icon: Mail, value: "ellowdigitalindia@gmail.com", href: "mailto:ellowdigitalindia@gmail.com", isLink: true },
-    { icon: Phone, value: "+91 89604 46756", href: "tel:+918960446756", isLink: true },
+    {
+      icon: Mail,
+      value: "ellowdigitalindia@gmail.com",
+      href: "mailto:ellowdigitalindia@gmail.com",
+      isLink: true,
+    },
+    {
+      icon: Phone,
+      value: "+91 89604 46756",
+      href: "tel:+918960446756",
+      isLink: true,
+    },
     { icon: MapPin, value: "India", isLink: false },
     { icon: Clock, value: "Mon - Sat: 10AM - 7PM", isLink: false },
   ];
 
   const renderNavLink = (link: { label: string; href: string }) => {
-    const cls = "group inline-flex items-center gap-1.5 text-muted-foreground hover:text-brand-yellow text-sm transition-all duration-200";
+    const cls =
+      "group inline-flex items-center gap-1.5 text-muted-foreground hover:text-brand-yellow text-sm transition-all duration-200";
     if (link.href.startsWith("/")) {
       return (
         <Link to={link.href} className={cls}>
@@ -66,7 +90,11 @@ const Footer = () => {
       );
     }
     return (
-      <a href={link.href} onClick={(e) => smoothScrollTo(e, link.href)} className={cls}>
+      <a
+        href={link.href}
+        onClick={(e) => smoothScrollTo(e, link.href)}
+        className={cls}
+      >
         {link.label}
         <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
       </a>
@@ -91,7 +119,8 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed mb-5 max-w-[260px] mx-auto sm:mx-0">
-              Crafting innovative digital experiences that empower your brand online.
+              Crafting innovative digital experiences that empower your brand
+              online.
             </p>
             <div className="flex items-center justify-center sm:justify-start gap-2">
               {socialLinks.map(({ href, label, icon: Icon }) => {
@@ -147,7 +176,9 @@ const Footer = () => {
                 const inner = (
                   <span className="inline-flex items-center justify-center sm:justify-start gap-2 text-muted-foreground text-sm hover:text-foreground transition-colors">
                     <Icon className="w-3.5 h-3.5 text-brand-yellow flex-shrink-0" />
-                    <span className={item.isLink ? "break-all" : ""}>{item.value}</span>
+                    <span className={item.isLink ? "break-all" : ""}>
+                      {item.value}
+                    </span>
                   </span>
                 );
                 return (
@@ -168,12 +199,17 @@ const Footer = () => {
             {/* Copyright */}
             <p className="text-muted-foreground text-xs order-2 sm:order-1">
               © {currentYear}{" "}
-              <span className="font-semibold text-brand-yellow">EllowDigital</span>
+              <span className="font-semibold text-brand-yellow">
+                EllowDigital
+              </span>
               . All Rights Reserved.
             </p>
 
             {/* Legal Links */}
-            <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 order-1 sm:order-2" aria-label="Legal navigation">
+            <nav
+              className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 order-1 sm:order-2"
+              aria-label="Legal navigation"
+            >
               {legalLinks.map(({ to, label }, index) => (
                 <span key={to} className="flex items-center gap-4">
                   <Link
@@ -183,7 +219,9 @@ const Footer = () => {
                     {label}
                   </Link>
                   {index < legalLinks.length - 1 && (
-                    <span className="text-border/50 hidden sm:inline text-xs">·</span>
+                    <span className="text-border/50 hidden sm:inline text-xs">
+                      ·
+                    </span>
                   )}
                 </span>
               ))}
@@ -196,7 +234,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-
     </footer>
   );
 };

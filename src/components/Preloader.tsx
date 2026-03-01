@@ -128,7 +128,11 @@ const Preloader = ({ minDuration = 1200 }: PreloaderProps) => {
                   scale: [1, 1.3, 1],
                   opacity: [0.4, 0.8, 0.4],
                 }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               />
 
               {/* 3D Logo container */}
@@ -194,7 +198,11 @@ const Preloader = ({ minDuration = 1200 }: PreloaderProps) => {
                 <motion.span
                   className="inline-block text-primary ml-0.5"
                   animate={{ opacity: [1, 0] }}
-                  transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
+                  transition={{
+                    duration: 0.5,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                  }}
                 >
                   |
                 </motion.span>

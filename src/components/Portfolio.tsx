@@ -278,7 +278,8 @@ const Portfolio = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            View Project <ExternalLink className="ml-2 w-4 h-4" />
+                            View Project{" "}
+                            <ExternalLink className="ml-2 w-4 h-4" />
                           </a>
                         </Button>
                       </div>
@@ -362,7 +363,11 @@ const Portfolio = () => {
             <span className="text-sm font-medium text-muted-foreground">
               Interested in seeing our complete timeline?
             </span>
-            <Button asChild size="lg" className="rounded-full px-8 shadow-lg w-full sm:w-auto">
+            <Button
+              asChild
+              size="lg"
+              className="rounded-full px-8 shadow-lg w-full sm:w-auto"
+            >
               <a href="/portfolio">
                 View Full Portfolio <ArrowRight className="ml-2 w-4 h-4" />
               </a>

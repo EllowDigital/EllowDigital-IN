@@ -46,7 +46,9 @@ const TechItem: FC<TechItemProps> = memo(({ name, category, Icon, index }) => {
               {Icon ? (
                 <Icon className="w-9 h-9 text-primary" aria-hidden="true" />
               ) : (
-                <span className="text-xl font-bold text-primary">{initial}</span>
+                <span className="text-xl font-bold text-primary">
+                  {initial}
+                </span>
               )}
             </div>
           </div>

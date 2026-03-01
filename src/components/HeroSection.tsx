@@ -1,13 +1,12 @@
 import { useEffect, useState, useRef, useCallback } from "react";
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import {
-  ArrowRight,
-  Play,
-  Star,
-  Users,
-  Zap,
-  Globe,
-} from "lucide-react";
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
+import { ArrowRight, Play, Star, Users, Zap, Globe } from "lucide-react";
 import { TypewriterText, FloatingShapes } from "./storytelling";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -22,15 +21,18 @@ const HeroSection = () => {
   const smoothMouseX = useSpring(mouseX, { stiffness: 50, damping: 20 });
   const smoothMouseY = useSpring(mouseY, { stiffness: 50, damping: 20 });
 
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (isMobile) return;
-    const rect = sectionRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    const centerX = (e.clientX - rect.left) / rect.width - 0.5;
-    const centerY = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(centerX * 40);
-    mouseY.set(centerY * 30);
-  }, [isMobile, mouseX, mouseY]);
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (isMobile) return;
+      const rect = sectionRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      const centerX = (e.clientX - rect.left) / rect.width - 0.5;
+      const centerY = (e.clientY - rect.top) / rect.height - 0.5;
+      mouseX.set(centerX * 40);
+      mouseY.set(centerY * 30);
+    },
+    [isMobile, mouseX, mouseY]
+  );
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -44,10 +46,10 @@ const HeroSection = () => {
   const orb1Y = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const orb2Y = useTransform(scrollYProgress, [0, 1], [0, -100]);
   // Derived mouse transforms for counter-parallax
-  const negMouseX = useTransform(smoothMouseX, v => -v * 0.6);
-  const negMouseY = useTransform(smoothMouseY, v => -v * 0.6);
-  const gridMouseX = useTransform(smoothMouseX, v => v * 0.3);
-  const gridMouseY = useTransform(smoothMouseY, v => v * 0.3);
+  const negMouseX = useTransform(smoothMouseX, (v) => -v * 0.6);
+  const negMouseY = useTransform(smoothMouseY, (v) => -v * 0.6);
+  const gridMouseX = useTransform(smoothMouseX, (v) => v * 0.3);
+  const gridMouseY = useTransform(smoothMouseY, (v) => v * 0.3);
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 100);

@@ -56,7 +56,18 @@ const TypewriterText = ({
         setTextIndex((prev) => (prev + 1) % texts.length);
       }
     }
-  }, [displayText, isDeleting, isPaused, textIndex, texts, speed, deleteSpeed, pauseDuration, loop, onComplete]);
+  }, [
+    displayText,
+    isDeleting,
+    isPaused,
+    textIndex,
+    texts,
+    speed,
+    deleteSpeed,
+    pauseDuration,
+    loop,
+    onComplete,
+  ]);
 
   useEffect(() => {
     const timeout = setTimeout(animate, isDeleting ? deleteSpeed : speed);
@@ -70,7 +81,11 @@ const TypewriterText = ({
         <motion.span
           className="inline-block text-primary ml-0.5"
           animate={{ opacity: [1, 0] }}
-          transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
+          transition={{
+            duration: 0.6,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
         >
           {cursorChar}
         </motion.span>
