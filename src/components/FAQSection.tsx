@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
 import { HelpCircle } from "lucide-react";
-import { generateFAQSchema } from "@/utils/faqSchema";
 import { FloatingShapes, ScrollNarrative, TiltCard } from "./storytelling";
 
 interface FAQItem {
@@ -61,9 +60,6 @@ const defaultFAQs: FAQItem[] = [
       "While we're based in India and primarily serve Indian businesses, we're equipped to work with international clients. We have experience collaborating remotely and can accommodate different time zones to ensure smooth project execution.",
   },
 ];
-
-// Export for use in schemas
-export { generateFAQSchema };
 
 const FAQSection: React.FC<FAQSectionProps> = ({ faqs = defaultFAQs }) => {
   return (

@@ -62,8 +62,6 @@ const TypewriterText = ({
     isPaused,
     textIndex,
     texts,
-    speed,
-    deleteSpeed,
     pauseDuration,
     loop,
     onComplete,
