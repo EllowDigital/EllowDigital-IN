@@ -174,17 +174,22 @@ const Index = () => {
       fallbackTimer = window.setTimeout(markReady, 2000) as unknown as number;
     }
 
+    // Defer non-critical animation initializers until after first paint
     const cleanupFns: Array<() => void> = [];
     const scheduledCancels: Array<() => void> = [];
-    const scheduleInit = (initializer: () => () => void) => {
-      const frame = window.requestAnimationFrame(() => {
-        cleanupFns.push(initializer());
-      });
-      scheduledCancels.push(() => window.cancelAnimationFrame(frame));
+    const scheduleInit = (initializer: () => () => void, delay = 0) => {
+      const timeout = window.setTimeout(() => {
+        const frame = window.requestAnimationFrame(() => {
+          cleanupFns.push(initializer());
+        });
+        scheduledCancels.push(() => window.cancelAnimationFrame(frame));
+      }, delay);
+      scheduledCancels.push(() => window.clearTimeout(timeout));
     };
 
-    scheduleInit(initScrollRevealAnimations);
-    scheduleInit(init3DTiltEffect);
+    // Stagger animation init after first paint to avoid jank
+    scheduleInit(initScrollRevealAnimations, 500);
+    scheduleInit(init3DTiltEffect, 800);
 
     return () => {
       if (fallbackTimer) {

@@ -9,6 +9,36 @@ import {
 import { ArrowRight, Play, Star, Users, Zap, Globe } from "lucide-react";
 import { TypewriterText, FloatingShapes } from "./storytelling";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useCountUp } from "@/hooks/useCountUp";
+
+// Animated counter stat component
+const CountUpStat = ({ stat, index, isLoaded }: { stat: { icon: React.ElementType; value: number; suffix: string; label: string }; index: number; isLoaded: boolean }) => {
+  const { count, ref } = useCountUp({ end: stat.value, duration: 2000 });
+  
+  return (
+    <motion.div
+      ref={ref as React.Ref<HTMLDivElement>}
+      className="flex items-center gap-4 cursor-default"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
+      transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
+      whileHover={{ scale: 1.05, rotateY: 5 }}
+      style={{ transformStyle: "preserve-3d" }}
+    >
+      <div className="w-14 h-14 rounded-2xl bg-secondary/60 border border-border/40 flex items-center justify-center">
+        <stat.icon className="w-6 h-6 text-brand-yellow" />
+      </div>
+      <div className="text-left">
+        <div className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
+          {count}{stat.suffix}
+        </div>
+        <div className="text-sm text-muted-foreground font-medium">
+          {stat.label}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -56,9 +86,9 @@ const HeroSection = () => {
   }, []);
 
   const stats = [
-    { icon: Users, value: "50+", label: "Happy Clients" },
-    { icon: Zap, value: "100+", label: "Projects Delivered" },
-    { icon: Globe, value: "15+", label: "Countries Served" },
+    { icon: Users, value: 50, suffix: "+", label: "Happy Clients" },
+    { icon: Zap, value: 100, suffix: "+", label: "Projects Delivered" },
+    { icon: Globe, value: 15, suffix: "+", label: "Countries Served" },
   ];
 
   return (
@@ -244,27 +274,7 @@ const HeroSection = () => {
           className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 lg:gap-14"
         >
           {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              className="flex items-center gap-4 cursor-default"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-              whileHover={{ scale: 1.05, rotateY: 5 }}
-              style={{ transformStyle: "preserve-3d" }}
-            >
-              <div className="w-14 h-14 rounded-2xl bg-secondary/60 border border-border/40 flex items-center justify-center">
-                <stat.icon className="w-6 h-6 text-brand-yellow" />
-              </div>
-              <div className="text-left">
-                <div className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-muted-foreground font-medium">
-                  {stat.label}
-                </div>
-              </div>
-            </motion.div>
+            <CountUpStat key={stat.label} stat={stat} index={index} isLoaded={isLoaded} />
           ))}
         </motion.div>
       </motion.div>
