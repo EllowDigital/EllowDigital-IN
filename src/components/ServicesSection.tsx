@@ -102,16 +102,21 @@ const ServiceCard = ({
   index: number;
   gradient: string;
 }) => (
-  <motion.div variants={itemVariants}>
+  <motion.div variants={itemVariants} whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
     <TiltCard className="h-full" tiltAmount={8} glareEnabled={true}>
       <div className="group relative h-full rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5">
-        {/* Animated gradient background */}
+        {/* Animated gradient background with shift effect */}
         <div
-          className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
+          className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110`}
         />
 
         {/* Glow effect on hover */}
         <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/20 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+
+        {/* Shine sweep effect */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden rounded-2xl">
+          <div className="absolute -inset-full top-0 h-full w-1/2 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 group-hover:animate-[shimmer_1.5s_ease-in-out]" />
+        </div>
 
         {/* Card content */}
         <div
@@ -122,9 +127,18 @@ const ServiceCard = ({
           <div className="flex items-start justify-between mb-6">
             <div className="relative">
               <div className="absolute inset-0 rounded-xl bg-primary/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
-                <Icon className="h-7 w-7 text-primary" strokeWidth={1.5} />
-              </div>
+              <motion.div
+                className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center transition-all duration-500"
+                whileHover={{ scale: 1.15, rotate: 6 }}
+              >
+                <motion.div
+                  className="flex items-center justify-center"
+                  whileHover={{ y: [0, -4, 0] }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                >
+                  <Icon className="h-7 w-7 text-primary" strokeWidth={1.5} />
+                </motion.div>
+              </motion.div>
             </div>
 
             <div className="w-10 h-10 rounded-xl bg-secondary/80 border border-border/50 flex items-center justify-center group-hover:bg-primary/10 group-hover:border-primary/30 transition-all duration-300">
@@ -159,10 +173,10 @@ const ServiceCard = ({
 
             <motion.div
               className="w-9 h-9 rounded-full bg-secondary/80 border border-border/50 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all duration-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.15, rotate: 45 }}
+              whileTap={{ scale: 0.9 }}
             >
-              <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary-foreground transition-colors duration-300 group-hover:translate-x-0.5" />
+              <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary-foreground transition-colors duration-300" />
             </motion.div>
           </div>
         </div>
