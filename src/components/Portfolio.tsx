@@ -143,19 +143,24 @@ const Portfolio = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 },
+      transition: { staggerChildren: 0.12, delayChildren: 0.1 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: {
+    hidden: { opacity: 0, y: 40, scale: 0.95, filter: "blur(4px)" },
+    visible: (i: number) => ({
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.4, ease: [0, 0, 0.2, 1] as const },
-    },
-    exit: { opacity: 0, scale: 0.9, transition: { duration: 0.2 } },
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.5,
+        delay: i * 0.08,
+        ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+      },
+    }),
+    exit: { opacity: 0, scale: 0.9, filter: "blur(4px)", transition: { duration: 0.2 } },
   };
 
   return (
@@ -227,14 +232,15 @@ const Portfolio = () => {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr"
             variants={containerVariants}
             initial="hidden"
-            animate="visible"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
             exit="exit"
           >
             {visibleProjects.map((project, index) => (
               <motion.div
                 key={project.title}
                 variants={itemVariants}
-                layout
+                custom={index}
                 className={`group relative flex flex-col ${
                   filter === "All" && index === 0 ? "md:col-span-2" : ""
                 }`}
