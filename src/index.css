@@ -93,13 +93,20 @@ body {
   }
 }
 
-/* Theme transition for smooth dark/light mode morphing */
-.dark-transitioning,
-.dark-transitioning *,
-.dark-transitioning *::before,
-.dark-transitioning *::after {
-  transition: background-color 0.5s ease, border-color 0.5s ease,
-    color 0.4s ease, box-shadow 0.5s ease, fill 0.4s ease, stroke 0.4s ease !important;
+/* Always-on smooth theme transitions */
+*,
+*::before,
+*::after {
+  transition: background-color 0.35s ease, border-color 0.35s ease,
+    color 0.3s ease, box-shadow 0.35s ease, fill 0.3s ease, stroke 0.3s ease;
+}
+
+/* Exclude elements that need instant transitions (inputs, animations) */
+input, textarea, select,
+[class*="animate-"],
+.framer-motion,
+canvas, video, svg path {
+  transition: none;
 }
 
 /* Base Styles */

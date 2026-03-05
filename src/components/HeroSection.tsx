@@ -292,10 +292,10 @@ const HeroSection = () => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - hidden on small screens to prevent overlap */}
       <motion.a
         href="#about"
-        className="absolute bottom-8 left-0 right-0 flex flex-col items-center justify-center cursor-pointer group"
+        className="absolute bottom-6 left-0 right-0 hidden sm:flex flex-col items-center justify-center cursor-pointer group"
         initial={{ opacity: 0, y: 20 }}
         animate={isLoaded ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 1, duration: 0.6 }}

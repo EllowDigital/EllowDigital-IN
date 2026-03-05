@@ -21,27 +21,27 @@ interface ScrollRevealProps {
 
 const animations: Record<AnimationType, Variants> = {
   fadeUp: {
-    hidden: { opacity: 0, y: 60 },
+    hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0 },
   },
   fadeDown: {
-    hidden: { opacity: 0, y: -60 },
+    hidden: { opacity: 0, y: -30 },
     visible: { opacity: 1, y: 0 },
   },
   fadeLeft: {
-    hidden: { opacity: 0, x: -60 },
+    hidden: { opacity: 0, x: -30 },
     visible: { opacity: 1, x: 0 },
   },
   fadeRight: {
-    hidden: { opacity: 0, x: 60 },
+    hidden: { opacity: 0, x: 30 },
     visible: { opacity: 1, x: 0 },
   },
   scale: {
-    hidden: { opacity: 0, scale: 0.8 },
+    hidden: { opacity: 0, scale: 0.9 },
     visible: { opacity: 1, scale: 1 },
   },
   blur: {
-    hidden: { opacity: 0, filter: "blur(10px)" },
+    hidden: { opacity: 0, filter: "blur(6px)" },
     visible: { opacity: 1, filter: "blur(0px)" },
   },
 };
