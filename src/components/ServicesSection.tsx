@@ -102,7 +102,11 @@ const ServiceCard = ({
   index: number;
   gradient: string;
 }) => (
-  <motion.div variants={itemVariants} whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
+  <motion.div
+    variants={itemVariants}
+    whileHover={{ y: -6 }}
+    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+  >
     <TiltCard className="h-full" tiltAmount={8} glareEnabled={true}>
       <div className="group relative h-full rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5">
         {/* Animated gradient background with shift effect */}

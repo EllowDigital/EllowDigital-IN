@@ -12,9 +12,22 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useCountUp } from "@/hooks/useCountUp";
 
 // Animated counter stat component
-const CountUpStat = ({ stat, index, isLoaded }: { stat: { icon: React.ElementType; value: number; suffix: string; label: string }; index: number; isLoaded: boolean }) => {
+const CountUpStat = ({
+  stat,
+  index,
+  isLoaded,
+}: {
+  stat: {
+    icon: React.ElementType;
+    value: number;
+    suffix: string;
+    label: string;
+  };
+  index: number;
+  isLoaded: boolean;
+}) => {
   const { count, ref } = useCountUp({ end: stat.value, duration: 2000 });
-  
+
   return (
     <motion.div
       ref={ref as React.Ref<HTMLDivElement>}
@@ -30,7 +43,8 @@ const CountUpStat = ({ stat, index, isLoaded }: { stat: { icon: React.ElementTyp
       </div>
       <div className="text-left">
         <div className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
-          {count}{stat.suffix}
+          {count}
+          {stat.suffix}
         </div>
         <div className="text-sm text-muted-foreground font-medium">
           {stat.label}
@@ -287,7 +301,12 @@ const HeroSection = () => {
           className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 lg:gap-14"
         >
           {stats.map((stat, index) => (
-            <CountUpStat key={stat.label} stat={stat} index={index} isLoaded={isLoaded} />
+            <CountUpStat
+              key={stat.label}
+              stat={stat}
+              index={index}
+              isLoaded={isLoaded}
+            />
           ))}
         </motion.div>
       </motion.div>

@@ -6,7 +6,11 @@ interface UseCountUpOptions {
   startOnView?: boolean;
 }
 
-export const useCountUp = ({ end, duration = 2000, startOnView = true }: UseCountUpOptions) => {
+export const useCountUp = ({
+  end,
+  duration = 2000,
+  startOnView = true,
+}: UseCountUpOptions) => {
   const [count, setCount] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
   const ref = useRef<HTMLElement>(null);

@@ -160,7 +160,12 @@ const Portfolio = () => {
         ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
       },
     }),
-    exit: { opacity: 0, scale: 0.9, filter: "blur(4px)", transition: { duration: 0.2 } },
+    exit: {
+      opacity: 0,
+      scale: 0.9,
+      filter: "blur(4px)",
+      transition: { duration: 0.2 },
+    },
   };
 
   return (
