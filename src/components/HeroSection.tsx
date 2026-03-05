@@ -95,7 +95,7 @@ const HeroSection = () => {
     <section
       ref={sectionRef}
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 px-4 sm:px-6"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-28 sm:pb-20 px-4 sm:px-6"
       onMouseMove={handleMouseMove}
     >
       {/* 3D Floating shapes */}
