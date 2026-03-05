@@ -38,7 +38,7 @@ export const useCountUp = ({
   useEffect(() => {
     if (!hasStarted) return;
 
-    let start = 0;
+    const start = 0;
     const startTime = performance.now();
 
     const step = (now: number) => {
