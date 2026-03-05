@@ -38,9 +38,6 @@ const ThemeToggle = () => {
     const newValue = !isDark;
     setIsDark(newValue);
 
-    // Add transition class for smooth theme morphing
-    document.documentElement.classList.add("dark-transitioning");
-
     if (newValue) {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
@@ -51,7 +48,6 @@ const ThemeToggle = () => {
 
     setTimeout(() => {
       setIsAnimating(false);
-      document.documentElement.classList.remove("dark-transitioning");
     }, 600);
   };
 

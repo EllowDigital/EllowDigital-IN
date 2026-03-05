@@ -95,7 +95,7 @@ const HeroSection = () => {
     <section
       ref={sectionRef}
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 px-4 sm:px-6"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-28 sm:pb-20 px-4 sm:px-6"
       onMouseMove={handleMouseMove}
     >
       {/* 3D Floating shapes */}
@@ -220,16 +220,29 @@ const HeroSection = () => {
           </span>
         </motion.h1>
 
-        {/* Scroll-driven narrative subheadline */}
+        {/* Scroll-driven narrative subheadline with typing effect */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
+          className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed"
         >
-          Transform your ideas into exceptional digital experiences. We craft
-          modern websites, web apps, and digital solutions that drive growth and
-          inspire users.
+          {isLoaded ? (
+            <TypewriterText
+              texts={[
+                "Transform your ideas into exceptional digital experiences.",
+                "We craft modern websites, web apps, and digital solutions.",
+                "Drive growth and inspire users with our expert team.",
+              ]}
+              speed={30}
+              deleteSpeed={15}
+              pauseDuration={3000}
+              cursor={true}
+              cursorChar="|"
+            />
+          ) : (
+            "Transform your ideas into exceptional digital experiences."
+          )}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -237,7 +250,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 sm:mb-16"
         >
           <motion.a
             href="#contact"
@@ -279,10 +292,10 @@ const HeroSection = () => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - hidden on small screens to prevent overlap */}
       <motion.a
         href="#about"
-        className="absolute bottom-8 left-0 right-0 flex flex-col items-center justify-center cursor-pointer group"
+        className="absolute bottom-6 left-0 right-0 hidden sm:flex flex-col items-center justify-center cursor-pointer group"
         initial={{ opacity: 0, y: 20 }}
         animate={isLoaded ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 1, duration: 0.6 }}
