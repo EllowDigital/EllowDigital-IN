@@ -220,16 +220,29 @@ const HeroSection = () => {
           </span>
         </motion.h1>
 
-        {/* Scroll-driven narrative subheadline */}
+        {/* Scroll-driven narrative subheadline with typing effect */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
+          className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed"
         >
-          Transform your ideas into exceptional digital experiences. We craft
-          modern websites, web apps, and digital solutions that drive growth and
-          inspire users.
+          {isLoaded ? (
+            <TypewriterText
+              texts={[
+                "Transform your ideas into exceptional digital experiences.",
+                "We craft modern websites, web apps, and digital solutions.",
+                "Drive growth and inspire users with our expert team.",
+              ]}
+              speed={30}
+              deleteSpeed={15}
+              pauseDuration={3000}
+              cursor={true}
+              cursorChar="|"
+            />
+          ) : (
+            "Transform your ideas into exceptional digital experiences."
+          )}
         </motion.p>
 
         {/* CTA Buttons */}
