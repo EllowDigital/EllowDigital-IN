@@ -136,18 +136,29 @@ const FloatingShapes = ({
     ],
   };
 
-  // On mobile: reduce shapes count and sizes for better FPS
+  // On mobile/tablet: reduce shapes count and sizes for better FPS
   const getShapes = () => {
     const allShapes = shapes[variant];
-    if (!isMobile) return allShapes;
 
-    // On mobile: take only first 2 shapes for hero/section, 1 for minimal
-    const limit = variant === "minimal" ? 1 : 2;
-    return allShapes.slice(0, limit).map((s) => ({
-      ...s,
-      size: Math.round(s.size * 0.6),
-      duration: s.duration * 1.3, // slower = less CPU
-    }));
+    if (isMobile) {
+      const limit = variant === "minimal" ? 1 : 2;
+      return allShapes.slice(0, limit).map((s) => ({
+        ...s,
+        size: Math.round(s.size * 0.6),
+        duration: s.duration * 1.3,
+      }));
+    }
+
+    if (isTablet) {
+      const limit = variant === "minimal" ? 1 : 3;
+      return allShapes.slice(0, limit).map((s) => ({
+        ...s,
+        size: Math.round(s.size * 0.75),
+        duration: s.duration * 1.15,
+      }));
+    }
+
+    return allShapes;
   };
 
   const activeShapes = getShapes();
