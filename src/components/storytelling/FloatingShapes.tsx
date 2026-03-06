@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -6,11 +7,26 @@ interface FloatingShapesProps {
   className?: string;
 }
 
+const TABLET_BREAKPOINT = 1024;
+
+const useIsTablet = () => {
+  const [isTablet, setIsTablet] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia(`(max-width: ${TABLET_BREAKPOINT - 1}px)`);
+    const onChange = () => setIsTablet(window.innerWidth < TABLET_BREAKPOINT);
+    mql.addEventListener("change", onChange);
+    onChange();
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+  return isTablet;
+};
+
 const FloatingShapes = ({
   variant = "hero",
   className = "",
 }: FloatingShapesProps) => {
   const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
 
   const shapes = {
     hero: [
@@ -120,18 +136,29 @@ const FloatingShapes = ({
     ],
   };
 
-  // On mobile: reduce shapes count and sizes for better FPS
+  // On mobile/tablet: reduce shapes count and sizes for better FPS
   const getShapes = () => {
     const allShapes = shapes[variant];
-    if (!isMobile) return allShapes;
 
-    // On mobile: take only first 2 shapes for hero/section, 1 for minimal
-    const limit = variant === "minimal" ? 1 : 2;
-    return allShapes.slice(0, limit).map((s) => ({
-      ...s,
-      size: Math.round(s.size * 0.6),
-      duration: s.duration * 1.3, // slower = less CPU
-    }));
+    if (isMobile) {
+      const limit = variant === "minimal" ? 1 : 2;
+      return allShapes.slice(0, limit).map((s) => ({
+        ...s,
+        size: Math.round(s.size * 0.6),
+        duration: s.duration * 1.3,
+      }));
+    }
+
+    if (isTablet) {
+      const limit = variant === "minimal" ? 1 : 3;
+      return allShapes.slice(0, limit).map((s) => ({
+        ...s,
+        size: Math.round(s.size * 0.75),
+        duration: s.duration * 1.15,
+      }));
+    }
+
+    return allShapes;
   };
 
   const activeShapes = getShapes();
