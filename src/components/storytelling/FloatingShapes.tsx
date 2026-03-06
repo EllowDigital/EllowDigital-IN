@@ -10,8 +10,8 @@ interface FloatingShapesProps {
 const TABLET_BREAKPOINT = 1024;
 
 const useIsTablet = () => {
-  const [isTablet, setIsTablet] = React.useState(false);
-  React.useEffect(() => {
+  const [isTablet, setIsTablet] = useState(false);
+  useEffect(() => {
     const mql = window.matchMedia(`(max-width: ${TABLET_BREAKPOINT - 1}px)`);
     const onChange = () => setIsTablet(window.innerWidth < TABLET_BREAKPOINT);
     mql.addEventListener("change", onChange);
