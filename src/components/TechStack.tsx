@@ -2,17 +2,15 @@ import { FC, memo } from "react";
 import { motion } from "framer-motion";
 import { Code2, Sparkles } from "lucide-react";
 import type { IconType } from "react-icons";
-import {
-  SiCss3,
-  SiFirebase,
-  SiFlutter,
-  SiHtml5,
-  SiJavascript,
-  SiMysql,
-  SiNodedotjs,
-  SiPython,
-  SiReact,
-} from "react-icons/si";
+import { SiCss3 } from "react-icons/si/index.js";
+import { SiFirebase } from "react-icons/si/index.js";
+import { SiFlutter } from "react-icons/si/index.js";
+import { SiHtml5 } from "react-icons/si/index.js";
+import { SiJavascript } from "react-icons/si/index.js";
+import { SiMysql } from "react-icons/si/index.js";
+import { SiNodedotjs } from "react-icons/si/index.js";
+import { SiPython } from "react-icons/si/index.js";
+import { SiReact } from "react-icons/si/index.js";
 import { AnimatedSectionHeader } from "./AnimatedGradient";
 import { TiltCard, FloatingShapes, ScrollNarrative } from "./storytelling";
 
