@@ -71,7 +71,7 @@ With analytics tools, your website provides invaluable insights into customer be
     readTime: "5 min read",
     category: "Business",
     tags: ["Web Development", "Business Growth", "Digital Marketing"],
-    author: { name: "Sarwan Yadav", avatar: "/images/founder.jpg" },
+    author: { name: "Sarwan Yadav", avatar: "/images/founder.webp" },
     featured: true,
   },
   {
