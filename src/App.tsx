@@ -19,6 +19,8 @@ import TeamPage from "./pages/TeamPage";
 import RefundPolicy from "./pages/RefundPolicy";
 import CookiesPolicy from "./pages/CookiesPolicy";
 import PortfolioPage from "./pages/PortfolioPage";
+import BlogPage from "./pages/BlogPage";
+import BlogPostPage from "./pages/BlogPostPage";
 
 import { initPerformanceOptimizations } from "@/utils/performanceUtils";
 import { initPerformanceMonitoring } from "@/utils/performanceMonitoring";
