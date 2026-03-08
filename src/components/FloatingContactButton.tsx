@@ -10,8 +10,10 @@ const FloatingContactButton = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show buttons after scrolling 300px
-      setIsVisible(window.scrollY > 300);
+      // Show buttons after scrolling past the hero section
+      const hero = document.getElementById("hero") || document.querySelector("section");
+      const threshold = hero ? hero.offsetTop + hero.offsetHeight : 600;
+      setIsVisible(window.scrollY > threshold);
 
       // Check if near footer to adjust position
       const footer = document.querySelector("footer");
