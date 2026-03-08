@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import {
   ExternalLink,
   ArrowLeft,
@@ -14,6 +14,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ImageLightbox, { LightboxTrigger } from "@/components/ImageLightbox";
 
 // --- Types ---
 interface Project {
@@ -175,6 +176,18 @@ const itemVariants = {
 const PortfolioPage = () => {
   const [filter, setFilter] = useState("All");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [lightboxImage, setLightboxImage] = useState<{
+    src: string;
+    alt: string;
+  } | null>(null);
+
+  const openLightbox = useCallback((src: string, alt: string) => {
+    setLightboxImage({ src, alt });
+  }, []);
+
+  const closeLightbox = useCallback(() => {
+    setLightboxImage(null);
+  }, []);
 
   // Scroll to top on mount
   useEffect(() => {
@@ -329,9 +342,16 @@ const PortfolioPage = () => {
                       <Card className="h-full flex flex-col overflow-hidden bg-card/40 backdrop-blur-sm border-border hover:border-brand-yellow/30 transition-all duration-500 hover:shadow-2xl hover:shadow-brand-yellow/5 hover:-translate-y-2">
                         {/* Image Container */}
                         <div className="relative aspect-[16/10] overflow-hidden bg-muted">
+                          <LightboxTrigger
+                            onClick={() =>
+                              openLightbox(project.image, project.title)
+                            }
+                          />
                           <img
                             src={project.image}
                             alt={project.title}
+                            width={640}
+                            height={400}
                             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                             loading="lazy"
                           />
@@ -440,6 +460,13 @@ const PortfolioPage = () => {
         </main>
 
         <Footer />
+
+        <ImageLightbox
+          src={lightboxImage?.src || ""}
+          alt={lightboxImage?.alt || ""}
+          isOpen={!!lightboxImage}
+          onClose={closeLightbox}
+        />
       </div>
     </>
   );

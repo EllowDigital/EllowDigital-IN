@@ -126,11 +126,37 @@ const Testimonials = () => {
       />
     ));
 
+  // Keyboard navigation
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      switch (e.key) {
+        case "ArrowLeft":
+          e.preventDefault();
+          scrollPrev();
+          break;
+        case "ArrowRight":
+          e.preventDefault();
+          scrollNext();
+          break;
+        case " ":
+          e.preventDefault();
+          toggleAutoplay();
+          break;
+      }
+    },
+    [scrollPrev, scrollNext, toggleAutoplay]
+  );
+
   return (
     <section
       id="testimonials"
       className="py-24 lg:py-32 relative overflow-hidden"
       ref={sectionRef}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Client testimonials. Use arrow keys to navigate, space to pause."
     >
       {/* 3D Floating Shapes */}
       <FloatingShapes variant="section" />

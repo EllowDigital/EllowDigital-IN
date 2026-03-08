@@ -25,7 +25,6 @@
 
     <!-- Critical Preloads for LCP optimization -->
     <link rel="preload" href="/preloader.css" as="style" />
-    <link rel="preload" href="/src/main.tsx" as="script" crossorigin />
 
     <!-- DNS Prefetch & Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -284,13 +283,7 @@
       href="/favicon/favicon-16x16.png"
     />
     <link rel="manifest" href="/favicon/site.webmanifest" />
-    <link rel="preload" href="/preloader.css" as="style" />
-    <link
-      rel="stylesheet"
-      href="/preloader.css"
-      media="print"
-      onload="this.media='all'"
-    />
+    <link rel="stylesheet" href="/preloader.css" />
     <noscript>
       <link rel="stylesheet" href="/preloader.css" />
     </noscript>
