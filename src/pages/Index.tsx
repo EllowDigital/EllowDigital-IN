@@ -1,4 +1,4 @@
-import { useEffect, useState, Suspense, lazy } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import Footer from "@/components/Footer";
@@ -7,7 +7,6 @@ import FloatingContactButton from "@/components/FloatingContactButton";
 import Preloader from "@/components/Preloader";
 import ScrollProgress from "@/components/ScrollProgress";
 import ScrollReveal from "@/components/ScrollReveal";
-import { SectionSkeleton } from "@/components/skeletons";
 import useSmoothScroll from "@/hooks/useSmoothScroll";
 import {
   initScrollRevealAnimations,
@@ -15,29 +14,20 @@ import {
 } from "@/utils/animationUtils";
 import { generateFAQSchema } from "@/utils/faqSchema";
 
-// Lazy load below-the-fold sections for better performance
-const AboutSection = lazy(() => import("@/components/AboutSection"));
-const FounderSection = lazy(() => import("@/components/FounderSection"));
-const ServicesSection = lazy(() => import("@/components/ServicesSection"));
-const WorkProcess = lazy(() => import("@/components/WorkProcess"));
-const EngagementModel = lazy(() => import("@/components/EngagementModel"));
-const Portfolio = lazy(() => import("@/components/Portfolio"));
-const ImpactMetrics = lazy(() => import("@/components/ImpactMetrics"));
-const Testimonials = lazy(() => import("@/components/Testimonials"));
-const TechStack = lazy(() => import("@/components/TechStack"));
-const WhyChooseUs = lazy(() => import("@/components/WhyChooseUs"));
-const FeaturedOffers = lazy(() => import("@/components/FeaturedOffers"));
-const FAQSection = lazy(() => import("@/components/FAQSection"));
-const SmartContactForm = lazy(() => import("@/components/SmartContactForm"));
-
-// Section loading fallback
-const SectionLoader = ({
-  cards = 3,
-  columns = 3,
-}: {
-  cards?: number;
-  columns?: 2 | 3 | 4;
-}) => <SectionSkeleton cards={cards} columns={columns} />;
+// Import all sections directly - no lazy loading to eliminate scroll delay
+import AboutSection from "@/components/AboutSection";
+import FounderSection from "@/components/FounderSection";
+import ServicesSection from "@/components/ServicesSection";
+import WorkProcess from "@/components/WorkProcess";
+import EngagementModel from "@/components/EngagementModel";
+import Portfolio from "@/components/Portfolio";
+import ImpactMetrics from "@/components/ImpactMetrics";
+import Testimonials from "@/components/Testimonials";
+import TechStack from "@/components/TechStack";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import FeaturedOffers from "@/components/FeaturedOffers";
+import FAQSection from "@/components/FAQSection";
+import SmartContactForm from "@/components/SmartContactForm";
 
 // Homepage FAQ Data
 const homepageFAQs = [
@@ -83,7 +73,7 @@ const homepageFAQs = [
   },
 ];
 
-// Homepage JSON-LD structured data (Enhanced with Service Schema)
+// Homepage JSON-LD structured data
 const homePageSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -106,13 +96,8 @@ const homePageSchema = {
       "@type": "Service",
       "@id": "https://ellowdigital.space/#webdevelopment",
       serviceType: "Web Development",
-      provider: {
-        "@id": "https://ellowdigital.space/#organization",
-      },
-      areaServed: {
-        "@type": "Country",
-        name: "India",
-      },
+      provider: { "@id": "https://ellowdigital.space/#organization" },
+      areaServed: { "@type": "Country", name: "India" },
       offers: {
         "@type": "Offer",
         price: "15999",
@@ -126,13 +111,8 @@ const homePageSchema = {
       "@type": "Service",
       "@id": "https://ellowdigital.space/#seo",
       serviceType: "SEO Services",
-      provider: {
-        "@id": "https://ellowdigital.space/#organization",
-      },
-      areaServed: {
-        "@type": "Country",
-        name: "India",
-      },
+      provider: { "@id": "https://ellowdigital.space/#organization" },
+      areaServed: { "@type": "Country", name: "India" },
       description:
         "Comprehensive SEO services to improve search rankings and organic traffic.",
     },
@@ -140,13 +120,8 @@ const homePageSchema = {
       "@type": "Service",
       "@id": "https://ellowdigital.space/#digitalmarketing",
       serviceType: "Digital Marketing",
-      provider: {
-        "@id": "https://ellowdigital.space/#organization",
-      },
-      areaServed: {
-        "@type": "Country",
-        name: "India",
-      },
+      provider: { "@id": "https://ellowdigital.space/#organization" },
+      areaServed: { "@type": "Country", name: "India" },
       description:
         "Complete digital marketing solutions including social media, content marketing, and PPC campaigns.",
     },
@@ -157,15 +132,12 @@ const homePageSchema = {
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-  // Enable smooth scroll for all anchor links
   useSmoothScroll();
 
   useEffect(() => {
     let fallbackTimer: number | undefined;
 
-    const markReady = () => {
-      setIsLoading(false);
-    };
+    const markReady = () => setIsLoading(false);
 
     if (document.readyState === "complete") {
       markReady();
@@ -174,7 +146,6 @@ const Index = () => {
       fallbackTimer = window.setTimeout(markReady, 2000) as unknown as number;
     }
 
-    // Defer non-critical animation initializers until after first paint
     const cleanupFns: Array<() => void> = [];
     const scheduledCancels: Array<() => void> = [];
     const scheduleInit = (initializer: () => () => void, delay = 0) => {
@@ -187,14 +158,11 @@ const Index = () => {
       scheduledCancels.push(() => window.clearTimeout(timeout));
     };
 
-    // Stagger animation init after first paint to avoid jank
     scheduleInit(initScrollRevealAnimations, 500);
     scheduleInit(init3DTiltEffect, 800);
 
     return () => {
-      if (fallbackTimer) {
-        clearTimeout(fallbackTimer);
-      }
+      if (fallbackTimer) clearTimeout(fallbackTimer);
       window.removeEventListener("load", markReady);
       scheduledCancels.forEach((cancel) => cancel());
       cleanupFns.forEach((cleanup) => cleanup());
@@ -211,9 +179,7 @@ const Index = () => {
         structuredData={homePageSchema}
       />
 
-      {/* Enhanced Preloader */}
       {isLoading && <Preloader />}
-
       <ScrollProgress />
 
       <div
@@ -223,86 +189,58 @@ const Index = () => {
       >
         <Navbar />
         <main className="flex-grow" id="main-content">
-          {/* Hero loads immediately */}
           <HeroSection />
 
-          {/* Lazy-loaded sections with scroll reveal animations */}
           <ScrollReveal animation="fadeUp">
-            <Suspense fallback={<SectionLoader cards={4} columns={4} />}>
-              <AboutSection />
-            </Suspense>
+            <AboutSection />
           </ScrollReveal>
 
           <ScrollReveal animation="fadeLeft" delay={0.1}>
-            <Suspense fallback={<SectionLoader cards={1} columns={2} />}>
-              <FounderSection />
-            </Suspense>
+            <FounderSection />
           </ScrollReveal>
 
           <ScrollReveal animation="fadeUp" delay={0.1}>
-            <Suspense fallback={<SectionLoader cards={6} columns={3} />}>
-              <ServicesSection />
-            </Suspense>
+            <ServicesSection />
           </ScrollReveal>
 
           <ScrollReveal animation="fadeRight" delay={0.1}>
-            <Suspense fallback={<SectionLoader cards={4} columns={4} />}>
-              <WorkProcess />
-            </Suspense>
+            <WorkProcess />
           </ScrollReveal>
 
           <ScrollReveal animation="scale" delay={0.1}>
-            <Suspense fallback={<SectionLoader cards={3} columns={3} />}>
-              <EngagementModel />
-            </Suspense>
+            <EngagementModel />
           </ScrollReveal>
 
           <ScrollReveal animation="fadeUp" delay={0.1}>
-            <Suspense fallback={<SectionLoader cards={5} columns={3} />}>
-              <Portfolio />
-            </Suspense>
+            <Portfolio />
           </ScrollReveal>
 
           <ScrollReveal animation="blur" delay={0.1}>
-            <Suspense fallback={<SectionLoader cards={4} columns={4} />}>
-              <ImpactMetrics />
-            </Suspense>
+            <ImpactMetrics />
           </ScrollReveal>
 
           <ScrollReveal animation="fadeLeft" delay={0.1}>
-            <Suspense fallback={<SectionLoader cards={3} columns={3} />}>
-              <Testimonials />
-            </Suspense>
+            <Testimonials />
           </ScrollReveal>
 
           <ScrollReveal animation="fadeUp" delay={0.1}>
-            <Suspense fallback={<SectionLoader cards={9} columns={3} />}>
-              <TechStack />
-            </Suspense>
+            <TechStack />
           </ScrollReveal>
 
           <ScrollReveal animation="fadeRight" delay={0.1}>
-            <Suspense fallback={<SectionLoader cards={6} columns={3} />}>
-              <WhyChooseUs />
-            </Suspense>
+            <WhyChooseUs />
           </ScrollReveal>
 
           <ScrollReveal animation="scale" delay={0.1}>
-            <Suspense fallback={<SectionLoader cards={2} columns={2} />}>
-              <FeaturedOffers />
-            </Suspense>
+            <FeaturedOffers />
           </ScrollReveal>
 
           <ScrollReveal animation="fadeUp" delay={0.1}>
-            <Suspense fallback={<SectionLoader cards={8} columns={2} />}>
-              <FAQSection />
-            </Suspense>
+            <FAQSection />
           </ScrollReveal>
 
           <ScrollReveal animation="fadeUp" delay={0.1}>
-            <Suspense fallback={<SectionLoader cards={2} columns={2} />}>
-              <SmartContactForm />
-            </Suspense>
+            <SmartContactForm />
           </ScrollReveal>
         </main>
         <Footer />
