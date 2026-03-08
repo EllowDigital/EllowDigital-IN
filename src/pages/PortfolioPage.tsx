@@ -179,6 +179,18 @@ const itemVariants = {
 const PortfolioPage = () => {
   const [filter, setFilter] = useState("All");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [lightboxImage, setLightboxImage] = useState<{
+    src: string;
+    alt: string;
+  } | null>(null);
+
+  const openLightbox = useCallback((src: string, alt: string) => {
+    setLightboxImage({ src, alt });
+  }, []);
+
+  const closeLightbox = useCallback(() => {
+    setLightboxImage(null);
+  }, []);
 
   // Scroll to top on mount
   useEffect(() => {
