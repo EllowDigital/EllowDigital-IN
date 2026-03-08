@@ -69,6 +69,8 @@ const router = createBrowserRouter(
       children: [
         { index: true, element: <Index /> },
         { path: "portfolio", element: <PortfolioPage /> },
+        { path: "blog", element: <BlogPage /> },
+        { path: "blog/:slug", element: <BlogPostPage /> },
         { path: "privacy-policy", element: <PrivacyPolicy /> },
         { path: "terms-of-service", element: <TermsOfService /> },
         { path: "refund-policy", element: <RefundPolicy /> },
