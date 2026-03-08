@@ -181,7 +181,7 @@ Not sure which to choose? [Reach out to our team](#contact) for a free consultat
     readTime: "6 min read",
     category: "Technology",
     tags: ["React", "Next.js", "Web Development", "JavaScript"],
-    author: { name: "Sarwan Yadav", avatar: "/images/founder.jpg" },
+    author: { name: "Sarwan Yadav", avatar: "/images/founder.webp" },
   },
   {
     slug: "ui-ux-design-principles-that-convert",
