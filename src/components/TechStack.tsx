@@ -2,15 +2,18 @@ import { FC, memo } from "react";
 import { motion } from "framer-motion";
 import { Code2, Sparkles } from "lucide-react";
 import type { IconType } from "react-icons";
-import { SiCss3 } from "react-icons/si/index.js";
-import { SiFirebase } from "react-icons/si/index.js";
-import { SiFlutter } from "react-icons/si/index.js";
-import { SiHtml5 } from "react-icons/si/index.js";
-import { SiJavascript } from "react-icons/si/index.js";
-import { SiMysql } from "react-icons/si/index.js";
-import { SiNodedotjs } from "react-icons/si/index.js";
-import { SiPython } from "react-icons/si/index.js";
-import { SiReact } from "react-icons/si/index.js";
+// @ts-ignore
+import * as SiIcons from "react-icons/si";
+
+const SiCss3 = SiIcons.SiCss3;
+const SiFirebase = SiIcons.SiFirebase;
+const SiFlutter = SiIcons.SiFlutter;
+const SiHtml5 = SiIcons.SiHtml5;
+const SiJavascript = SiIcons.SiJavascript;
+const SiMysql = SiIcons.SiMysql;
+const SiNodedotjs = SiIcons.SiNodedotjs;
+const SiPython = SiIcons.SiPython;
+const SiReact = SiIcons.SiReact;
 import { AnimatedSectionHeader } from "./AnimatedGradient";
 import { TiltCard, FloatingShapes, ScrollNarrative } from "./storytelling";
 
