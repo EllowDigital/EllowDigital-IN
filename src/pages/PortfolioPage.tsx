@@ -342,9 +342,16 @@ const PortfolioPage = () => {
                       <Card className="h-full flex flex-col overflow-hidden bg-card/40 backdrop-blur-sm border-border hover:border-brand-yellow/30 transition-all duration-500 hover:shadow-2xl hover:shadow-brand-yellow/5 hover:-translate-y-2">
                         {/* Image Container */}
                         <div className="relative aspect-[16/10] overflow-hidden bg-muted">
+                          <LightboxTrigger
+                            onClick={() =>
+                              openLightbox(project.image, project.title)
+                            }
+                          />
                           <img
                             src={project.image}
                             alt={project.title}
+                            width={640}
+                            height={400}
                             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                             loading="lazy"
                           />
