@@ -19,6 +19,8 @@ import TeamPage from "./pages/TeamPage";
 import RefundPolicy from "./pages/RefundPolicy";
 import CookiesPolicy from "./pages/CookiesPolicy";
 import PortfolioPage from "./pages/PortfolioPage";
+import BlogPage from "./pages/BlogPage";
+import BlogPostPage from "./pages/BlogPostPage";
 
 import { initPerformanceOptimizations } from "@/utils/performanceUtils";
 import { initPerformanceMonitoring } from "@/utils/performanceMonitoring";
@@ -67,6 +69,8 @@ const router = createBrowserRouter(
       children: [
         { index: true, element: <Index /> },
         { path: "portfolio", element: <PortfolioPage /> },
+        { path: "blog", element: <BlogPage /> },
+        { path: "blog/:slug", element: <BlogPostPage /> },
         { path: "privacy-policy", element: <PrivacyPolicy /> },
         { path: "terms-of-service", element: <TermsOfService /> },
         { path: "refund-policy", element: <RefundPolicy /> },
