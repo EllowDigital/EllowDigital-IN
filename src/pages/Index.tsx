@@ -189,59 +189,89 @@ const Index = () => {
       >
         <Navbar />
         <main className="flex-grow" id="main-content">
-          <HeroSection />
+          {/* Hero - full viewport snap section */}
+          <div className="snap-start">
+            <HeroSection />
+          </div>
 
-          <ScrollReveal animation="fadeUp">
-            <AboutSection />
-          </ScrollReveal>
+          {/* Content sections with scroll-snap proximity */}
+          <div className="snap-start">
+            <ScrollReveal animation="fadeUp">
+              <AboutSection />
+            </ScrollReveal>
+          </div>
 
-          <ScrollReveal animation="fadeLeft" delay={0.1}>
-            <FounderSection />
-          </ScrollReveal>
+          <div className="snap-start">
+            <ScrollReveal animation="fadeLeft" delay={0.1}>
+              <FounderSection />
+            </ScrollReveal>
+          </div>
 
-          <ScrollReveal animation="fadeUp" delay={0.1}>
-            <ServicesSection />
-          </ScrollReveal>
+          <div className="snap-start">
+            <ScrollReveal animation="fadeUp" delay={0.1}>
+              <ServicesSection />
+            </ScrollReveal>
+          </div>
 
-          <ScrollReveal animation="fadeRight" delay={0.1}>
-            <WorkProcess />
-          </ScrollReveal>
+          <div className="snap-start">
+            <ScrollReveal animation="fadeRight" delay={0.1}>
+              <WorkProcess />
+            </ScrollReveal>
+          </div>
 
-          <ScrollReveal animation="scale" delay={0.1}>
-            <EngagementModel />
-          </ScrollReveal>
+          <div className="snap-start">
+            <ScrollReveal animation="scale" delay={0.1}>
+              <EngagementModel />
+            </ScrollReveal>
+          </div>
 
-          <ScrollReveal animation="fadeUp" delay={0.1}>
-            <Portfolio />
-          </ScrollReveal>
+          <div className="snap-start">
+            <ScrollReveal animation="fadeUp" delay={0.1}>
+              <Portfolio />
+            </ScrollReveal>
+          </div>
 
-          <ScrollReveal animation="blur" delay={0.1}>
-            <ImpactMetrics />
-          </ScrollReveal>
+          <div className="snap-start">
+            <ScrollReveal animation="blur" delay={0.1}>
+              <ImpactMetrics />
+            </ScrollReveal>
+          </div>
 
-          <ScrollReveal animation="fadeLeft" delay={0.1}>
-            <Testimonials />
-          </ScrollReveal>
+          <div className="snap-start">
+            <ScrollReveal animation="fadeLeft" delay={0.1}>
+              <Testimonials />
+            </ScrollReveal>
+          </div>
 
-          <ScrollReveal animation="fadeUp" delay={0.1}>
-            <TechStack />
-          </ScrollReveal>
+          <div className="snap-start">
+            <ScrollReveal animation="fadeUp" delay={0.1}>
+              <TechStack />
+            </ScrollReveal>
+          </div>
 
-          <ScrollReveal animation="fadeRight" delay={0.1}>
-            <WhyChooseUs />
-          </ScrollReveal>
+          <div className="snap-start">
+            <ScrollReveal animation="fadeRight" delay={0.1}>
+              <WhyChooseUs />
+            </ScrollReveal>
+          </div>
 
-          <ScrollReveal animation="scale" delay={0.1}>
-            <FeaturedOffers />
-          </ScrollReveal>
+          <div className="snap-start">
+            <ScrollReveal animation="scale" delay={0.1}>
+              <FeaturedOffers />
+            </ScrollReveal>
+          </div>
 
-          <ScrollReveal animation="fadeUp" delay={0.1}>
-            <FAQSection />
-          </ScrollReveal>
+          <div className="snap-start">
+            <ScrollReveal animation="fadeUp" delay={0.1}>
+              <FAQSection />
+            </ScrollReveal>
+          </div>
 
-          <ScrollReveal animation="fadeUp" delay={0.1}>
-            <SmartContactForm />
-          </ScrollReveal>
+          <div className="snap-start">
+            <ScrollReveal animation="fadeUp" delay={0.1}>
+              <SmartContactForm />
+            </ScrollReveal>
+          </div>
         </main>
         <Footer />
         <FloatingContactButton />
