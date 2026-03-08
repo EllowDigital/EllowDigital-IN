@@ -460,6 +460,13 @@ const PortfolioPage = () => {
         </main>
 
         <Footer />
+
+        <ImageLightbox
+          src={lightboxImage?.src || ""}
+          alt={lightboxImage?.alt || ""}
+          isOpen={!!lightboxImage}
+          onClose={closeLightbox}
+        />
       </div>
     </>
   );
