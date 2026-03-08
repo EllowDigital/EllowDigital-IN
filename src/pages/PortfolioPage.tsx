@@ -15,9 +15,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ImageLightbox, { LightboxTrigger } from "@/components/ImageLightbox";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import SEOHead from "@/components/SEOHead";
 
 // --- Types ---
 interface Project {
