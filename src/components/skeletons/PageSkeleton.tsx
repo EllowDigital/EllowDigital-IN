@@ -20,7 +20,7 @@ const PageSkeleton = () => {
           {/* Nav links skeleton */}
           <div className="hidden lg:flex items-center gap-2">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="h-8 w-16 rounded-full bg-secondary/40" />
+              <div key={i} className="h-8 w-16 rounded-full bg-primary/10" />
             ))}
           </div>
 
