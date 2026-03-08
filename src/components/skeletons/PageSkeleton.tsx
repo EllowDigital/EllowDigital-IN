@@ -7,7 +7,7 @@ const PageSkeleton = () => {
       {/* Navbar skeleton */}
       <div className="fixed top-2 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl">
         <motion.div
-          className="h-16 rounded-2xl bg-card/60 backdrop-blur-sm border border-border/30 flex items-center justify-between px-6"
+          className="h-16 rounded-2xl bg-card/80 backdrop-blur-sm border border-primary/10 flex items-center justify-between px-6"
           animate={{ opacity: [0.5, 0.8, 0.5] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
