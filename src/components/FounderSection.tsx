@@ -84,10 +84,13 @@ const FounderSection = () => {
               >
                 <div className="relative h-64 sm:h-80 lg:h-full min-h-[400px]">
                   <img
-                    src="/images/founder.jpg"
+                    src="/images/founder.webp"
                     alt="Sarwan Yadav - Founder & CEO"
                     className="absolute inset-0 w-full h-full object-cover"
+                    width={400}
+                    height={533}
                     loading="lazy"
+                    decoding="async"
                   />
                   {/* Overlay gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent lg:bg-gradient-to-r" />
