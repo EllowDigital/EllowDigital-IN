@@ -26,7 +26,7 @@ const testimonials = [
     company: "Ghatak Sports Academy India™",
     position: "Founder & CEO",
     rating: 5,
-    image: "images/nitesh.png",
+    image: "images/nitesh.webp",
     projectType: "Website Development",
     text: "EllowDigital truly elevated our digital presence. Their team captured the essence of our brand and delivered a sleek, functional website that has received fantastic feedback from our users.",
   },

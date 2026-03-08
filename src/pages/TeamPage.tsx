@@ -27,7 +27,7 @@ const TeamPage = () => {
       id: 1,
       name: "Sarwan Yadav",
       role: "Founder & Lead Developer",
-      image: "/images/founder.jpg",
+      image: "/images/founder.webp",
       bio: "Sarwan is the founder of EllowDigital with over 2 years of experience in web development and digital marketing. He's passionate about creating innovative digital solutions that help businesses grow.",
       specialties: [
         "Full-stack Development",

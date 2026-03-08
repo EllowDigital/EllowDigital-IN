@@ -4,13 +4,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Prevent double scrollbar and enable smooth scroll */
+/* Smooth scroll with scroll-snap for Apple-style experience */
 html,
 body {
   scroll-behavior: smooth;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+}
+
+/* Apple-style scroll-snap on homepage - proximity so it doesn't lock */
+html {
+  scroll-snap-type: y proximity;
 }
 
 html {

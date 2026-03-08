@@ -71,7 +71,7 @@ With analytics tools, your website provides invaluable insights into customer be
     readTime: "5 min read",
     category: "Business",
     tags: ["Web Development", "Business Growth", "Digital Marketing"],
-    author: { name: "Sarwan Yadav", avatar: "/images/founder.jpg" },
+    author: { name: "Sarwan Yadav", avatar: "/images/founder.webp" },
     featured: true,
   },
   {
@@ -127,7 +127,7 @@ Need help with SEO? EllowDigital offers affordable SEO packages starting at ₹4
     readTime: "7 min read",
     category: "SEO",
     tags: ["SEO", "Small Business", "Local SEO", "Google Rankings"],
-    author: { name: "Sarwan Yadav", avatar: "/images/founder.jpg" },
+    author: { name: "Sarwan Yadav", avatar: "/images/founder.webp" },
     featured: true,
   },
   {
@@ -181,7 +181,7 @@ Not sure which to choose? [Reach out to our team](#contact) for a free consultat
     readTime: "6 min read",
     category: "Technology",
     tags: ["React", "Next.js", "Web Development", "JavaScript"],
-    author: { name: "Sarwan Yadav", avatar: "/images/founder.jpg" },
+    author: { name: "Sarwan Yadav", avatar: "/images/founder.webp" },
   },
   {
     slug: "ui-ux-design-principles-that-convert",
@@ -231,7 +231,7 @@ Want a website that converts? [Let's talk about your project](#contact).`,
     readTime: "4 min read",
     category: "Design",
     tags: ["UI/UX", "Design", "Conversion", "Web Design"],
-    author: { name: "Sarwan Yadav", avatar: "/images/founder.jpg" },
+    author: { name: "Sarwan Yadav", avatar: "/images/founder.webp" },
   },
 ];
 
