@@ -42,6 +42,7 @@ const Footer = () => {
     { label: "Home", href: "#home" },
     { label: "About Us", href: "#about" },
     { label: "Services", href: "#services" },
+    { label: "Blog", href: "/blog" },
     { label: "Team", href: "/team" },
     { label: "Contact", href: "#contact" },
   ];
