@@ -127,7 +127,7 @@ Need help with SEO? EllowDigital offers affordable SEO packages starting at ₹4
     readTime: "7 min read",
     category: "SEO",
     tags: ["SEO", "Small Business", "Local SEO", "Google Rankings"],
-    author: { name: "Sarwan Yadav", avatar: "/images/founder.jpg" },
+    author: { name: "Sarwan Yadav", avatar: "/images/founder.webp" },
     featured: true,
   },
   {
