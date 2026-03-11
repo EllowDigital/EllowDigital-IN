@@ -48,10 +48,7 @@ const PageSkeleton = () => {
                 <div className="h-6 w-24 rounded bg-primary/20" />
                 <div className="space-y-2">
                   {Array.from({ length: 4 }).map((_, j) => (
-                    <div
-                      key={j}
-                      className="h-4 w-full rounded bg-primary/10"
-                    />
+                    <div key={j} className="h-4 w-full rounded bg-primary/10" />
                   ))}
                 </div>
               </motion.div>

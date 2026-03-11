@@ -6,7 +6,15 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
-import { ArrowRight, Play, Star, Users, Zap, Globe, ChevronDown } from "lucide-react";
+import {
+  ArrowRight,
+  Play,
+  Star,
+  Users,
+  Zap,
+  Globe,
+  ChevronDown,
+} from "lucide-react";
 import { TypewriterText, FloatingShapes } from "./storytelling";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useCountUp } from "@/hooks/useCountUp";

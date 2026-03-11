@@ -18,11 +18,23 @@ import { blogPosts } from "@/pages/BlogPage";
 const renderMarkdown = (md: string): string => {
   let html = md
     // Headers
-    .replace(/^### (.*$)/gm, '<h3 class="text-xl font-bold mt-8 mb-3 text-foreground">$1</h3>')
-    .replace(/^## (.*$)/gm, '<h2 class="text-2xl sm:text-3xl font-bold mt-12 mb-4 text-foreground">$1</h2>')
-    .replace(/^# (.*$)/gm, '<h1 class="text-3xl sm:text-4xl font-bold mt-8 mb-6 text-foreground">$1</h1>')
+    .replace(
+      /^### (.*$)/gm,
+      '<h3 class="text-xl font-bold mt-8 mb-3 text-foreground">$1</h3>'
+    )
+    .replace(
+      /^## (.*$)/gm,
+      '<h2 class="text-2xl sm:text-3xl font-bold mt-12 mb-4 text-foreground">$1</h2>'
+    )
+    .replace(
+      /^# (.*$)/gm,
+      '<h1 class="text-3xl sm:text-4xl font-bold mt-8 mb-6 text-foreground">$1</h1>'
+    )
     // Bold & italic
-    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-foreground">$1</strong>')
+    .replace(
+      /\*\*(.*?)\*\*/g,
+      '<strong class="font-semibold text-foreground">$1</strong>'
+    )
     .replace(/\*(.*?)\*/g, "<em>$1</em>")
     // Links
     .replace(
@@ -42,25 +54,25 @@ const renderMarkdown = (md: string): string => {
       '<li class="flex items-start gap-2 mb-2"><span class="text-primary font-bold">$1.</span><span>$2</span></li>'
     )
     // Tables (basic)
-    .replace(
-      /\|(.+)\|/g,
-      (match) => {
-        const cells = match
-          .split("|")
-          .filter(Boolean)
-          .map((c) => c.trim());
-        if (cells.every((c) => /^-+$/.test(c))) return "";
-        const tag = cells.length > 0 ? "td" : "td";
-        return `<tr>${cells.map((c) => `<${tag} class="px-4 py-2 border border-border/30">${c}</${tag}>`).join("")}</tr>`;
-      }
-    )
+    .replace(/\|(.+)\|/g, (match) => {
+      const cells = match
+        .split("|")
+        .filter(Boolean)
+        .map((c) => c.trim());
+      if (cells.every((c) => /^-+$/.test(c))) return "";
+      const tag = cells.length > 0 ? "td" : "td";
+      return `<tr>${cells
+        .map(
+          (c) =>
+            `<${tag} class="px-4 py-2 border border-border/30">${c}</${tag}>`
+        )
+        .join("")}</tr>`;
+    })
     // Paragraphs
-    .replace(
-      /^(?!<[hlutrd]|<li|<hr|<tr)(.*$)/gm,
-      (_, content) =>
-        content.trim()
-          ? `<p class="text-muted-foreground leading-relaxed mb-4">${content}</p>`
-          : ""
+    .replace(/^(?!<[hlutrd]|<li|<hr|<tr)(.*$)/gm, (_, content) =>
+      content.trim()
+        ? `<p class="text-muted-foreground leading-relaxed mb-4">${content}</p>`
+        : ""
     );
 
   // Wrap lists

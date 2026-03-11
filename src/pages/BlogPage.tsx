@@ -390,8 +390,7 @@ const BlogPage = () => {
 
   const filteredPosts = useMemo(() => {
     return blogPosts.filter((post) => {
-      const matchesCategory =
-        filter === "All" || post.category === filter;
+      const matchesCategory = filter === "All" || post.category === filter;
       const matchesSearch =
         searchQuery === "" ||
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -404,9 +403,7 @@ const BlogPage = () => {
   }, [filter, searchQuery]);
 
   const featuredPost = filteredPosts.find((p) => p.featured);
-  const regularPosts = filteredPosts.filter(
-    (p) => p !== featuredPost
-  );
+  const regularPosts = filteredPosts.filter((p) => p !== featuredPost);
 
   return (
     <>
@@ -444,13 +441,12 @@ const BlogPage = () => {
                 </div>
 
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight">
-                  Insights &{" "}
-                  <span className="text-primary">Ideas</span>
+                  Insights & <span className="text-primary">Ideas</span>
                 </h1>
 
                 <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-                  Expert articles on web development, SEO, design, and
-                  digital strategy to help your business grow online.
+                  Expert articles on web development, SEO, design, and digital
+                  strategy to help your business grow online.
                 </p>
 
                 {/* Search */}
