@@ -351,7 +351,7 @@ const SmartContactForm = () => {
                     <Instagram className="w-4 h-4" />
                   </a>
                   <a
-                    href="https://wa.me/918960446756"
+                    href="https://wa.me/919999999999"
                     aria-label="Whatsapp"
                     target="_blank"
                     rel="noreferrer noopener"

@@ -141,8 +141,8 @@ const ContactSection = () => {
     {
       icon: <Phone className="h-5 w-5" />,
       label: "Phone",
-      value: "+91 89604 46756",
-      href: "tel:+918960446756",
+      value: "+91 9999999999",
+      href: "tel:+919999999999",
     },
     {
       icon: <Github className="h-5 w-5" />,
