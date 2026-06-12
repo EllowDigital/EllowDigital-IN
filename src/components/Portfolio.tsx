@@ -44,14 +44,14 @@ const allProjects: Project[] = [
     link: "https://ghatakgsai.netlify.app/",
     featured: true,
   },
-  {
-    title: "TypeBlitz",
-    category: "Desktop App",
-    image: "/images/projects_img/project1_typeblitz.webp",
+   {
+    title: "Praharsh Infrastructure",
+    category: "Website",
+    image: "/images/projects_img/project7_praharsh.webp",
     description:
-      "Desktop app to boost typing speed and accuracy with drills, progress tracking, and detailed live stats.",
-    tech: ["Python", "SQLite3"],
-    link: "https://typeblitz.netlify.app/",
+      "Modern corporate website for a leading infrastructure and 360° branding solutions company, showcasing government projects, solar energy solutions, electrical installations, road infrastructure, and sustainable development initiatives.",
+    tech: ["React", "TypeScript", "Vite"],
+    link: "https://praharshinfrastructure.com/",
     featured: true,
   },
   {
@@ -61,8 +61,18 @@ const allProjects: Project[] = [
     description:
       "Personal finance mobile app for tracking expenses, budgeting, and financial goals with intuitive charts.",
     tech: ["React Native", "Expo", "NeonDB"],
-    link: "https://expo.dev/artifacts/eas/8oTjej2xLnBzFQZUwvuCjv.apk",
+    link: "https://dhandiary.netlify.app/",
     featured: true,
+  },
+   {
+    title: "TypeBlitz",
+    category: "Desktop App",
+    image: "/images/projects_img/project1_typeblitz.webp",
+    description:
+      "Desktop app to boost typing speed and accuracy with drills, progress tracking, and detailed live stats.",
+    tech: ["Python", "SQLite3"],
+    link: "https://apps.microsoft.com/detail/9NC8MKGL2Q2B?hl=en-us&gl=IN&ocid=pdpshare",
+    featured: false,
   },
   {
     title: "Tent Decor Expo UP 2025",
@@ -71,8 +81,8 @@ const allProjects: Project[] = [
     description:
       "End-to-end event system with online registration, secure e-passes, and real-time validation.",
     tech: ["Node.js", "PostgreSQL", "Cloudinary"],
-    link: "https://td-expoup25.netlify.app/",
-    featured: true,
+    link: "#",
+    featured: false,
   },
   {
     title: "RGSK Technologies Pvt. Ltd.",
@@ -219,11 +229,10 @@ const Portfolio = () => {
             <button
               key={category}
               onClick={() => setFilter(category)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border ${
-                filter === category
+              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border ${filter === category
                   ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20"
                   : "bg-card/50 text-muted-foreground border-border hover:border-primary/50 hover:bg-card hover:text-foreground"
-              }`}
+                }`}
             >
               {category}
             </button>
@@ -246,19 +255,17 @@ const Portfolio = () => {
                 key={project.title}
                 variants={itemVariants}
                 custom={index}
-                className={`group relative flex flex-col ${
-                  filter === "All" && index === 0 ? "md:col-span-2" : ""
-                }`}
+                className={`group relative flex flex-col ${filter === "All" && index === 0 ? "md:col-span-2" : ""
+                  }`}
               >
                 <TiltCard className="h-full" tiltAmount={6} glareEnabled={true}>
                   <div className="relative h-full flex flex-col rounded-2xl bg-card border border-border/50 overflow-hidden hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
                     {/* Image */}
                     <div
-                      className={`relative overflow-hidden w-full ${
-                        filter === "All" && index === 0
+                      className={`relative overflow-hidden w-full ${filter === "All" && index === 0
                           ? "aspect-video"
                           : "aspect-[4/3]"
-                      }`}
+                        }`}
                     >
                       <img
                         src={project.image}
