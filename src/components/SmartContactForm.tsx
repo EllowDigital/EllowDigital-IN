@@ -325,7 +325,7 @@ const SmartContactForm = () => {
                   <span className="w-10 h-10 rounded-full bg-brand-yellow/20 flex items-center justify-center">
                     <Phone className="w-5 h-5 text-brand-yellow" />
                   </span>
-                  <span className="font-medium text-base">+91 89604 46756</span>
+                  <span className="font-medium text-base">+91 99999 99999</span>
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="w-10 h-10 rounded-full bg-brand-yellow/20 flex items-center justify-center">

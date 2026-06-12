@@ -85,7 +85,7 @@ const FounderSection = () => {
                 <div className="relative h-64 sm:h-80 lg:h-full min-h-[400px]">
                   <img
                     src="/images/founder.webp"
-                    alt="Sarwan Yadav - Founder & CEO"
+                    alt="Sarwan Yadav - Founder"
                     className="absolute inset-0 w-full h-full object-cover"
                     width={400}
                     height={533}
@@ -146,7 +146,7 @@ const FounderSection = () => {
                   <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-1">
                     Sarwan Yadav
                   </h3>
-                  <p className="text-primary font-medium">Founder & CEO</p>
+                  <p className="text-primary font-medium">Founder</p>
                 </div>
 
                 {/* Badges */}

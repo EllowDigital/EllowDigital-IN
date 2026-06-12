@@ -29,7 +29,7 @@ const Footer = () => {
 
   const socialLinks = [
     { href: "mailto:ellowdigitalindia@gmail.com", label: "Mail", icon: Mail },
-    { href: "tel:+919999999999", label: "Phone", icon: Phone },
+    { href: "tel:+91 99999 99999", label: "Phone", icon: Phone },
     {
       href: "https://instagram.com/ellowdigital",
       label: "Instagram",
@@ -71,8 +71,8 @@ const Footer = () => {
     },
     {
       icon: Phone,
-      value: "+91 89604 46756",
-      href: "tel:+919999999999",
+      value: "+91 99999 99999",
+      href: "tel:+91 99999 99999",
       isLink: true,
     },
     { icon: MapPin, value: "India", isLink: false },

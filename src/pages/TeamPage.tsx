@@ -35,9 +35,9 @@ const TeamPage = () => {
         "Project Management",
       ],
       social: {
-        linkedin: "https://linkedin.com/in/sarwan6174",
+        linkedin: "#",
         github: "https://github.com/devsarwan",
-        twitter: "https://twitter.com/devsarwan",
+        twitter: "#",
       },
     },
     // {

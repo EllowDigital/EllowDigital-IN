@@ -68,7 +68,7 @@ const CookiesPolicy = () => {
                 <strong>Email:</strong> ellowdigitalindia@gmail.com
               </p>
               <p className="text-muted-foreground">
-                <strong>Phone:</strong> +91 89604 46756
+                <strong>Phone:</strong> +91 99999 99999
               </p>
             </section>
           </motion.div>

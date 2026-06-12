@@ -24,7 +24,7 @@ const testimonials = [
   {
     name: "Nitish Yadav",
     company: "Ghatak Sports Academy India™",
-    position: "Founder & CEO",
+    position: "Founder",
     rating: 5,
     image: "images/nitesh.webp",
     projectType: "Website Development",
@@ -33,7 +33,7 @@ const testimonials = [
   {
     name: "Sarwan Yadav",
     company: "EllowDigital",
-    position: "Founder & CEO",
+    position: "Founder",
     rating: 5,
     image: "images/projects_img/project1_typeblitz.webp",
     projectType: "TypeBlitz - Boost Your Typing Skills",
